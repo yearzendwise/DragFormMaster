@@ -35,6 +35,14 @@ const paletteItems: ComponentPaletteItem[] = [
     color: 'bg-gradient-to-br from-orange-100 to-orange-200 text-orange-700',
     category: 'basic',
   },
+  {
+    type: 'image',
+    label: 'Image',
+    description: 'Square image display',
+    icon: 'fas fa-image',
+    color: 'bg-gradient-to-br from-violet-100 to-purple-200 text-violet-700',
+    category: 'basic',
+  },
   // Selection
   {
     type: 'select',
