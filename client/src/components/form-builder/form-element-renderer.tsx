@@ -182,8 +182,8 @@ export function FormElementRenderer({
             <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-blue-500 to-indigo-500 rounded-r-full"></div>
           )}
           
-          {/* Action buttons */}
-          <div className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-all duration-200 flex gap-1">
+          {/* Action buttons - Desktop */}
+          <div className="hidden lg:flex absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-all duration-200 gap-1">
             <Button
               size="sm"
               variant="secondary"
@@ -211,6 +211,15 @@ export function FormElementRenderer({
                 <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
             </Button>
+          </div>
+
+          {/* Mobile edit indicator */}
+          <div className="lg:hidden absolute top-2 right-2 opacity-60 group-hover:opacity-100 transition-opacity">
+            <div className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center shadow-sm">
+              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+              </svg>
+            </div>
           </div>
 
           {/* Drag handle */}

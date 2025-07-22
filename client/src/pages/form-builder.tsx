@@ -8,7 +8,12 @@ import { PropertiesPanel } from '@/components/form-builder/properties-panel';
 import { FormElementType, DragItem, ComponentPaletteItem } from '@/types/form-builder';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Type, Mail, AlignLeft, Hash, ChevronDown, CheckSquare, Circle, Send } from 'lucide-react';
+import { Type, Mail, AlignLeft, Hash, ChevronDown, CheckSquare, Circle, Send, Settings, X } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 
 export default function FormBuilder() {
   const {
@@ -31,6 +36,7 @@ export default function FormBuilder() {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [draggedType, setDraggedType] = useState<FormElementType | null>(null);
   const [mobileModalOpen, setMobileModalOpen] = useState(false);
+  const [mobilePropertiesOpen, setMobilePropertiesOpen] = useState(false);
 
   // Component palette items for mobile modal
   const paletteItems = [
@@ -146,6 +152,15 @@ export default function FormBuilder() {
 
   const handleDeselectElement = () => {
     selectElement(null);
+    setMobilePropertiesOpen(false);
+  };
+
+  const handleMobileElementSelect = (elementId: string | null) => {
+    selectElement(elementId);
+    // On mobile, open properties modal when selecting an element
+    if (elementId && window.innerWidth < 1024) {
+      setMobilePropertiesOpen(true);
+    }
   };
 
   return (
@@ -213,7 +228,7 @@ export default function FormBuilder() {
               elements={elements}
               selectedElementId={selectedElementId}
               previewMode={previewMode}
-              onSelectElement={selectElement}
+              onSelectElement={handleMobileElementSelect}
               onRemoveElement={removeElement}
               onUpdateElement={updateElement}
               onUpdateFormTitle={updateFormTitle}
@@ -285,6 +300,144 @@ export default function FormBuilder() {
           </DialogContent>
         </Dialog>
       </div>
+
+      {/* Mobile Properties Modal */}
+      <Dialog open={mobilePropertiesOpen} onOpenChange={setMobilePropertiesOpen}>
+        <DialogContent className="sm:max-w-md max-h-[80vh] overflow-y-auto lg:hidden">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Settings className="w-5 h-5" />
+              Edit Properties
+            </DialogTitle>
+          </DialogHeader>
+          
+          {selectedElement && (
+            <div className="space-y-4 mt-4">
+              {/* Element Type Badge */}
+              <div className="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                <div className="text-xs text-slate-500 uppercase tracking-wide mb-1">Element Type</div>
+                <div className="font-medium text-slate-800 capitalize">
+                  {selectedElement.type.replace('-', ' ')}
+                </div>
+              </div>
+
+              {/* Basic Properties */}
+              <div className="space-y-3">
+                <div>
+                  <Label htmlFor="mobile-label" className="text-sm font-medium">Label</Label>
+                  <Input
+                    id="mobile-label"
+                    value={selectedElement.label}
+                    onChange={(e) => updateElement(selectedElement.id, { label: e.target.value })}
+                    className="mt-1"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="mobile-name" className="text-sm font-medium">Name</Label>
+                  <Input
+                    id="mobile-name"
+                    value={selectedElement.name}
+                    onChange={(e) => updateElement(selectedElement.id, { name: e.target.value })}
+                    className="mt-1"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="mobile-placeholder" className="text-sm font-medium">Placeholder</Label>
+                  <Input
+                    id="mobile-placeholder"
+                    value={selectedElement.placeholder || ''}
+                    onChange={(e) => updateElement(selectedElement.id, { placeholder: e.target.value })}
+                    className="mt-1"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="mobile-help" className="text-sm font-medium">Help Text</Label>
+                  <Textarea
+                    id="mobile-help"
+                    value={selectedElement.helpText || ''}
+                    onChange={(e) => updateElement(selectedElement.id, { helpText: e.target.value })}
+                    className="mt-1"
+                    rows={2}
+                  />
+                </div>
+
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="mobile-required"
+                    checked={selectedElement.required}
+                    onCheckedChange={(checked) => 
+                      updateElement(selectedElement.id, { required: !!checked })
+                    }
+                  />
+                  <Label htmlFor="mobile-required" className="text-sm">Required field</Label>
+                </div>
+
+                {/* Width Setting */}
+                <div>
+                  <Label className="text-sm font-medium">Width</Label>
+                  <Select
+                    value={selectedElement.styling?.width || 'full'}
+                    onValueChange={(value) => {
+                      const currentStyling = selectedElement.styling || { width: 'full', size: 'medium' };
+                      const styling = { ...currentStyling, width: value as 'full' | 'half' | 'third' };
+                      updateElement(selectedElement.id, { styling });
+                    }}
+                  >
+                    <SelectTrigger className="mt-1">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="full">Full Width</SelectItem>
+                      <SelectItem value="half">Half Width</SelectItem>
+                      <SelectItem value="third">Third Width</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Size Setting */}
+                <div>
+                  <Label className="text-sm font-medium">Size</Label>
+                  <Select
+                    value={selectedElement.styling?.size || 'medium'}
+                    onValueChange={(value) => {
+                      const currentStyling = selectedElement.styling || { width: 'full', size: 'medium' };
+                      const styling = { ...currentStyling, size: value as 'small' | 'medium' | 'large' };
+                      updateElement(selectedElement.id, { styling });
+                    }}
+                  >
+                    <SelectTrigger className="mt-1">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="small">Small</SelectItem>
+                      <SelectItem value="medium">Medium</SelectItem>
+                      <SelectItem value="large">Large</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              {/* Delete Element Button */}
+              <div className="pt-4 border-t border-slate-200">
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  onClick={() => {
+                    removeElement(selectedElement.id);
+                    setMobilePropertiesOpen(false);
+                  }}
+                  className="w-full"
+                >
+                  Delete Element
+                </Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
 
       {/* Status Bar */}
       <div className="bg-white/95 backdrop-blur-sm border-t border-slate-200/60 px-3 md:px-6 py-2 md:py-3 shadow-sm">
