@@ -7,6 +7,7 @@ This is a modern form builder application built with React and Express, featurin
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Mobile-first design: Ensure all interfaces work seamlessly on mobile devices.
 
 ## System Architecture
 
@@ -52,8 +53,10 @@ Preferred communication style: Simple, everyday language.
 ### UI Components
 - Complete shadcn/ui component library integration
 - Consistent design system with CSS variables
-- Responsive design with mobile-first approach
-- Accessibility-focused components
+- Fully responsive design with mobile-first approach
+- Accessibility-focused components with proper touch targets
+- Mobile-optimized interactions and animations
+- Floating action button for mobile component addition
 
 ## Data Flow
 

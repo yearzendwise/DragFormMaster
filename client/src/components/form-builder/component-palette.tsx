@@ -93,8 +93,8 @@ export function ComponentPalette({ onAddElement }: ComponentPaletteProps) {
   const categories = ['basic', 'selection', 'actions'] as const;
 
   return (
-    <aside className="w-80 bg-gradient-to-b from-slate-50 to-white border-r border-slate-200/60 overflow-y-auto shadow-sm">
-      <div className="p-6">
+    <aside className="w-80 lg:w-80 bg-gradient-to-b from-slate-50 to-white border-r border-slate-200/60 overflow-y-auto shadow-sm">
+      <div className="p-4 lg:p-6">
         <div className="mb-6">
           <h2 className="text-lg font-bold text-slate-800 mb-1">Form Components</h2>
           <p className="text-sm text-slate-500">Drag & drop to build your form</p>

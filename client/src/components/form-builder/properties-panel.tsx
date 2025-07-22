@@ -19,17 +19,17 @@ export function PropertiesPanel({
 }: PropertiesPanelProps) {
   if (!selectedElement) {
     return (
-      <aside className="w-80 bg-gradient-to-b from-white to-slate-50/50 border-l border-slate-200/60 overflow-y-auto shadow-sm">
-        <div className="p-6">
-          <div className="text-center py-20">
-            <div className="w-20 h-20 bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
-              <svg className="w-8 h-8 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+      <aside className="w-80 lg:w-80 bg-gradient-to-b from-white to-slate-50/50 border-l border-slate-200/60 overflow-y-auto shadow-sm">
+        <div className="p-4 lg:p-6">
+          <div className="text-center py-12 lg:py-20">
+            <div className="w-16 h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl lg:rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-sm">
+              <svg className="w-6 h-6 lg:w-8 lg:h-8 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd"/>
               </svg>
             </div>
-            <h3 className="text-lg font-bold text-slate-800 mb-3">Properties Panel</h3>
-            <p className="text-slate-600 leading-relaxed mb-6">Select any form element to customize its properties, validation rules, and styling options.</p>
-            <div className="bg-blue-50/50 border border-blue-100 rounded-xl p-4">
+            <h3 className="text-base lg:text-lg font-bold text-slate-800 mb-2 lg:mb-3">Properties Panel</h3>
+            <p className="text-sm lg:text-base text-slate-600 leading-relaxed mb-4 lg:mb-6 px-4">Select any form element to customize its properties, validation rules, and styling options.</p>
+            <div className="bg-blue-50/50 border border-blue-100 rounded-lg lg:rounded-xl p-3 lg:p-4">
               <div className="text-xs text-blue-600 font-medium mb-1">💡 Quick tip</div>
               <div className="text-xs text-blue-700">
                 Click on any form element to start editing
@@ -61,18 +61,18 @@ export function PropertiesPanel({
   };
 
   return (
-    <aside className="w-80 bg-gradient-to-b from-white to-slate-50/30 border-l border-slate-200/60 overflow-y-auto shadow-sm">
-      <div className="p-6">
-        <div className="flex items-center justify-between mb-6">
+    <aside className="w-80 lg:w-80 bg-gradient-to-b from-white to-slate-50/30 border-l border-slate-200/60 overflow-y-auto shadow-sm">
+      <div className="p-4 lg:p-6">
+        <div className="flex items-center justify-between mb-4 lg:mb-6">
           <div>
-            <h2 className="text-lg font-bold text-slate-800">Element Properties</h2>
+            <h2 className="text-base lg:text-lg font-bold text-slate-800">Element Properties</h2>
             <p className="text-xs text-slate-500 mt-0.5">Customize your form element</p>
           </div>
           <Button
             variant="ghost"
             size="sm"
             onClick={onDeselectElement}
-            className="text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
+            className="text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors p-1 lg:p-2"
           >
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"/>
@@ -81,11 +81,11 @@ export function PropertiesPanel({
         </div>
 
         {/* Element Type Badge */}
-        <div className="mb-8">
-          <div className="bg-gradient-to-r from-blue-100 to-indigo-100 border border-blue-200/50 rounded-xl p-4">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-sm">
-                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+        <div className="mb-6 lg:mb-8">
+          <div className="bg-gradient-to-r from-blue-100 to-indigo-100 border border-blue-200/50 rounded-lg lg:rounded-xl p-3 lg:p-4">
+            <div className="flex items-center space-x-2 lg:space-x-3">
+              <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg lg:rounded-xl flex items-center justify-center shadow-sm">
+                <svg className="w-4 h-4 lg:w-5 lg:h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
               </div>

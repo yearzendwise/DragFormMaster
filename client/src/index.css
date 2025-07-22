@@ -131,3 +131,52 @@
 
 .border-neutral-200 { border-color: var(--neutral-200); }
 .border-neutral-300 { border-color: var(--neutral-300); }
+
+/* Mobile-specific improvements */
+@media (max-width: 1024px) {
+  .form-element {
+    min-height: 44px; /* Ensure touch targets are at least 44px */
+  }
+
+  /* Better touch feedback */
+  .form-element:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease-out;
+  }
+
+  /* Improved tap targets for buttons */
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Better scroll behavior on mobile */
+  * {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Prevent zoom on input focus on iOS */
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="url"],
+  textarea,
+  select {
+    font-size: 16px;
+  }
+}
+
+/* Responsive text utilities */
+@media (max-width: 640px) {
+  .text-responsive-xl {
+    font-size: 1.125rem;
+  }
+  .text-responsive-lg {
+    font-size: 1rem;
+  }
+  .text-responsive-base {
+    font-size: 0.875rem;
+  }
+}

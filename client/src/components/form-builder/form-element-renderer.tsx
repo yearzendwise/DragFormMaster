@@ -167,7 +167,7 @@ export function FormElementRenderer({
 
   const containerClasses = previewMode 
     ? "space-y-3"
-    : `form-element group relative border-2 transition-all duration-200 p-5 rounded-xl cursor-pointer hover:shadow-lg hover:shadow-blue-100/20 ${
+    : `form-element group relative border-2 transition-all duration-200 p-3 md:p-5 rounded-lg md:rounded-xl cursor-pointer hover:shadow-lg hover:shadow-blue-100/20 ${
         isSelected 
           ? 'border-blue-400 bg-gradient-to-br from-blue-50/80 to-indigo-50/50 shadow-md shadow-blue-200/25' 
           : 'border-transparent hover:border-blue-200 bg-white'
