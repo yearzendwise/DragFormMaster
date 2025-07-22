@@ -291,29 +291,32 @@ export default function FormBuilder() {
         onDragOver={handleDragOver}
       >
         <div className="flex-1 flex relative">
-          {/* Component Palette - Hidden on mobile by default */}
-          <div className="hidden lg:block">
+          {/* Left Sidebar - Component Palette */}
+          <div className="hidden lg:block flex-none">
             <ComponentPalette onAddElement={handleAddElement} />
           </div>
           
-          <SortableContext items={elements.map(el => el.id)} strategy={verticalListSortingStrategy}>
-            <FormCanvas
-              formTitle={formTitle}
-              elements={elements}
-              selectedElementId={selectedElementId}
-              previewMode={previewMode}
-              draggedType={draggedType}
-              onSelectElement={handleMobileElementSelect}
-              onRemoveElement={removeElement}
-              onUpdateElement={updateElement}
-              onUpdateFormTitle={updateFormTitle}
-              onTogglePreview={togglePreview}
-            />
-          </SortableContext>
+          {/* Main Content Area */}
+          <div className="flex-1 flex flex-col min-w-0">
+            <SortableContext items={elements.map(el => el.id)} strategy={verticalListSortingStrategy}>
+              <FormCanvas
+                formTitle={formTitle}
+                elements={elements}
+                selectedElementId={selectedElementId}
+                previewMode={previewMode}
+                draggedType={draggedType}
+                onSelectElement={handleMobileElementSelect}
+                onRemoveElement={removeElement}
+                onUpdateElement={updateElement}
+                onUpdateFormTitle={updateFormTitle}
+                onTogglePreview={togglePreview}
+              />
+            </SortableContext>
+          </div>
           
-          {/* Properties Panel - Hidden on mobile by default */}
+          {/* Right Sidebar - Properties Panel */}
           {!previewMode && (
-            <div className="hidden lg:block">
+            <div className="hidden lg:block flex-none">
               <PropertiesPanel
                 selectedElement={selectedElement}
                 onUpdateElement={updateElement}
