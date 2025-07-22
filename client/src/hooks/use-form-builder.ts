@@ -130,7 +130,8 @@ function getDefaultLabel(type: FormElementType): string {
     'radio': 'Radio Button',
     'submit-button': 'Submit',
     'reset-button': 'Reset',
-  };
+    'image': 'Image',
+  } as const;
   return labels[type];
 }
 
@@ -145,7 +146,8 @@ function getDefaultPlaceholder(type: FormElementType): string {
     'radio': '',
     'submit-button': '',
     'reset-button': '',
-  };
+    'image': '',
+  } as const;
   return placeholders[type];
 }
 

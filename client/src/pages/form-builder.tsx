@@ -20,7 +20,7 @@ import { PropertiesPanel } from '@/components/form-builder/properties-panel';
 import { FormElementType, DragItem, ComponentPaletteItem } from '@/types/form-builder';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Type, Mail, AlignLeft, Hash, ChevronDown, CheckSquare, Circle, Send, Settings, X } from 'lucide-react';
+import { Type, Mail, AlignLeft, Hash, ChevronDown, CheckSquare, Circle, Send, Settings, X, Image } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -115,6 +115,14 @@ export default function FormBuilder() {
       icon: Send,
       color: 'bg-gradient-to-br from-gray-100 to-slate-200 text-gray-700',
       category: 'actions' as const,
+    },
+    {
+      type: 'image' as FormElementType,
+      label: 'Image',
+      description: 'Square image display',
+      icon: Image,
+      color: 'bg-gradient-to-br from-violet-100 to-purple-200 text-violet-700',
+      category: 'basic' as const,
     },
   ];
 

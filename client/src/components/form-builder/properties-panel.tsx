@@ -154,6 +154,43 @@ export function PropertiesPanel({
               </div>
             </>
           )}
+
+          {/* Image-specific properties */}
+          {selectedElement.type === 'image' && (
+            <>
+              <div>
+                <Label htmlFor="src" className="text-sm font-medium text-neutral-700 mb-2">
+                  Image URL
+                </Label>
+                <Input
+                  id="src"
+                  value={selectedElement.src || ''}
+                  onChange={(e) => handleUpdate('src', e.target.value)}
+                  placeholder="https://example.com/image.jpg"
+                  className="focus:ring-2 focus:ring-blue-500"
+                />
+                <p className="text-xs text-neutral-500 mt-1">
+                  Enter a valid image URL (jpg, png, gif, webp)
+                </p>
+              </div>
+
+              <div>
+                <Label htmlFor="alt" className="text-sm font-medium text-neutral-700 mb-2">
+                  Alt Text
+                </Label>
+                <Input
+                  id="alt"
+                  value={selectedElement.alt || ''}
+                  onChange={(e) => handleUpdate('alt', e.target.value)}
+                  placeholder="Describe the image..."
+                  className="focus:ring-2 focus:ring-blue-500"
+                />
+                <p className="text-xs text-neutral-500 mt-1">
+                  Describe the image for accessibility
+                </p>
+              </div>
+            </>
+          )}
         </div>
 
         {/* Options for select, radio, checkbox */}

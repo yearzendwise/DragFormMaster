@@ -76,4 +76,5 @@ export type FormElementType =
   | 'checkbox' 
   | 'radio' 
   | 'submit-button' 
-  | 'reset-button';
+  | 'reset-button'
+  | 'image';

@@ -11,6 +11,8 @@ export interface FormElement {
   options?: string[]; // for select, radio, checkbox
   disabled?: boolean;
   readonly?: boolean;
+  src?: string; // for image components
+  alt?: string; // for image components
 }
 
 export interface ValidationRules {
@@ -41,7 +43,8 @@ export type FormElementType =
   | 'checkbox' 
   | 'radio' 
   | 'submit-button' 
-  | 'reset-button';
+  | 'reset-button'
+  | 'image';
 
 export interface ComponentPaletteItem {
   type: FormElementType;
