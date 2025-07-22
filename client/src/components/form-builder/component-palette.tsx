@@ -8,7 +8,7 @@ const paletteItems: ComponentPaletteItem[] = [
     label: 'Text Input',
     description: 'Single line text field',
     icon: 'fas fa-font',
-    color: 'bg-blue-100 text-blue-600',
+    color: 'bg-gradient-to-br from-blue-100 to-blue-200 text-blue-700',
     category: 'basic',
   },
   {
@@ -16,7 +16,7 @@ const paletteItems: ComponentPaletteItem[] = [
     label: 'Email Input',
     description: 'Email address field',
     icon: 'fas fa-envelope',
-    color: 'bg-green-100 text-green-600',
+    color: 'bg-gradient-to-br from-green-100 to-emerald-200 text-green-700',
     category: 'basic',
   },
   {
@@ -24,7 +24,7 @@ const paletteItems: ComponentPaletteItem[] = [
     label: 'Textarea',
     description: 'Multi-line text area',
     icon: 'fas fa-align-left',
-    color: 'bg-purple-100 text-purple-600',
+    color: 'bg-gradient-to-br from-purple-100 to-purple-200 text-purple-700',
     category: 'basic',
   },
   {
@@ -32,7 +32,7 @@ const paletteItems: ComponentPaletteItem[] = [
     label: 'Number Input',
     description: 'Numeric field',
     icon: 'fas fa-hashtag',
-    color: 'bg-orange-100 text-orange-600',
+    color: 'bg-gradient-to-br from-orange-100 to-orange-200 text-orange-700',
     category: 'basic',
   },
   // Selection
@@ -41,7 +41,7 @@ const paletteItems: ComponentPaletteItem[] = [
     label: 'Select Dropdown',
     description: 'Dropdown selection',
     icon: 'fas fa-caret-down',
-    color: 'bg-indigo-100 text-indigo-600',
+    color: 'bg-gradient-to-br from-indigo-100 to-indigo-200 text-indigo-700',
     category: 'selection',
   },
   {
@@ -49,7 +49,7 @@ const paletteItems: ComponentPaletteItem[] = [
     label: 'Checkbox',
     description: 'Multiple selection',
     icon: 'fas fa-check-square',
-    color: 'bg-emerald-100 text-emerald-600',
+    color: 'bg-gradient-to-br from-emerald-100 to-teal-200 text-emerald-700',
     category: 'selection',
   },
   {
@@ -57,7 +57,7 @@ const paletteItems: ComponentPaletteItem[] = [
     label: 'Radio Button',
     description: 'Single selection',
     icon: 'fas fa-dot-circle',
-    color: 'bg-pink-100 text-pink-600',
+    color: 'bg-gradient-to-br from-pink-100 to-rose-200 text-pink-700',
     category: 'selection',
   },
   // Actions
@@ -66,7 +66,7 @@ const paletteItems: ComponentPaletteItem[] = [
     label: 'Submit Button',
     description: 'Form submission',
     icon: 'fas fa-paper-plane',
-    color: 'bg-blue-100 text-blue-600',
+    color: 'bg-gradient-to-br from-blue-100 to-cyan-200 text-blue-700',
     category: 'actions',
   },
   {
@@ -74,7 +74,7 @@ const paletteItems: ComponentPaletteItem[] = [
     label: 'Reset Button',
     description: 'Clear form data',
     icon: 'fas fa-undo',
-    color: 'bg-red-100 text-red-600',
+    color: 'bg-gradient-to-br from-red-100 to-red-200 text-red-700',
     category: 'actions',
   },
 ];
@@ -93,19 +93,26 @@ export function ComponentPalette({ onAddElement }: ComponentPaletteProps) {
   const categories = ['basic', 'selection', 'actions'] as const;
 
   return (
-    <aside className="w-80 bg-white border-r border-neutral-200 overflow-y-auto">
+    <aside className="w-80 bg-gradient-to-b from-slate-50 to-white border-r border-slate-200/60 overflow-y-auto shadow-sm">
       <div className="p-6">
-        <h2 className="text-lg font-semibold text-neutral-800 mb-4">Form Components</h2>
+        <div className="mb-6">
+          <h2 className="text-lg font-bold text-slate-800 mb-1">Form Components</h2>
+          <p className="text-sm text-slate-500">Drag & drop to build your form</p>
+        </div>
         
         {categories.map((category) => {
           const items = paletteItems.filter(item => item.category === category);
           
           return (
-            <div key={category} className="mb-6">
-              <h3 className="text-sm font-medium text-neutral-600 mb-3 uppercase tracking-wider">
-                {categoryLabels[category]}
-              </h3>
-              <div className="space-y-2">
+            <div key={category} className="mb-8">
+              <div className="flex items-center mb-4">
+                <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                <h3 className="text-sm font-semibold text-slate-700 uppercase tracking-wide">
+                  {categoryLabels[category]}
+                </h3>
+                <div className="flex-1 h-px bg-gradient-to-r from-slate-200 to-transparent ml-3"></div>
+              </div>
+              <div className="space-y-3">
                 {items.map((item) => (
                   <DraggableComponent
                     key={item.type}
@@ -117,6 +124,13 @@ export function ComponentPalette({ onAddElement }: ComponentPaletteProps) {
             </div>
           );
         })}
+        
+        <div className="mt-12 p-4 bg-blue-50/50 rounded-xl border border-blue-100">
+          <div className="text-xs text-blue-600 font-medium mb-1">💡 Pro tip</div>
+          <div className="text-xs text-blue-700">
+            Click to add instantly, or drag for precise placement
+          </div>
+        </div>
       </div>
     </aside>
   );
