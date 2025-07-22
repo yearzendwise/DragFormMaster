@@ -25,6 +25,10 @@ export function DroppableCanvas({
 }: DroppableCanvasProps) {
   const { isOver, setNodeRef } = useDroppable({
     id: 'form-canvas',
+    data: {
+      accepts: ['form-element'],
+      type: 'canvas'
+    }
   });
 
   if (previewMode) {
@@ -56,12 +60,23 @@ export function DroppableCanvas({
       <div className="max-w-4xl mx-auto">
         <div
           ref={setNodeRef}
-          className={`min-h-80 md:min-h-96 bg-white rounded-xl md:rounded-2xl shadow-sm border-2 transition-all duration-300 ${
+          className={`min-h-80 md:min-h-96 bg-white rounded-xl md:rounded-2xl shadow-sm border-2 transition-all duration-300 relative ${
             isOver 
-              ? 'border-blue-400 bg-gradient-to-br from-blue-50 to-indigo-50 shadow-lg shadow-blue-200/25 scale-[1.01]' 
+              ? 'border-blue-400 bg-gradient-to-br from-blue-50 to-indigo-50 shadow-lg shadow-blue-200/25 scale-[1.02]' 
               : 'border-slate-200 border-dashed hover:border-slate-300'
           } ${elements.length === 0 ? 'p-4 md:p-8' : 'p-3 md:p-6'}`}
         >
+          {/* Drop indicator when dragging over empty canvas */}
+          {isOver && elements.length === 0 && (
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg font-medium flex items-center gap-2">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                Drop to add element
+              </div>
+            </div>
+          )}
           {elements.length === 0 ? (
             <div className="text-center py-12 md:py-20">
               <div className="relative mb-6 md:mb-8">
@@ -123,10 +138,27 @@ export function DroppableCanvas({
                   </div>
                 ))}
                 
-                {/* Drop indicator for new elements */}
-                {isOver && (
-                  <div className="h-2 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full animate-pulse shadow-lg"></div>
-                )}
+                {/* Enhanced drop zone for new elements */}
+                <div 
+                  className={`min-h-12 rounded-lg border-2 border-dashed transition-all duration-300 flex items-center justify-center ${
+                    isOver 
+                      ? 'border-blue-400 bg-blue-50/30 scale-105' 
+                      : 'border-slate-200 hover:border-slate-300'
+                  }`}
+                >
+                  {isOver ? (
+                    <div className="text-blue-600 font-medium flex items-center gap-2 animate-pulse">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      </svg>
+                      Drop here to add element
+                    </div>
+                  ) : (
+                    <div className="text-slate-400 text-sm opacity-60 hover:opacity-100 transition-opacity">
+                      Drop new elements here
+                    </div>
+                  )}
+                </div>
               </div>
             </SortableContext>
           )}

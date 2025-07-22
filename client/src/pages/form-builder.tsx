@@ -1,4 +1,16 @@
-import { DndContext, DragEndEvent, DragOverlay, DragStartEvent } from '@dnd-kit/core';
+import { 
+  DndContext, 
+  DragEndEvent, 
+  DragOverlay, 
+  DragStartEvent, 
+  useSensor, 
+  useSensors, 
+  PointerSensor,
+  TouchSensor,
+  closestCorners,
+  DragOverEvent,
+  rectIntersection
+} from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy, arrayMove } from '@dnd-kit/sortable';
 import { useState } from 'react';
 import { useFormBuilder } from '@/hooks/use-form-builder';
@@ -108,6 +120,21 @@ export default function FormBuilder() {
 
   const selectedElement = elements.find(el => el.id === selectedElementId) || null;
 
+  // Configure drag sensors for better touch and mouse support
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 250,
+        tolerance: 5,
+      },
+    })
+  );
+
   function handleDragStart(event: DragStartEvent) {
     const { active } = event;
     setActiveId(active.id as string);
@@ -129,21 +156,34 @@ export default function FormBuilder() {
 
     const dragData = active.data.current as DragItem;
     
-    if (dragData?.isNew && over.id === 'form-canvas') {
+    // Check if dropping on the canvas or any valid drop area
+    const isCanvasDrop = over.id === 'form-canvas' || over.data?.current?.accepts?.includes('form-element');
+    
+    if (dragData?.isNew && isCanvasDrop) {
       // Adding new element from palette
       addElement(dragData.type);
     } else if (!dragData?.isNew) {
       // Reordering existing elements
       const oldIndex = elements.findIndex(el => el.id === active.id);
-      const newIndex = elements.findIndex(el => el.id === over.id);
+      let newIndex = elements.findIndex(el => el.id === over.id);
       
-      if (oldIndex !== newIndex) {
+      // If dropping on canvas, add to end
+      if (over.id === 'form-canvas') {
+        newIndex = elements.length - 1;
+      }
+      
+      if (oldIndex !== newIndex && oldIndex !== -1) {
         moveElement(oldIndex, newIndex);
       }
     }
     
     setActiveId(null);
     setDraggedType(null);
+  }
+
+  function handleDragOver(event: DragOverEvent) {
+    const { over } = event;
+    // You can add visual feedback here for drag over states
   }
 
   const handleAddElement = (type: FormElementType) => {
@@ -215,7 +255,13 @@ export default function FormBuilder() {
         </div>
       </header>
 
-      <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+      <DndContext 
+        sensors={sensors}
+        collisionDetection={rectIntersection}
+        onDragStart={handleDragStart} 
+        onDragEnd={handleDragEnd}
+        onDragOver={handleDragOver}
+      >
         <div className="flex-1 flex relative">
           {/* Component Palette - Hidden on mobile by default */}
           <div className="hidden lg:block">
