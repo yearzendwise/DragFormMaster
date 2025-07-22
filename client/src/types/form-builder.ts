@@ -68,3 +68,31 @@ export interface FormBuilderState {
   settings: FormSettings;
   previewMode: boolean;
 }
+
+export type WizardStep = 'build' | 'style' | 'preview';
+
+export interface FormTheme {
+  id: string;
+  name: string;
+  description: string;
+  preview: string;
+  styles: {
+    container: string;
+    header: string;
+    field: string;
+    label: string;
+    input: string;
+    button: string;
+    background: string;
+  };
+}
+
+export interface WizardState {
+  currentStep: WizardStep;
+  formData: {
+    title: string;
+    elements: FormElement[];
+  };
+  selectedTheme: FormTheme | null;
+  isComplete: boolean;
+}

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a modern form builder application built with React and Express, featuring a drag-and-drop interface for creating custom forms. The application provides a visual form designer with real-time preview capabilities and a comprehensive component library.
+This is a modern wizard-style form builder application built with React and Express. The application guides users through a three-step process to create, style, and preview custom forms with a comprehensive component library and multiple design themes.
 
 ## User Preferences
 
@@ -39,11 +39,17 @@ Mobile-first design: Ensure all interfaces work seamlessly on mobile devices.
 
 ## Key Components
 
+### Wizard Flow
+- **Step 1 - Build**: Drag-and-drop form creation with component palette and properties panel
+- **Step 2 - Style**: Selection from 5 predefined form themes/styles
+- **Step 3 - Preview**: Final form preview and save functionality
+
 ### Form Builder Core
-- **Component Palette**: Draggable form elements (text, email, textarea, select, etc.)
+- **Component Palette**: Draggable form elements (text, email, textarea, select, image, etc.)
 - **Form Canvas**: Drop zone with sortable elements and live preview
 - **Properties Panel**: Element configuration and styling options
-- **Preview Mode**: Real-time form preview functionality
+- **Theme Selector**: Multiple visual themes for form styling
+- **Final Preview**: Complete form preview with save functionality
 
 ### Database Schema
 - **Users Table**: Authentication and user management
@@ -60,11 +66,11 @@ Mobile-first design: Ensure all interfaces work seamlessly on mobile devices.
 
 ## Data Flow
 
-1. **Form Creation**: Users drag components from palette to canvas
-2. **Element Configuration**: Properties panel updates element settings in real-time
-3. **State Management**: Custom hooks manage form builder state and synchronization
-4. **Persistence**: Forms saved to PostgreSQL via REST API endpoints
-5. **Preview**: Toggle between edit and preview modes for user testing
+1. **Step 1 - Form Creation**: Users drag components from palette to canvas and configure properties
+2. **Step 2 - Theme Selection**: Users choose from 5 predefined visual themes
+3. **Step 3 - Preview & Save**: Users preview the final styled form and save to database
+4. **State Management**: Custom hooks manage wizard state, form data, and theme selection
+5. **Persistence**: Complete forms with theme data saved to PostgreSQL via REST API endpoints
 
 ## External Dependencies
 
