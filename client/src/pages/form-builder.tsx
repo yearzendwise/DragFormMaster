@@ -5,8 +5,10 @@ import { useFormBuilder } from '@/hooks/use-form-builder';
 import { ComponentPalette } from '@/components/form-builder/component-palette';
 import { FormCanvas } from '@/components/form-builder/form-canvas';
 import { PropertiesPanel } from '@/components/form-builder/properties-panel';
-import { FormElementType, DragItem } from '@/types/form-builder';
+import { FormElementType, DragItem, ComponentPaletteItem } from '@/types/form-builder';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Type, Mail, AlignLeft, Hash, ChevronDown, CheckSquare, Circle, Send } from 'lucide-react';
 
 export default function FormBuilder() {
   const {
@@ -28,6 +30,75 @@ export default function FormBuilder() {
 
   const [activeId, setActiveId] = useState<string | null>(null);
   const [draggedType, setDraggedType] = useState<FormElementType | null>(null);
+  const [mobileModalOpen, setMobileModalOpen] = useState(false);
+
+  // Component palette items for mobile modal
+  const paletteItems = [
+    {
+      type: 'text-input' as FormElementType,
+      label: 'Text Input',
+      description: 'Single line text field',
+      icon: Type,
+      color: 'bg-gradient-to-br from-blue-100 to-blue-200 text-blue-700',
+      category: 'basic' as const,
+    },
+    {
+      type: 'email-input' as FormElementType,
+      label: 'Email Input',
+      description: 'Email address field',
+      icon: Mail,
+      color: 'bg-gradient-to-br from-green-100 to-emerald-200 text-green-700',
+      category: 'basic' as const,
+    },
+    {
+      type: 'textarea' as FormElementType,
+      label: 'Textarea',
+      description: 'Multi-line text area',
+      icon: AlignLeft,
+      color: 'bg-gradient-to-br from-purple-100 to-purple-200 text-purple-700',
+      category: 'basic' as const,
+    },
+    {
+      type: 'number-input' as FormElementType,
+      label: 'Number Input',
+      description: 'Numeric field',
+      icon: Hash,
+      color: 'bg-gradient-to-br from-orange-100 to-orange-200 text-orange-700',
+      category: 'basic' as const,
+    },
+    {
+      type: 'select' as FormElementType,
+      label: 'Select Dropdown',
+      description: 'Dropdown selection',
+      icon: ChevronDown,
+      color: 'bg-gradient-to-br from-indigo-100 to-indigo-200 text-indigo-700',
+      category: 'selection' as const,
+    },
+    {
+      type: 'checkbox' as FormElementType,
+      label: 'Checkbox',
+      description: 'Multiple selection',
+      icon: CheckSquare,
+      color: 'bg-gradient-to-br from-emerald-100 to-teal-200 text-emerald-700',
+      category: 'selection' as const,
+    },
+    {
+      type: 'radio' as FormElementType,
+      label: 'Radio Button',
+      description: 'Single selection',
+      icon: Circle,
+      color: 'bg-gradient-to-br from-pink-100 to-rose-200 text-pink-700',
+      category: 'selection' as const,
+    },
+    {
+      type: 'submit-button' as FormElementType,
+      label: 'Submit Button',
+      description: 'Form submit button',
+      icon: Send,
+      color: 'bg-gradient-to-br from-gray-100 to-slate-200 text-gray-700',
+      category: 'actions' as const,
+    },
+  ];
 
   const selectedElement = elements.find(el => el.id === selectedElementId) || null;
 
@@ -175,17 +246,44 @@ export default function FormBuilder() {
 
       {/* Mobile Floating Action Button */}
       <div className="lg:hidden fixed bottom-6 right-6 z-50">
-        <Button
-          size="lg"
-          className="w-14 h-14 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg shadow-blue-200/25 transition-all duration-200"
-          onClick={() => {
-            // Could open a mobile component selector modal
-          }}
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-          </svg>
-        </Button>
+        <Dialog open={mobileModalOpen} onOpenChange={setMobileModalOpen}>
+          <DialogTrigger asChild>
+            <Button
+              size="lg"
+              className="w-14 h-14 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg shadow-blue-200/25 transition-all duration-200"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-md max-h-[80vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle>Add Component</DialogTitle>
+            </DialogHeader>
+            <div className="grid grid-cols-2 gap-3 mt-4">
+              {paletteItems.map((item) => (
+                <Button
+                  key={item.type}
+                  variant="outline"
+                  className="h-auto p-4 flex flex-col items-center gap-2 text-center border-2 hover:border-blue-300 transition-all duration-200"
+                  onClick={() => {
+                    addElement(item.type);
+                    setMobileModalOpen(false);
+                  }}
+                >
+                  <div className={`w-8 h-8 rounded-lg ${item.color} flex items-center justify-center text-sm`}>
+                    <item.icon className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <div className="font-medium text-sm">{item.label}</div>
+                    <div className="text-xs text-muted-foreground">{item.description}</div>
+                  </div>
+                </Button>
+              ))}
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
 
       {/* Status Bar */}
