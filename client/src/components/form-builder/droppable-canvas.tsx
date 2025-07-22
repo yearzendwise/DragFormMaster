@@ -1,8 +1,9 @@
 import { useDroppable } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy, arrayMove } from '@dnd-kit/sortable';
-import { FormElement, DragItem } from '@/types/form-builder';
+import { FormElement, DragItem, FormElementType } from '@/types/form-builder';
 import { FormElementRenderer } from './form-element-renderer';
 import { SortableFormElement } from './sortable-form-element';
+import { DropIndicator } from './drop-indicator';
 
 interface DroppableCanvasProps {
   elements: FormElement[];
@@ -12,6 +13,7 @@ interface DroppableCanvasProps {
   onUpdateElement: (id: string, updates: Partial<FormElement>) => void;
   formTitle: string;
   previewMode: boolean;
+  draggedType: FormElementType | null;
 }
 
 export function DroppableCanvas({
@@ -22,6 +24,7 @@ export function DroppableCanvas({
   onUpdateElement,
   formTitle,
   previewMode,
+  draggedType,
 }: DroppableCanvasProps) {
   const { isOver, setNodeRef } = useDroppable({
     id: 'form-canvas',
@@ -121,44 +124,44 @@ export function DroppableCanvas({
             </div>
           ) : (
             <SortableContext items={elements.map(el => el.id)} strategy={verticalListSortingStrategy}>
-              <div className="space-y-4">
+              <div className="space-y-0">
+                {/* Drop zone at the beginning */}
+                <DropIndicator index={0} isActive={draggedType !== null} />
+                
                 {elements.map((element, index) => (
-                  <div
-                    key={element.id}
-                    className="animate-slide-up"
-                    style={{ animationDelay: `${index * 50}ms` }}
-                  >
-                    <SortableFormElement
-                      element={element}
-                      isSelected={selectedElementId === element.id}
-                      onSelect={onSelectElement}
-                      onRemove={onRemoveElement}
-                      onUpdate={onUpdateElement}
-                    />
+                  <div key={element.id}>
+                    <div
+                      className="animate-slide-up"
+                      style={{ animationDelay: `${index * 50}ms` }}
+                    >
+                      <SortableFormElement
+                        element={element}
+                        isSelected={selectedElementId === element.id}
+                        onSelect={onSelectElement}
+                        onRemove={onRemoveElement}
+                        onUpdate={onUpdateElement}
+                      />
+                    </div>
+                    
+                    {/* Drop zone after each element */}
+                    <DropIndicator index={index + 1} isActive={draggedType !== null} />
                   </div>
                 ))}
                 
-                {/* Enhanced drop zone for new elements */}
-                <div 
-                  className={`min-h-12 rounded-lg border-2 border-dashed transition-all duration-300 flex items-center justify-center ${
-                    isOver 
-                      ? 'border-blue-400 bg-blue-50/30 scale-105' 
-                      : 'border-slate-200 hover:border-slate-300'
-                  }`}
-                >
-                  {isOver ? (
-                    <div className="text-blue-600 font-medium flex items-center gap-2 animate-pulse">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                      </svg>
-                      Drop here to add element
+                {/* Enhanced drop zone for new elements at the end - now simplified since we have indicators */}
+                {draggedType && (
+                  <div 
+                    className={`min-h-8 rounded-lg border-2 border-dashed transition-all duration-300 flex items-center justify-center mt-4 ${
+                      isOver 
+                        ? 'border-blue-400 bg-blue-50/30 scale-105' 
+                        : 'border-slate-200 hover:border-slate-300'
+                    }`}
+                  >
+                    <div className="text-slate-400 text-sm opacity-60">
+                      Or drop at the end
                     </div>
-                  ) : (
-                    <div className="text-slate-400 text-sm opacity-60 hover:opacity-100 transition-opacity">
-                      Drop new elements here
-                    </div>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             </SortableContext>
           )}

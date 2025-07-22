@@ -1,4 +1,4 @@
-import { FormElement } from '@/types/form-builder';
+import { FormElement, FormElementType } from '@/types/form-builder';
 import { DroppableCanvas } from './droppable-canvas';
 
 interface FormCanvasProps {
@@ -6,6 +6,7 @@ interface FormCanvasProps {
   elements: FormElement[];
   selectedElementId: string | null;
   previewMode: boolean;
+  draggedType: FormElementType | null;
   onSelectElement: (id: string | null) => void;
   onRemoveElement: (id: string) => void;
   onUpdateElement: (id: string, updates: Partial<FormElement>) => void;
@@ -18,6 +19,7 @@ export function FormCanvas({
   elements,
   selectedElementId,
   previewMode,
+  draggedType,
   onSelectElement,
   onRemoveElement,
   onUpdateElement,
@@ -106,6 +108,7 @@ export function FormCanvas({
         onUpdateElement={onUpdateElement}
         formTitle={formTitle}
         previewMode={previewMode}
+        draggedType={draggedType}
       />
     </main>
   );

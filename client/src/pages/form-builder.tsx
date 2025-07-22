@@ -155,21 +155,41 @@ export default function FormBuilder() {
     }
 
     const dragData = active.data.current as DragItem;
+    const overData = over.data?.current;
     
-    // Check if dropping on the canvas or any valid drop area
-    const isCanvasDrop = over.id === 'form-canvas' || over.data?.current?.accepts?.includes('form-element');
+    // Check if dropping on a drop zone
+    const isDropZone = typeof over.id === 'string' && over.id.startsWith('drop-zone-');
+    const isCanvasDrop = over.id === 'form-canvas' || overData?.accepts?.includes('form-element');
     
-    if (dragData?.isNew && isCanvasDrop) {
+    if (dragData?.isNew && (isDropZone || isCanvasDrop)) {
       // Adding new element from palette
-      addElement(dragData.type);
+      if (isDropZone) {
+        // Extract the index from the drop zone ID (e.g., "drop-zone-2" -> 2)
+        const dropIndex = parseInt(over.id.toString().split('-')[2]);
+        // Insert at specific position
+        addElement(dragData.type, dropIndex);
+      } else {
+        // Add to end
+        addElement(dragData.type);
+      }
     } else if (!dragData?.isNew) {
       // Reordering existing elements
       const oldIndex = elements.findIndex(el => el.id === active.id);
-      let newIndex = elements.findIndex(el => el.id === over.id);
+      let newIndex: number;
       
-      // If dropping on canvas, add to end
-      if (over.id === 'form-canvas') {
+      if (isDropZone) {
+        // Drop zone insertion
+        newIndex = parseInt(over.id.toString().split('-')[2]);
+        // Adjust for the element being removed from its current position
+        if (oldIndex < newIndex) {
+          newIndex--;
+        }
+      } else if (over.id === 'form-canvas') {
+        // Dropping on canvas - add to end
         newIndex = elements.length - 1;
+      } else {
+        // Dropping on another element - find its position
+        newIndex = elements.findIndex(el => el.id === over.id);
       }
       
       if (oldIndex !== newIndex && oldIndex !== -1) {
@@ -274,6 +294,7 @@ export default function FormBuilder() {
               elements={elements}
               selectedElementId={selectedElementId}
               previewMode={previewMode}
+              draggedType={draggedType}
               onSelectElement={handleMobileElementSelect}
               onRemoveElement={removeElement}
               onUpdateElement={updateElement}
