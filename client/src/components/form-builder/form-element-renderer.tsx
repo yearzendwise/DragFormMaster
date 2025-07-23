@@ -261,20 +261,7 @@ export function FormElementRenderer({
             </Button>
           </div>
 
-          {/* Mobile edit indicator */}
-          <div className="lg:hidden absolute top-2 right-2 opacity-60 group-hover:opacity-100 transition-opacity">
-            <button
-              className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center shadow-sm hover:bg-blue-600 transition-colors"
-              onClick={(e) => {
-                e.stopPropagation();
-                onMobileEdit?.(element.id);
-              }}
-            >
-              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-              </svg>
-            </button>
-          </div>
+          {/* Removed mobile edit indicator - now in vertical control panel */}
 
           {/* Vertical control panel - up, settings, down */}
           {isSelected && (
