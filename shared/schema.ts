@@ -37,6 +37,7 @@ export interface FormElement {
   id: string;
   type: FormElementType;
   label: string;
+  labelTranslations?: Record<string, string>; // language code -> translated label
   placeholder?: string;
   helpText?: string;
   name: string;

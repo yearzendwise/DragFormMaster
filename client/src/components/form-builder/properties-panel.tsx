@@ -5,6 +5,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
+import { LanguageSelector } from '@/components/ui/language-selector';
 
 interface PropertiesPanelProps {
   selectedElement: FormElement | null;
@@ -107,12 +108,19 @@ export function PropertiesPanel({
             <Label htmlFor="label" className="text-sm font-medium text-neutral-700 mb-2">
               Label
             </Label>
-            <Input
-              id="label"
-              value={selectedElement.label}
-              onChange={(e) => handleUpdate('label', e.target.value)}
-              className="focus:ring-2 focus:ring-blue-500"
-            />
+            <div className="flex gap-2 items-center">
+              <Input
+                id="label"
+                value={selectedElement.label}
+                onChange={(e) => handleUpdate('label', e.target.value)}
+                className="focus:ring-2 focus:ring-blue-500 flex-1"
+              />
+              <LanguageSelector
+                currentTranslations={selectedElement.labelTranslations || {}}
+                onTranslationsUpdate={(translations) => handleUpdate('labelTranslations', translations)}
+                originalLabel={selectedElement.label}
+              />
+            </div>
           </div>
 
           {selectedElement.type !== 'submit-button' && selectedElement.type !== 'reset-button' && (
