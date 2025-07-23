@@ -264,14 +264,14 @@ export function FormElementRenderer({
             <Button
               size="sm"
               variant="destructive"
-              className="w-5 h-5 p-0 rounded-full shadow-sm"
+              className="w-8 h-8 p-0 rounded-full shadow-sm"
               onClick={(e) => {
                 e.stopPropagation();
                 onRemove(element.id);
               }}
             >
               <svg
-                className="w-2.5 h-2.5"
+                className="w-4 h-4"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -289,13 +289,13 @@ export function FormElementRenderer({
             <Button
               size="sm"
               variant="secondary"
-              className="w-7 h-7 p-0 rounded-full bg-white border border-slate-200 hover:border-blue-300 hover:bg-blue-50 shadow-sm"
+              className="w-9 h-9 p-0 rounded-full bg-white border border-slate-200 hover:border-blue-300 hover:bg-blue-50 shadow-sm"
               onClick={(e) => {
                 e.stopPropagation();
                 // Could add duplicate functionality here
               }}
             >
-              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M7 9a2 2 0 012-2h6a2 2 0 012 2v6a2 2 0 01-2 2H9a2 2 0 01-2-2V9z" />
                 <path d="M5 3a2 2 0 00-2 2v6a2 2 0 002 2V5h8a2 2 0 00-2-2H5z" />
               </svg>
@@ -341,7 +341,7 @@ export function FormElementRenderer({
                     onMoveUp(element.id);
                   }}
                   disabled={!canMoveUp}
-                  className={`w-6 h-6 rounded-full shadow-lg flex items-center justify-center transition-all ${
+                  className={`w-8 h-8 lg:w-9 lg:h-9 rounded-full shadow-lg flex items-center justify-center transition-all ${
                     canMoveUp
                       ? "bg-blue-500 hover:bg-blue-600 text-white shadow-blue-200"
                       : "bg-slate-300 text-slate-500 cursor-not-allowed"
@@ -349,7 +349,7 @@ export function FormElementRenderer({
                   title="Move up"
                 >
                   <svg
-                    className="w-3 h-3"
+                    className="w-3 h-3 lg:w-4 lg:h-4"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -368,11 +368,11 @@ export function FormElementRenderer({
                   e.stopPropagation();
                   onMobileEdit?.(element.id);
                 }}
-                className="w-6 h-6 rounded-full shadow-lg flex items-center justify-center transition-all bg-slate-500 hover:bg-slate-600 text-white shadow-slate-200"
+                className="w-8 h-8 lg:w-9 lg:h-9 rounded-full shadow-lg flex items-center justify-center transition-all bg-slate-500 hover:bg-slate-600 text-white shadow-slate-200"
                 title="Edit properties"
               >
                 <svg
-                  className="w-3 h-3"
+                  className="w-3 h-3 lg:w-4 lg:h-4"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -392,7 +392,7 @@ export function FormElementRenderer({
                     onMoveDown(element.id);
                   }}
                   disabled={!canMoveDown}
-                  className={`w-6 h-6 rounded-full shadow-lg flex items-center justify-center transition-all ${
+                  className={`w-8 h-8 lg:w-9 lg:h-9 rounded-full shadow-lg flex items-center justify-center transition-all ${
                     canMoveDown
                       ? "bg-blue-500 hover:bg-blue-600 text-white shadow-blue-200"
                       : "bg-slate-300 text-slate-500 cursor-not-allowed"
@@ -400,7 +400,7 @@ export function FormElementRenderer({
                   title="Move down"
                 >
                   <svg
-                    className="w-3 h-3"
+                    className="w-3 h-3 lg:w-4 lg:h-4"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
