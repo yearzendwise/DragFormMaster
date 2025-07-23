@@ -34,6 +34,7 @@ export function PreviewStep({
   onExport 
 }: PreviewStepProps) {
   const [showJsonPreview, setShowJsonPreview] = useState(false);
+  const [actualFormData, setActualFormData] = useState<Record<string, any>>({});
 
   // Generate sample form data based on form elements
   const generateSampleFormData = () => {
@@ -69,12 +70,7 @@ export function PreviewStep({
         case 'boolean-switch':
           sampleData[element.name] = true;
           break;
-        case 'date':
-          sampleData[element.name] = new Date().toISOString().split('T')[0];
-          break;
-        case 'file':
-          sampleData[element.name] = 'uploaded_file.pdf';
-          break;
+
       }
     });
 
@@ -87,7 +83,54 @@ export function PreviewStep({
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Extract actual form data from the form
+    const formData = new FormData(e.target as HTMLFormElement);
+    const actualFormData: Record<string, any> = {};
+    
+    // Convert FormData to regular object with proper type handling
+    const formDataEntries = Array.from(formData.entries());
+    for (const [key, value] of formDataEntries) {
+      // Skip the submit and reset buttons
+      if (key === 'submit' || key === 'reset') continue;
+      
+      // Find the corresponding element to understand the data type
+      const element = elements.find(el => el.name === key);
+      
+      if (element) {
+        switch (element.type) {
+          case 'number-input':
+            actualFormData[key] = value ? Number(value) : null;
+            break;
+          case 'checkbox':
+            actualFormData[key] = value === 'on';
+            break;
+          case 'rate-scale':
+            actualFormData[key] = value ? Number(value) : null;
+            break;
+          case 'boolean-switch':
+            actualFormData[key] = value === 'true';
+            break;
+          default:
+            actualFormData[key] = value || null;
+        }
+      } else {
+        actualFormData[key] = value || null;
+      }
+    }
+    
+    // Store the actual form data in state
+    setActualFormData(actualFormData);
     setShowJsonPreview(true);
+  };
+
+  // Generate actual form data based on current form input values
+  const getActualFormData = () => {
+    return {
+      formTitle,
+      submittedAt: new Date().toISOString(),
+      formData: actualFormData
+    };
   };
   // Show error if no theme is selected
   if (!selectedTheme) {
@@ -209,14 +252,14 @@ export function PreviewStep({
             </p>
             <div className="bg-slate-100 rounded-lg p-4 overflow-x-auto">
               <pre className="text-sm text-slate-800 whitespace-pre-wrap">
-                {JSON.stringify(generateSampleFormData(), null, 2)}
+                {JSON.stringify(getActualFormData(), null, 2)}
               </pre>
             </div>
             <div className="mt-4 flex justify-end space-x-3">
               <Button 
                 variant="outline" 
                 onClick={() => {
-                  navigator.clipboard.writeText(JSON.stringify(generateSampleFormData(), null, 2));
+                  navigator.clipboard.writeText(JSON.stringify(getActualFormData(), null, 2));
                 }}
               >
                 Copy JSON
