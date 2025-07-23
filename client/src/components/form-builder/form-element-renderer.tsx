@@ -276,8 +276,8 @@ export function FormElementRenderer({
             </button>
           </div>
 
-          {/* Move buttons - positioned on the right edge, visible when selected */}
-          {isSelected && (onMoveUp || onMoveDown) && (
+          {/* Vertical control panel - up, settings, down */}
+          {isSelected && (
             <div className="absolute -right-8 top-1/2 -translate-y-1/2 flex flex-col gap-1 transition-opacity duration-200 z-10">
               {/* Move Up Button */}
               {onMoveUp && (
@@ -299,6 +299,20 @@ export function FormElementRenderer({
                   </svg>
                 </button>
               )}
+              
+              {/* Settings Button */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onMobileEdit?.(element.id);
+                }}
+                className="w-6 h-6 rounded-full shadow-lg flex items-center justify-center transition-all bg-slate-500 hover:bg-slate-600 text-white shadow-slate-200"
+                title="Edit properties"
+              >
+                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
+                </svg>
+              </button>
               
               {/* Move Down Button */}
               {onMoveDown && (
