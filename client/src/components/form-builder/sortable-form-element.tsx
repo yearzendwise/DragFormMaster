@@ -10,6 +10,7 @@ interface SortableFormElementProps {
   onRemove: (id: string) => void;
   onUpdate: (id: string, updates: Partial<FormElement>) => void;
   onMobileEdit?: (id: string) => void;
+  isGlobalDragging?: boolean;
 }
 
 export function SortableFormElement({
@@ -19,6 +20,7 @@ export function SortableFormElement({
   onRemove,
   onUpdate,
   onMobileEdit,
+  isGlobalDragging = false,
 }: SortableFormElementProps) {
   const {
     attributes,
@@ -72,6 +74,7 @@ export function SortableFormElement({
           onUpdate={onUpdate}
           previewMode={false}
           onMobileEdit={onMobileEdit}
+          isDragging={isGlobalDragging}
         />
       </div>
     </div>

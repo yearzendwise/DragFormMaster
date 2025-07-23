@@ -15,6 +15,7 @@ interface FormElementRendererProps {
   onUpdate?: (id: string, updates: Partial<FormElement>) => void;
   previewMode: boolean;
   onMobileEdit?: (id: string) => void;
+  isDragging?: boolean;
 }
 
 export function FormElementRenderer({
@@ -24,6 +25,7 @@ export function FormElementRenderer({
   onRemove,
   previewMode,
   onMobileEdit,
+  isDragging = false,
 }: FormElementRendererProps) {
   const handleClick = (e: React.MouseEvent) => {
     if (previewMode) return;
@@ -39,10 +41,11 @@ export function FormElementRenderer({
             type="text"
             placeholder={element.placeholder}
             required={element.required}
-            disabled={element.disabled}
+            disabled={element.disabled || isDragging}
             readOnly={element.readonly}
             name={element.name}
             className="focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            tabIndex={isDragging ? -1 : undefined}
           />
         );
 
@@ -52,10 +55,11 @@ export function FormElementRenderer({
             type="email"
             placeholder={element.placeholder}
             required={element.required}
-            disabled={element.disabled}
+            disabled={element.disabled || isDragging}
             readOnly={element.readonly}
             name={element.name}
             className="focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            tabIndex={isDragging ? -1 : undefined}
           />
         );
 
@@ -65,12 +69,13 @@ export function FormElementRenderer({
             type="number"
             placeholder={element.placeholder}
             required={element.required}
-            disabled={element.disabled}
+            disabled={element.disabled || isDragging}
             readOnly={element.readonly}
             name={element.name}
             min={element.validation?.min}
             max={element.validation?.max}
             className="focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            tabIndex={isDragging ? -1 : undefined}
           />
         );
 
@@ -79,18 +84,22 @@ export function FormElementRenderer({
           <Textarea
             placeholder={element.placeholder}
             required={element.required}
-            disabled={element.disabled}
+            disabled={element.disabled || isDragging}
             readOnly={element.readonly}
             name={element.name}
             className="focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             rows={4}
+            tabIndex={isDragging ? -1 : undefined}
           />
         );
 
       case 'select':
         return (
-          <Select name={element.name} required={element.required} disabled={element.disabled}>
-            <SelectTrigger className="focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+          <Select name={element.name} required={element.required} disabled={element.disabled || isDragging}>
+            <SelectTrigger 
+              className="focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              tabIndex={isDragging ? -1 : undefined}
+            >
               <SelectValue placeholder={element.placeholder || "Choose an option"} />
             </SelectTrigger>
             <SelectContent>
@@ -112,7 +121,8 @@ export function FormElementRenderer({
                   id={`${element.id}-${index}`}
                   name={element.name}
                   value={option.toLowerCase().replace(/\s+/g, '-')}
-                  disabled={element.disabled}
+                  disabled={element.disabled || isDragging}
+                  tabIndex={isDragging ? -1 : undefined}
                 />
                 <Label htmlFor={`${element.id}-${index}`} className="text-sm">
                   {option}

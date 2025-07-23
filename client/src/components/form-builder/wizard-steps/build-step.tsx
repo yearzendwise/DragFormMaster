@@ -46,6 +46,7 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
   const [draggedType, setDraggedType] = useState<FormElementType | null>(null);
   const [showMobileAdd, setShowMobileAdd] = useState(false);
   const [showMobileProperties, setShowMobileProperties] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -91,6 +92,7 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
   function handleDragStart(event: DragStartEvent) {
     const { active } = event;
     setActiveId(active.id as string);
+    setIsDragging(true);
     
     const dragData = active.data.current as DragItem | undefined;
     if (dragData?.type) {
@@ -141,6 +143,7 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
     
     setActiveId(null);
     setDraggedType(null);
+    setIsDragging(false);
   }
 
   const handleAddElement = (type: FormElementType) => {
@@ -185,6 +188,7 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
               onUpdateFormTitle={updateFormTitle}
               onTogglePreview={togglePreview}
               onMobileEdit={handleMobileEdit}
+              isDragging={isDragging}
             />
           </SortableContext>
         </div>

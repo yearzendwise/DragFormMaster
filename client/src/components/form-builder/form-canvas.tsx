@@ -13,6 +13,7 @@ interface FormCanvasProps {
   onUpdateFormTitle: (title: string) => void;
   onTogglePreview: () => void;
   onMobileEdit?: (id: string) => void;
+  isDragging?: boolean;
 }
 
 export function FormCanvas({
@@ -27,6 +28,7 @@ export function FormCanvas({
   onUpdateFormTitle,
   onTogglePreview,
   onMobileEdit,
+  isDragging = false,
 }: FormCanvasProps) {
   return (
     <main className="flex-1 flex flex-col bg-neutral-50">
@@ -112,6 +114,7 @@ export function FormCanvas({
         previewMode={previewMode}
         draggedType={draggedType}
         onMobileEdit={onMobileEdit}
+        isDragging={isDragging}
       />
     </main>
   );

@@ -15,6 +15,7 @@ interface DroppableCanvasProps {
   previewMode: boolean;
   draggedType: FormElementType | null;
   onMobileEdit?: (id: string) => void;
+  isDragging?: boolean;
 }
 
 export function DroppableCanvas({
@@ -27,6 +28,7 @@ export function DroppableCanvas({
   previewMode,
   draggedType,
   onMobileEdit,
+  isDragging = false,
 }: DroppableCanvasProps) {
   const { isOver, setNodeRef } = useDroppable({
     id: 'form-canvas',
@@ -143,6 +145,7 @@ export function DroppableCanvas({
                         onRemove={onRemoveElement}
                         onUpdate={onUpdateElement}
                         onMobileEdit={onMobileEdit}
+                        isGlobalDragging={isDragging}
                       />
                     </div>
                     
