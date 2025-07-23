@@ -278,7 +278,7 @@ export function FormElementRenderer({
 
           {/* Move buttons for selected element */}
           {isSelected && (onMoveUp || onMoveDown) && (
-            <div className="absolute -left-3 top-1/2 -translate-y-1/2 flex flex-col gap-1">
+            <div className="absolute -left-12 top-2 flex flex-col gap-1">
               {/* Move Up Button */}
               {onMoveUp && (
                 <button

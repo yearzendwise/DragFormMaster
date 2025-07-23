@@ -1,9 +1,8 @@
-import { useDroppable } from '@dnd-kit/core';
-import { SortableContext, verticalListSortingStrategy, arrayMove } from '@dnd-kit/sortable';
-import { FormElement, DragItem, FormElementType } from '@/types/form-builder';
+// Removed drag and drop imports - using button-based movement
+import { FormElement, FormElementType } from '@/types/form-builder';
 import { FormElementRenderer } from './form-element-renderer';
 import { SortableFormElement } from './sortable-form-element';
-import { DropIndicator } from './drop-indicator';
+// Removed DropIndicator import - using button-based movement
 
 interface DroppableCanvasProps {
   elements: FormElement[];
@@ -38,13 +37,7 @@ export function DroppableCanvas({
   moveDirection = null,
   moveFromIndex = -1,
 }: DroppableCanvasProps) {
-  const { isOver, setNodeRef } = useDroppable({
-    id: 'form-canvas',
-    data: {
-      accepts: ['form-element'],
-      type: 'canvas'
-    }
-  });
+  // Removed droppable hook - using button-based movement
 
   if (previewMode) {
     return (
@@ -74,24 +67,9 @@ export function DroppableCanvas({
     <div className="flex-1 p-3 md:p-6 overflow-y-auto bg-gradient-to-br from-slate-50 via-blue-50/20 to-indigo-50/30">
       <div className="max-w-4xl mx-auto">
         <div
-          ref={setNodeRef}
-          className={`min-h-80 md:min-h-96 bg-white rounded-xl md:rounded-2xl shadow-sm border-2 transition-all duration-300 relative ${
-            isOver 
-              ? 'border-blue-400 bg-gradient-to-br from-blue-50 to-indigo-50 shadow-lg shadow-blue-200/25 scale-[1.02]' 
-              : 'border-slate-200 border-dashed hover:border-slate-300'
-          } ${elements.length === 0 ? 'p-4 md:p-8' : 'p-3 md:p-6'}`}
+          className={`min-h-80 md:min-h-96 bg-white rounded-xl md:rounded-2xl shadow-sm border-2 transition-all duration-300 relative border-slate-200 border-dashed hover:border-slate-300 ${elements.length === 0 ? 'p-4 md:p-8' : 'p-3 md:p-6'}`}
         >
-          {/* Drop indicator when dragging over empty canvas */}
-          {isOver && elements.length === 0 && (
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg font-medium flex items-center gap-2">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                </svg>
-                Drop to add element
-              </div>
-            </div>
-          )}
+          {/* Removed drop indicator - using button-based movement */}
           {elements.length === 0 ? (
             <div className="text-center py-12 md:py-20">
               <div className="relative mb-6 md:mb-8">
@@ -135,10 +113,8 @@ export function DroppableCanvas({
               </div>
             </div>
           ) : (
-            <SortableContext items={elements.map(el => el.id)} strategy={verticalListSortingStrategy}>
-              <div className="space-y-0">
-                {/* Drop zone at the beginning */}
-                <DropIndicator index={0} isActive={draggedType !== null} />
+            <div className="space-y-0">
+                {/* Removed drop zone - using button-based movement */}
                 
                 {elements.map((element, index) => {
                   const isMovingElement = showMoveIndicators && moveFromIndex === index;
@@ -190,30 +166,13 @@ export function DroppableCanvas({
                         </div>
                       )}
                       
-                      {/* Drop zone after each element */}
-                      {!showMoveIndicators && (
-                        <DropIndicator index={index + 1} isActive={draggedType !== null} />
-                      )}
+                      {/* Removed drop zones - using button-based movement */}
                     </div>
                   );
                 })}
                 
-                {/* Enhanced drop zone for new elements at the end - now simplified since we have indicators */}
-                {draggedType && (
-                  <div 
-                    className={`min-h-8 rounded-lg border-2 border-dashed transition-all duration-300 flex items-center justify-center mt-4 ${
-                      isOver 
-                        ? 'border-blue-400 bg-blue-50/30 scale-105' 
-                        : 'border-slate-200 hover:border-slate-300'
-                    }`}
-                  >
-                    <div className="text-slate-400 text-sm opacity-60">
-                      Or drop at the end
-                    </div>
-                  </div>
-                )}
+                {/* Removed drop zone - using button-based movement */}
               </div>
-            </SortableContext>
           )}
         </div>
         
