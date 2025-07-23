@@ -68,9 +68,10 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
   
   // Update parent component when data changes (with comparison to prevent loops)
   useEffect(() => {
+    // Deep comparison to detect property changes within elements
     const dataChanged = formTitle !== lastSentData.current.title || 
                        elements.length !== lastSentData.current.elements.length ||
-                       elements.some((el, idx) => el.id !== lastSentData.current.elements[idx]?.id);
+                       JSON.stringify(elements) !== JSON.stringify(lastSentData.current.elements);
     
     if (dataChanged) {
       onDataChange(formTitle, elements);
