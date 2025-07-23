@@ -1,7 +1,9 @@
 import { FormElement, FormTheme } from '@/types/form-builder';
 import { ThemedFormRenderer } from '@/components/form-builder/themed-form-renderer';
 import { Button } from '@/components/ui/button';
-import { Save, Download } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Save, Download, Code } from 'lucide-react';
+import { useState } from 'react';
 
 // Extended type for preview elements that includes buttons
 type PreviewFormElement = FormElement | {
@@ -31,6 +33,62 @@ export function PreviewStep({
   onSave, 
   onExport 
 }: PreviewStepProps) {
+  const [showJsonPreview, setShowJsonPreview] = useState(false);
+
+  // Generate sample form data based on form elements
+  const generateSampleFormData = () => {
+    const sampleData: Record<string, any> = {};
+    
+    elements.forEach((element) => {
+      switch (element.type) {
+        case 'text-input':
+          sampleData[element.name] = element.placeholder || 'Sample text input';
+          break;
+        case 'email-input':
+          sampleData[element.name] = 'user@example.com';
+          break;
+        case 'number-input':
+          sampleData[element.name] = element.validation?.min || 42;
+          break;
+        case 'textarea':
+          sampleData[element.name] = element.placeholder || 'Sample textarea content';
+          break;
+        case 'select':
+          sampleData[element.name] = element.options?.[0] || 'Option 1';
+          break;
+        case 'checkbox':
+          sampleData[element.name] = true;
+          break;
+        case 'radio':
+          sampleData[element.name] = element.options?.[0] || 'Option 1';
+          break;
+        case 'rate-scale':
+          const max = element.validation?.max || 10;
+          sampleData[element.name] = Math.ceil(max / 2);
+          break;
+        case 'boolean-switch':
+          sampleData[element.name] = true;
+          break;
+        case 'date':
+          sampleData[element.name] = new Date().toISOString().split('T')[0];
+          break;
+        case 'file':
+          sampleData[element.name] = 'uploaded_file.pdf';
+          break;
+      }
+    });
+
+    return {
+      formTitle,
+      submittedAt: new Date().toISOString(),
+      formData: sampleData
+    };
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setShowJsonPreview(true);
+  };
   // Show error if no theme is selected
   if (!selectedTheme) {
     return (
@@ -101,7 +159,7 @@ export function PreviewStep({
         <div className={`${themeStyles.container} ${selectedTheme.id === 'glassmorphism' ? 'glassmorphism-override' : ''}`}>
           <h1 className={themeStyles.header}>{formTitle}</h1>
           
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleFormSubmit}>
             {elementsWithButtons.map((element) => (
               <ThemedFormRenderer
                 key={element.id}
@@ -135,6 +193,41 @@ export function PreviewStep({
           </div>
         </div>
       )}
+
+      {/* JSON Preview Modal */}
+      <Dialog open={showJsonPreview} onOpenChange={setShowJsonPreview}>
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="flex items-center space-x-2">
+              <Code className="w-5 h-5" />
+              <span>Form Submission Preview</span>
+            </DialogTitle>
+          </DialogHeader>
+          <div className="mt-4">
+            <p className="text-sm text-slate-600 mb-4">
+              This is how your form data will be structured when submitted to the backend:
+            </p>
+            <div className="bg-slate-100 rounded-lg p-4 overflow-x-auto">
+              <pre className="text-sm text-slate-800 whitespace-pre-wrap">
+                {JSON.stringify(generateSampleFormData(), null, 2)}
+              </pre>
+            </div>
+            <div className="mt-4 flex justify-end space-x-3">
+              <Button 
+                variant="outline" 
+                onClick={() => {
+                  navigator.clipboard.writeText(JSON.stringify(generateSampleFormData(), null, 2));
+                }}
+              >
+                Copy JSON
+              </Button>
+              <Button onClick={() => setShowJsonPreview(false)}>
+                Close
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
