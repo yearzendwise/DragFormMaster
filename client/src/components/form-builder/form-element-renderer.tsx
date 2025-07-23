@@ -12,6 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { DropInsertionIndicator } from './drop-insertion-indicator';
 
 interface FormElementRendererProps {
   element: FormElement;
@@ -26,6 +27,8 @@ interface FormElementRendererProps {
   onMoveDown?: (id: string) => void;
   canMoveUp?: boolean;
   canMoveDown?: boolean;
+  showDropIndicators?: boolean;
+  elementIndex?: number;
 }
 
 export function FormElementRenderer({
@@ -40,6 +43,8 @@ export function FormElementRenderer({
   onMoveDown,
   canMoveUp = true,
   canMoveDown = true,
+  showDropIndicators = false,
+  elementIndex = 0,
 }: FormElementRendererProps) {
   const handleClick = (e: React.MouseEvent) => {
     if (previewMode) return;
@@ -251,8 +256,19 @@ export function FormElementRenderer({
       }`;
 
   return (
-    <div className={containerClasses} onClick={handleClick}>
-      {!previewMode && (
+    <>
+      {/* Top drop insertion indicator - Desktop only */}
+      {showDropIndicators && !previewMode && (
+        <DropInsertionIndicator
+          id={`insert-top-${element.id}`}
+          position="top"
+          elementId={element.id}
+          isVisible={true}
+        />
+      )}
+      
+      <div className={containerClasses} onClick={handleClick}>
+        {!previewMode && (
         <>
           {/* Selection indicator */}
           {isSelected && (
@@ -401,24 +417,35 @@ export function FormElementRenderer({
         </>
       )}
 
-      {/* Content - no margin needed since buttons are outside */}
-      <div>
-        {element.type !== "submit-button" &&
-          element.type !== "reset-button" && (
-            <Label className="block text-sm font-medium text-neutral-700 mb-2">
-              {element.label}
-              {element.required && <span className="text-red-500 ml-1">*</span>}
-            </Label>
+        {/* Content - no margin needed since buttons are outside */}
+        <div>
+          {element.type !== "submit-button" &&
+            element.type !== "reset-button" && (
+              <Label className="block text-sm font-medium text-neutral-700 mb-2">
+                {element.label}
+                {element.required && <span className="text-red-500 ml-1">*</span>}
+              </Label>
+            )}
+
+          {renderFormControl()}
+
+          {element.helpText && (
+            <div className="text-xs text-neutral-500 mt-1">
+              {element.helpText}
+            </div>
           )}
-
-        {renderFormControl()}
-
-        {element.helpText && (
-          <div className="text-xs text-neutral-500 mt-1">
-            {element.helpText}
-          </div>
-        )}
+        </div>
       </div>
-    </div>
+      
+      {/* Bottom drop insertion indicator - Desktop only */}
+      {showDropIndicators && !previewMode && (
+        <DropInsertionIndicator
+          id={`insert-bottom-${element.id}`}
+          position="bottom"
+          elementId={element.id}
+          isVisible={true}
+        />
+      )}
+    </>
   );
 }

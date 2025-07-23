@@ -138,9 +138,45 @@ export function useFormBuilder(initialTitle?: string, initialElements?: FormElem
     linkElement.click();
   }, [state]);
 
+
+
+  const addElementAtIndex = (type: FormElementType, index?: number) => {
+    const newElement: FormElement = {
+      id: nanoid(),
+      type,
+      label: getDefaultLabel(type),
+      placeholder: getDefaultPlaceholder(type),
+      required: false,
+      disabled: false,
+      readonly: false,
+      name: `field-${state.elements.length + 1}`,
+      ...(type === 'select' && { options: [] }),
+      ...(type === 'radio' && { options: [] }),
+      ...(type === 'checkbox' && { checked: false }),
+      ...(type === 'image' && { src: '', alt: '' }),
+    };
+
+    if (index !== undefined && index >= 0 && index <= state.elements.length) {
+      const newElements = [...state.elements];
+      newElements.splice(index, 0, newElement);
+      setState(prev => ({
+        ...prev,
+        elements: newElements,
+        selectedElementId: newElement.id,
+      }));
+    } else {
+      setState(prev => ({
+        ...prev,
+        elements: [...prev.elements, newElement],
+        selectedElementId: newElement.id,
+      }));
+    }
+  };
+
   return {
     ...state,
     addElement,
+    addElementAtIndex,
     updateElement,
     removeElement,
     moveElement,

@@ -2,6 +2,7 @@ import { useDroppable } from '@dnd-kit/core';
 import { FormElement, FormElementType } from '@/types/form-builder';
 import { FormElementRenderer } from './form-element-renderer';
 import { SortableFormElement } from './sortable-form-element';
+import { DropInsertionIndicator } from './drop-insertion-indicator';
 // Removed DropIndicator import - using button-based movement
 
 interface DroppableCanvasProps {
@@ -40,6 +41,7 @@ export function DroppableCanvas({
   const { setNodeRef, isOver } = useDroppable({
     id: 'form-canvas',
   });
+  const isMobile = window.innerWidth < 1024; // lg breakpoint
 
   if (previewMode) {
     return (
@@ -168,6 +170,8 @@ export function DroppableCanvas({
                           } : undefined}
                           canMoveUp={index > 0}
                           canMoveDown={index < elements.length - 1}
+                          showDropIndicators={!isMobile && draggedType !== null}
+                          elementIndex={index}
                         />
                       </div>
                       

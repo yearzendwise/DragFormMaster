@@ -13,6 +13,8 @@ interface SortableFormElementProps {
   onMoveDown?: (id: string) => void;
   canMoveUp?: boolean;
   canMoveDown?: boolean;
+  showDropIndicators?: boolean;
+  elementIndex?: number;
 }
 
 export function SortableFormElement({
@@ -27,6 +29,8 @@ export function SortableFormElement({
   onMoveDown,
   canMoveUp = true,
   canMoveDown = true,
+  showDropIndicators = false,
+  elementIndex = 0,
 }: SortableFormElementProps) {
   return (
     <div>
@@ -43,6 +47,8 @@ export function SortableFormElement({
         onMoveDown={onMoveDown}
         canMoveUp={canMoveUp}
         canMoveDown={canMoveDown}
+        showDropIndicators={showDropIndicators}
+        elementIndex={elementIndex}
       />
     </div>
   );

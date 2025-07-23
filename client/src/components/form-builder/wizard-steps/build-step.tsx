@@ -22,6 +22,7 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
     selectedElementId,
     previewMode,
     addElement,
+    addElementAtIndex,
     updateElement,
     removeElement,
     moveElement,
@@ -93,9 +94,25 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
     if (!over) return;
 
     // Handle dropping new component from palette
-    if (active.data.current?.isNew && over.id === 'form-canvas') {
+    if (active.data.current?.isNew) {
       const type = active.id.toString().replace('palette-', '') as FormElementType;
-      addElement(type);
+      
+      // Check if dropping on an insertion point
+      if (over.data.current?.isInsertionPoint) {
+        const { elementId, position } = over.data.current;
+        const targetIndex = elements.findIndex(el => el.id === elementId);
+        
+        if (targetIndex !== -1) {
+          const insertIndex = position === 'top' ? targetIndex : targetIndex + 1;
+          addElementAtIndex(type, insertIndex);
+          return;
+        }
+      }
+      
+      // Default: add to end of form
+      if (over.id === 'form-canvas') {
+        addElement(type);
+      }
     }
   };
 
