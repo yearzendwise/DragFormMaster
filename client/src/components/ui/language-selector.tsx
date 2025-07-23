@@ -33,7 +33,8 @@ export function LanguageSelector({
   originalLabel,
 }: LanguageSelectorProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [translations, setTranslations] = useState(currentTranslations || {});
+  // Use currentTranslations directly instead of local state
+  const translations = currentTranslations || {};
 
   const handleAddLanguage = (languageCode: string) => {
     if (!translations[languageCode]) {
@@ -41,7 +42,6 @@ export function LanguageSelector({
         ...translations,
         [languageCode]: originalLabel, // Default to original label
       };
-      setTranslations(newTranslations);
       onTranslationsUpdate(newTranslations);
     }
   };
@@ -49,7 +49,6 @@ export function LanguageSelector({
   const handleRemoveLanguage = (languageCode: string) => {
     const newTranslations = { ...translations };
     delete newTranslations[languageCode];
-    setTranslations(newTranslations);
     onTranslationsUpdate(newTranslations);
   };
 
@@ -58,7 +57,6 @@ export function LanguageSelector({
       ...translations,
       [languageCode]: value,
     };
-    setTranslations(newTranslations);
     onTranslationsUpdate(newTranslations);
   };
 
@@ -76,10 +74,15 @@ export function LanguageSelector({
         <Button
           variant="outline"
           size="sm"
-          className="h-8 w-8 p-0 flex-shrink-0 border-dashed hover:bg-blue-50 hover:border-blue-300 transition-colors"
+          className="h-8 w-8 p-0 flex-shrink-0 border-dashed hover:bg-blue-50 hover:border-blue-300 transition-colors relative"
           title="Add translations"
         >
           <Globe className="h-3.5 w-3.5 text-blue-600" />
+          {Object.keys(translations).length > 0 && (
+            <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center font-bold">
+              {Object.keys(translations).length}
+            </span>
+          )}
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">

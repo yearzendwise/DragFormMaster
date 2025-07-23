@@ -21,6 +21,7 @@ export function useFormBuilder(initialTitle?: string, initialElements?: FormElem
       id: nanoid(),
       type,
       label: getDefaultLabel(type),
+      labelTranslations: {},
       placeholder: getDefaultPlaceholder(type),
       helpText: '',
       name: generateFieldName(type),
