@@ -106,7 +106,7 @@ export function PreviewStep({
             actualFormData[key] = value === 'on';
             break;
           case 'rate-scale':
-            actualFormData[key] = value ? Number(value) : null;
+            actualFormData[key] = value ? Number(value) : "NA";
             break;
           case 'boolean-switch':
             actualFormData[key] = value === 'true';
@@ -118,6 +118,19 @@ export function PreviewStep({
         actualFormData[key] = value || null;
       }
     }
+    
+    // Handle elements that weren't filled out (not present in FormData)
+    elements.forEach((element) => {
+      if (!(element.name in actualFormData)) {
+        if (element.type === 'rate-scale') {
+          actualFormData[element.name] = "NA";
+        } else if (element.type === 'checkbox') {
+          actualFormData[element.name] = false;
+        } else {
+          actualFormData[element.name] = null;
+        }
+      }
+    });
     
     // Store the actual form data in state
     setActualFormData(actualFormData);
