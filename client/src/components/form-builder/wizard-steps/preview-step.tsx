@@ -56,7 +56,7 @@ export function PreviewStep({
 
       {/* Preview */}
       <div className={`flex-1 overflow-y-auto p-6 ${themeStyles.background}`}>
-        <div className={themeStyles.container}>
+        <div className={`${themeStyles.container} ${selectedTheme.id === 'glassmorphism' ? 'glassmorphism-override' : ''}`}>
           <h1 className={themeStyles.header}>{formTitle}</h1>
           
           <form className="space-y-4">
