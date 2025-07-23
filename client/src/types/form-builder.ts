@@ -44,8 +44,6 @@ export type FormElementType =
   | 'select' 
   | 'checkbox' 
   | 'radio' 
-  | 'submit-button' 
-  | 'reset-button'
   | 'image'
   | 'rate-scale'
   | 'boolean-switch';
@@ -56,7 +54,7 @@ export interface ComponentPaletteItem {
   description: string;
   icon: string;
   color: string;
-  category: 'basic' | 'selection' | 'actions';
+  category: 'basic' | 'selection';
 }
 
 export interface DragItem {

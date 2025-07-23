@@ -4,8 +4,21 @@ import { Textarea } from '@/components/ui/textarea';
 import { RateScale } from '@/components/ui/rate-scale';
 import { BooleanSwitch } from '@/components/ui/boolean-switch';
 
+// Extended type for preview elements that includes buttons
+type PreviewFormElement = FormElement | {
+  id: string;
+  type: 'submit-button' | 'reset-button';
+  label: string;
+  name: string;
+  required: boolean;
+  styling?: {
+    width: 'full' | 'half' | 'third';
+    size: 'small' | 'medium' | 'large';
+  };
+};
+
 interface ThemedFormRendererProps {
-  element: FormElement;
+  element: PreviewFormElement;
   themeStyles: FormTheme['styles'];
 }
 
@@ -195,11 +208,11 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
           <RateScale
             name={element.name}
             required={element.required}
-            disabled={element.disabled}
-            min={element.validation?.min || 1}
-            max={element.validation?.max || 10}
-            variant={element.rateVariant || "numbers"}
-            showNumbers={element.rateVariant === "numbers" || !element.rateVariant}
+            disabled={(element as FormElement).disabled}
+            min={(element as FormElement).validation?.min || 1}
+            max={(element as FormElement).validation?.max || 10}
+            variant={(element as FormElement).rateVariant || "numbers"}
+            showNumbers={(element as FormElement).rateVariant === "numbers" || !(element as FormElement).rateVariant}
             className="justify-center"
           />
         );
@@ -209,21 +222,26 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
           <BooleanSwitch
             name={element.name}
             required={element.required}
-            disabled={element.disabled}
-            variant={element.booleanVariant || "yes-no"}
+            disabled={(element as FormElement).disabled}
+            variant={(element as FormElement).booleanVariant || "yes-no"}
             showLabels={true}
             className="justify-center"
           />
         );
 
       default:
-        return <div className="text-red-500">Unknown element type: {element.type}</div>;
+        return <div className="text-red-500">Unknown element type: {(element as any).type}</div>;
     }
   };
 
+  // Handle button types separately since they don't need labels
+  if (element.type === 'submit-button' || element.type === 'reset-button') {
+    return renderFormControl();
+  }
+
   return (
     <div className={themeStyles.field}>
-      {element.type !== 'submit-button' && element.type !== 'reset-button' && element.type !== 'image' && (
+      {element.type !== 'image' && (
         <label className={themeStyles.label}>
           {element.label}
           {element.required && <span className="text-red-500 ml-1">*</span>}
@@ -232,8 +250,8 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
       
       {renderFormControl()}
       
-      {element.helpText && element.type !== 'submit-button' && element.type !== 'reset-button' && (
-        <p className="text-sm text-gray-500 mt-1">{element.helpText}</p>
+      {(element as FormElement).helpText && (
+        <p className="text-sm text-gray-500 mt-1">{(element as FormElement).helpText}</p>
       )}
     </div>
   );

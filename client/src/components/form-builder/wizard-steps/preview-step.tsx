@@ -3,6 +3,19 @@ import { ThemedFormRenderer } from '@/components/form-builder/themed-form-render
 import { Button } from '@/components/ui/button';
 import { Save, Download } from 'lucide-react';
 
+// Extended type for preview elements that includes buttons
+type PreviewFormElement = FormElement | {
+  id: string;
+  type: 'submit-button' | 'reset-button';
+  label: string;
+  name: string;
+  required: boolean;
+  styling?: {
+    width: 'full' | 'half' | 'third';
+    size: 'small' | 'medium' | 'large';
+  };
+};
+
 interface PreviewStepProps {
   formTitle: string;
   elements: FormElement[];
@@ -30,16 +43,11 @@ export function PreviewStep({
     );
   }
 
-  // Check if form has submit or reset buttons
-  const hasSubmitButton = elements.some(element => element.type === 'submit-button');
-  const hasResetButton = elements.some(element => element.type === 'reset-button');
-
-  // Create enhanced elements list with automatic buttons if missing
-  const elementsWithButtons = [...elements];
-  
-  // Add submit button if missing
-  if (!hasSubmitButton) {
-    elementsWithButtons.push({
+  // Create enhanced elements list with automatic buttons
+  const elementsWithButtons: PreviewFormElement[] = [
+    ...elements,
+    // Always add submit button
+    {
       id: `auto-submit-${Date.now()}`,
       type: 'submit-button',
       label: 'Submit',
@@ -49,14 +57,11 @@ export function PreviewStep({
         width: 'full',
         size: 'medium',
       }
-    });
-  }
-
-  // Add reset button if missing  
-  if (!hasResetButton) {
-    elementsWithButtons.push({
+    },
+    // Always add reset button
+    {
       id: `auto-reset-${Date.now()}`,
-      type: 'reset-button',
+      type: 'reset-button', 
       label: 'Reset',
       name: 'reset',
       required: false,
@@ -64,8 +69,8 @@ export function PreviewStep({
         width: 'full',
         size: 'medium',
       }
-    });
-  }
+    }
+  ];
 
   const themeStyles = selectedTheme.styles;
 
@@ -100,7 +105,7 @@ export function PreviewStep({
             {elementsWithButtons.map((element) => (
               <ThemedFormRenderer
                 key={element.id}
-                element={element}
+                element={element as FormElement}
                 themeStyles={themeStyles}
               />
             ))}
@@ -112,15 +117,11 @@ export function PreviewStep({
               </div>
             )}
 
-            {/* Show notification if buttons were auto-added */}
-            {(!hasSubmitButton || !hasResetButton) && elements.length > 0 && (
+            {/* Show notification that buttons are always auto-added */}
+            {elements.length > 0 && (
               <div className="mt-6 p-3 bg-blue-50 border border-blue-200 rounded-lg">
                 <div className="text-sm text-blue-700">
-                  <strong>Auto-added buttons:</strong> 
-                  {!hasSubmitButton && !hasResetButton && " Submit and Reset buttons"}
-                  {!hasSubmitButton && hasResetButton && " Submit button"}
-                  {hasSubmitButton && !hasResetButton && " Reset button"}
-                  {" were automatically added to complete your form."}
+                  <strong>Form completion:</strong> Submit and Reset buttons are automatically added to all forms in the preview.
                 </div>
               </div>
             )}

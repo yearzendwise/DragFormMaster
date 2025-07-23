@@ -179,28 +179,7 @@ export function FormElementRenderer({
           </RadioGroup>
         );
 
-      case "submit-button":
-        return (
-          <Button
-            type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium"
-            disabled={element.disabled}
-          >
-            {element.label}
-          </Button>
-        );
 
-      case "reset-button":
-        return (
-          <Button
-            type="reset"
-            variant="outline"
-            className="w-full"
-            disabled={element.disabled}
-          >
-            {element.label}
-          </Button>
-        );
 
       case "image":
         return (
@@ -447,13 +426,10 @@ export function FormElementRenderer({
 
         {/* Content - no margin needed since buttons are outside */}
         <div>
-          {element.type !== "submit-button" &&
-            element.type !== "reset-button" && (
-              <Label className="block text-sm font-medium text-neutral-700 mb-2">
-                {element.label}
-                {element.required && <span className="text-red-500 ml-1">*</span>}
-              </Label>
-            )}
+          <Label className="block text-sm font-medium text-neutral-700 mb-2">
+            {element.label}
+            {element.required && <span className="text-red-500 ml-1">*</span>}
+          </Label>
 
           {renderFormControl()}
 

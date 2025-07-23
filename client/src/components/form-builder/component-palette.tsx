@@ -84,29 +84,11 @@ const paletteItems: ComponentPaletteItem[] = [
     color: 'bg-gradient-to-br from-cyan-100 to-blue-200 text-cyan-700',
     category: 'selection',
   },
-  // Actions
-  {
-    type: 'submit-button',
-    label: 'Submit Button',
-    description: 'Form submission',
-    icon: 'fas fa-paper-plane',
-    color: 'bg-gradient-to-br from-blue-100 to-cyan-200 text-blue-700',
-    category: 'actions',
-  },
-  {
-    type: 'reset-button',
-    label: 'Reset Button',
-    description: 'Clear form data',
-    icon: 'fas fa-undo',
-    color: 'bg-gradient-to-br from-red-100 to-red-200 text-red-700',
-    category: 'actions',
-  },
 ];
 
 const categoryLabels = {
   basic: 'Basic Inputs',
   selection: 'Selection',
-  actions: 'Actions',
 };
 
 interface ComponentPaletteProps {
@@ -114,7 +96,7 @@ interface ComponentPaletteProps {
 }
 
 export function ComponentPalette({ onAddElement }: ComponentPaletteProps) {
-  const categories = ['basic', 'selection', 'actions'] as const;
+  const categories = ['basic', 'selection'] as const;
   const isMobile = window.innerWidth < 1024; // lg breakpoint
 
   return (
