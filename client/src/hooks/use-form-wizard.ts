@@ -149,7 +149,7 @@ const defaultThemes: FormTheme[] = [
       header: 'text-4xl font-bold text-white mb-10 text-center tracking-wide drop-shadow-2xl shadow-black/50',
       field: 'mb-8',
       label: 'block text-sm font-bold text-white mb-4 tracking-wider uppercase drop-shadow-lg shadow-black/50 bg-transparent',
-      input: 'w-full px-5 py-4 bg-transparent backdrop-blur-xl border border-white/30 rounded-2xl focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white/60 transition-all duration-300 text-white placeholder-white/60 shadow-inner shadow-black/10 focus:shadow-white/20',
+      input: 'glassmorphism-input w-full px-5 py-4 !bg-transparent backdrop-blur-xl border border-white/30 rounded-2xl focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white/60 transition-all duration-300 text-white placeholder-white/60 shadow-inner shadow-black/10 focus:shadow-white/20',
       button: 'w-full bg-white/10 backdrop-blur-xl border border-white/40 text-white py-4 px-6 rounded-2xl hover:bg-white/20 hover:border-white/60 transition-all duration-300 font-bold shadow-2xl hover:shadow-white/20 drop-shadow-lg',
       background: 'bg-gradient-to-br from-indigo-500/30 via-purple-500/30 to-pink-500/30'
     }

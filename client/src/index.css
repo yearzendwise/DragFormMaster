@@ -75,6 +75,17 @@
   transition: all 0.15s ease;
 }
 
+/* Glassmorphism theme specific overrides */
+.glassmorphism-input {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.glassmorphism-input:focus {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
 .drop-zone.drag-over {
   background-color: hsl(221, 83%, 97%);
   border-color: hsl(221, 83%, 53%);
