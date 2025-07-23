@@ -259,8 +259,8 @@ export function FormElementRenderer({
             <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-blue-500 to-indigo-500 rounded-r-full"></div>
           )}
 
-          {/* Delete button - Desktop (top-left corner) */}
-          <div className="hidden lg:block absolute -top-4 -left-2.5 opacity-0 group-hover:opacity-100 transition-all duration-200">
+          {/* Delete button - Desktop (top-center) */}
+          <div className="hidden lg:block absolute -top-3 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-200">
             <Button
               size="sm"
               variant="destructive"
@@ -304,9 +304,9 @@ export function FormElementRenderer({
 
           {/* Removed mobile edit indicator - now in vertical control panel */}
 
-          {/* Mobile delete button - top-left corner */}
+          {/* Mobile delete button - top-center */}
           {isSelected && (
-            <div className="lg:hidden absolute -top-4 -left-2.5 transition-opacity duration-200 z-10">
+            <div className="lg:hidden absolute -top-3 left-1/2 -translate-x-1/2 transition-opacity duration-200 z-10">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
