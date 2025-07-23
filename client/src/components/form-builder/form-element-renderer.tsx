@@ -276,9 +276,9 @@ export function FormElementRenderer({
             </button>
           </div>
 
-          {/* Move buttons for selected element */}
+          {/* Move buttons for selected element - inside component area */}
           {isSelected && (onMoveUp || onMoveDown) && (
-            <div className="absolute -left-12 top-2 flex flex-col gap-1">
+            <div className="absolute left-2 top-2 flex flex-col gap-1 z-10">
               {/* Move Up Button */}
               {onMoveUp && (
                 <button
@@ -323,20 +323,23 @@ export function FormElementRenderer({
         </>
       )}
       
-      {element.type !== 'submit-button' && element.type !== 'reset-button' && (
-        <Label className="block text-sm font-medium text-neutral-700 mb-2">
-          {element.label}
-          {element.required && <span className="text-red-500 ml-1">*</span>}
-        </Label>
-      )}
-      
-      {renderFormControl()}
-      
-      {element.helpText && (
-        <div className="text-xs text-neutral-500 mt-1">
-          {element.helpText}
-        </div>
-      )}
+      {/* Content wrapper with left margin when buttons are visible */}
+      <div className={`${isSelected && (onMoveUp || onMoveDown) ? 'ml-8' : ''}`}>
+        {element.type !== 'submit-button' && element.type !== 'reset-button' && (
+          <Label className="block text-sm font-medium text-neutral-700 mb-2">
+            {element.label}
+            {element.required && <span className="text-red-500 ml-1">*</span>}
+          </Label>
+        )}
+        
+        {renderFormControl()}
+        
+        {element.helpText && (
+          <div className="text-xs text-neutral-500 mt-1">
+            {element.helpText}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
