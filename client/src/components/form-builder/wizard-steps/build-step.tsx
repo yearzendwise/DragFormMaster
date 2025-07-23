@@ -4,8 +4,10 @@ import { useFormBuilder } from '@/hooks/use-form-builder';
 import { ComponentPalette } from '@/components/form-builder/component-palette';
 import { FormCanvas } from '@/components/form-builder/form-canvas';
 import { PropertiesPanel } from '@/components/form-builder/properties-panel';
+import { DragCompatibilityDiagnostic } from '@/components/form-builder/drag-compatibility-diagnostic';
 import { FormElementType, DragItem } from '@/types/form-builder';
 import { Button } from '@/components/ui/button';
+import { Settings } from 'lucide-react';
 
 interface BuildStepProps {
   onDataChange: (title: string, elements: any[]) => void;
@@ -32,6 +34,7 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
   const [showMobileAdd, setShowMobileAdd] = useState(false);
   const [showMobileProperties, setShowMobileProperties] = useState(false);
   const [draggedType, setDraggedType] = useState<FormElementType | null>(null);
+  const [showDiagnostic, setShowDiagnostic] = useState(false);
 
   // Configure drag and drop sensors with better desktop support
   const mouseSensor = useSensor(MouseSensor, {
@@ -165,6 +168,19 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
         </div>
         )}
 
+        {/* Drag Compatibility Diagnostic Button */}
+        <div className="fixed bottom-6 right-6 z-50">
+          <Button
+            variant="outline"
+            size="sm"
+            className="bg-white shadow-lg hover:shadow-xl transition-all duration-200"
+            onClick={() => setShowDiagnostic(true)}
+          >
+            <Settings className="w-4 h-4 mr-2" />
+            Drag Test
+          </Button>
+        </div>
+
         {/* Mobile Add Components Modal */}
         {showMobileAdd && (
           <div className="lg:hidden fixed inset-0 bg-black/50 z-[300] flex items-end">
@@ -241,6 +257,12 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
             </div>
           )}
         </DragOverlay>
+
+        {/* Drag Compatibility Diagnostic Modal */}
+        <DragCompatibilityDiagnostic 
+          isOpen={showDiagnostic}
+          onClose={() => setShowDiagnostic(false)}
+        />
       </div>
     </DndContext>
   );
