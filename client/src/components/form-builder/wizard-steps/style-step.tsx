@@ -97,7 +97,7 @@ export function StyleStep({ themes, selectedTheme, onSelectTheme }: StyleStepPro
                           theme.id === 'professional' ? 'bg-slate-50 border-2 border-slate-300' :
                           'bg-white border border-gray-300 rounded-lg'
                         }`}>
-                          <div className={theme.id === 'neon' || theme.id === 'luxury' || theme.id === 'elegant' ? 'text-gray-300' : 'text-slate-400'}>
+                          <div className={theme.id === 'neon' || theme.id === 'luxury' || theme.id === 'elegant' || theme.id === 'glassmorphism' ? 'text-gray-300' : 'text-slate-400'}>
                             Enter your name
                           </div>
                         </div>
@@ -116,7 +116,7 @@ export function StyleStep({ themes, selectedTheme, onSelectTheme }: StyleStepPro
                           theme.id === 'professional' ? 'bg-slate-50 border-2 border-slate-300' :
                           'bg-white border border-gray-300 rounded-lg'
                         }`}>
-                          <div className={theme.id === 'neon' || theme.id === 'luxury' || theme.id === 'elegant' ? 'text-gray-300' : 'text-slate-400'}>
+                          <div className={theme.id === 'neon' || theme.id === 'luxury' || theme.id === 'elegant' || theme.id === 'glassmorphism' ? 'text-gray-300' : 'text-slate-400'}>
                             Enter your email
                           </div>
                         </div>
@@ -126,7 +126,7 @@ export function StyleStep({ themes, selectedTheme, onSelectTheme }: StyleStepPro
                         theme.id === 'nature' ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-2xl' :
                         theme.id === 'luxury' ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-purple-900 rounded-lg' :
                         theme.id === 'retro' ? 'bg-gradient-to-r from-orange-500 to-pink-500 text-white' :
-                        theme.id === 'glassmorphism' ? 'bg-white/30 backdrop-blur border border-white/50 text-gray-800 rounded-xl' :
+                        theme.id === 'glassmorphism' ? 'bg-white/10 backdrop-blur-xl border border-white/40 text-white rounded-2xl shadow-2xl' :
                         theme.id === 'elegant' ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 rounded-lg' :
                         theme.id === 'playful' ? 'bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-2xl' :
                         theme.id === 'modern' ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl' :
