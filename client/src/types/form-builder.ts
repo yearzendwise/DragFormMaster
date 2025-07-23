@@ -13,6 +13,7 @@ export interface FormElement {
   readonly?: boolean;
   src?: string; // for image components
   alt?: string; // for image components
+  rateVariant?: 'numbers' | 'faces' | 'stars'; // for rate-scale components
 }
 
 export interface ValidationRules {

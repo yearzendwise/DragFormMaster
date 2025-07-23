@@ -31,6 +31,7 @@ export function useFormBuilder(initialTitle?: string, initialElements?: FormElem
         size: 'medium',
       },
       options: type === 'select' || type === 'radio' || type === 'checkbox' ? ['Option 1', 'Option 2'] : undefined,
+      rateVariant: type === 'rate-scale' ? 'numbers' : undefined,
     };
 
     setState(prev => {
@@ -154,6 +155,7 @@ export function useFormBuilder(initialTitle?: string, initialElements?: FormElem
       ...(type === 'radio' && { options: [] }),
       ...(type === 'checkbox' && { checked: false }),
       ...(type === 'image' && { src: '', alt: '' }),
+      ...(type === 'rate-scale' && { rateVariant: 'numbers' }),
     };
 
     if (index !== undefined && index >= 0 && index <= state.elements.length) {

@@ -12,7 +12,7 @@ export interface RateScaleProps {
   required?: boolean
   className?: string
   showNumbers?: boolean
-  variant?: "stars" | "numbers"
+  variant?: "stars" | "numbers" | "faces"
 }
 
 const RateScale = React.forwardRef<HTMLDivElement, RateScaleProps>(
@@ -53,6 +53,30 @@ const RateScale = React.forwardRef<HTMLDivElement, RateScaleProps>(
 
     const numbers = Array.from({ length: max - min + 1 }, (_, i) => i + min)
 
+    // Face emoji mapping for different rating values
+    const getFaceEmoji = (rating: number, isActive: boolean, isHovered: boolean) => {
+      const totalRange = max - min + 1
+      const position = (rating - min) / (totalRange - 1)
+      
+      let baseEmoji = "😐"
+      if (position <= 0.2) baseEmoji = "😢"
+      else if (position <= 0.4) baseEmoji = "😕"
+      else if (position <= 0.6) baseEmoji = "😐"
+      else if (position <= 0.8) baseEmoji = "🙂"
+      else baseEmoji = "😊"
+      
+      // Show excited face on hover or active
+      if (isActive || isHovered) {
+        if (position <= 0.2) return "😭"
+        else if (position <= 0.4) return "☹️"
+        else if (position <= 0.6) return "😐"
+        else if (position <= 0.8) return "😃"
+        else return "🤩"
+      }
+      
+      return baseEmoji
+    }
+
     if (variant === "stars") {
       return (
         <div
@@ -71,7 +95,7 @@ const RateScale = React.forwardRef<HTMLDivElement, RateScaleProps>(
                 onMouseEnter={() => handleMouseEnter(rating)}
                 onMouseLeave={handleMouseLeave}
                 className={cn(
-                  "p-1 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                  "p-1 rounded transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
                   disabled
                     ? "cursor-not-allowed opacity-50"
                     : "cursor-pointer hover:scale-110 active:scale-95"
@@ -106,6 +130,61 @@ const RateScale = React.forwardRef<HTMLDivElement, RateScaleProps>(
       )
     }
 
+    if (variant === "faces") {
+      return (
+        <div
+          ref={ref}
+          className={cn("inline-flex items-center gap-2 flex-wrap", className)}
+          {...props}
+        >
+          {numbers.map((rating) => {
+            const isActive = selectedValue === rating
+            const isHovered = hoverValue === rating
+            return (
+              <button
+                key={rating}
+                type="button"
+                disabled={disabled}
+                onClick={() => handleClick(rating)}
+                onMouseEnter={() => handleMouseEnter(rating)}
+                onMouseLeave={handleMouseLeave}
+                className={cn(
+                  "w-12 h-12 rounded-full border-2 text-2xl transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 flex items-center justify-center",
+                  isActive
+                    ? "bg-primary/10 border-primary shadow-md scale-110"
+                    : isHovered
+                    ? "bg-primary/5 border-primary/50 scale-105"
+                    : "border-muted-foreground/20 hover:border-primary/30",
+                  disabled
+                    ? "cursor-not-allowed opacity-50"
+                    : "cursor-pointer active:scale-95"
+                )}
+                aria-label={`Rate ${rating} out of ${max}`}
+              >
+                <span className="select-none">
+                  {getFaceEmoji(rating, isActive, isHovered)}
+                </span>
+              </button>
+            )
+          })}
+          {showNumbers && (
+            <span className="ml-2 text-sm text-muted-foreground">
+              {selectedValue > 0 ? `${selectedValue}/${max}` : `0/${max}`}
+            </span>
+          )}
+          {name && (
+            <input
+              type="hidden"
+              name={name}
+              value={selectedValue}
+              required={required}
+            />
+          )}
+        </div>
+      )
+    }
+
+    // Default numbers variant
     return (
       <div
         ref={ref}

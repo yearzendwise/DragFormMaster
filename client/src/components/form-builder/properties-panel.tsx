@@ -294,6 +294,51 @@ export function PropertiesPanel({
                   </div>
                 </div>
               )}
+
+              {selectedElement.type === 'rate-scale' && (
+                <>
+                  <div>
+                    <Label className="text-xs font-medium text-neutral-600 mb-1">Display Style</Label>
+                    <Select 
+                      value={selectedElement.rateVariant || 'numbers'}
+                      onValueChange={(value) => handleUpdate('rateVariant', value)}
+                    >
+                      <SelectTrigger className="text-sm">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="numbers">Numbers (1, 2, 3...)</SelectItem>
+                        <SelectItem value="stars">Stars (⭐⭐⭐...)</SelectItem>
+                        <SelectItem value="faces">Happy Faces (😢😐😊...)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <Label className="text-xs font-medium text-neutral-600 mb-1">Min Rating</Label>
+                      <Input
+                        type="number"
+                        value={selectedElement.validation?.min || 1}
+                        onChange={(e) => handleValidationUpdate('min', parseInt(e.target.value) || 1)}
+                        className="text-sm"
+                        min="1"
+                        max="10"
+                      />
+                    </div>
+                    <div>
+                      <Label className="text-xs font-medium text-neutral-600 mb-1">Max Rating</Label>
+                      <Input
+                        type="number"
+                        value={selectedElement.validation?.max || 10}
+                        onChange={(e) => handleValidationUpdate('max', parseInt(e.target.value) || 10)}
+                        className="text-sm"
+                        min="1"
+                        max="10"
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         )}

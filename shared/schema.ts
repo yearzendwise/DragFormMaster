@@ -46,6 +46,7 @@ export interface FormElement {
   options?: string[]; // for select, radio, checkbox
   disabled?: boolean;
   readonly?: boolean;
+  rateVariant?: 'numbers' | 'faces' | 'stars'; // for rate-scale components
 }
 
 export interface ValidationRules {

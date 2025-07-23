@@ -251,7 +251,7 @@ export function FormElementRenderer({
             disabled={element.disabled || isDragging}
             min={element.validation?.min || 1}
             max={element.validation?.max || 10}
-            variant="numbers"
+            variant={element.rateVariant || "numbers"}
             showNumbers={true}
             className="justify-center"
           />
