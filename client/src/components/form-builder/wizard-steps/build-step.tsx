@@ -200,7 +200,7 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
 
         {/* Mobile Floating Add Button */}
         {!previewMode && (
-          <div className="lg:hidden fixed bottom-6 right-6 z-50">
+          <div className="lg:hidden fixed bottom-6 left-6 z-50">
             <Button
               size="lg"
               className="w-14 h-14 rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg hover:shadow-xl transition-all duration-200"
@@ -216,8 +216,8 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
         {/* Mobile Add Components Modal */}
         {showMobileAdd && (
           <div className="lg:hidden fixed inset-0 bg-black/50 z-50 flex items-end">
-            <div className="bg-white w-full max-h-[70vh] rounded-t-2xl">
-              <div className="p-4 border-b border-gray-200">
+            <div className="bg-white w-full max-h-[70vh] rounded-t-2xl flex flex-col">
+              <div className="flex-shrink-0 p-4 border-b border-gray-200">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-semibold">Add Component</h3>
                   <Button
@@ -231,7 +231,7 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
                   </Button>
                 </div>
               </div>
-              <div className="p-4 overflow-y-auto">
+              <div className="flex-1 p-4 overflow-y-auto overscroll-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
                 <ComponentPalette 
                   onAddElement={(type) => {
                     handleAddElement(type);
@@ -246,8 +246,8 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
         {/* Mobile Properties Modal */}
         {showMobileProperties && selectedElement && (
           <div className="lg:hidden fixed inset-0 bg-black/50 z-50 flex items-end">
-            <div className="bg-white w-full max-h-[80vh] rounded-t-2xl">
-              <div className="p-4 border-b border-gray-200">
+            <div className="bg-white w-full max-h-[80vh] rounded-t-2xl flex flex-col">
+              <div className="flex-shrink-0 p-4 border-b border-gray-200">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-semibold">Edit Component</h3>
                   <Button
@@ -261,7 +261,7 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
                   </Button>
                 </div>
               </div>
-              <div className="p-4 overflow-y-auto">
+              <div className="flex-1 p-4 overflow-y-auto overscroll-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
                 <PropertiesPanel
                   selectedElement={selectedElement}
                   onUpdateElement={updateElement}
