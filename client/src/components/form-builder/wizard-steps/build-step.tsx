@@ -115,14 +115,14 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
-      <div className="flex-1 flex relative">
+      <div className="flex-1 flex relative h-full">
         {/* Left Sidebar - Component Palette */}
-        <div className="hidden lg:block flex-none">
+        <div className="hidden lg:block flex-none relative z-20">
           <ComponentPalette onAddElement={handleAddElement} />
         </div>
         
         {/* Main Content Area */}
-        <div className="flex-1 flex flex-col min-w-0">
+        <div className="flex-1 flex flex-col min-w-0 relative z-10">
           <FormCanvas
             formTitle={formTitle}
             elements={elements}
@@ -141,7 +141,7 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
         </div>
         
         {/* Right Sidebar - Properties Panel */}
-        <div className="hidden lg:block flex-none">
+        <div className="hidden lg:block flex-none relative z-20">
           <PropertiesPanel
             selectedElement={selectedElement}
             onUpdateElement={updateElement}

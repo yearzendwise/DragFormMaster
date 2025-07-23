@@ -19,8 +19,8 @@ export function PropertiesPanel({
 }: PropertiesPanelProps) {
   if (!selectedElement) {
     return (
-      <aside className="w-80 lg:w-80 bg-gradient-to-b from-white to-slate-50/50 border-l border-slate-200/60 overflow-y-auto shadow-sm">
-        <div className="p-4 lg:p-6">
+      <aside className="w-80 lg:w-80 bg-gradient-to-b from-white to-slate-50/50 border-l border-slate-200/60 shadow-sm relative z-10 h-full flex flex-col">
+        <div className="p-4 lg:p-6 flex-1 overflow-y-auto">
           <div className="text-center py-12 lg:py-20">
             <div className="w-16 h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl lg:rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-sm">
               <svg className="w-6 h-6 lg:w-8 lg:h-8 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
@@ -61,8 +61,8 @@ export function PropertiesPanel({
   };
 
   return (
-    <aside className="w-80 lg:w-80 bg-gradient-to-b from-white to-slate-50/30 border-l border-slate-200/60 overflow-y-auto shadow-sm">
-      <div className="p-4 lg:p-6">
+    <aside className="w-80 lg:w-80 bg-gradient-to-b from-white to-slate-50/30 border-l border-slate-200/60 shadow-sm relative z-10 h-full flex flex-col">
+      <div className="p-4 lg:p-6 flex-1 overflow-y-auto">
         <div className="flex items-center justify-between mb-4 lg:mb-6">
           <div>
             <h2 className="text-base lg:text-lg font-bold text-slate-800">Element Properties</h2>
