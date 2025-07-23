@@ -13,6 +13,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RateScale } from "@/components/ui/rate-scale";
+import { BooleanSwitch } from "@/components/ui/boolean-switch";
 import { DropInsertionIndicator } from './drop-insertion-indicator';
 
 interface FormElementRendererProps {
@@ -253,6 +254,18 @@ export function FormElementRenderer({
             max={element.validation?.max || 10}
             variant={element.rateVariant || "numbers"}
             showNumbers={element.rateVariant === "numbers" || !element.rateVariant}
+            className="justify-center"
+          />
+        );
+
+      case "boolean-switch":
+        return (
+          <BooleanSwitch
+            name={element.name}
+            required={element.required}
+            disabled={element.disabled || isDragging}
+            variant={element.booleanVariant || "yes-no"}
+            showLabels={true}
             className="justify-center"
           />
         );

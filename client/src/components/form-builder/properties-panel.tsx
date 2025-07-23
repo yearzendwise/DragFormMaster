@@ -339,6 +339,25 @@ export function PropertiesPanel({
                   </div>
                 </>
               )}
+
+              {selectedElement.type === 'boolean-switch' && (
+                <div>
+                  <Label className="text-xs font-medium text-neutral-600 mb-1">Display Style</Label>
+                  <Select 
+                    value={selectedElement.booleanVariant || 'yes-no'}
+                    onValueChange={(value) => handleUpdate('booleanVariant', value)}
+                  >
+                    <SelectTrigger className="text-sm">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="yes-no">Yes / No</SelectItem>
+                      <SelectItem value="true-false">True / False</SelectItem>
+                      <SelectItem value="on-off">On / Off</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
             </div>
           </div>
         )}

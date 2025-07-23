@@ -76,6 +76,14 @@ const paletteItems: ComponentPaletteItem[] = [
     color: 'bg-gradient-to-br from-yellow-100 to-amber-200 text-yellow-700',
     category: 'selection',
   },
+  {
+    type: 'boolean-switch',
+    label: 'Yes/No Switch',
+    description: 'Toggle switch for binary choices',
+    icon: 'fas fa-toggle-on',
+    color: 'bg-gradient-to-br from-cyan-100 to-blue-200 text-cyan-700',
+    category: 'selection',
+  },
   // Actions
   {
     type: 'submit-button',

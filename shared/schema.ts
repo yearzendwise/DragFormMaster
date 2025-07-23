@@ -47,6 +47,7 @@ export interface FormElement {
   disabled?: boolean;
   readonly?: boolean;
   rateVariant?: 'numbers' | 'faces' | 'stars'; // for rate-scale components
+  booleanVariant?: 'yes-no' | 'true-false' | 'on-off'; // for boolean-switch components
 }
 
 export interface ValidationRules {
@@ -79,4 +80,5 @@ export type FormElementType =
   | 'submit-button' 
   | 'reset-button'
   | 'image'
-  | 'rate-scale';
+  | 'rate-scale'
+  | 'boolean-switch';

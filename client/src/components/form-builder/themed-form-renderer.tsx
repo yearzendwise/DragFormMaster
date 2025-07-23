@@ -2,6 +2,7 @@ import { FormElement, FormTheme } from '@/types/form-builder';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { RateScale } from '@/components/ui/rate-scale';
+import { BooleanSwitch } from '@/components/ui/boolean-switch';
 
 interface ThemedFormRendererProps {
   element: FormElement;
@@ -199,6 +200,18 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
             max={element.validation?.max || 10}
             variant={element.rateVariant || "numbers"}
             showNumbers={element.rateVariant === "numbers" || !element.rateVariant}
+            className="justify-center"
+          />
+        );
+
+      case 'boolean-switch':
+        return (
+          <BooleanSwitch
+            name={element.name}
+            required={element.required}
+            disabled={element.disabled}
+            variant={element.booleanVariant || "yes-no"}
+            showLabels={true}
             className="justify-center"
           />
         );
