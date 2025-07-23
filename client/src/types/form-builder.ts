@@ -86,6 +86,12 @@ export interface FormTheme {
     input: string;
     button: string;
     background: string;
+    booleanSwitch?: {
+      track: string;
+      thumb: string;
+      activeLabel: string;
+      inactiveLabel: string;
+    };
   };
 }
 

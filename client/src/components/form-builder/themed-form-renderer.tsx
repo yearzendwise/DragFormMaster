@@ -3,6 +3,10 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { RateScale } from '@/components/ui/rate-scale';
 import { BooleanSwitch } from '@/components/ui/boolean-switch';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
+import { cn } from '@/lib/utils';
+import * as React from 'react';
 
 // Extended type for preview elements that includes buttons and spacer
 type PreviewFormElement = FormElement | {
@@ -16,6 +20,112 @@ type PreviewFormElement = FormElement | {
     size: 'small' | 'medium' | 'large';
   };
 };
+
+// Themed Boolean Switch Component
+interface ThemedBooleanSwitchProps {
+  value?: boolean;
+  onValueChange?: (value: boolean) => void;
+  disabled?: boolean;
+  name?: string;
+  required?: boolean;
+  className?: string;
+  variant?: "yes-no" | "true-false" | "on-off";
+  showLabels?: boolean;
+  themeStyles?: {
+    track: string;
+    thumb: string;
+    activeLabel: string;
+    inactiveLabel: string;
+  };
+}
+
+function ThemedBooleanSwitch({ 
+  value = false,
+  onValueChange,
+  disabled = false,
+  name,
+  required = false,
+  className,
+  variant = "yes-no",
+  showLabels = true,
+  themeStyles,
+  ...props 
+}: ThemedBooleanSwitchProps) {
+  const [checked, setChecked] = React.useState(value);
+
+  React.useEffect(() => {
+    setChecked(value);
+  }, [value]);
+
+  const handleChange = (newValue: boolean) => {
+    if (disabled) return;
+    setChecked(newValue);
+    onValueChange?.(newValue);
+  };
+
+  const getLabels = () => {
+    switch (variant) {
+      case "true-false":
+        return { positive: "True", negative: "False" };
+      case "on-off":
+        return { positive: "On", negative: "Off" };
+      case "yes-no":
+      default:
+        return { positive: "Yes", negative: "No" };
+    }
+  };
+
+  const labels = getLabels();
+
+  return (
+    <div className={cn("inline-flex items-center gap-3", className)} {...props}>
+      {showLabels && (
+        <Label 
+          className={cn(
+            "text-sm font-medium transition-colors cursor-pointer select-none",
+            checked 
+              ? themeStyles?.inactiveLabel || "text-muted-foreground"
+              : themeStyles?.activeLabel || "text-foreground font-semibold"
+          )}
+          onClick={() => handleChange(false)}
+        >
+          {labels.negative}
+        </Label>
+      )}
+      
+      <Switch
+        checked={checked}
+        onCheckedChange={handleChange}
+        disabled={disabled}
+        className={cn(themeStyles?.track || '')}
+        aria-label={`Toggle between ${labels.negative} and ${labels.positive}`}
+      />
+      
+      {showLabels && (
+        <Label 
+          className={cn(
+            "text-sm font-medium transition-colors cursor-pointer select-none",
+            checked 
+              ? themeStyles?.activeLabel || "text-foreground font-semibold"
+              : themeStyles?.inactiveLabel || "text-muted-foreground"
+          )}
+          onClick={() => handleChange(true)}
+        >
+          {labels.positive}
+        </Label>
+      )}
+
+      {name && (
+        <input
+          type="hidden"
+          name={name}
+          value={checked ? "true" : "false"}
+          required={required}
+        />
+      )}
+    </div>
+  );
+}
 
 interface ThemedFormRendererProps {
   element: PreviewFormElement;
@@ -224,13 +334,14 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
 
       case 'boolean-switch':
         return (
-          <BooleanSwitch
+          <ThemedBooleanSwitch
             name={element.name}
             required={element.required}
             disabled={(element as FormElement).disabled}
             variant={(element as FormElement).booleanVariant || "yes-no"}
             showLabels={true}
             className="justify-center"
+            themeStyles={themeStyles.booleanSwitch}
           />
         );
 

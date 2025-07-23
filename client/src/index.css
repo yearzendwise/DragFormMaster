@@ -94,31 +94,38 @@
   background-image: none !important;
 }
 
-/* Boolean Switch Dark Theme Enhancement */
-.dark [data-state="unchecked"][role="switch"] {
+/* Theme-specific Boolean Switch Styles */
+/* These CSS custom properties will be overridden by theme-specific styles */
+
+/* Theme-aware switch styling - uses theme-specific classes */
+[role="switch"] {
+  transition: all 0.2s ease-in-out;
+}
+
+[role="switch"] > span {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Theme label styling - allows for theme-specific overrides */
+.themed-boolean-label {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Fallback for non-themed boolean switches */
+.dark [data-state="unchecked"][role="switch"]:not([class*="theme-"]) {
   background-color: rgb(51, 65, 85) !important; /* slate-700 */
   border-color: rgb(71, 85, 105) !important; /* slate-600 */
 }
 
-.dark [data-state="checked"][role="switch"] {
+.dark [data-state="checked"][role="switch"]:not([class*="theme-"]) {
   background-color: hsl(var(--primary)) !important;
   border-color: hsl(var(--primary)) !important;
 }
 
-/* Enhanced thumb styling for dark mode */
-.dark [role="switch"] [data-state="unchecked"],
-.dark [role="switch"] [data-state="checked"] {
+.dark [role="switch"]:not([class*="theme-"]) [data-state="unchecked"],
+.dark [role="switch"]:not([class*="theme-"]) [data-state="checked"] {
   background-color: white !important;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.1) !important;
-}
-
-/* Better visibility for boolean switch labels on dark backgrounds */
-.dark .boolean-switch-label {
-  color: white !important;
-}
-
-.dark .boolean-switch-label.inactive {
-  color: rgb(148, 163, 184) !important; /* slate-400 */
 }
 
 .glassmorphism-input:active {
