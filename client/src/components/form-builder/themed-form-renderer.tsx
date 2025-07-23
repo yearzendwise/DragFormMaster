@@ -9,6 +9,14 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
   const renderFormControl = () => {
     const baseInputClasses = themeStyles.input;
     
+    // Special handling for glassmorphism theme to force transparency
+    const isGlassmorphism = themeStyles.input.includes('glassmorphism-input');
+    const forceTransparentStyle = isGlassmorphism ? {
+      background: 'transparent',
+      backgroundColor: 'transparent',
+      backgroundImage: 'none'
+    } : {};
+    
     switch (element.type) {
       case 'text-input':
         return (
@@ -20,6 +28,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
             readOnly={element.readonly}
             name={element.name}
             className={baseInputClasses}
+            style={forceTransparentStyle}
           />
         );
 
@@ -33,6 +42,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
             readOnly={element.readonly}
             name={element.name}
             className={baseInputClasses}
+            style={forceTransparentStyle}
           />
         );
 
@@ -48,6 +58,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
             min={element.validation?.min}
             max={element.validation?.max}
             className={baseInputClasses}
+            style={forceTransparentStyle}
           />
         );
 
@@ -63,6 +74,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
             minLength={element.validation?.minLength}
             maxLength={element.validation?.maxLength}
             className={baseInputClasses}
+            style={forceTransparentStyle}
           />
         );
 

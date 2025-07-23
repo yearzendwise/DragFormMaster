@@ -127,6 +127,12 @@ div.glassmorphism-container textarea {
   background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
+  background-attachment: initial !important;
+  background-repeat: initial !important;
+  background-position: initial !important;
+  background-size: initial !important;
+  background-origin: initial !important;
+  background-clip: initial !important;
   border: 2px solid green !important; /* DEBUGGING - this should show green border if this rule works */
 }
 
