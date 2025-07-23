@@ -185,7 +185,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
 
       case 'spacer':
         return (
-          <div className="h-[55px]" />
+          <div className="h-[35px]" />
         );
 
       case 'submit-button':
