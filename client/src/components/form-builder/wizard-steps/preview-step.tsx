@@ -18,15 +18,19 @@ export function PreviewStep({
   onSave, 
   onExport 
 }: PreviewStepProps) {
-  const themeStyles = selectedTheme?.styles || {
-    container: 'max-w-2xl mx-auto p-8 bg-white border border-gray-200 rounded-lg shadow-sm',
-    header: 'text-2xl font-semibold text-gray-900 mb-6',
-    field: 'mb-6',
-    label: 'block text-sm font-medium text-gray-700 mb-2',
-    input: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500',
-    button: 'w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors',
-    background: 'bg-gray-50'
-  };
+  // Show error if no theme is selected
+  if (!selectedTheme) {
+    return (
+      <div className="flex-1 flex flex-col items-center justify-center bg-neutral-50">
+        <div className="text-center">
+          <div className="text-lg font-medium text-slate-800 mb-2">No theme selected</div>
+          <div className="text-sm text-slate-600">Please go back to Step 2 and select a theme</div>
+        </div>
+      </div>
+    );
+  }
+
+  const themeStyles = selectedTheme.styles;
 
   return (
     <div className="flex-1 flex flex-col">
