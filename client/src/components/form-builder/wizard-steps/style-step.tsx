@@ -63,8 +63,8 @@ export function StyleStep({ themes, selectedTheme, onSelectTheme }: StyleStepPro
                         </div>
                       )}
                       {theme.id === 'glassmorphism' && (
-                        <div className="text-gray-800 font-semibold text-lg backdrop-blur-sm bg-white/20 px-4 py-2 rounded-xl">
-                          Glass Effect
+                        <div className="text-white font-bold text-lg backdrop-blur-xl bg-white/10 px-6 py-3 rounded-2xl border border-white/30 shadow-2xl drop-shadow-lg">
+                          ✨ True Glass ✨
                         </div>
                       )}
                       {!['neon', 'nature', 'luxury', 'retro', 'glassmorphism'].includes(theme.id) && (
@@ -90,7 +90,7 @@ export function StyleStep({ themes, selectedTheme, onSelectTheme }: StyleStepPro
                           theme.id === 'nature' ? 'bg-white border-2 border-green-300 rounded-2xl' :
                           theme.id === 'luxury' ? 'bg-purple-800/50 border border-yellow-400 text-white' :
                           theme.id === 'retro' ? 'bg-yellow-50 border-3 border-orange-400' :
-                          theme.id === 'glassmorphism' ? 'bg-white/40 backdrop-blur border border-white/50 rounded-xl' :
+                          theme.id === 'glassmorphism' ? 'bg-transparent backdrop-blur-xl border border-white/30 rounded-2xl text-white shadow-inner shadow-black/10' :
                           theme.id === 'elegant' ? 'bg-gray-800 border border-gray-600 text-white rounded-lg' :
                           theme.id === 'playful' ? 'bg-pink-50 border-3 border-pink-300 rounded-2xl' :
                           theme.id === 'modern' ? 'bg-white/80 border-2 border-gray-200 rounded-xl backdrop-blur-sm' :
@@ -109,7 +109,7 @@ export function StyleStep({ themes, selectedTheme, onSelectTheme }: StyleStepPro
                           theme.id === 'nature' ? 'bg-white border-2 border-emerald-300 rounded-2xl' :
                           theme.id === 'luxury' ? 'bg-purple-800/50 border border-yellow-400 text-white' :
                           theme.id === 'retro' ? 'bg-yellow-50 border-3 border-pink-400' :
-                          theme.id === 'glassmorphism' ? 'bg-white/40 backdrop-blur border border-white/50 rounded-xl' :
+                          theme.id === 'glassmorphism' ? 'bg-transparent backdrop-blur-xl border border-white/30 rounded-2xl text-white shadow-inner shadow-black/10' :
                           theme.id === 'elegant' ? 'bg-gray-800 border border-gray-600 text-white rounded-lg' :
                           theme.id === 'playful' ? 'bg-pink-50 border-3 border-purple-300 rounded-2xl' :
                           theme.id === 'modern' ? 'bg-white/80 border-2 border-gray-200 rounded-xl backdrop-blur-sm' :

@@ -142,16 +142,16 @@ const defaultThemes: FormTheme[] = [
   {
     id: 'glassmorphism',
     name: 'Glassmorphism',
-    description: 'Frosted glass effect with transparent backgrounds and subtle borders',
-    preview: 'bg-white/30 backdrop-blur-md border border-white/20 shadow-lg',
+    description: 'True glass effect with ultra-transparent backgrounds and crystal-clear visibility',
+    preview: 'bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl',
     styles: {
-      container: 'max-w-2xl mx-auto p-10 bg-white/20 backdrop-blur-2xl border border-white/30 rounded-3xl shadow-2xl',
-      header: 'text-3xl font-bold text-gray-800 mb-8 text-center tracking-wide backdrop-blur-sm',
-      field: 'mb-6',
-      label: 'block text-sm font-semibold text-gray-700 mb-3 tracking-wide backdrop-blur-sm',
-      input: 'w-full px-4 py-3 bg-white/40 backdrop-blur-md border border-white/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-400/50 transition-all duration-300 placeholder-gray-500',
-      button: 'w-full bg-white/30 backdrop-blur-md border border-white/50 text-gray-800 py-4 px-6 rounded-xl hover:bg-white/40 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl',
-      background: 'bg-gradient-to-br from-blue-400/20 via-purple-400/20 to-pink-400/20'
+      container: 'max-w-2xl mx-auto p-12 bg-white/5 backdrop-blur-3xl border border-white/20 rounded-3xl shadow-2xl shadow-black/10',
+      header: 'text-4xl font-bold text-white mb-10 text-center tracking-wide drop-shadow-2xl shadow-black/50',
+      field: 'mb-8',
+      label: 'block text-sm font-bold text-white mb-4 tracking-wider uppercase drop-shadow-lg shadow-black/50 bg-transparent',
+      input: 'w-full px-5 py-4 bg-transparent backdrop-blur-xl border border-white/30 rounded-2xl focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white/60 transition-all duration-300 text-white placeholder-white/60 shadow-inner shadow-black/10 focus:shadow-white/20',
+      button: 'w-full bg-white/10 backdrop-blur-xl border border-white/40 text-white py-4 px-6 rounded-2xl hover:bg-white/20 hover:border-white/60 transition-all duration-300 font-bold shadow-2xl hover:shadow-white/20 drop-shadow-lg',
+      background: 'bg-gradient-to-br from-indigo-500/30 via-purple-500/30 to-pink-500/30'
     }
   }
 ];
