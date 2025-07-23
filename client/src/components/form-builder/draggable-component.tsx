@@ -51,7 +51,11 @@ export function DraggableComponent({ item, onAddElement }: DraggableComponentPro
       {...listeners}
       {...attributes}
       className="group relative p-4 border-2 border-transparent bg-white rounded-xl hover:border-blue-300 hover:shadow-lg hover:shadow-blue-100/50 transition-all duration-200 cursor-grab active:cursor-grabbing hover:scale-[1.02] active:scale-[0.98] select-none"
+      onMouseDown={(e) => {
+        console.log('Mouse down on component:', item.type);
+      }}
       onClick={(e) => {
+        console.log('Click on component:', item.type, 'isDragging:', isDragging);
         // Only trigger click to add if not dragging
         if (!isDragging) {
           onAddElement(item.type);
