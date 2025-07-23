@@ -61,11 +61,11 @@ const BooleanSwitch = React.forwardRef<HTMLDivElement, BooleanSwitchProps>(
         {showLabels && (
           <Label 
             className={cn(
-              "text-sm font-medium transition-colors cursor-pointer select-none",
-              "hover:text-foreground",
+              "text-sm font-medium transition-colors cursor-pointer select-none boolean-switch-label",
+              "hover:text-foreground dark:hover:text-white",
               checked 
-                ? "text-muted-foreground dark:text-muted-foreground" 
-                : "text-foreground dark:text-foreground font-semibold"
+                ? "text-muted-foreground dark:text-slate-400 inactive" 
+                : "text-foreground dark:text-white font-semibold"
             )}
             onClick={() => handleChange(false)}
           >
@@ -77,23 +77,17 @@ const BooleanSwitch = React.forwardRef<HTMLDivElement, BooleanSwitchProps>(
           checked={checked}
           onCheckedChange={handleChange}
           disabled={disabled}
-          className={cn(
-            "data-[state=checked]:bg-primary data-[state=unchecked]:bg-input",
-            "data-[state=checked]:border-primary data-[state=unchecked]:border-border",
-            "focus-visible:ring-ring focus-visible:ring-offset-background",
-            disabled && "opacity-50 cursor-not-allowed"
-          )}
           aria-label={`Toggle between ${labels.negative} and ${labels.positive}`}
         />
         
         {showLabels && (
           <Label 
             className={cn(
-              "text-sm font-medium transition-colors cursor-pointer select-none",
-              "hover:text-foreground",
+              "text-sm font-medium transition-colors cursor-pointer select-none boolean-switch-label",
+              "hover:text-foreground dark:hover:text-white",
               checked 
-                ? "text-foreground dark:text-foreground font-semibold" 
-                : "text-muted-foreground dark:text-muted-foreground"
+                ? "text-foreground dark:text-white font-semibold" 
+                : "text-muted-foreground dark:text-slate-400 inactive"
             )}
             onClick={() => handleChange(true)}
           >
