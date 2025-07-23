@@ -99,6 +99,7 @@ interface ComponentPaletteProps {
 
 export function ComponentPalette({ onAddElement }: ComponentPaletteProps) {
   const categories = ['basic', 'selection', 'actions'] as const;
+  const isMobile = window.innerWidth < 1024; // lg breakpoint
 
   return (
     <aside className="w-80 lg:w-80 bg-gradient-to-b from-slate-50 to-white border-r border-slate-200/60 shadow-sm relative z-10 h-full flex flex-col">
@@ -126,6 +127,7 @@ export function ComponentPalette({ onAddElement }: ComponentPaletteProps) {
                     key={item.type}
                     item={item}
                     onAddElement={onAddElement}
+                    isMobile={isMobile}
                   />
                 ))}
               </div>
@@ -136,7 +138,7 @@ export function ComponentPalette({ onAddElement }: ComponentPaletteProps) {
         <div className="mt-12 p-4 bg-blue-50/50 rounded-xl border border-blue-100">
           <div className="text-xs text-blue-600 font-medium mb-1">💡 Pro tip</div>
           <div className="text-xs text-blue-700">
-            Click to add instantly, or drag for precise placement
+            {isMobile ? 'Click to add instantly, or drag for precise placement' : 'Drag components for precise placement with blue line indicators'}
           </div>
         </div>
       </div>

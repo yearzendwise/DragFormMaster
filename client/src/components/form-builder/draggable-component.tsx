@@ -5,6 +5,7 @@ import { Type, Mail, FileText, Hash, ChevronDown, CheckSquare, Circle, Send, Rot
 interface DraggableComponentProps {
   item: ComponentPaletteItem;
   onAddElement: (type: FormElementType) => void;
+  isMobile?: boolean;
 }
 
 const iconMap = {
@@ -20,7 +21,7 @@ const iconMap = {
   'image': Image,
 };
 
-export function DraggableComponent({ item, onAddElement }: DraggableComponentProps) {
+export function DraggableComponent({ item, onAddElement, isMobile = false }: DraggableComponentProps) {
   const {
     attributes,
     listeners,
@@ -56,8 +57,8 @@ export function DraggableComponent({ item, onAddElement }: DraggableComponentPro
         {...attributes}
         className="p-4 cursor-grab active:cursor-grabbing hover:scale-[1.02] active:scale-[0.98] relative"
         onClick={(e) => {
-          // Only trigger click to add if not dragging
-          if (!isDragging) {
+          // Only trigger click to add on mobile devices when not dragging
+          if (!isDragging && isMobile) {
             onAddElement(item.type);
           }
         }}
