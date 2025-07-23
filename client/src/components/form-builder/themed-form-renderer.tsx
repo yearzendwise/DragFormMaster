@@ -4,10 +4,10 @@ import { Textarea } from '@/components/ui/textarea';
 import { RateScale } from '@/components/ui/rate-scale';
 import { BooleanSwitch } from '@/components/ui/boolean-switch';
 
-// Extended type for preview elements that includes buttons
+// Extended type for preview elements that includes buttons and spacer
 type PreviewFormElement = FormElement | {
   id: string;
-  type: 'submit-button' | 'reset-button';
+  type: 'submit-button' | 'reset-button' | 'spacer';
   label: string;
   name: string;
   required: boolean;
@@ -183,11 +183,16 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
           </div>
         );
 
+      case 'spacer':
+        return (
+          <div className="h-[75px]" />
+        );
+
       case 'submit-button':
         return (
           <button
             type="submit"
-            className={`${themeStyles.button} mt-[75px]`}
+            className={`${themeStyles.button}`}
           >
             {element.label}
           </button>
@@ -197,7 +202,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
         return (
           <button
             type="reset"
-            className={`${themeStyles.button.replace('bg-blue-600', 'bg-gray-600').replace('hover:bg-blue-700', 'hover:bg-gray-700')} mt-[75px]`}
+            className={`${themeStyles.button.replace('bg-blue-600', 'bg-gray-600').replace('hover:bg-blue-700', 'hover:bg-gray-700')}`}
           >
             {element.label}
           </button>
@@ -234,8 +239,8 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
     }
   };
 
-  // Handle button types separately since they don't need labels
-  if (element.type === 'submit-button' || element.type === 'reset-button') {
+  // Handle special types separately since they don't need labels
+  if (element.type === 'submit-button' || element.type === 'reset-button' || element.type === 'spacer') {
     return renderFormControl();
   }
 

@@ -5,10 +5,10 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Save, Download, Code, Mail, Clock, User } from 'lucide-react';
 import { useState } from 'react';
 
-// Extended type for preview elements that includes buttons
+// Extended type for preview elements that includes buttons and spacer
 type PreviewFormElement = FormElement | {
   id: string;
-  type: 'submit-button' | 'reset-button';
+  type: 'submit-button' | 'reset-button' | 'spacer';
   label: string;
   name: string;
   required: boolean;
@@ -176,6 +176,18 @@ export function PreviewStep({
   // Create enhanced elements list with automatic buttons
   const elementsWithButtons: PreviewFormElement[] = [
     ...elements,
+    // Add spacer before buttons
+    {
+      id: `auto-spacer-${Date.now()}`,
+      type: 'spacer',
+      label: '',
+      name: 'spacer',
+      required: false,
+      styling: {
+        width: 'full',
+        size: 'medium',
+      }
+    },
     // Always add submit button
     {
       id: `auto-submit-${Date.now()}`,
