@@ -12,6 +12,7 @@ interface FormCanvasProps {
   onUpdateElement: (id: string, updates: Partial<FormElement>) => void;
   onUpdateFormTitle: (title: string) => void;
   onTogglePreview: () => void;
+  onMobileEdit?: (id: string) => void;
 }
 
 export function FormCanvas({
@@ -25,6 +26,7 @@ export function FormCanvas({
   onUpdateElement,
   onUpdateFormTitle,
   onTogglePreview,
+  onMobileEdit,
 }: FormCanvasProps) {
   return (
     <main className="flex-1 flex flex-col bg-neutral-50">
@@ -109,6 +111,7 @@ export function FormCanvas({
         formTitle={formTitle}
         previewMode={previewMode}
         draggedType={draggedType}
+        onMobileEdit={onMobileEdit}
       />
     </main>
   );

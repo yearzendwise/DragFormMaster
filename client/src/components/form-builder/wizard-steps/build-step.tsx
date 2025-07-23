@@ -18,6 +18,7 @@ import { ComponentPalette } from '@/components/form-builder/component-palette';
 import { FormCanvas } from '@/components/form-builder/form-canvas';
 import { PropertiesPanel } from '@/components/form-builder/properties-panel';
 import { FormElementType, DragItem } from '@/types/form-builder';
+import { Button } from '@/components/ui/button';
 
 interface BuildStepProps {
   onDataChange: (title: string, elements: any[]) => void;
@@ -43,6 +44,8 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
 
   const [activeId, setActiveId] = useState<string | null>(null);
   const [draggedType, setDraggedType] = useState<FormElementType | null>(null);
+  const [showMobileAdd, setShowMobileAdd] = useState(false);
+  const [showMobileProperties, setShowMobileProperties] = useState(false);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -146,6 +149,12 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
 
   const handleDeselectElement = () => {
     selectElement(null);
+    setShowMobileProperties(false);
+  };
+
+  const handleMobileEdit = (elementId: string) => {
+    selectElement(elementId);
+    setShowMobileProperties(true);
   };
 
   return (
@@ -175,6 +184,7 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
               onUpdateElement={updateElement}
               onUpdateFormTitle={updateFormTitle}
               onTogglePreview={togglePreview}
+              onMobileEdit={handleMobileEdit}
             />
           </SortableContext>
         </div>
@@ -187,6 +197,80 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
             onDeselectElement={handleDeselectElement}
           />
         </div>
+
+        {/* Mobile Floating Add Button */}
+        {!previewMode && (
+          <div className="lg:hidden fixed bottom-6 right-6 z-50">
+            <Button
+              size="lg"
+              className="w-14 h-14 rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg hover:shadow-xl transition-all duration-200"
+              onClick={() => setShowMobileAdd(true)}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+            </Button>
+          </div>
+        )}
+
+        {/* Mobile Add Components Modal */}
+        {showMobileAdd && (
+          <div className="lg:hidden fixed inset-0 bg-black/50 z-50 flex items-end">
+            <div className="bg-white w-full max-h-[70vh] rounded-t-2xl">
+              <div className="p-4 border-b border-gray-200">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-semibold">Add Component</h3>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => setShowMobileAdd(false)}
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </Button>
+                </div>
+              </div>
+              <div className="p-4 overflow-y-auto">
+                <ComponentPalette 
+                  onAddElement={(type) => {
+                    handleAddElement(type);
+                    setShowMobileAdd(false);
+                  }} 
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Mobile Properties Modal */}
+        {showMobileProperties && selectedElement && (
+          <div className="lg:hidden fixed inset-0 bg-black/50 z-50 flex items-end">
+            <div className="bg-white w-full max-h-[80vh] rounded-t-2xl">
+              <div className="p-4 border-b border-gray-200">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-semibold">Edit Component</h3>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => setShowMobileProperties(false)}
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </Button>
+                </div>
+              </div>
+              <div className="p-4 overflow-y-auto">
+                <PropertiesPanel
+                  selectedElement={selectedElement}
+                  onUpdateElement={updateElement}
+                  onDeselectElement={handleDeselectElement}
+                />
+              </div>
+            </div>
+          </div>
+        )}
 
         <DragOverlay>
           {activeId && draggedType ? (

@@ -9,6 +9,7 @@ interface SortableFormElementProps {
   onSelect: (id: string | null) => void;
   onRemove: (id: string) => void;
   onUpdate: (id: string, updates: Partial<FormElement>) => void;
+  onMobileEdit?: (id: string) => void;
 }
 
 export function SortableFormElement({
@@ -17,6 +18,7 @@ export function SortableFormElement({
   onSelect,
   onRemove,
   onUpdate,
+  onMobileEdit,
 }: SortableFormElementProps) {
   const {
     attributes,
@@ -56,6 +58,7 @@ export function SortableFormElement({
           onRemove={onRemove}
           onUpdate={onUpdate}
           previewMode={false}
+          onMobileEdit={onMobileEdit}
         />
       </div>
     </div>
