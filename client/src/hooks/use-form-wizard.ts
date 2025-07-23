@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { WizardStep, WizardState, FormTheme, FormElement } from '@/types/form-builder';
 
 const defaultThemes: FormTheme[] = [
@@ -156,51 +156,123 @@ const defaultThemes: FormTheme[] = [
   }
 ];
 
+// Storage utility functions
+const STORAGE_KEY = 'form-wizard-data';
+
+function saveToStorage(data: WizardState) {
+  try {
+    // Try localStorage first
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch (error) {
+    try {
+      // Fallback to sessionStorage
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch (fallbackError) {
+      console.warn('Failed to save form data to storage:', fallbackError);
+    }
+  }
+}
+
+function loadFromStorage(): WizardState | null {
+  try {
+    // Try localStorage first
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      return JSON.parse(stored);
+    }
+  } catch (error) {
+    console.warn('Failed to load from localStorage:', error);
+  }
+  
+  try {
+    // Fallback to sessionStorage
+    const stored = sessionStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      return JSON.parse(stored);
+    }
+  } catch (error) {
+    console.warn('Failed to load from sessionStorage:', error);
+  }
+  
+  return null;
+}
+
+function clearStorage() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+    sessionStorage.removeItem(STORAGE_KEY);
+  } catch (error) {
+    console.warn('Failed to clear storage:', error);
+  }
+}
+
 export function useFormWizard() {
-  const [wizardState, setWizardState] = useState<WizardState>({
-    currentStep: 'build',
-    formData: {
-      title: 'Untitled Form',
-      elements: []
-    },
-    selectedTheme: null,
-    isComplete: false
-  });
+  // Initialize state from storage or default values
+  const getInitialState = (): WizardState => {
+    const saved = loadFromStorage();
+    return saved || {
+      currentStep: 'build',
+      formData: {
+        title: 'Untitled Form',
+        elements: []
+      },
+      selectedTheme: null,
+      isComplete: false
+    };
+  };
+
+  const [wizardState, setWizardState] = useState<WizardState>(getInitialState);
 
   const nextStep = () => {
     setWizardState(prev => {
-      if (prev.currentStep === 'build') {
-        return { ...prev, currentStep: 'style' };
-      } else if (prev.currentStep === 'style') {
-        return { ...prev, currentStep: 'preview' };
+      const newState = prev.currentStep === 'build' 
+        ? { ...prev, currentStep: 'style' as const }
+        : prev.currentStep === 'style' 
+        ? { ...prev, currentStep: 'preview' as const }
+        : prev;
+      
+      if (newState !== prev) {
+        saveToStorage(newState);
       }
-      return prev;
+      return newState;
     });
   };
 
   const previousStep = () => {
     setWizardState(prev => {
-      if (prev.currentStep === 'style') {
-        return { ...prev, currentStep: 'build' };
-      } else if (prev.currentStep === 'preview') {
-        return { ...prev, currentStep: 'style' };
+      const newState = prev.currentStep === 'style'
+        ? { ...prev, currentStep: 'build' as const }
+        : prev.currentStep === 'preview'
+        ? { ...prev, currentStep: 'style' as const }
+        : prev;
+      
+      if (newState !== prev) {
+        saveToStorage(newState);
       }
-      return prev;
+      return newState;
     });
   };
 
   const updateFormData = (title: string, elements: FormElement[]) => {
-    setWizardState(prev => ({
-      ...prev,
-      formData: { title, elements }
-    }));
+    setWizardState(prev => {
+      const newState = {
+        ...prev,
+        formData: { title, elements }
+      };
+      saveToStorage(newState);
+      return newState;
+    });
   };
 
   const selectTheme = (theme: FormTheme) => {
-    setWizardState(prev => ({
-      ...prev,
-      selectedTheme: theme
-    }));
+    setWizardState(prev => {
+      const newState = {
+        ...prev,
+        selectedTheme: theme
+      };
+      saveToStorage(newState);
+      return newState;
+    });
   };
 
   const completeWizard = () => {
@@ -211,16 +283,28 @@ export function useFormWizard() {
   };
 
   const resetWizard = () => {
-    setWizardState({
-      currentStep: 'build',
+    const newState = {
+      currentStep: 'build' as const,
       formData: {
         title: 'Untitled Form',
         elements: []
       },
       selectedTheme: null,
       isComplete: false
-    });
+    };
+    clearStorage();
+    setWizardState(newState);
   };
+
+  // Save data before page unload
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      saveToStorage(wizardState);
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, [wizardState]);
 
   return {
     wizardState,
