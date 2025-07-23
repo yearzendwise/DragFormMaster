@@ -101,7 +101,7 @@ export function ComponentPalette({ onAddElement }: ComponentPaletteProps) {
   const categories = ['basic', 'selection', 'actions'] as const;
 
   return (
-    <div className="p-6 font-normal text-left">
+    <div className="p-6 font-normal text-left overflow-y-auto max-h-full">
       {categories.map((category) => {
         const items = paletteItems.filter(item => item.category === category);
         
