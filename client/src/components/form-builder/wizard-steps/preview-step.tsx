@@ -106,7 +106,8 @@ export function PreviewStep({
             actualFormData[key] = value === 'on';
             break;
           case 'rate-scale':
-            actualFormData[key] = value ? Number(value) : "NA";
+            const numValue = Number(value);
+            actualFormData[key] = numValue > 0 ? numValue : "NA";
             break;
           case 'boolean-switch':
             actualFormData[key] = value === 'true';

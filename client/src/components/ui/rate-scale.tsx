@@ -17,7 +17,7 @@ export interface RateScaleProps {
 
 const RateScale = React.forwardRef<HTMLDivElement, RateScaleProps>(
   ({ 
-    value = 0,
+    value,
     onValueChange,
     max = 10,
     min = 1,
@@ -30,10 +30,10 @@ const RateScale = React.forwardRef<HTMLDivElement, RateScaleProps>(
     ...props 
   }, ref) => {
     const [hoverValue, setHoverValue] = React.useState<number | null>(null)
-    const [selectedValue, setSelectedValue] = React.useState(value)
+    const [selectedValue, setSelectedValue] = React.useState(value || 0)
 
     React.useEffect(() => {
-      setSelectedValue(value)
+      setSelectedValue(value || 0)
     }, [value])
 
     const handleClick = (rating: number) => {
