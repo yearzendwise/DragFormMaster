@@ -75,24 +75,7 @@
   transition: all 0.15s ease;
 }
 
-/* Glassmorphism theme specific overrides */
-.glassmorphism-input {
-  background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
-}
 
-.glassmorphism-input:focus {
-  background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
-}
-
-.glassmorphism-input:hover {
-  background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
-}
 
 /* Theme-specific Boolean Switch Styles */
 /* These CSS custom properties will be overridden by theme-specific styles */
@@ -128,116 +111,13 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.1) !important;
 }
 
-.glassmorphism-input:active {
-  background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
-}
 
-/* Force override for all input and textarea elements in glassmorphism theme */
-.glassmorphism-container input,
-.glassmorphism-container textarea,
-.glassmorphism-container select {
-  background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
-}
 
-.glassmorphism-container input:focus,
-.glassmorphism-container textarea:focus,
-.glassmorphism-container select:focus {
-  background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
-}
 
-/* Override the bg-background Tailwind class and CSS variable */
-.glassmorphism-container {
-  --background: transparent !important;
-}
 
-.glassmorphism-container .bg-background {
-  background: transparent !important;
-  background-color: transparent !important;
-}
 
-/* Nuclear option - override everything with highest specificity */
-div.glassmorphism-container input[type="text"],
-div.glassmorphism-container input[type="email"], 
-div.glassmorphism-container input[type="number"],
-div.glassmorphism-container textarea,
-div.glassmorphism-container select {
-  background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
-  -webkit-appearance: none !important;
-  -moz-appearance: none !important;
-  appearance: none !important;
-}
 
-/* Browser-specific overrides for inputs */
-div.glassmorphism-container input::-webkit-inner-spin-button,
-div.glassmorphism-container input::-webkit-outer-spin-button {
-  -webkit-appearance: none !important;
-  background: transparent !important;
-}
 
-/* Override browser autofill background */
-div.glassmorphism-container input:-webkit-autofill,
-div.glassmorphism-container input:-webkit-autofill:hover,
-div.glassmorphism-container input:-webkit-autofill:focus,
-div.glassmorphism-container input:-webkit-autofill:active {
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: white !important;
-  transition: background-color 5000s ease-in-out 0s !important;
-  background: transparent !important;
-}
-
-/* Force all form elements to be transparent */
-.glassmorphism-container input,
-.glassmorphism-container textarea,
-.glassmorphism-container select,
-.glassmorphism-container input:not([type]),
-.glassmorphism-container input[type] {
-  background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
-}
-
-/* Override any possible parent background inheritance */
-.glassmorphism-container * {
-  --tw-bg-opacity: 0 !important;
-}
-
-/* Target inputs with maximum specificity */
-body .glassmorphism-container input,
-body .glassmorphism-container textarea,
-body .glassmorphism-container select {
-  background: rgba(0, 0, 0, 0) !important;
-  background-color: rgba(0, 0, 0, 0) !important;
-  background-image: none !important;
-}
-
-/* Override with glassmorphism-override class */
-.glassmorphism-override input,
-.glassmorphism-override textarea,
-.glassmorphism-override select {
-  background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
-  -webkit-appearance: none !important;
-  -moz-appearance: none !important;
-  appearance: none !important;
-}
-
-/* Ultimate override - use attribute selector for maximum specificity */
-[class*="glassmorphism"] input,
-[class*="glassmorphism"] textarea,
-[class*="glassmorphism"] select {
-  background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
-}
 
 .drop-zone.drag-over {
   background-color: hsl(221, 83%, 97%);

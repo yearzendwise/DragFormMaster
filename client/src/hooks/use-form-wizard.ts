@@ -192,27 +192,6 @@ const defaultThemes: FormTheme[] = [
         inactiveLabel: 'text-pink-400 font-black tracking-wider uppercase transform skew-x-6'
       }
     }
-  },
-  {
-    id: 'glassmorphism',
-    name: 'Glassmorphism',
-    description: 'True glass effect with ultra-transparent backgrounds and crystal-clear visibility',
-    preview: 'bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl',
-    styles: {
-      container: 'glassmorphism-container max-w-2xl mx-auto p-12 bg-white/5 backdrop-blur-3xl border border-white/20 rounded-3xl shadow-2xl shadow-black/10',
-      header: 'text-4xl font-bold text-white mb-10 text-center tracking-wide drop-shadow-2xl shadow-black/50',
-      field: 'mb-8',
-      label: 'block text-sm font-bold text-white mb-4 tracking-wider uppercase drop-shadow-lg shadow-black/50 bg-transparent',
-      input: 'glassmorphism-input w-full px-5 py-4 !bg-transparent !bg-none backdrop-blur-xl border border-white/30 rounded-2xl focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white/60 transition-all duration-300 text-white placeholder-white/60 shadow-inner shadow-black/10 focus:shadow-white/20 [&]:!bg-transparent',
-      button: 'w-full bg-white/10 backdrop-blur-xl border border-white/40 text-white py-4 px-6 rounded-2xl hover:bg-white/20 hover:border-white/60 transition-all duration-300 font-bold shadow-2xl hover:shadow-white/20 drop-shadow-lg',
-      background: 'bg-gradient-to-br from-indigo-500/30 via-purple-500/30 to-pink-500/30',
-      booleanSwitch: {
-        track: 'data-[state=unchecked]:bg-white/10 data-[state=checked]:bg-white/30 border-white/30 backdrop-blur-xl rounded-2xl',
-        thumb: 'bg-white shadow-2xl shadow-white/20 rounded-full backdrop-blur-sm',
-        activeLabel: 'text-white font-bold tracking-wider uppercase drop-shadow-lg shadow-black/50',
-        inactiveLabel: 'text-white/60 font-bold tracking-wider uppercase drop-shadow-lg shadow-black/50'
-      }
-    }
   }
 ];
 
