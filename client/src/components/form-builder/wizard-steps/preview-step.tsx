@@ -1,5 +1,5 @@
 import { FormElement, FormTheme } from '@/types/form-builder';
-import { FormElementRenderer } from '@/components/form-builder/form-element-renderer';
+import { ThemedFormRenderer } from '@/components/form-builder/themed-form-renderer';
 import { Button } from '@/components/ui/button';
 import { Save, Download } from 'lucide-react';
 
@@ -55,18 +55,13 @@ export function PreviewStep({
         <div className={themeStyles.container}>
           <h1 className={themeStyles.header}>{formTitle}</h1>
           
-          <form className="space-y-1">
+          <form className="space-y-4">
             {elements.map((element) => (
-              <div key={element.id} className={themeStyles.field}>
-                <FormElementRenderer
-                  element={element}
-                  isSelected={false}
-                  onSelect={() => {}}
-                  onRemove={() => {}}
-                  onUpdate={() => {}}
-                  previewMode={true}
-                />
-              </div>
+              <ThemedFormRenderer
+                key={element.id}
+                element={element}
+                themeStyles={themeStyles}
+              />
             ))}
             
             {elements.length === 0 && (

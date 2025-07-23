@@ -21,9 +21,11 @@ import { FormElementType, DragItem } from '@/types/form-builder';
 
 interface BuildStepProps {
   onDataChange: (title: string, elements: any[]) => void;
+  initialTitle?: string;
+  initialElements?: any[];
 }
 
-export function BuildStep({ onDataChange }: BuildStepProps) {
+export function BuildStep({ onDataChange, initialTitle, initialElements }: BuildStepProps) {
   const {
     formTitle,
     elements,
@@ -49,13 +51,21 @@ export function BuildStep({ onDataChange }: BuildStepProps) {
   );
 
   const selectedElement = elements.find(el => el.id === selectedElementId) || null;
-  const onDataChangeRef = useRef(onDataChange);
-  onDataChangeRef.current = onDataChange;
-
-  // Update parent component when data changes
+  
+  // Use a ref to track the last sent data to prevent infinite loops
+  const lastSentData = useRef<{title: string, elements: any[]}>({ title: '', elements: [] });
+  
+  // Update parent component when data changes (with comparison to prevent loops)
   useEffect(() => {
-    onDataChangeRef.current(formTitle, elements);
-  }, [formTitle, elements]);
+    const dataChanged = formTitle !== lastSentData.current.title || 
+                       elements.length !== lastSentData.current.elements.length ||
+                       elements.some((el, idx) => el.id !== lastSentData.current.elements[idx]?.id);
+    
+    if (dataChanged) {
+      onDataChange(formTitle, elements);
+      lastSentData.current = { title: formTitle, elements: [...elements] };
+    }
+  }, [formTitle, elements, onDataChange]);
 
   function handleDragStart(event: DragStartEvent) {
     const { active } = event;
