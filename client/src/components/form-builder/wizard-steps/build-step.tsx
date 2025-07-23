@@ -30,12 +30,14 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
     formTitle,
     elements,
     selectedElementId,
+    previewMode,
     addElement,
     updateElement,
     removeElement,
     moveElement,
     selectElement,
     updateFormTitle,
+    togglePreview,
   } = useFormBuilder();
 
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -150,13 +152,13 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
               formTitle={formTitle}
               elements={elements}
               selectedElementId={selectedElementId}
-              previewMode={false}
+              previewMode={previewMode}
               draggedType={draggedType}
               onSelectElement={selectElement}
               onRemoveElement={removeElement}
               onUpdateElement={updateElement}
               onUpdateFormTitle={updateFormTitle}
-              onTogglePreview={() => {}} // Not needed in build step
+              onTogglePreview={togglePreview}
             />
           </SortableContext>
         </div>
