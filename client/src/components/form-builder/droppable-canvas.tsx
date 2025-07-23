@@ -122,7 +122,7 @@ export function DroppableCanvas({
                   const showMoveIndicatorBelow = showMoveIndicators && moveDirection === 'down' && moveFromIndex === index - 1;
                   
                   return (
-                    <div key={element.id}>
+                    <div key={element.id} className="relative">
                       {/* Move indicator above */}
                       {showMoveIndicatorAbove && (
                         <div className="h-6 flex items-center justify-center mb-2">
@@ -131,8 +131,11 @@ export function DroppableCanvas({
                       )}
                       
                       <div
-                        className={`animate-slide-up ${isMovingElement ? 'opacity-50 z-[100]' : ''} relative`}
-                        style={{ animationDelay: `${index * 50}ms` }}
+                        className={`animate-slide-up relative ${isMovingElement ? 'opacity-50' : ''}`}
+                        style={{ 
+                          animationDelay: `${index * 50}ms`,
+                          zIndex: selectedElementId === element.id ? 200 : 10
+                        }}
                       >
                         <SortableFormElement
                           element={element}
