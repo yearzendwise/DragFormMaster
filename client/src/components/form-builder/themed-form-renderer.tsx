@@ -15,8 +15,8 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
     const isGlassmorphism = themeStyles.input.includes('glassmorphism-input');
     
     const forceTransparentStyle: React.CSSProperties = isGlassmorphism ? {
-      background: 'rgba(0, 0, 0, 0)',
-      backgroundColor: 'rgba(0, 0, 0, 0)',
+      background: 'transparent',
+      backgroundColor: 'transparent',
       backgroundImage: 'none',
       opacity: '1',
       WebkitAppearance: 'none',

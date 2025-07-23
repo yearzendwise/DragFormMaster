@@ -188,8 +188,8 @@ body .glassmorphism-container select {
 .glassmorphism-override input,
 .glassmorphism-override textarea,
 .glassmorphism-override select {
-  background: rgba(255, 0, 255, 0.3) !important; /* Pink for debugging */
-  background-color: rgba(255, 0, 255, 0.3) !important;
+  background: transparent !important;
+  background-color: transparent !important;
   background-image: none !important;
   -webkit-appearance: none !important;
   -moz-appearance: none !important;
