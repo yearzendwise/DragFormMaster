@@ -35,10 +35,10 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
 
   // Configure drag and drop sensors with better desktop support
   const mouseSensor = useSensor(MouseSensor, {
-    activationConstraint: { distance: 3 }
+    activationConstraint: { distance: 8 }
   });
   const touchSensor = useSensor(TouchSensor, {
-    activationConstraint: { delay: 150, tolerance: 5 }
+    activationConstraint: { delay: 150, tolerance: 8 }
   });
   const sensors = useSensors(mouseSensor, touchSensor);
 
@@ -79,7 +79,8 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
     const { active } = event;
     console.log('Drag start:', active.id, active.data.current);
     if (active.data.current?.isNew) {
-      setDraggedType(active.id as FormElementType);
+      const type = active.id.toString().replace('palette-', '') as FormElementType;
+      setDraggedType(type);
     }
   };
 
@@ -92,7 +93,7 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
 
     // Handle dropping new component from palette
     if (active.data.current?.isNew && over.id === 'form-canvas') {
-      const type = active.id as FormElementType;
+      const type = active.id.toString().replace('palette-', '') as FormElementType;
       console.log('Adding element:', type);
       addElement(type);
     }

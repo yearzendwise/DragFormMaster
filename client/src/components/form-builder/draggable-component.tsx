@@ -28,7 +28,7 @@ export function DraggableComponent({ item, onAddElement }: DraggableComponentPro
     transform,
     isDragging,
   } = useDraggable({
-    id: item.type,
+    id: `palette-${item.type}`,
     data: {
       type: item.type,
       isNew: true,
@@ -48,47 +48,52 @@ export function DraggableComponent({ item, onAddElement }: DraggableComponentPro
     <div
       ref={setNodeRef}
       style={style}
-      {...listeners}
-      {...attributes}
-      className="group relative p-4 border-2 border-transparent bg-white rounded-xl hover:border-blue-300 hover:shadow-lg hover:shadow-blue-100/50 transition-all duration-200 cursor-grab active:cursor-grabbing hover:scale-[1.02] active:scale-[0.98] select-none"
+      className="group relative border-2 border-transparent bg-white rounded-xl hover:border-blue-300 hover:shadow-lg hover:shadow-blue-100/50 transition-all duration-200 select-none"
       onMouseDown={(e) => {
-        console.log('Mouse down on component:', item.type);
-      }}
-      onClick={(e) => {
-        console.log('Click on component:', item.type, 'isDragging:', isDragging);
-        // Only trigger click to add if not dragging
-        if (!isDragging) {
-          onAddElement(item.type);
-        }
+        console.log('Mouse down on component:', item.type, 'listeners:', !!listeners);
       }}
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-50/0 via-blue-50/30 to-purple-50/0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-      
-      <div className="relative flex items-center space-x-3">
-        <div className={`w-10 h-10 ${item.color} rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow duration-200`}>
-          <IconComponent size={18} className="text-current" />
-        </div>
-        <div className="flex-1 min-w-0">
-          <div className="text-sm font-semibold text-neutral-800 group-hover:text-blue-700 transition-colors">
-            {item.label}
+      <div
+        {...listeners}
+        {...attributes}
+        className="p-4 cursor-grab active:cursor-grabbing hover:scale-[1.02] active:scale-[0.98] relative"
+        onClick={(e) => {
+          console.log('Click on component:', item.type, 'isDragging:', isDragging);
+          e.preventDefault();
+          // Only trigger click to add if not dragging
+          if (!isDragging) {
+            onAddElement(item.type);
+          }
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-50/0 via-blue-50/30 to-purple-50/0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        
+        <div className="relative flex items-center space-x-3">
+          <div className={`w-10 h-10 ${item.color} rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow duration-200`}>
+            <IconComponent size={18} className="text-current" />
           </div>
-          <div className="text-xs text-neutral-500 truncate">
-            {item.description}
+          <div className="flex-1 min-w-0">
+            <div className="text-sm font-semibold text-neutral-800 group-hover:text-blue-700 transition-colors">
+              {item.label}
+            </div>
+            <div className="text-xs text-neutral-500 truncate">
+              {item.description}
+            </div>
+          </div>
+          <div className="text-neutral-400 group-hover:text-blue-500 transition-colors">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="opacity-60 group-hover:opacity-100">
+              <path d="M6 3C6 2.44772 6.44772 2 7 2H9C9.55228 2 10 2.44772 10 3V4H6V3Z" fill="currentColor"/>
+              <path d="M6 6C6 5.44772 6.44772 5 7 5H9C9.55228 5 10 5.44772 10 6V7H6V6Z" fill="currentColor"/>
+              <path d="M6 9C6 8.44772 6.44772 8 7 8H9C9.55228 8 10 8.44772 10 9V10H6V9Z" fill="currentColor"/>
+              <path d="M6 12C6 11.4477 6.44772 11 7 11H9C9.55228 11 10 11.4477 10 12V13H6V12Z" fill="currentColor"/>
+            </svg>
           </div>
         </div>
-        <div className="text-neutral-400 group-hover:text-blue-500 transition-colors">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="opacity-60 group-hover:opacity-100">
-            <path d="M6 3C6 2.44772 6.44772 2 7 2H9C9.55228 2 10 2.44772 10 3V4H6V3Z" fill="currentColor"/>
-            <path d="M6 6C6 5.44772 6.44772 5 7 5H9C9.55228 5 10 5.44772 10 6V7H6V6Z" fill="currentColor"/>
-            <path d="M6 9C6 8.44772 6.44772 8 7 8H9C9.55228 8 10 8.44772 10 9V10H6V9Z" fill="currentColor"/>
-            <path d="M6 12C6 11.4477 6.44772 11 7 11H9C9.55228 11 10 11.4477 10 12V13H6V12Z" fill="currentColor"/>
-          </svg>
-        </div>
+        
+        {isDragging && (
+          <div className="absolute inset-0 rounded-xl border-2 border-blue-400 bg-blue-50/20 animate-pulse"></div>
+        )}
       </div>
-      
-      {isDragging && (
-        <div className="absolute inset-0 rounded-xl border-2 border-blue-400 bg-blue-50/20 animate-pulse"></div>
-      )}
     </div>
   );
 }
