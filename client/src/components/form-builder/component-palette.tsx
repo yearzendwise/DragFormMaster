@@ -101,7 +101,7 @@ export function ComponentPalette({ onAddElement }: ComponentPaletteProps) {
   const categories = ['basic', 'selection', 'actions'] as const;
 
   return (
-    <div className="p-6">
+    <div className="p-6 font-normal text-left">
       {categories.map((category) => {
         const items = paletteItems.filter(item => item.category === category);
         
@@ -126,7 +126,6 @@ export function ComponentPalette({ onAddElement }: ComponentPaletteProps) {
           </div>
         );
       })}
-      
       <div className="mt-12 p-4 bg-blue-50/50 rounded-xl border border-blue-100">
         <div className="text-xs text-blue-600 font-medium mb-1">💡 Pro tip</div>
         <div className="text-xs text-blue-700">
