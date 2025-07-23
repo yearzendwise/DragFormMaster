@@ -14,7 +14,8 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
     const forceTransparentStyle = isGlassmorphism ? {
       background: 'transparent',
       backgroundColor: 'transparent',
-      backgroundImage: 'none'
+      backgroundImage: 'none',
+      opacity: '1'
     } : {};
     
     switch (element.type) {

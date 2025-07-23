@@ -75,12 +75,11 @@
   transition: all 0.15s ease;
 }
 
-/* Glassmorphism theme specific overrides - DEBUGGING */
+/* Glassmorphism theme specific overrides */
 .glassmorphism-input {
   background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
-  border: 2px solid red !important; /* DEBUGGING - this should show red border if class is applied */
 }
 
 .glassmorphism-input:focus {
@@ -108,7 +107,6 @@
   background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
-  border: 2px solid blue !important; /* DEBUGGING - this should show blue border if class is applied */
 }
 
 .glassmorphism-container input:focus,
@@ -119,6 +117,16 @@
   background-image: none !important;
 }
 
+/* Override the bg-background Tailwind class and CSS variable */
+.glassmorphism-container {
+  --background: transparent !important;
+}
+
+.glassmorphism-container .bg-background {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
 /* Nuclear option - override everything with highest specificity */
 div.glassmorphism-container input[type="text"],
 div.glassmorphism-container input[type="email"], 
@@ -127,13 +135,9 @@ div.glassmorphism-container textarea {
   background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
-  background-attachment: initial !important;
-  background-repeat: initial !important;
-  background-position: initial !important;
-  background-size: initial !important;
-  background-origin: initial !important;
-  background-clip: initial !important;
-  border: 2px solid green !important; /* DEBUGGING - this should show green border if this rule works */
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
 }
 
 .drop-zone.drag-over {
