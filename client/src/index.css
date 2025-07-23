@@ -94,6 +94,25 @@
   background-image: none !important;
 }
 
+/* Boolean Switch Dark Theme Enhancement */
+.dark [data-state="unchecked"][role="switch"] {
+  background-color: hsl(var(--muted));
+  border-color: hsl(var(--border));
+}
+
+.dark [data-state="checked"][role="switch"] {
+  background-color: hsl(var(--primary));
+}
+
+.dark [data-state="unchecked"][role="switch"] [data-state="unchecked"] {
+  background-color: hsl(var(--background));
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.dark [data-state="checked"][role="switch"] [data-state="checked"] {
+  background-color: hsl(var(--primary-foreground));
+}
+
 .glassmorphism-input:active {
   background: transparent !important;
   background-color: transparent !important;

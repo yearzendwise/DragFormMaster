@@ -62,9 +62,10 @@ const BooleanSwitch = React.forwardRef<HTMLDivElement, BooleanSwitchProps>(
           <Label 
             className={cn(
               "text-sm font-medium transition-colors cursor-pointer select-none",
+              "hover:text-foreground",
               checked 
-                ? "text-muted-foreground" 
-                : "text-foreground"
+                ? "text-muted-foreground dark:text-muted-foreground" 
+                : "text-foreground dark:text-foreground font-semibold"
             )}
             onClick={() => handleChange(false)}
           >
@@ -78,6 +79,8 @@ const BooleanSwitch = React.forwardRef<HTMLDivElement, BooleanSwitchProps>(
           disabled={disabled}
           className={cn(
             "data-[state=checked]:bg-primary data-[state=unchecked]:bg-input",
+            "data-[state=checked]:border-primary data-[state=unchecked]:border-border",
+            "focus-visible:ring-ring focus-visible:ring-offset-background",
             disabled && "opacity-50 cursor-not-allowed"
           )}
           aria-label={`Toggle between ${labels.negative} and ${labels.positive}`}
@@ -87,9 +90,10 @@ const BooleanSwitch = React.forwardRef<HTMLDivElement, BooleanSwitchProps>(
           <Label 
             className={cn(
               "text-sm font-medium transition-colors cursor-pointer select-none",
+              "hover:text-foreground",
               checked 
-                ? "text-foreground" 
-                : "text-muted-foreground"
+                ? "text-foreground dark:text-foreground font-semibold" 
+                : "text-muted-foreground dark:text-muted-foreground"
             )}
             onClick={() => handleChange(true)}
           >
