@@ -187,7 +187,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
         return (
           <button
             type="submit"
-            className={`${themeStyles.button} mt-[50px]`}
+            className={`${themeStyles.button} mt-[75px]`}
           >
             {element.label}
           </button>
@@ -197,7 +197,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
         return (
           <button
             type="reset"
-            className={`${themeStyles.button.replace('bg-blue-600', 'bg-gray-600').replace('hover:bg-blue-700', 'hover:bg-gray-700')} mt-[50px]`}
+            className={`${themeStyles.button.replace('bg-blue-600', 'bg-gray-600').replace('hover:bg-blue-700', 'hover:bg-gray-700')} mt-[75px]`}
           >
             {element.label}
           </button>
