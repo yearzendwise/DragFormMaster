@@ -260,7 +260,7 @@ export function FormElementRenderer({
           )}
 
           {/* Delete button - Desktop (top-left corner) */}
-          <div className="hidden lg:block absolute -top-2.5 -left-2.5 opacity-0 group-hover:opacity-100 transition-all duration-200">
+          <div className="hidden lg:block absolute -top-4 -left-2.5 opacity-0 group-hover:opacity-100 transition-all duration-200">
             <Button
               size="sm"
               variant="destructive"
@@ -306,7 +306,7 @@ export function FormElementRenderer({
 
           {/* Mobile delete button - top-left corner */}
           {isSelected && (
-            <div className="lg:hidden absolute -top-2.5 -left-2.5 transition-opacity duration-200 z-10">
+            <div className="lg:hidden absolute -top-4 -left-2.5 transition-opacity duration-200 z-10">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
