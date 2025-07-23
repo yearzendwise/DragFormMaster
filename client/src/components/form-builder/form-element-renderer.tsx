@@ -265,7 +265,7 @@ export function FormElementRenderer({
 
           {/* Vertical control panel - up, settings, down */}
           {isSelected && (
-            <div className="absolute -right-8 top-1/2 -translate-y-1/2 flex flex-col gap-1 transition-opacity duration-200 z-10">
+            <div className="absolute -right-4 top-1/2 -translate-y-1/2 flex flex-col gap-1 transition-opacity duration-200 z-10">
               {/* Move Up Button */}
               {onMoveUp && (
                 <button
