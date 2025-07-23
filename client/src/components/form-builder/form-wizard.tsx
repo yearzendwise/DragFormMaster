@@ -145,7 +145,11 @@ export function FormWizard() {
       {/* Step Content */}
       <div className="flex-1 flex flex-col">
         {wizardState.currentStep === 'build' && (
-          <BuildStep onDataChange={updateFormData} />
+          <BuildStep 
+            onDataChange={updateFormData}
+            initialTitle={wizardState.formData.title}
+            initialElements={wizardState.formData.elements}
+          />
         )}
         
         {wizardState.currentStep === 'style' && (

@@ -38,7 +38,8 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
     selectElement,
     updateFormTitle,
     togglePreview,
-  } = useFormBuilder();
+    resetFormData,
+  } = useFormBuilder(initialTitle, initialElements);
 
   const [activeId, setActiveId] = useState<string | null>(null);
   const [draggedType, setDraggedType] = useState<FormElementType | null>(null);
@@ -54,8 +55,23 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
 
   const selectedElement = elements.find(el => el.id === selectedElementId) || null;
   
-  // Use a ref to track the last sent data to prevent infinite loops
+  // Use refs to track data and initialization
   const lastSentData = useRef<{title: string, elements: any[]}>({ title: '', elements: [] });
+  const hasInitialized = useRef(false);
+  
+  // Initialize form data from props on first mount or when props change significantly
+  useEffect(() => {
+    if (initialTitle && initialElements && initialElements.length > 0) {
+      // Only reset if we haven't initialized yet, or if the data is very different
+      const shouldReset = !hasInitialized.current || 
+                         (initialTitle !== formTitle && elements.length === 0);
+      
+      if (shouldReset) {
+        resetFormData(initialTitle, initialElements);
+        hasInitialized.current = true;
+      }
+    }
+  }, [initialTitle, initialElements, formTitle, elements.length, resetFormData]);
   
   // Update parent component when data changes (with comparison to prevent loops)
   useEffect(() => {

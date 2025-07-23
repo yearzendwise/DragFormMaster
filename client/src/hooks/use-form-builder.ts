@@ -7,10 +7,10 @@ const defaultSettings: FormSettings = {
   method: 'POST',
 };
 
-export function useFormBuilder() {
+export function useFormBuilder(initialTitle?: string, initialElements?: FormElement[]) {
   const [state, setState] = useState<FormBuilderState>({
-    formTitle: 'Untitled Form',
-    elements: [],
+    formTitle: initialTitle || 'Untitled Form',
+    elements: initialElements || [],
     selectedElementId: null,
     settings: defaultSettings,
     previewMode: false,
@@ -87,6 +87,15 @@ export function useFormBuilder() {
     setState(prev => ({ ...prev, previewMode: !prev.previewMode }));
   }, []);
 
+  const resetFormData = useCallback((title: string, elements: FormElement[]) => {
+    setState(prev => ({
+      ...prev,
+      formTitle: title,
+      elements: elements,
+      selectedElementId: null
+    }));
+  }, []);
+
   const exportForm = useCallback(() => {
     const formConfig = {
       title: state.formTitle,
@@ -115,6 +124,7 @@ export function useFormBuilder() {
     updateFormTitle,
     updateSettings,
     togglePreview,
+    resetFormData,
     exportForm,
   };
 }
