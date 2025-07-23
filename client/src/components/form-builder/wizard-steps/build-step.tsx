@@ -77,7 +77,6 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
   // Drag handlers
   const handleDragStart = (event: DragStartEvent) => {
     const { active } = event;
-    console.log('Drag start:', active.id, active.data.current);
     if (active.data.current?.isNew) {
       const type = active.id.toString().replace('palette-', '') as FormElementType;
       setDraggedType(type);
@@ -86,7 +85,6 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
-    console.log('Drag end:', active.id, over?.id);
     setDraggedType(null);
 
     if (!over) return;
@@ -94,7 +92,6 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
     // Handle dropping new component from palette
     if (active.data.current?.isNew && over.id === 'form-canvas') {
       const type = active.id.toString().replace('palette-', '') as FormElementType;
-      console.log('Adding element:', type);
       addElement(type);
     }
   };
