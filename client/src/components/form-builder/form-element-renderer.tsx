@@ -284,23 +284,7 @@ export function FormElementRenderer({
             </Button>
           </div>
 
-          {/* Other action buttons - Desktop (right side) */}
-          <div className="hidden lg:flex absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-all duration-200 gap-1">
-            <Button
-              size="sm"
-              variant="secondary"
-              className="w-9 h-9 p-0 rounded-full bg-white border border-slate-200 hover:border-blue-300 hover:bg-blue-50 shadow-sm"
-              onClick={(e) => {
-                e.stopPropagation();
-                // Could add duplicate functionality here
-              }}
-            >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M7 9a2 2 0 012-2h6a2 2 0 012 2v6a2 2 0 01-2 2H9a2 2 0 01-2-2V9z" />
-                <path d="M5 3a2 2 0 00-2 2v6a2 2 0 002 2V5h8a2 2 0 00-2-2H5z" />
-              </svg>
-            </Button>
-          </div>
+
 
           {/* Removed mobile edit indicator - now in vertical control panel */}
 
