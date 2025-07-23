@@ -12,7 +12,7 @@ import {
   rectIntersection
 } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useFormBuilder } from '@/hooks/use-form-builder';
 import { ComponentPalette } from '@/components/form-builder/component-palette';
 import { FormCanvas } from '@/components/form-builder/form-canvas';
@@ -49,11 +49,13 @@ export function BuildStep({ onDataChange }: BuildStepProps) {
   );
 
   const selectedElement = elements.find(el => el.id === selectedElementId) || null;
+  const onDataChangeRef = useRef(onDataChange);
+  onDataChangeRef.current = onDataChange;
 
   // Update parent component when data changes
   useEffect(() => {
-    onDataChange(formTitle, elements);
-  }, [formTitle, elements, onDataChange]);
+    onDataChangeRef.current(formTitle, elements);
+  }, [formTitle, elements]);
 
   function handleDragStart(event: DragStartEvent) {
     const { active } = event;
