@@ -1,4 +1,6 @@
 import { FormElement, FormTheme } from '@/types/form-builder';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 
 interface ThemedFormRendererProps {
   element: FormElement;
@@ -25,7 +27,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
     switch (element.type) {
       case 'text-input':
         return (
-          <input
+          <Input
             type="text"
             placeholder={element.placeholder}
             required={element.required}
@@ -39,7 +41,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
 
       case 'email-input':
         return (
-          <input
+          <Input
             type="email"
             placeholder={element.placeholder}
             required={element.required}
@@ -53,7 +55,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
 
       case 'number-input':
         return (
-          <input
+          <Input
             type="number"
             placeholder={element.placeholder}
             required={element.required}
@@ -69,7 +71,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
 
       case 'textarea':
         return (
-          <textarea
+          <Textarea
             placeholder={element.placeholder}
             required={element.required}
             disabled={element.disabled}
