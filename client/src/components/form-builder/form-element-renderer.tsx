@@ -230,18 +230,18 @@ export function FormElementRenderer({
             <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-blue-500 to-indigo-500 rounded-r-full"></div>
           )}
           
-          {/* Delete button - Desktop (left side) */}
-          <div className="hidden lg:block absolute -top-2 -left-2 opacity-0 group-hover:opacity-100 transition-all duration-200">
+          {/* Delete button - Desktop (top-left corner) */}
+          <div className="hidden lg:block absolute -top-1 -left-1 opacity-0 group-hover:opacity-100 transition-all duration-200">
             <Button
               size="sm"
               variant="destructive"
-              className="w-7 h-7 p-0 rounded-full shadow-sm"
+              className="w-5 h-5 p-0 rounded-full shadow-sm"
               onClick={(e) => {
                 e.stopPropagation();
                 onRemove(element.id);
               }}
             >
-              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
             </Button>
@@ -267,18 +267,18 @@ export function FormElementRenderer({
 
           {/* Removed mobile edit indicator - now in vertical control panel */}
 
-          {/* Mobile delete button - left side */}
+          {/* Mobile delete button - top-left corner */}
           {isSelected && (
-            <div className="lg:hidden absolute -left-4 top-1/2 -translate-y-1/2 transition-opacity duration-200 z-10">
+            <div className="lg:hidden absolute -top-1 -left-1 transition-opacity duration-200 z-10">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   onRemove(element.id);
                 }}
-                className="w-6 h-6 rounded-full shadow-lg flex items-center justify-center transition-all bg-red-500 hover:bg-red-600 text-white shadow-red-200"
+                className="w-5 h-5 rounded-full shadow-lg flex items-center justify-center transition-all bg-red-500 hover:bg-red-600 text-white shadow-red-200"
                 title="Delete"
               >
-                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
               </button>
