@@ -278,7 +278,7 @@ export function FormElementRenderer({
 
           {/* Move buttons for selected element - inside component area */}
           {isSelected && (onMoveUp || onMoveDown) && (
-            <div className="absolute left-2 top-2 flex flex-col gap-1 z-10">
+            <div className="absolute left-1 top-1 flex flex-col gap-0.5 z-10">
               {/* Move Up Button */}
               {onMoveUp && (
                 <button
@@ -287,13 +287,13 @@ export function FormElementRenderer({
                     onMoveUp(element.id);
                   }}
                   disabled={!canMoveUp}
-                  className={`w-6 h-6 rounded-lg shadow-sm flex items-center justify-center transition-all ${
+                  className={`w-4 h-4 rounded shadow-sm flex items-center justify-center transition-all ${
                     canMoveUp 
                       ? 'bg-white border border-slate-200 hover:bg-blue-50 hover:border-blue-300 text-slate-600 hover:text-blue-600' 
                       : 'bg-slate-100 border border-slate-200 text-slate-300 cursor-not-allowed'
                   }`}
                 >
-                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
                   </svg>
                 </button>
@@ -307,13 +307,13 @@ export function FormElementRenderer({
                     onMoveDown(element.id);
                   }}
                   disabled={!canMoveDown}
-                  className={`w-6 h-6 rounded-lg shadow-sm flex items-center justify-center transition-all ${
+                  className={`w-4 h-4 rounded shadow-sm flex items-center justify-center transition-all ${
                     canMoveDown 
                       ? 'bg-white border border-slate-200 hover:bg-blue-50 hover:border-blue-300 text-slate-600 hover:text-blue-600' 
                       : 'bg-slate-100 border border-slate-200 text-slate-300 cursor-not-allowed'
                   }`}
                 >
-                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
                 </button>
@@ -324,7 +324,7 @@ export function FormElementRenderer({
       )}
       
       {/* Content wrapper with left margin when buttons are visible */}
-      <div className={`${isSelected && (onMoveUp || onMoveDown) ? 'ml-8' : ''}`}>
+      <div className={`${isSelected && (onMoveUp || onMoveDown) ? 'ml-6' : ''}`}>
         {element.type !== 'submit-button' && element.type !== 'reset-button' && (
           <Label className="block text-sm font-medium text-neutral-700 mb-2">
             {element.label}
