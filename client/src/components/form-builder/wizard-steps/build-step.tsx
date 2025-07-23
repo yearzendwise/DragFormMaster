@@ -139,17 +139,8 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
         onDragEnd={handleDragEnd}
       >
         {/* Left Sidebar - Component Palette */}
-        <div className="hidden lg:flex lg:flex-col flex-none w-80 bg-white border-r border-slate-200 shadow-sm">
-          {/* Palette Header */}
-          <div className="flex-none px-6 py-4 border-b border-slate-200 bg-slate-50">
-            <h3 className="text-lg font-semibold text-slate-800 mb-1">Components</h3>
-            <p className="text-sm text-slate-600">Drag elements to your form</p>
-          </div>
-          
-          {/* Scrollable Palette Content */}
-          <div className="flex-1 overflow-y-auto">
-            <ComponentPalette onAddElement={handleAddElement} />
-          </div>
+        <div className="hidden lg:block flex-none">
+          <ComponentPalette onAddElement={handleAddElement} />
         </div>
         
         {/* Main Content Area */}
@@ -171,23 +162,12 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
         </div>
         
         {/* Right Sidebar - Properties Panel */}
-        <div className="hidden lg:flex lg:flex-col flex-none w-80 bg-white border-l border-slate-200 shadow-sm">
-          {/* Properties Header */}
-          <div className="flex-none px-6 py-4 border-b border-slate-200 bg-slate-50">
-            <h3 className="text-lg font-semibold text-slate-800 mb-1">Properties</h3>
-            <p className="text-sm text-slate-600">
-              {selectedElement ? `Editing ${selectedElement.label}` : 'Select an element to edit'}
-            </p>
-          </div>
-          
-          {/* Scrollable Properties Content */}
-          <div className="flex-1 overflow-y-auto">
-            <PropertiesPanel
-              selectedElement={selectedElement}
-              onUpdateElement={updateElement}
-              onDeselectElement={handleDeselectElement}
-            />
-          </div>
+        <div className="hidden lg:block flex-none">
+          <PropertiesPanel
+            selectedElement={selectedElement}
+            onUpdateElement={updateElement}
+            onDeselectElement={handleDeselectElement}
+          />
         </div>
 
         <DragOverlay>

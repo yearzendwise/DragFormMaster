@@ -101,37 +101,45 @@ export function ComponentPalette({ onAddElement }: ComponentPaletteProps) {
   const categories = ['basic', 'selection', 'actions'] as const;
 
   return (
-    <div className="p-6 font-normal text-left overflow-y-auto max-h-full">
-      {categories.map((category) => {
-        const items = paletteItems.filter(item => item.category === category);
+    <aside className="w-80 lg:w-80 bg-gradient-to-b from-slate-50 to-white border-r border-slate-200/60 overflow-y-auto shadow-sm">
+      <div className="p-4 lg:p-6">
+        <div className="mb-6">
+          <h2 className="text-lg font-bold text-slate-800 mb-1">Form Components</h2>
+          <p className="text-sm text-slate-500">Drag & drop to build your form</p>
+        </div>
         
-        return (
-          <div key={category} className="mb-8">
-            <div className="flex items-center mb-4">
-              <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
-              <h3 className="text-sm font-semibold text-slate-700 uppercase tracking-wide">
-                {categoryLabels[category]}
-              </h3>
-              <div className="flex-1 h-px bg-gradient-to-r from-slate-200 to-transparent ml-3"></div>
+        {categories.map((category) => {
+          const items = paletteItems.filter(item => item.category === category);
+          
+          return (
+            <div key={category} className="mb-8">
+              <div className="flex items-center mb-4">
+                <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                <h3 className="text-sm font-semibold text-slate-700 uppercase tracking-wide">
+                  {categoryLabels[category]}
+                </h3>
+                <div className="flex-1 h-px bg-gradient-to-r from-slate-200 to-transparent ml-3"></div>
+              </div>
+              <div className="space-y-3">
+                {items.map((item) => (
+                  <DraggableComponent
+                    key={item.type}
+                    item={item}
+                    onAddElement={onAddElement}
+                  />
+                ))}
+              </div>
             </div>
-            <div className="space-y-3">
-              {items.map((item) => (
-                <DraggableComponent
-                  key={item.type}
-                  item={item}
-                  onAddElement={onAddElement}
-                />
-              ))}
-            </div>
+          );
+        })}
+        
+        <div className="mt-12 p-4 bg-blue-50/50 rounded-xl border border-blue-100">
+          <div className="text-xs text-blue-600 font-medium mb-1">💡 Pro tip</div>
+          <div className="text-xs text-blue-700">
+            Click to add instantly, or drag for precise placement
           </div>
-        );
-      })}
-      <div className="mt-12 p-4 bg-blue-50/50 rounded-xl border border-blue-100">
-        <div className="text-xs text-blue-600 font-medium mb-1">💡 Pro tip</div>
-        <div className="text-xs text-blue-700">
-          Click to add instantly, or drag for precise placement
         </div>
       </div>
-    </div>
+    </aside>
   );
 }

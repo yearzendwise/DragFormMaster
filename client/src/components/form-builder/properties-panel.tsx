@@ -19,23 +19,25 @@ export function PropertiesPanel({
 }: PropertiesPanelProps) {
   if (!selectedElement) {
     return (
-      <div className="p-6">
-        <div className="text-center py-12">
-          <div className="w-16 h-16 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-sm">
-            <svg className="w-6 h-6 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd"/>
-            </svg>
-          </div>
-          <h3 className="text-sm font-medium text-slate-600 mb-3">No Element Selected</h3>
-          <p className="text-xs text-slate-500 leading-relaxed mb-4 px-2">Select any form element to customize its properties, validation rules, and styling options.</p>
-          <div className="bg-blue-50/50 border border-blue-100 rounded-lg p-3">
-            <div className="text-xs text-blue-600 font-medium mb-1">💡 Quick tip</div>
-            <div className="text-xs text-blue-700">
-              Click on any form element to start editing
+      <aside className="w-80 lg:w-80 bg-gradient-to-b from-white to-slate-50/50 border-l border-slate-200/60 overflow-y-auto shadow-sm">
+        <div className="p-4 lg:p-6">
+          <div className="text-center py-12 lg:py-20">
+            <div className="w-16 h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl lg:rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-sm">
+              <svg className="w-6 h-6 lg:w-8 lg:h-8 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd"/>
+              </svg>
+            </div>
+            <h3 className="text-base lg:text-lg font-bold text-slate-800 mb-2 lg:mb-3">Properties Panel</h3>
+            <p className="text-sm lg:text-base text-slate-600 leading-relaxed mb-4 lg:mb-6 px-4">Select any form element to customize its properties, validation rules, and styling options.</p>
+            <div className="bg-blue-50/50 border border-blue-100 rounded-lg lg:rounded-xl p-3 lg:p-4">
+              <div className="text-xs text-blue-600 font-medium mb-1">💡 Quick tip</div>
+              <div className="text-xs text-blue-700">
+                Click on any form element to start editing
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </aside>
     );
   }
 
@@ -59,7 +61,8 @@ export function PropertiesPanel({
   };
 
   return (
-    <div className="p-6">
+    <aside className="w-80 lg:w-80 bg-gradient-to-b from-white to-slate-50/30 border-l border-slate-200/60 overflow-y-auto shadow-sm">
+      <div className="p-4 lg:p-6">
         <div className="flex items-center justify-between mb-4 lg:mb-6">
           <div>
             <h2 className="text-base lg:text-lg font-bold text-slate-800">Element Properties</h2>
@@ -366,6 +369,7 @@ export function PropertiesPanel({
             Done Editing
           </Button>
         </div>
-    </div>
+      </div>
+    </aside>
   );
 }
