@@ -145,7 +145,7 @@ const defaultThemes: FormTheme[] = [
     description: 'True glass effect with ultra-transparent backgrounds and crystal-clear visibility',
     preview: 'bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl',
     styles: {
-      container: 'max-w-2xl mx-auto p-12 bg-white/5 backdrop-blur-3xl border border-white/20 rounded-3xl shadow-2xl shadow-black/10',
+      container: 'glassmorphism-container max-w-2xl mx-auto p-12 bg-white/5 backdrop-blur-3xl border border-white/20 rounded-3xl shadow-2xl shadow-black/10',
       header: 'text-4xl font-bold text-white mb-10 text-center tracking-wide drop-shadow-2xl shadow-black/50',
       field: 'mb-8',
       label: 'block text-sm font-bold text-white mb-4 tracking-wider uppercase drop-shadow-lg shadow-black/50 bg-transparent',

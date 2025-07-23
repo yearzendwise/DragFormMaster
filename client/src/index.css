@@ -79,11 +79,42 @@
 .glassmorphism-input {
   background: transparent !important;
   background-color: transparent !important;
+  background-image: none !important;
 }
 
 .glassmorphism-input:focus {
   background: transparent !important;
   background-color: transparent !important;
+  background-image: none !important;
+}
+
+.glassmorphism-input:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+.glassmorphism-input:active {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* Force override for all input and textarea elements in glassmorphism theme */
+.glassmorphism-container input,
+.glassmorphism-container textarea,
+.glassmorphism-container select {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+.glassmorphism-container input:focus,
+.glassmorphism-container textarea:focus,
+.glassmorphism-container select:focus {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
 }
 
 .drop-zone.drag-over {
