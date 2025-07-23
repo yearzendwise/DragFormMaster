@@ -30,6 +30,43 @@ export function PreviewStep({
     );
   }
 
+  // Check if form has submit or reset buttons
+  const hasSubmitButton = elements.some(element => element.type === 'submit-button');
+  const hasResetButton = elements.some(element => element.type === 'reset-button');
+
+  // Create enhanced elements list with automatic buttons if missing
+  const elementsWithButtons = [...elements];
+  
+  // Add submit button if missing
+  if (!hasSubmitButton) {
+    elementsWithButtons.push({
+      id: `auto-submit-${Date.now()}`,
+      type: 'submit-button',
+      label: 'Submit',
+      name: 'submit',
+      required: false,
+      styling: {
+        width: 'full',
+        size: 'medium',
+      }
+    });
+  }
+
+  // Add reset button if missing  
+  if (!hasResetButton) {
+    elementsWithButtons.push({
+      id: `auto-reset-${Date.now()}`,
+      type: 'reset-button',
+      label: 'Reset',
+      name: 'reset',
+      required: false,
+      styling: {
+        width: 'full',
+        size: 'medium',
+      }
+    });
+  }
+
   const themeStyles = selectedTheme.styles;
 
   return (
@@ -60,7 +97,7 @@ export function PreviewStep({
           <h1 className={themeStyles.header}>{formTitle}</h1>
           
           <form className="space-y-4">
-            {elements.map((element) => (
+            {elementsWithButtons.map((element) => (
               <ThemedFormRenderer
                 key={element.id}
                 element={element}
@@ -72,6 +109,19 @@ export function PreviewStep({
               <div className="text-center py-12 text-slate-500">
                 <div className="text-lg font-medium mb-2">No form elements</div>
                 <div className="text-sm">Go back to the build step to add form elements</div>
+              </div>
+            )}
+
+            {/* Show notification if buttons were auto-added */}
+            {(!hasSubmitButton || !hasResetButton) && elements.length > 0 && (
+              <div className="mt-6 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                <div className="text-sm text-blue-700">
+                  <strong>Auto-added buttons:</strong> 
+                  {!hasSubmitButton && !hasResetButton && " Submit and Reset buttons"}
+                  {!hasSubmitButton && hasResetButton && " Submit button"}
+                  {hasSubmitButton && !hasResetButton && " Reset button"}
+                  {" were automatically added to complete your form."}
+                </div>
               </div>
             )}
           </form>
