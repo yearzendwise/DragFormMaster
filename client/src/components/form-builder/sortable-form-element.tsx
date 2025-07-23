@@ -11,6 +11,10 @@ interface SortableFormElementProps {
   onUpdate: (id: string, updates: Partial<FormElement>) => void;
   onMobileEdit?: (id: string) => void;
   isGlobalDragging?: boolean;
+  onMoveUp?: (id: string) => void;
+  onMoveDown?: (id: string) => void;
+  canMoveUp?: boolean;
+  canMoveDown?: boolean;
 }
 
 export function SortableFormElement({
@@ -21,6 +25,10 @@ export function SortableFormElement({
   onUpdate,
   onMobileEdit,
   isGlobalDragging = false,
+  onMoveUp,
+  onMoveDown,
+  canMoveUp = true,
+  canMoveDown = true,
 }: SortableFormElementProps) {
   const {
     attributes,
@@ -75,6 +83,10 @@ export function SortableFormElement({
           previewMode={false}
           onMobileEdit={onMobileEdit}
           isDragging={isGlobalDragging}
+          onMoveUp={onMoveUp}
+          onMoveDown={onMoveDown}
+          canMoveUp={canMoveUp}
+          canMoveDown={canMoveDown}
         />
       </div>
     </div>

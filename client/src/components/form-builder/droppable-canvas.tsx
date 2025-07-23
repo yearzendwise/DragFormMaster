@@ -16,6 +16,10 @@ interface DroppableCanvasProps {
   draggedType: FormElementType | null;
   onMobileEdit?: (id: string) => void;
   isDragging?: boolean;
+  onMoveElement?: (fromIndex: number, toIndex: number) => void;
+  showMoveIndicators?: boolean;
+  moveDirection?: 'up' | 'down' | null;
+  moveFromIndex?: number;
 }
 
 export function DroppableCanvas({
@@ -29,6 +33,10 @@ export function DroppableCanvas({
   draggedType,
   onMobileEdit,
   isDragging = false,
+  onMoveElement,
+  showMoveIndicators = false,
+  moveDirection = null,
+  moveFromIndex = -1,
 }: DroppableCanvasProps) {
   const { isOver, setNodeRef } = useDroppable({
     id: 'form-canvas',
@@ -132,27 +140,63 @@ export function DroppableCanvas({
                 {/* Drop zone at the beginning */}
                 <DropIndicator index={0} isActive={draggedType !== null} />
                 
-                {elements.map((element, index) => (
-                  <div key={element.id}>
-                    <div
-                      className="animate-slide-up"
-                      style={{ animationDelay: `${index * 50}ms` }}
-                    >
-                      <SortableFormElement
-                        element={element}
-                        isSelected={selectedElementId === element.id}
-                        onSelect={onSelectElement}
-                        onRemove={onRemoveElement}
-                        onUpdate={onUpdateElement}
-                        onMobileEdit={onMobileEdit}
-                        isGlobalDragging={isDragging}
-                      />
+                {elements.map((element, index) => {
+                  const isMovingElement = showMoveIndicators && moveFromIndex === index;
+                  const showMoveIndicatorAbove = showMoveIndicators && moveDirection === 'up' && moveFromIndex === index + 1;
+                  const showMoveIndicatorBelow = showMoveIndicators && moveDirection === 'down' && moveFromIndex === index - 1;
+                  
+                  return (
+                    <div key={element.id}>
+                      {/* Move indicator above */}
+                      {showMoveIndicatorAbove && (
+                        <div className="h-6 flex items-center justify-center mb-2">
+                          <div className="w-full h-1 bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 rounded-full shadow-lg shadow-purple-500/30 animate-pulse" />
+                        </div>
+                      )}
+                      
+                      <div
+                        className={`animate-slide-up ${isMovingElement ? 'opacity-50' : ''}`}
+                        style={{ animationDelay: `${index * 50}ms` }}
+                      >
+                        <SortableFormElement
+                          element={element}
+                          isSelected={selectedElementId === element.id}
+                          onSelect={onSelectElement}
+                          onRemove={onRemoveElement}
+                          onUpdate={onUpdateElement}
+                          onMobileEdit={onMobileEdit}
+                          isGlobalDragging={isDragging}
+                          onMoveUp={onMoveElement ? (id) => {
+                            const elementIndex = elements.findIndex(el => el.id === id);
+                            if (elementIndex > 0) {
+                              onMoveElement(elementIndex, elementIndex - 1);
+                            }
+                          } : undefined}
+                          onMoveDown={onMoveElement ? (id) => {
+                            const elementIndex = elements.findIndex(el => el.id === id);
+                            if (elementIndex < elements.length - 1) {
+                              onMoveElement(elementIndex, elementIndex + 1);
+                            }
+                          } : undefined}
+                          canMoveUp={index > 0}
+                          canMoveDown={index < elements.length - 1}
+                        />
+                      </div>
+                      
+                      {/* Move indicator below */}
+                      {showMoveIndicatorBelow && (
+                        <div className="h-6 flex items-center justify-center mt-2">
+                          <div className="w-full h-1 bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 rounded-full shadow-lg shadow-purple-500/30 animate-pulse" />
+                        </div>
+                      )}
+                      
+                      {/* Drop zone after each element */}
+                      {!showMoveIndicators && (
+                        <DropIndicator index={index + 1} isActive={draggedType !== null} />
+                      )}
                     </div>
-                    
-                    {/* Drop zone after each element */}
-                    <DropIndicator index={index + 1} isActive={draggedType !== null} />
-                  </div>
-                ))}
+                  );
+                })}
                 
                 {/* Enhanced drop zone for new elements at the end - now simplified since we have indicators */}
                 {draggedType && (

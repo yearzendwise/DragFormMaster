@@ -189,6 +189,7 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
               onTogglePreview={togglePreview}
               onMobileEdit={handleMobileEdit}
               isDragging={isDragging}
+              onMoveElement={moveElement}
             />
           </SortableContext>
         </div>

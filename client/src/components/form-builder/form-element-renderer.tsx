@@ -16,6 +16,10 @@ interface FormElementRendererProps {
   previewMode: boolean;
   onMobileEdit?: (id: string) => void;
   isDragging?: boolean;
+  onMoveUp?: (id: string) => void;
+  onMoveDown?: (id: string) => void;
+  canMoveUp?: boolean;
+  canMoveDown?: boolean;
 }
 
 export function FormElementRenderer({
@@ -26,6 +30,10 @@ export function FormElementRenderer({
   previewMode,
   onMobileEdit,
   isDragging = false,
+  onMoveUp,
+  onMoveDown,
+  canMoveUp = true,
+  canMoveDown = true,
 }: FormElementRendererProps) {
   const handleClick = (e: React.MouseEvent) => {
     if (previewMode) return;
@@ -268,23 +276,50 @@ export function FormElementRenderer({
             </button>
           </div>
 
-          {/* Drag handle */}
-          <div className="absolute -left-3 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
-            <div 
-              className="w-6 h-6 bg-white border border-slate-200 rounded-lg shadow-sm flex items-center justify-center cursor-grab hover:bg-slate-50 select-none"
-              style={{ 
-                touchAction: 'none',
-                userSelect: 'none',
-                WebkitUserSelect: 'none',
-                MozUserSelect: 'none',
-                msUserSelect: 'none'
-              }}
-            >
-              <svg className="w-3 h-3 text-slate-400 pointer-events-none" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
-              </svg>
+          {/* Move buttons for selected element */}
+          {isSelected && (onMoveUp || onMoveDown) && (
+            <div className="absolute -left-3 top-1/2 -translate-y-1/2 flex flex-col gap-1">
+              {/* Move Up Button */}
+              {onMoveUp && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onMoveUp(element.id);
+                  }}
+                  disabled={!canMoveUp}
+                  className={`w-6 h-6 rounded-lg shadow-sm flex items-center justify-center transition-all ${
+                    canMoveUp 
+                      ? 'bg-white border border-slate-200 hover:bg-blue-50 hover:border-blue-300 text-slate-600 hover:text-blue-600' 
+                      : 'bg-slate-100 border border-slate-200 text-slate-300 cursor-not-allowed'
+                  }`}
+                >
+                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
+                  </svg>
+                </button>
+              )}
+              
+              {/* Move Down Button */}
+              {onMoveDown && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onMoveDown(element.id);
+                  }}
+                  disabled={!canMoveDown}
+                  className={`w-6 h-6 rounded-lg shadow-sm flex items-center justify-center transition-all ${
+                    canMoveDown 
+                      ? 'bg-white border border-slate-200 hover:bg-blue-50 hover:border-blue-300 text-slate-600 hover:text-blue-600' 
+                      : 'bg-slate-100 border border-slate-200 text-slate-300 cursor-not-allowed'
+                  }`}
+                >
+                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </button>
+              )}
             </div>
-          </div>
+          )}
         </>
       )}
       
