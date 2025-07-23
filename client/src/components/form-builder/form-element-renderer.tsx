@@ -252,7 +252,7 @@ export function FormElementRenderer({
             min={element.validation?.min || 1}
             max={element.validation?.max || 10}
             variant={element.rateVariant || "numbers"}
-            showNumbers={true}
+            showNumbers={element.rateVariant === "numbers" || !element.rateVariant}
             className="justify-center"
           />
         );
