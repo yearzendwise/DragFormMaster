@@ -117,14 +117,7 @@ export function PreviewStep({
               </div>
             )}
 
-            {/* Show notification that buttons are always auto-added */}
-            {elements.length > 0 && (
-              <div className="mt-6 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                <div className="text-sm text-blue-700">
-                  <strong>Form completion:</strong> Submit and Reset buttons are automatically added to all forms in the preview.
-                </div>
-              </div>
-            )}
+
           </form>
         </div>
       </div>
