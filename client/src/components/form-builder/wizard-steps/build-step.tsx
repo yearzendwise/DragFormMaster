@@ -33,12 +33,12 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
   const [showMobileProperties, setShowMobileProperties] = useState(false);
   const [draggedType, setDraggedType] = useState<FormElementType | null>(null);
 
-  // Configure drag and drop sensors
+  // Configure drag and drop sensors with better desktop support
   const mouseSensor = useSensor(MouseSensor, {
-    activationConstraint: { distance: 8 }
+    activationConstraint: { distance: 5 }
   });
   const touchSensor = useSensor(TouchSensor, {
-    activationConstraint: { delay: 200, tolerance: 8 }
+    activationConstraint: { delay: 150, tolerance: 5 }
   });
   const sensors = useSensors(mouseSensor, touchSensor);
 
@@ -224,11 +224,18 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
         )}
         
         {/* Drag Overlay */}
-        <DragOverlay>
+        <DragOverlay dropAnimation={null}>
           {draggedType && (
-            <div className="p-4 bg-white border-2 border-blue-300 rounded-xl shadow-lg opacity-90">
-              <div className="text-sm font-medium text-blue-700">
-                {draggedType.charAt(0).toUpperCase() + draggedType.slice(1).replace('-', ' ')}
+            <div className="p-4 bg-white border-2 border-blue-400 rounded-xl shadow-xl opacity-95 pointer-events-none">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <svg className="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div className="text-sm font-medium text-blue-700">
+                  {draggedType.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                </div>
               </div>
             </div>
           )}

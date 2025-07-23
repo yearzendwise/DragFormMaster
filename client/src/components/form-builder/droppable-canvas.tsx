@@ -71,8 +71,10 @@ export function DroppableCanvas({
         <div
           ref={setNodeRef}
           className={`min-h-80 md:min-h-96 bg-white rounded-xl md:rounded-2xl shadow-sm border-2 transition-all duration-300 relative ${
-            isOver || isDragging 
-              ? 'border-blue-400 border-solid bg-gradient-to-br from-blue-50/30 to-indigo-50/20' 
+            isOver 
+              ? 'border-blue-400 border-solid bg-gradient-to-br from-blue-50/40 to-indigo-50/30 shadow-blue-100' 
+              : isDragging
+              ? 'border-blue-300 border-dashed bg-gradient-to-br from-blue-50/20 to-indigo-50/10'
               : 'border-slate-200 border-dashed hover:border-slate-300'
           } ${elements.length === 0 ? 'p-4 md:p-8' : 'p-3 md:p-6'}`}
         >

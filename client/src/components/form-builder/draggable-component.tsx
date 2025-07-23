@@ -50,8 +50,13 @@ export function DraggableComponent({ item, onAddElement }: DraggableComponentPro
       style={style}
       {...listeners}
       {...attributes}
-      className="group relative p-4 border-2 border-transparent bg-white rounded-xl hover:border-blue-300 hover:shadow-lg hover:shadow-blue-100/50 transition-all duration-200 cursor-grab active:cursor-grabbing hover:scale-[1.02] active:scale-[0.98]"
-      onClick={() => onAddElement(item.type)}
+      className="group relative p-4 border-2 border-transparent bg-white rounded-xl hover:border-blue-300 hover:shadow-lg hover:shadow-blue-100/50 transition-all duration-200 cursor-grab active:cursor-grabbing hover:scale-[1.02] active:scale-[0.98] select-none"
+      onClick={(e) => {
+        // Only trigger click to add if not dragging
+        if (!isDragging) {
+          onAddElement(item.type);
+        }
+      }}
     >
       <div className="absolute inset-0 bg-gradient-to-r from-blue-50/0 via-blue-50/30 to-purple-50/0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       
