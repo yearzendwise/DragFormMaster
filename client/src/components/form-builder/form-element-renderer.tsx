@@ -197,7 +197,7 @@ export function FormElementRenderer({
 
   const containerClasses = previewMode 
     ? "space-y-3"
-    : `form-element group relative border-2 transition-all duration-200 p-3 md:p-5 rounded-lg md:rounded-xl cursor-pointer hover:shadow-lg hover:shadow-blue-100/20 ${
+    : `form-element group relative border-2 transition-all duration-200 p-3 md:p-5 rounded-lg md:rounded-xl cursor-pointer hover:shadow-lg hover:shadow-blue-100/20 select-none ${
         isSelected 
           ? 'border-blue-400 bg-gradient-to-br from-blue-50/80 to-indigo-50/50 shadow-md shadow-blue-200/25' 
           : 'border-transparent hover:border-blue-200 bg-white'
@@ -260,8 +260,17 @@ export function FormElementRenderer({
 
           {/* Drag handle */}
           <div className="absolute -left-3 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
-            <div className="w-6 h-6 bg-white border border-slate-200 rounded-lg shadow-sm flex items-center justify-center cursor-grab hover:bg-slate-50">
-              <svg className="w-3 h-3 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+            <div 
+              className="w-6 h-6 bg-white border border-slate-200 rounded-lg shadow-sm flex items-center justify-center cursor-grab hover:bg-slate-50 select-none"
+              style={{ 
+                touchAction: 'none',
+                userSelect: 'none',
+                WebkitUserSelect: 'none',
+                MozUserSelect: 'none',
+                msUserSelect: 'none'
+              }}
+            >
+              <svg className="w-3 h-3 text-slate-400 pointer-events-none" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
               </svg>
             </div>
