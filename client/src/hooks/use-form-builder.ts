@@ -201,6 +201,7 @@ function getDefaultLabel(type: FormElementType): string {
     'submit-button': 'Submit',
     'reset-button': 'Reset',
     'image': 'Image',
+    'rate-scale': 'How did we do?',
   } as const;
   return labels[type];
 }
@@ -217,6 +218,7 @@ function getDefaultPlaceholder(type: FormElementType): string {
     'submit-button': '',
     'reset-button': '',
     'image': '',
+    'rate-scale': '',
   } as const;
   return placeholders[type];
 }

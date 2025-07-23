@@ -12,6 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { RateScale } from "@/components/ui/rate-scale";
 import { DropInsertionIndicator } from './drop-insertion-indicator';
 
 interface FormElementRendererProps {
@@ -240,6 +241,20 @@ export function FormElementRenderer({
               </div>
             </div>
           </div>
+        );
+
+      case "rate-scale":
+        return (
+          <RateScale
+            name={element.name}
+            required={element.required}
+            disabled={element.disabled || isDragging}
+            min={element.validation?.min || 1}
+            max={element.validation?.max || 10}
+            variant="numbers"
+            showNumbers={true}
+            className="justify-center"
+          />
         );
 
       default:

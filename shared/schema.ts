@@ -77,4 +77,5 @@ export type FormElementType =
   | 'radio' 
   | 'submit-button' 
   | 'reset-button'
-  | 'image';
+  | 'image'
+  | 'rate-scale';

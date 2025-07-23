@@ -1,6 +1,7 @@
 import { FormElement, FormTheme } from '@/types/form-builder';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { RateScale } from '@/components/ui/rate-scale';
 
 interface ThemedFormRendererProps {
   element: FormElement;
@@ -186,6 +187,20 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
           >
             {element.label}
           </button>
+        );
+
+      case 'rate-scale':
+        return (
+          <RateScale
+            name={element.name}
+            required={element.required}
+            disabled={element.disabled}
+            min={element.validation?.min || 1}
+            max={element.validation?.max || 10}
+            variant="numbers"
+            showNumbers={true}
+            className="justify-center"
+          />
         );
 
       default:

@@ -68,6 +68,14 @@ const paletteItems: ComponentPaletteItem[] = [
     color: 'bg-gradient-to-br from-pink-100 to-rose-200 text-pink-700',
     category: 'selection',
   },
+  {
+    type: 'rate-scale',
+    label: 'Rate Scale',
+    description: 'Rating scale 1-10',
+    icon: 'fas fa-star',
+    color: 'bg-gradient-to-br from-yellow-100 to-amber-200 text-yellow-700',
+    category: 'selection',
+  },
   // Actions
   {
     type: 'submit-button',

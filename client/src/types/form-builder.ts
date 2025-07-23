@@ -44,7 +44,8 @@ export type FormElementType =
   | 'radio' 
   | 'submit-button' 
   | 'reset-button'
-  | 'image';
+  | 'image'
+  | 'rate-scale';
 
 export interface ComponentPaletteItem {
   type: FormElementType;

@@ -1,0 +1,158 @@
+import * as React from "react"
+import { Star } from "lucide-react"
+import { cn } from "@/lib/utils"
+
+export interface RateScaleProps {
+  value?: number
+  onValueChange?: (value: number) => void
+  max?: number
+  min?: number
+  disabled?: boolean
+  name?: string
+  required?: boolean
+  className?: string
+  showNumbers?: boolean
+  variant?: "stars" | "numbers"
+}
+
+const RateScale = React.forwardRef<HTMLDivElement, RateScaleProps>(
+  ({ 
+    value = 0,
+    onValueChange,
+    max = 10,
+    min = 1,
+    disabled = false,
+    name,
+    required = false,
+    className,
+    showNumbers = true,
+    variant = "numbers",
+    ...props 
+  }, ref) => {
+    const [hoverValue, setHoverValue] = React.useState<number | null>(null)
+    const [selectedValue, setSelectedValue] = React.useState(value)
+
+    React.useEffect(() => {
+      setSelectedValue(value)
+    }, [value])
+
+    const handleClick = (rating: number) => {
+      if (disabled) return
+      setSelectedValue(rating)
+      onValueChange?.(rating)
+    }
+
+    const handleMouseEnter = (rating: number) => {
+      if (disabled) return
+      setHoverValue(rating)
+    }
+
+    const handleMouseLeave = () => {
+      setHoverValue(null)
+    }
+
+    const numbers = Array.from({ length: max - min + 1 }, (_, i) => i + min)
+
+    if (variant === "stars") {
+      return (
+        <div
+          ref={ref}
+          className={cn("inline-flex items-center gap-1", className)}
+          {...props}
+        >
+          {numbers.slice(0, Math.min(10, numbers.length)).map((rating) => {
+            const isActive = (hoverValue ?? selectedValue) >= rating
+            return (
+              <button
+                key={rating}
+                type="button"
+                disabled={disabled}
+                onClick={() => handleClick(rating)}
+                onMouseEnter={() => handleMouseEnter(rating)}
+                onMouseLeave={handleMouseLeave}
+                className={cn(
+                  "p-1 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                  disabled
+                    ? "cursor-not-allowed opacity-50"
+                    : "cursor-pointer hover:scale-110 active:scale-95"
+                )}
+                aria-label={`Rate ${rating} out of ${max}`}
+              >
+                <Star
+                  className={cn(
+                    "h-6 w-6 transition-colors",
+                    isActive
+                      ? "fill-yellow-400 text-yellow-400"
+                      : "text-muted-foreground hover:text-yellow-400"
+                  )}
+                />
+              </button>
+            )
+          })}
+          {showNumbers && (
+            <span className="ml-2 text-sm text-muted-foreground">
+              {selectedValue > 0 ? `${selectedValue}/${max}` : `0/${max}`}
+            </span>
+          )}
+          {name && (
+            <input
+              type="hidden"
+              name={name}
+              value={selectedValue}
+              required={required}
+            />
+          )}
+        </div>
+      )
+    }
+
+    return (
+      <div
+        ref={ref}
+        className={cn("inline-flex items-center gap-2 flex-wrap", className)}
+        {...props}
+      >
+        {numbers.map((rating) => {
+          const isActive = selectedValue === rating
+          const isHovered = hoverValue === rating
+          return (
+            <button
+              key={rating}
+              type="button"
+              disabled={disabled}
+              onClick={() => handleClick(rating)}
+              onMouseEnter={() => handleMouseEnter(rating)}
+              onMouseLeave={handleMouseLeave}
+              className={cn(
+                "w-10 h-10 rounded-full border-2 text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                isActive
+                  ? "bg-primary text-primary-foreground border-primary shadow-md"
+                  : isHovered
+                  ? "bg-primary/10 border-primary text-primary scale-110"
+                  : "border-muted-foreground/20 text-muted-foreground hover:border-primary/50 hover:text-primary hover:scale-105",
+                disabled
+                  ? "cursor-not-allowed opacity-50"
+                  : "cursor-pointer active:scale-95"
+              )}
+              aria-label={`Rate ${rating} out of ${max}`}
+            >
+              {rating}
+            </button>
+          )
+        })}
+        {name && (
+          <input
+            type="hidden"
+            name={name}
+            value={selectedValue}
+            required={required}
+          />
+        )}
+      </div>
+    )
+  }
+)
+
+RateScale.displayName = "RateScale"
+
+export { RateScale }
