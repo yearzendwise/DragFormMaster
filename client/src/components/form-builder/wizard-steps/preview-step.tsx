@@ -303,15 +303,15 @@ export function PreviewStep({
               
               <div className="space-y-2 text-sm">
                 <div className="flex">
-                  <span className="font-medium text-slate-600 w-12">From:</span>
+                  <span className="font-medium text-slate-600 w-16 flex-shrink-0">From:</span>
                   <span className="text-slate-800">{generateEmailContent().from}</span>
                 </div>
                 <div className="flex">
-                  <span className="font-medium text-slate-600 w-12">To:</span>
+                  <span className="font-medium text-slate-600 w-16 flex-shrink-0">To:</span>
                   <span className="text-slate-800">{generateEmailContent().to}</span>
                 </div>
                 <div className="flex">
-                  <span className="font-medium text-slate-600 w-12">Subject:</span>
+                  <span className="font-medium text-slate-600 w-16 flex-shrink-0">Subject:</span>
                   <span className="text-slate-800 font-medium">{generateEmailContent().subject}</span>
                 </div>
               </div>
