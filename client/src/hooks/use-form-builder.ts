@@ -64,7 +64,13 @@ export function useFormBuilder(initialTitle?: string, initialElements?: FormElem
       const elements = [...prev.elements];
       const [movedElement] = elements.splice(fromIndex, 1);
       elements.splice(toIndex, 0, movedElement);
-      return { ...prev, elements };
+      
+      // Keep the moved element selected to maintain high z-index
+      return { 
+        ...prev, 
+        elements,
+        selectedElementId: movedElement.id
+      };
     });
   }, []);
 

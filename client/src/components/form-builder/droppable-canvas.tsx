@@ -131,7 +131,7 @@ export function DroppableCanvas({
                       )}
                       
                       <div
-                        className={`animate-slide-up ${isMovingElement ? 'opacity-50' : ''}`}
+                        className={`animate-slide-up ${isMovingElement ? 'opacity-50 z-[100]' : ''} relative`}
                         style={{ animationDelay: `${index * 50}ms` }}
                       >
                         <SortableFormElement
