@@ -33,13 +33,31 @@ export function useFormBuilder(initialTitle?: string, initialElements?: FormElem
       options: type === 'select' || type === 'radio' || type === 'checkbox' ? ['Option 1', 'Option 2'] : undefined,
     };
 
-    setState(prev => ({
-      ...prev,
-      elements: index !== undefined 
-        ? [...prev.elements.slice(0, index), newElement, ...prev.elements.slice(index)]
-        : [...prev.elements, newElement],
-      selectedElementId: newElement.id,
-    }));
+    setState(prev => {
+      let insertIndex: number;
+      
+      if (index !== undefined) {
+        // Use provided index
+        insertIndex = index;
+      } else if (prev.selectedElementId) {
+        // Insert after currently selected element
+        const selectedIndex = prev.elements.findIndex(el => el.id === prev.selectedElementId);
+        insertIndex = selectedIndex >= 0 ? selectedIndex + 1 : prev.elements.length;
+      } else {
+        // No selection, add to end
+        insertIndex = prev.elements.length;
+      }
+
+      return {
+        ...prev,
+        elements: [
+          ...prev.elements.slice(0, insertIndex),
+          newElement,
+          ...prev.elements.slice(insertIndex)
+        ],
+        selectedElementId: newElement.id,
+      };
+    });
   }, []);
 
   const updateElement = useCallback((id: string, updates: Partial<FormElement>) => {
