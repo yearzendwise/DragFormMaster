@@ -182,11 +182,12 @@ export function PreviewStep({
   }
 
   // Create enhanced elements list with automatic buttons
+  const baseTimestamp = Date.now();
   const elementsWithButtons: PreviewFormElement[] = [
     ...elements,
     // Add spacer before buttons
     {
-      id: `auto-spacer-${Date.now()}`,
+      id: `auto-spacer-${baseTimestamp}-0`,
       type: 'spacer',
       label: '',
       name: 'spacer',
@@ -198,7 +199,7 @@ export function PreviewStep({
     },
     // Always add submit button
     {
-      id: `auto-submit-${Date.now()}`,
+      id: `auto-submit-${baseTimestamp}-1`,
       type: 'submit-button',
       label: 'Submit',
       name: 'submit',
@@ -210,7 +211,7 @@ export function PreviewStep({
     },
     // Always add reset button
     {
-      id: `auto-reset-${Date.now()}`,
+      id: `auto-reset-${baseTimestamp}-2`,
       type: 'reset-button', 
       label: 'Reset',
       name: 'reset',

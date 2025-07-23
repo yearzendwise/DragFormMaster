@@ -85,13 +85,16 @@ export function LanguageSelector({
           )}
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto" aria-describedby="translation-description">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Globe className="h-5 w-5 text-blue-600" />
             Label Translations
           </DialogTitle>
         </DialogHeader>
+        <div id="translation-description" className="sr-only">
+          Add and manage translations for form element labels in different languages
+        </div>
         
         <div className="space-y-6">
           {/* Original Label Display */}

@@ -123,45 +123,41 @@ export function PropertiesPanel({
             </div>
           </div>
 
-          {selectedElement.type !== 'submit-button' && selectedElement.type !== 'reset-button' && (
-            <>
-              <div>
-                <Label htmlFor="placeholder" className="text-sm font-medium text-neutral-700 mb-2">
-                  Placeholder
-                </Label>
-                <Input
-                  id="placeholder"
-                  value={selectedElement.placeholder || ''}
-                  onChange={(e) => handleUpdate('placeholder', e.target.value)}
-                  className="focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
+          <div>
+            <Label htmlFor="placeholder" className="text-sm font-medium text-neutral-700 mb-2">
+              Placeholder
+            </Label>
+            <Input
+              id="placeholder"
+              value={selectedElement.placeholder || ''}
+              onChange={(e) => handleUpdate('placeholder', e.target.value)}
+              className="focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
 
-              <div>
-                <Label htmlFor="helpText" className="text-sm font-medium text-neutral-700 mb-2">
-                  Help Text
-                </Label>
-                <Input
-                  id="helpText"
-                  value={selectedElement.helpText || ''}
-                  onChange={(e) => handleUpdate('helpText', e.target.value)}
-                  className="focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
+          <div>
+            <Label htmlFor="helpText" className="text-sm font-medium text-neutral-700 mb-2">
+              Help Text
+            </Label>
+            <Input
+              id="helpText"
+              value={selectedElement.helpText || ''}
+              onChange={(e) => handleUpdate('helpText', e.target.value)}
+              className="focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
 
-              <div>
-                <Label htmlFor="name" className="text-sm font-medium text-neutral-700 mb-2">
-                  Field Name
-                </Label>
-                <Input
-                  id="name"
-                  value={selectedElement.name}
-                  onChange={(e) => handleUpdate('name', e.target.value)}
-                  className="focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-            </>
-          )}
+          <div>
+            <Label htmlFor="name" className="text-sm font-medium text-neutral-700 mb-2">
+              Field Name
+            </Label>
+            <Input
+              id="name"
+              value={selectedElement.name}
+              onChange={(e) => handleUpdate('name', e.target.value)}
+              className="focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
 
           {/* Image-specific properties */}
           {selectedElement.type === 'image' && (
@@ -245,8 +241,7 @@ export function PropertiesPanel({
         )}
 
         {/* Validation Rules */}
-        {selectedElement.type !== 'submit-button' && selectedElement.type !== 'reset-button' && (
-          <div className="mb-8">
+        <div className="mb-8">
             <h3 className="text-sm font-medium text-neutral-700 mb-4">Validation Rules</h3>
             <div className="space-y-3">
               <label className="flex items-center">
@@ -367,8 +362,7 @@ export function PropertiesPanel({
                 </div>
               )}
             </div>
-          </div>
-        )}
+        </div>
 
         {/* Styling Options */}
         <div className="mb-8">
