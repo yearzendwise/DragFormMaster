@@ -113,11 +113,19 @@ export function PreviewStep({
           case 'boolean-switch':
             actualFormData[key] = value === 'true';
             break;
+          case 'textarea':
+          case 'text-input':
+          case 'email-input':
+          case 'select':
+          case 'radio':
+            // Explicitly handle text-based inputs as strings
+            actualFormData[key] = value ? String(value) : null;
+            break;
           default:
-            actualFormData[key] = value || null;
+            actualFormData[key] = value ? String(value) : null;
         }
       } else {
-        actualFormData[key] = value || null;
+        actualFormData[key] = value ? String(value) : null;
       }
     }
     
