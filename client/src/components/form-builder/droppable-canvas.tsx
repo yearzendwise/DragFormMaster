@@ -1,4 +1,4 @@
-// Removed drag and drop imports - using button-based movement
+import { useDroppable } from '@dnd-kit/core';
 import { FormElement, FormElementType } from '@/types/form-builder';
 import { FormElementRenderer } from './form-element-renderer';
 import { SortableFormElement } from './sortable-form-element';
@@ -37,7 +37,9 @@ export function DroppableCanvas({
   moveDirection = null,
   moveFromIndex = -1,
 }: DroppableCanvasProps) {
-  // Removed droppable hook - using button-based movement
+  const { setNodeRef, isOver } = useDroppable({
+    id: 'form-canvas',
+  });
 
   if (previewMode) {
     return (
@@ -67,7 +69,12 @@ export function DroppableCanvas({
     <div className="flex-1 p-3 md:p-6 overflow-y-auto bg-gradient-to-br from-slate-50 via-blue-50/20 to-indigo-50/30">
       <div className="max-w-4xl mx-auto">
         <div
-          className={`min-h-80 md:min-h-96 bg-white rounded-xl md:rounded-2xl shadow-sm border-2 transition-all duration-300 relative border-slate-200 border-dashed hover:border-slate-300 ${elements.length === 0 ? 'p-4 md:p-8' : 'p-3 md:p-6'}`}
+          ref={setNodeRef}
+          className={`min-h-80 md:min-h-96 bg-white rounded-xl md:rounded-2xl shadow-sm border-2 transition-all duration-300 relative ${
+            isOver || isDragging 
+              ? 'border-blue-400 border-solid bg-gradient-to-br from-blue-50/30 to-indigo-50/20' 
+              : 'border-slate-200 border-dashed hover:border-slate-300'
+          } ${elements.length === 0 ? 'p-4 md:p-8' : 'p-3 md:p-6'}`}
         >
           {/* Removed drop indicator - using button-based movement */}
           {elements.length === 0 ? (

@@ -1,5 +1,5 @@
-// Removed drag and drop imports - using button-based movement instead
 import { useState, useEffect, useRef } from 'react';
+import { DndContext, DragEndEvent, MouseSensor, TouchSensor, useSensor, useSensors, DragOverlay, DragStartEvent } from '@dnd-kit/core';
 import { useFormBuilder } from '@/hooks/use-form-builder';
 import { ComponentPalette } from '@/components/form-builder/component-palette';
 import { FormCanvas } from '@/components/form-builder/form-canvas';
@@ -31,8 +31,16 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
 
   const [showMobileAdd, setShowMobileAdd] = useState(false);
   const [showMobileProperties, setShowMobileProperties] = useState(false);
+  const [draggedType, setDraggedType] = useState<FormElementType | null>(null);
 
-  // Removed drag and drop sensors - using button-based movement
+  // Configure drag and drop sensors
+  const mouseSensor = useSensor(MouseSensor, {
+    activationConstraint: { distance: 8 }
+  });
+  const touchSensor = useSensor(TouchSensor, {
+    activationConstraint: { delay: 200, tolerance: 8 }
+  });
+  const sensors = useSensors(mouseSensor, touchSensor);
 
   const selectedElement = elements.find(el => el.id === selectedElementId) || null;
   
@@ -66,7 +74,26 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
     }
   }, [formTitle, elements, onDataChange]);
 
-  // Removed drag handlers - using button-based movement instead
+  // Drag handlers
+  const handleDragStart = (event: DragStartEvent) => {
+    const { active } = event;
+    if (active.data.current?.isNew) {
+      setDraggedType(active.id as FormElementType);
+    }
+  };
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    setDraggedType(null);
+
+    if (!over) return;
+
+    // Handle dropping new component from palette
+    if (active.data.current?.isNew && over.id === 'form-canvas') {
+      const type = active.id as FormElementType;
+      addElement(type);
+    }
+  };
 
   const handleAddElement = (type: FormElementType) => {
     addElement(type);
@@ -83,42 +110,47 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
   };
 
   return (
-    <div className="flex-1 flex relative">
-      {/* Left Sidebar - Component Palette */}
-      <div className="hidden lg:block flex-none">
-        <ComponentPalette onAddElement={handleAddElement} />
-      </div>
-      
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0">
-        <FormCanvas
-          formTitle={formTitle}
-          elements={elements}
-          selectedElementId={selectedElementId}
-          previewMode={previewMode}
-          draggedType={null}
-          onSelectElement={selectElement}
-          onRemoveElement={removeElement}
-          onUpdateElement={updateElement}
-          onUpdateFormTitle={updateFormTitle}
-          onTogglePreview={togglePreview}
-          onMobileEdit={handleMobileEdit}
-          isDragging={false}
-          onMoveElement={moveElement}
-        />
-      </div>
-      
-      {/* Right Sidebar - Properties Panel */}
-      <div className="hidden lg:block flex-none">
-        <PropertiesPanel
-          selectedElement={selectedElement}
-          onUpdateElement={updateElement}
-          onDeselectElement={handleDeselectElement}
-        />
-      </div>
+    <DndContext
+      sensors={sensors}
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+    >
+      <div className="flex-1 flex relative">
+        {/* Left Sidebar - Component Palette */}
+        <div className="hidden lg:block flex-none">
+          <ComponentPalette onAddElement={handleAddElement} />
+        </div>
+        
+        {/* Main Content Area */}
+        <div className="flex-1 flex flex-col min-w-0">
+          <FormCanvas
+            formTitle={formTitle}
+            elements={elements}
+            selectedElementId={selectedElementId}
+            previewMode={previewMode}
+            draggedType={draggedType}
+            onSelectElement={selectElement}
+            onRemoveElement={removeElement}
+            onUpdateElement={updateElement}
+            onUpdateFormTitle={updateFormTitle}
+            onTogglePreview={togglePreview}
+            onMobileEdit={handleMobileEdit}
+            isDragging={!!draggedType}
+            onMoveElement={moveElement}
+          />
+        </div>
+        
+        {/* Right Sidebar - Properties Panel */}
+        <div className="hidden lg:block flex-none">
+          <PropertiesPanel
+            selectedElement={selectedElement}
+            onUpdateElement={updateElement}
+            onDeselectElement={handleDeselectElement}
+          />
+        </div>
 
-      {/* Mobile Floating Add Button */}
-      {!previewMode && (
+        {/* Mobile Floating Add Button */}
+        {!previewMode && (
         <div className="lg:hidden fixed bottom-6 left-6 z-50">
           <Button
             size="lg"
@@ -130,10 +162,10 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
             </svg>
           </Button>
         </div>
-      )}
+        )}
 
-      {/* Mobile Add Components Modal */}
-      {showMobileAdd && (
+        {/* Mobile Add Components Modal */}
+        {showMobileAdd && (
           <div className="lg:hidden fixed inset-0 bg-black/50 z-[300] flex items-end">
             <div className="bg-white w-full max-h-[70vh] rounded-t-2xl flex flex-col">
               <div className="flex-shrink-0 p-4 border-b border-gray-200">
@@ -160,10 +192,10 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
               </div>
             </div>
           </div>
-      )}
+        )}
 
-      {/* Mobile Properties Modal */}
-      {showMobileProperties && selectedElement && (
+        {/* Mobile Properties Modal */}
+        {showMobileProperties && selectedElement && (
           <div className="lg:hidden fixed inset-0 bg-black/50 z-[300] flex items-end">
             <div className="bg-white w-full max-h-[80vh] rounded-t-2xl flex flex-col">
               <div className="flex-shrink-0 p-4 border-b border-gray-200">
@@ -191,7 +223,17 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
           </div>
         )}
         
-        {/* Removed drag overlay - using button-based movement */}
-    </div>
+        {/* Drag Overlay */}
+        <DragOverlay>
+          {draggedType && (
+            <div className="p-4 bg-white border-2 border-blue-300 rounded-xl shadow-lg opacity-90">
+              <div className="text-sm font-medium text-blue-700">
+                {draggedType.charAt(0).toUpperCase() + draggedType.slice(1).replace('-', ' ')}
+              </div>
+            </div>
+          )}
+        </DragOverlay>
+      </div>
+    </DndContext>
   );
 }
