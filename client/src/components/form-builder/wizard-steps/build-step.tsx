@@ -58,55 +58,39 @@ export function BuildStep({ onDataChange, initialTitle, initialElements, initial
   
   // Initialize form data from props on first mount only
   useEffect(() => {
-    if (!hasInitialized.current) {
-      if (initialTitle && initialElements && initialElements.length > 0) {
-        resetFormData(initialTitle, initialElements);
-      }
-      
-      // Initialize form settings from props
-      if (initialSettings) {
-        Object.keys(initialSettings).forEach(key => {
-          updateFormSettings(key, initialSettings[key]);
-        });
-      }
-      
+    if (!hasInitialized.current && initialTitle && initialElements) {
+      resetFormData(initialTitle, initialElements);
       hasInitialized.current = true;
     }
   }, []);
 
-  // Separate effect to sync settings when they change from outside (but not on every formSettings change)
+  // Initialize settings separately and only once
   useEffect(() => {
-    if (hasInitialized.current && initialSettings) {
-      // Only update if there's an actual difference and it's not just the form settings changing
-      let hasChanges = false;
-      const updates: Record<string, any> = {};
-      
+    if (initialSettings && Object.keys(initialSettings).length > 0) {
+      // Set initial form settings directly in the hook without triggering updates
       Object.keys(initialSettings).forEach(key => {
-        if ((formSettings as any)[key] !== initialSettings[key]) {
-          updates[key] = initialSettings[key];
-          hasChanges = true;
-        }
+        updateFormSettings(key, initialSettings[key]);
       });
-      
-      if (hasChanges) {
-        Object.keys(updates).forEach(key => {
-          updateFormSettings(key, updates[key]);
-        });
-      }
     }
-  }, [JSON.stringify(initialSettings)]);
+  }, []);
   
-  // Update parent component when data changes (with comparison to prevent loops)
+  // Update parent component when data changes (only when user makes actual changes)
   useEffect(() => {
-    // Deep comparison to detect property changes within elements and settings
-    const dataChanged = formTitle !== lastSentData.current.title || 
-                       elements.length !== lastSentData.current.elements.length ||
-                       JSON.stringify(elements) !== JSON.stringify(lastSentData.current.elements) ||
-                       JSON.stringify(formSettings) !== JSON.stringify(lastSentData.current.settings);
-    
-    if (dataChanged) {
-      onDataChange(formTitle, elements, formSettings);
-      lastSentData.current = { title: formTitle, elements: [...elements], settings: { ...formSettings } };
+    if (hasInitialized.current) {
+      const timeoutId = setTimeout(() => {
+        // Simple comparison to detect changes
+        const dataChanged = formTitle !== lastSentData.current.title || 
+                           elements.length !== lastSentData.current.elements.length ||
+                           JSON.stringify(elements) !== JSON.stringify(lastSentData.current.elements) ||
+                           JSON.stringify(formSettings) !== JSON.stringify(lastSentData.current.settings);
+        
+        if (dataChanged) {
+          onDataChange(formTitle, elements, formSettings);
+          lastSentData.current = { title: formTitle, elements: [...elements], settings: { ...formSettings } };
+        }
+      }, 100); // 100ms debounce
+      
+      return () => clearTimeout(timeoutId);
     }
   }, [formTitle, elements, formSettings, onDataChange]);
 
