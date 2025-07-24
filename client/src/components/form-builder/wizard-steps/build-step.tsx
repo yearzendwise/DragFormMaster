@@ -11,12 +11,13 @@ import { Button } from '@/components/ui/button';
 
 
 interface BuildStepProps {
-  onDataChange: (title: string, elements: any[]) => void;
+  onDataChange: (title: string, elements: any[], settings?: any) => void;
   initialTitle?: string;
   initialElements?: any[];
+  initialSettings?: any;
 }
 
-export function BuildStep({ onDataChange, initialTitle, initialElements }: BuildStepProps) {
+export function BuildStep({ onDataChange, initialTitle, initialElements, initialSettings }: BuildStepProps) {
   const {
     formTitle,
     elements,
@@ -31,6 +32,8 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
     updateFormTitle,
     togglePreview,
     resetFormData,
+    formSettings,
+    updateFormSettings,
   } = useFormBuilder(initialTitle, initialElements);
 
   const [showMobileAdd, setShowMobileAdd] = useState(false);
@@ -50,7 +53,7 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
   const selectedElement = elements.find(el => el.id === selectedElementId) || null;
   
   // Use refs to track data and initialization
-  const lastSentData = useRef<{title: string, elements: any[]}>({ title: '', elements: [] });
+  const lastSentData = useRef<{title: string, elements: any[], settings: any}>({ title: '', elements: [], settings: {} });
   const hasInitialized = useRef(false);
   
   // Initialize form data from props on first mount or when props change significantly
@@ -65,20 +68,28 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
         hasInitialized.current = true;
       }
     }
-  }, [initialTitle, initialElements, formTitle, elements.length, resetFormData]);
+    
+    // Initialize form settings from props
+    if (initialSettings && !hasInitialized.current) {
+      Object.keys(initialSettings).forEach(key => {
+        updateFormSettings(key, initialSettings[key]);
+      });
+    }
+  }, [initialTitle, initialElements, initialSettings, formTitle, elements.length, resetFormData, updateFormSettings]);
   
   // Update parent component when data changes (with comparison to prevent loops)
   useEffect(() => {
-    // Deep comparison to detect property changes within elements
+    // Deep comparison to detect property changes within elements and settings
     const dataChanged = formTitle !== lastSentData.current.title || 
                        elements.length !== lastSentData.current.elements.length ||
-                       JSON.stringify(elements) !== JSON.stringify(lastSentData.current.elements);
+                       JSON.stringify(elements) !== JSON.stringify(lastSentData.current.elements) ||
+                       JSON.stringify(formSettings) !== JSON.stringify(lastSentData.current.settings);
     
     if (dataChanged) {
-      onDataChange(formTitle, elements);
-      lastSentData.current = { title: formTitle, elements: [...elements] };
+      onDataChange(formTitle, elements, formSettings);
+      lastSentData.current = { title: formTitle, elements: [...elements], settings: { ...formSettings } };
     }
-  }, [formTitle, elements, onDataChange]);
+  }, [formTitle, elements, formSettings, onDataChange]);
 
   // Drag handlers
   const handleDragStart = (event: DragStartEvent) => {
@@ -170,6 +181,13 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
             formTitle={formTitle}
             onUpdateFormTitle={updateFormTitle}
             elements={elements}
+            settings={formSettings}
+            onUpdateSettings={(newSettings) => {
+              // Update the entire settings object
+              Object.keys(newSettings).forEach(key => {
+                updateFormSettings(key, newSettings[key]);
+              });
+            }}
           />
           
           {/* Element Properties - Only when element is selected */}

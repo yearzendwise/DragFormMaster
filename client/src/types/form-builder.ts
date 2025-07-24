@@ -104,6 +104,14 @@ export interface WizardState {
   formData: {
     title: string;
     elements: FormElement[];
+    settings?: {
+      description?: string;
+      submitButtonText?: string;
+      resetButtonText?: string;
+      showProgressBar?: boolean;
+      allowSaveProgress?: boolean;
+      showFormTitle?: boolean;
+    };
   };
   selectedTheme: FormTheme | null;
   isComplete: boolean;

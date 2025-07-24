@@ -149,6 +149,7 @@ export function FormWizard() {
             onDataChange={updateFormData}
             initialTitle={wizardState.formData.title}
             initialElements={wizardState.formData.elements}
+            initialSettings={wizardState.formData.settings}
           />
         )}
         
@@ -165,6 +166,7 @@ export function FormWizard() {
             formTitle={wizardState.formData.title}
             elements={wizardState.formData.elements}
             selectedTheme={wizardState.selectedTheme}
+            formSettings={wizardState.formData.settings}
             onSave={handleSave}
             onExport={handleExport}
           />

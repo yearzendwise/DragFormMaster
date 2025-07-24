@@ -22,6 +22,14 @@ interface PreviewStepProps {
   formTitle: string;
   elements: FormElement[];
   selectedTheme: FormTheme | null;
+  formSettings?: {
+    description?: string;
+    submitButtonText?: string;
+    resetButtonText?: string;
+    showProgressBar?: boolean;
+    allowSaveProgress?: boolean;
+    showFormTitle?: boolean;
+  };
   onSave: () => void;
   onExport: () => void;
 }
@@ -30,6 +38,7 @@ export function PreviewStep({
   formTitle, 
   elements, 
   selectedTheme, 
+  formSettings = {},
   onSave, 
   onExport 
 }: PreviewStepProps) {
@@ -250,7 +259,9 @@ export function PreviewStep({
       {/* Preview */}
       <div className={`flex-1 overflow-y-auto p-6 ${themeStyles.background}`}>
         <div className={`${themeStyles.container} ${selectedTheme.id === 'glassmorphism' ? 'glassmorphism-override' : ''}`}>
-          <h1 className={themeStyles.header}>{formTitle}</h1>
+          {formSettings.showFormTitle !== false && (
+            <h1 className={themeStyles.header}>{formTitle}</h1>
+          )}
           
           <form className="space-y-4" onSubmit={handleFormSubmit}>
             {elementsWithButtons.map((element) => (

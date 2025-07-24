@@ -16,6 +16,7 @@ interface FormPropertiesProps {
     resetButtonText?: string;
     showProgressBar?: boolean;
     allowSaveProgress?: boolean;
+    showFormTitle?: boolean;
   };
   elements?: any[];
 }
@@ -35,6 +36,7 @@ export function FormProperties({
     resetButtonText = 'Reset',
     showProgressBar = false,
     allowSaveProgress = false,
+    showFormTitle = true,
   } = settings;
 
   const handleSettingChange = (key: string, value: any) => {
@@ -134,6 +136,19 @@ export function FormProperties({
             <div className="space-y-3">
               <h4 className="text-sm font-medium text-neutral-700">Form Options</h4>
               
+              <div className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  id="show-title"
+                  checked={showFormTitle}
+                  onChange={(e) => handleSettingChange('showFormTitle', e.target.checked)}
+                  className="rounded border-neutral-300 text-blue-600 focus:ring-blue-500"
+                />
+                <Label htmlFor="show-title" className="text-xs text-neutral-600">
+                  Show form title
+                </Label>
+              </div>
+
               <div className="flex items-center space-x-2">
                 <input
                   type="checkbox"

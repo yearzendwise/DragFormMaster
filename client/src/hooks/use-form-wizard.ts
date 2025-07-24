@@ -253,7 +253,15 @@ export function useFormWizard() {
       currentStep: 'build',
       formData: {
         title: 'Untitled Form',
-        elements: []
+        elements: [],
+        settings: {
+          description: '',
+          submitButtonText: 'Submit',
+          resetButtonText: 'Reset',
+          showProgressBar: false,
+          allowSaveProgress: false,
+          showFormTitle: true,
+        }
       },
       selectedTheme: null,
       isComplete: false
@@ -292,11 +300,15 @@ export function useFormWizard() {
     });
   };
 
-  const updateFormData = (title: string, elements: FormElement[]) => {
+  const updateFormData = (title: string, elements: FormElement[], settings?: any) => {
     setWizardState(prev => {
       const newState = {
         ...prev,
-        formData: { title, elements }
+        formData: { 
+          title, 
+          elements,
+          settings: settings || prev.formData.settings
+        }
       };
       saveToStorage(newState);
       return newState;
@@ -326,7 +338,15 @@ export function useFormWizard() {
       currentStep: 'build' as const,
       formData: {
         title: 'Untitled Form',
-        elements: []
+        elements: [],
+        settings: {
+          description: '',
+          submitButtonText: 'Submit',
+          resetButtonText: 'Reset',
+          showProgressBar: false,
+          allowSaveProgress: false,
+          showFormTitle: true,
+        }
       },
       selectedTheme: null,
       isComplete: false

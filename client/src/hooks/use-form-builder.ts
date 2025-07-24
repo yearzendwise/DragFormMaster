@@ -16,6 +16,15 @@ export function useFormBuilder(initialTitle?: string, initialElements?: FormElem
     previewMode: false,
   });
 
+  const [formSettings, setFormSettings] = useState({
+    description: '',
+    submitButtonText: 'Submit',
+    resetButtonText: 'Reset',
+    showProgressBar: false,
+    allowSaveProgress: false,
+    showFormTitle: true,
+  });
+
   const addElement = useCallback((type: FormElementType, index?: number) => {
     const newElement: FormElement = {
       id: nanoid(),
@@ -188,8 +197,16 @@ export function useFormBuilder(initialTitle?: string, initialElements?: FormElem
     }
   };
 
+  const updateFormSettings = useCallback((key: string, value: any) => {
+    setFormSettings(prev => ({
+      ...prev,
+      [key]: value,
+    }));
+  }, []);
+
   return {
     ...state,
+    formSettings,
     addElement,
     addElementAtIndex,
     updateElement,
@@ -198,6 +215,7 @@ export function useFormBuilder(initialTitle?: string, initialElements?: FormElem
     selectElement,
     updateFormTitle,
     updateSettings,
+    updateFormSettings,
     togglePreview,
     resetFormData,
     exportForm,
