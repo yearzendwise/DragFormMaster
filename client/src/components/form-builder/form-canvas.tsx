@@ -39,13 +39,6 @@ export function FormCanvas({
         <div className="flex items-center justify-between">
           <div className="flex-1 min-w-0">
             <div className="flex items-center space-x-2 md:space-x-3 mb-2">
-              <input
-                type="text"
-                value={formTitle}
-                onChange={(e) => onUpdateFormTitle(e.target.value)}
-                className="text-lg md:text-xl font-bold text-slate-800 bg-transparent border-none outline-none focus:ring-0 placeholder-slate-400 w-full"
-                placeholder="Untitled Form"
-              />
               <div className="flex items-center space-x-1 hidden sm:flex">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                 <span className="text-xs text-slate-500 font-medium whitespace-nowrap">Auto-saved</span>
