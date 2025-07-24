@@ -117,6 +117,7 @@ export interface WizardState {
       showProgressBar?: boolean;
       allowSaveProgress?: boolean;
       showFormTitle?: boolean;
+      compactMode?: boolean;
     };
   };
   selectedTheme: FormTheme | null;

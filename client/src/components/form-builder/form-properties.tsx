@@ -15,6 +15,7 @@ interface FormPropertiesProps {
     showProgressBar?: boolean;
     allowSaveProgress?: boolean;
     showFormTitle?: boolean;
+    compactMode?: boolean;
   };
   elements?: any[];
 }
@@ -33,6 +34,7 @@ export function FormProperties({
     showProgressBar = false,
     allowSaveProgress = false,
     showFormTitle = true,
+    compactMode = false,
   } = settings;
 
   const handleSettingChange = (key: string, value: any) => {
@@ -99,6 +101,19 @@ export function FormProperties({
             {/* Form Options */}
             <div className="space-y-3">
               <h4 className="text-sm font-medium text-neutral-700">Form Options</h4>
+              
+              <div className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  id="compact-mode"
+                  checked={compactMode}
+                  onChange={(e) => handleSettingChange('compactMode', e.target.checked)}
+                  className="rounded border-neutral-300 text-blue-600 focus:ring-blue-500"
+                />
+                <Label htmlFor="compact-mode" className="text-sm text-neutral-700">
+                  Compact Mode (2 fields per row)
+                </Label>
+              </div>
               
               <div className="flex items-center space-x-2">
                 <input

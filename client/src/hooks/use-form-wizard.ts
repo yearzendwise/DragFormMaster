@@ -295,6 +295,7 @@ export function useFormWizard() {
           showProgressBar: false,
           allowSaveProgress: false,
           showFormTitle: true,
+          compactMode: false,
         }
       },
       selectedTheme: null,
@@ -378,6 +379,7 @@ export function useFormWizard() {
           showProgressBar: false,
           allowSaveProgress: false,
           showFormTitle: true,
+          compactMode: false,
         }
       },
       selectedTheme: null,

@@ -53,6 +53,7 @@ interface PreviewStepProps {
     showProgressBar?: boolean;
     allowSaveProgress?: boolean;
     showFormTitle?: boolean;
+    compactMode?: boolean;
   };
   onSave: () => void;
   onExport: () => void;
@@ -344,14 +345,70 @@ export function PreviewStep({
           <ThemedProgressBar />
           
           <form className="space-y-4" onSubmit={handleFormSubmit}>
-            {elementsWithButtons.map((element) => (
-              <ThemedFormRenderer
-                key={element.id}
-                element={element as FormElement}
-                themeStyles={themeStyles}
-                onChange={handleFormChange}
-              />
-            ))}
+            {formSettings.compactMode ? (
+              // Compact mode: Group elements into rows of 2, excluding components that already have 2 items
+              (() => {
+                const shouldExcludeFromCompact = (element: PreviewFormElement) => {
+                  return element.type === 'full-name' || 
+                         element.type === 'submit-button' || 
+                         element.type === 'reset-button' || 
+                         element.type === 'spacer' ||
+                         element.type === 'textarea' ||
+                         element.type === 'rate-scale' ||
+                         element.type === 'image';
+                };
+
+                const rows: PreviewFormElement[][] = [];
+                let currentRow: PreviewFormElement[] = [];
+
+                elementsWithButtons.forEach((element) => {
+                  if (shouldExcludeFromCompact(element)) {
+                    // Add current row if it has elements
+                    if (currentRow.length > 0) {
+                      rows.push([...currentRow]);
+                      currentRow = [];
+                    }
+                    // Add the excluded element as its own row
+                    rows.push([element]);
+                  } else {
+                    currentRow.push(element);
+                    // When row has 2 elements, add to rows and start new row
+                    if (currentRow.length === 2) {
+                      rows.push([...currentRow]);
+                      currentRow = [];
+                    }
+                  }
+                });
+
+                // Add remaining elements in currentRow
+                if (currentRow.length > 0) {
+                  rows.push(currentRow);
+                }
+
+                return rows.map((row, rowIndex) => (
+                  <div key={`row-${rowIndex}`} className={row.length > 1 ? "grid grid-cols-2 gap-4" : ""}>
+                    {row.map((element) => (
+                      <ThemedFormRenderer
+                        key={element.id}
+                        element={element as FormElement}
+                        themeStyles={themeStyles}
+                        onChange={handleFormChange}
+                      />
+                    ))}
+                  </div>
+                ));
+              })()
+            ) : (
+              // Normal mode: Single column layout
+              elementsWithButtons.map((element) => (
+                <ThemedFormRenderer
+                  key={element.id}
+                  element={element as FormElement}
+                  themeStyles={themeStyles}
+                  onChange={handleFormChange}
+                />
+              ))
+            )}
             
             {elements.length === 0 && (
               <div className="text-center py-12 text-slate-500">
