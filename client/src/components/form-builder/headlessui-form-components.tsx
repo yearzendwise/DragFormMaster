@@ -3,6 +3,144 @@ import { Switch, RadioGroup, Checkbox } from '@headlessui/react';
 import { cn } from '@/lib/utils';
 import { FormTheme } from '@/types/form-builder';
 
+// Helper functions for theme-specific radio button styling
+const getRadioThemeChecked = (baseInput: string) => {
+  if (baseInput.includes('bg-gray-900') || baseInput.includes('bg-gray-800')) {
+    return 'border-yellow-400 bg-yellow-400';
+  } else if (baseInput.includes('border-3') || baseInput.includes('font-mono')) {
+    return 'border-orange-500 bg-orange-500';
+  } else if (baseInput.includes('rounded-3xl') || baseInput.includes('border-4')) {
+    return 'border-purple-500 bg-purple-500';
+  } else if (baseInput.includes('rounded-2xl') && baseInput.includes('green')) {
+    return 'border-emerald-600 bg-emerald-600';
+  } else if (baseInput.includes('bg-black') || baseInput.includes('border-cyan')) {
+    return 'border-cyan-400 bg-cyan-400';
+  } else if (baseInput.includes('bg-purple-800') || baseInput.includes('font-serif')) {
+    return 'border-yellow-400 bg-yellow-400';
+  } else if (baseInput.includes('rounded-xl') && baseInput.includes('backdrop-blur')) {
+    return 'border-purple-500 bg-purple-500';
+  } else if (baseInput.includes('uppercase') && baseInput.includes('tracking-wider')) {
+    return 'border-blue-600 bg-blue-600';
+  } else {
+    return 'border-blue-500 bg-blue-500';
+  }
+};
+
+const getRadioThemeUnchecked = (baseInput: string) => {
+  if (baseInput.includes('bg-gray-900') || baseInput.includes('bg-gray-800')) {
+    return 'border-gray-600 bg-gray-800';
+  } else if (baseInput.includes('border-3') || baseInput.includes('font-mono')) {
+    return 'border-orange-400 bg-yellow-50';
+  } else if (baseInput.includes('rounded-3xl') || baseInput.includes('border-4')) {
+    return 'border-pink-300 bg-pink-50';
+  } else if (baseInput.includes('rounded-2xl') && baseInput.includes('green')) {
+    return 'border-green-300 bg-white';
+  } else if (baseInput.includes('bg-black') || baseInput.includes('border-cyan')) {
+    return 'border-cyan-400 bg-gray-900';
+  } else if (baseInput.includes('bg-purple-800') || baseInput.includes('font-serif')) {
+    return 'border-purple-600 bg-purple-800';
+  } else if (baseInput.includes('rounded-xl') && baseInput.includes('backdrop-blur')) {
+    return 'border-gray-200 bg-white';
+  } else if (baseInput.includes('uppercase') && baseInput.includes('tracking-wider')) {
+    return 'border-slate-300 bg-slate-50';
+  } else {
+    return 'border-gray-300 bg-gray-50';
+  }
+};
+
+const getRadioIndicatorColor = (baseInput: string) => {
+  if (baseInput.includes('bg-gray-900') || baseInput.includes('bg-gray-800')) {
+    return 'bg-gray-800';
+  } else if (baseInput.includes('border-3') || baseInput.includes('font-mono')) {
+    return 'bg-yellow-50';
+  } else if (baseInput.includes('rounded-3xl') || baseInput.includes('border-4')) {
+    return 'bg-pink-50';
+  } else if (baseInput.includes('rounded-2xl') && baseInput.includes('green')) {
+    return 'bg-white';
+  } else if (baseInput.includes('bg-black') || baseInput.includes('border-cyan')) {
+    return 'bg-gray-900';
+  } else if (baseInput.includes('bg-purple-800') || baseInput.includes('font-serif')) {
+    return 'bg-purple-800';
+  } else if (baseInput.includes('rounded-xl') && baseInput.includes('backdrop-blur')) {
+    return 'bg-white';
+  } else if (baseInput.includes('uppercase') && baseInput.includes('tracking-wider')) {
+    return 'bg-slate-50';
+  } else {
+    return 'bg-gray-50';
+  }
+};
+
+const getRadioLabelStyle = (baseInput: string) => {
+  if (baseInput.includes('bg-gray-900') || baseInput.includes('bg-gray-800')) {
+    return 'text-gray-300 font-medium tracking-widest uppercase cursor-pointer select-none';
+  } else if (baseInput.includes('border-3') || baseInput.includes('font-mono')) {
+    return 'text-pink-600 font-black tracking-wider uppercase cursor-pointer select-none transform skew-x-6';
+  } else if (baseInput.includes('rounded-3xl') || baseInput.includes('border-4')) {
+    return 'text-purple-700 font-bold cursor-pointer select-none';
+  } else if (baseInput.includes('rounded-2xl') && baseInput.includes('green')) {
+    return 'text-emerald-700 font-semibold tracking-wide cursor-pointer select-none';
+  } else if (baseInput.includes('bg-black') || baseInput.includes('border-cyan')) {
+    return 'text-green-400 font-bold tracking-wider uppercase cursor-pointer select-none';
+  } else if (baseInput.includes('bg-purple-800') || baseInput.includes('font-serif')) {
+    return 'text-yellow-300 font-medium tracking-widest uppercase font-serif cursor-pointer select-none';
+  } else if (baseInput.includes('rounded-xl') && baseInput.includes('backdrop-blur')) {
+    return 'text-gray-800 font-semibold cursor-pointer select-none';
+  } else if (baseInput.includes('uppercase') && baseInput.includes('tracking-wider')) {
+    return 'text-slate-700 font-bold uppercase tracking-wider cursor-pointer select-none';
+  } else {
+    return 'text-gray-700 font-medium tracking-wide cursor-pointer select-none';
+  }
+};
+
+// Helper functions for checkbox styling
+const getCheckboxThemeChecked = (baseInput: string) => {
+  if (baseInput.includes('bg-gray-900') || baseInput.includes('bg-gray-800')) {
+    return 'border-yellow-400 bg-yellow-400';
+  } else if (baseInput.includes('border-3') || baseInput.includes('font-mono')) {
+    return 'border-orange-500 bg-orange-500';
+  } else if (baseInput.includes('rounded-3xl') || baseInput.includes('border-4')) {
+    return 'border-purple-500 bg-purple-500 rounded-xl';
+  } else if (baseInput.includes('rounded-2xl') && baseInput.includes('green')) {
+    return 'border-emerald-600 bg-emerald-600 rounded-lg';
+  } else if (baseInput.includes('bg-black') || baseInput.includes('border-cyan')) {
+    return 'border-cyan-400 bg-cyan-400';
+  } else if (baseInput.includes('bg-purple-800') || baseInput.includes('font-serif')) {
+    return 'border-yellow-400 bg-yellow-400';
+  } else if (baseInput.includes('rounded-xl') && baseInput.includes('backdrop-blur')) {
+    return 'border-purple-500 bg-purple-500 rounded-md';
+  } else if (baseInput.includes('uppercase') && baseInput.includes('tracking-wider')) {
+    return 'border-blue-600 bg-blue-600';
+  } else {
+    return 'border-blue-500 bg-blue-500';
+  }
+};
+
+const getCheckboxThemeUnchecked = (baseInput: string) => {
+  if (baseInput.includes('bg-gray-900') || baseInput.includes('bg-gray-800')) {
+    return 'border-gray-600 bg-gray-800';
+  } else if (baseInput.includes('border-3') || baseInput.includes('font-mono')) {
+    return 'border-orange-400 bg-yellow-50 rounded-none';
+  } else if (baseInput.includes('rounded-3xl') || baseInput.includes('border-4')) {
+    return 'border-pink-300 bg-pink-50 rounded-xl';
+  } else if (baseInput.includes('rounded-2xl') && baseInput.includes('green')) {
+    return 'border-green-300 bg-white rounded-lg';
+  } else if (baseInput.includes('bg-black') || baseInput.includes('border-cyan')) {
+    return 'border-cyan-400 bg-gray-900';
+  } else if (baseInput.includes('bg-purple-800') || baseInput.includes('font-serif')) {
+    return 'border-purple-600 bg-purple-800';
+  } else if (baseInput.includes('rounded-xl') && baseInput.includes('backdrop-blur')) {
+    return 'border-gray-200 bg-white rounded-md';
+  } else if (baseInput.includes('uppercase') && baseInput.includes('tracking-wider')) {
+    return 'border-slate-300 bg-slate-50';
+  } else {
+    return 'border-gray-300 bg-gray-50';
+  }
+};
+
+const getCheckboxLabelStyle = (baseInput: string) => {
+  return getRadioLabelStyle(baseInput); // Same as radio labels
+};
+
 // HeadlessUI Boolean Switch Component
 interface HeadlessUIBooleanSwitchProps {
   value?: boolean;
@@ -231,77 +369,7 @@ export function HeadlessUIRadioGroup({
     onChange?.(value);
   };
 
-  // Get theme-specific radio styling
-  const getRadioStyles = () => {
-    const baseInput = themeStyles.input;
-    
-    if (baseInput.includes('bg-gray-900') || baseInput.includes('bg-gray-800')) {
-      // Elegant/Dark themes
-      return {
-        radio: 'w-5 h-5 rounded-full border-2 border-gray-600 ui-checked:border-yellow-400 ui-checked:bg-yellow-400',
-        label: 'text-gray-300 font-medium tracking-widest uppercase cursor-pointer select-none',
-        indicator: 'bg-gray-800'
-      };
-    } else if (baseInput.includes('border-3') || baseInput.includes('font-mono')) {
-      // Retro theme
-      return {
-        radio: 'w-5 h-5 rounded-full border-3 border-orange-400 ui-checked:border-orange-500 ui-checked:bg-orange-500',
-        label: 'text-pink-600 font-black tracking-wider uppercase cursor-pointer select-none transform skew-x-6',
-        indicator: 'bg-yellow-50'
-      };
-    } else if (baseInput.includes('rounded-3xl') || baseInput.includes('border-4')) {
-      // Playful theme
-      return {
-        radio: 'w-5 h-5 rounded-full border-3 border-pink-300 ui-checked:border-purple-500 ui-checked:bg-purple-500',
-        label: 'text-purple-700 font-bold cursor-pointer select-none',
-        indicator: 'bg-pink-50'
-      };
-    } else if (baseInput.includes('rounded-2xl') && baseInput.includes('green')) {
-      // Nature theme
-      return {
-        radio: 'w-5 h-5 rounded-full border-2 border-green-300 ui-checked:border-emerald-600 ui-checked:bg-emerald-600',
-        label: 'text-emerald-700 font-semibold tracking-wide cursor-pointer select-none',
-        indicator: 'bg-white'
-      };
-    } else if (baseInput.includes('bg-black') || baseInput.includes('border-cyan')) {
-      // Neon theme
-      return {
-        radio: 'w-5 h-5 rounded-full border-2 border-cyan-400 ui-checked:border-cyan-400 ui-checked:bg-cyan-400',
-        label: 'text-green-400 font-bold tracking-wider uppercase cursor-pointer select-none',
-        indicator: 'bg-gray-900'
-      };
-    } else if (baseInput.includes('bg-purple-800') || baseInput.includes('font-serif')) {
-      // Luxury theme
-      return {
-        radio: 'w-5 h-5 rounded-full border border-purple-600 ui-checked:border-yellow-400 ui-checked:bg-yellow-400',
-        label: 'text-yellow-300 font-medium tracking-widest uppercase font-serif cursor-pointer select-none',
-        indicator: 'bg-purple-800'
-      };
-    } else if (baseInput.includes('rounded-xl') && baseInput.includes('backdrop-blur')) {
-      // Modern theme
-      return {
-        radio: 'w-5 h-5 rounded-full border-2 border-gray-200 ui-checked:border-purple-500 ui-checked:bg-purple-500',
-        label: 'text-gray-800 font-semibold cursor-pointer select-none',
-        indicator: 'bg-white'
-      };
-    } else if (baseInput.includes('uppercase') && baseInput.includes('tracking-wider')) {
-      // Professional theme
-      return {
-        radio: 'w-5 h-5 rounded-full border-2 border-slate-300 ui-checked:border-blue-600 ui-checked:bg-blue-600',
-        label: 'text-slate-700 font-bold uppercase tracking-wider cursor-pointer select-none',
-        indicator: 'bg-slate-50'
-      };
-    } else {
-      // Minimal theme (default)
-      return {
-        radio: 'w-5 h-5 rounded-full border border-gray-300 ui-checked:border-blue-500 ui-checked:bg-blue-500',
-        label: 'text-gray-700 font-medium tracking-wide cursor-pointer select-none',
-        indicator: 'bg-gray-50'
-      };
-    }
-  };
 
-  const styles = getRadioStyles();
 
   return (
     <RadioGroup value={selected} onChange={handleChange} className="space-y-3">
@@ -314,10 +382,20 @@ export function HeadlessUIRadioGroup({
           {({ checked }) => (
             <>
               <div className="relative">
-                <div className={cn("transition-all duration-200", styles.radio)} />
+                <div 
+                  className={cn(
+                    "w-5 h-5 rounded-full border-2 transition-all duration-200",
+                    checked 
+                      ? getRadioThemeChecked(themeStyles.input)
+                      : getRadioThemeUnchecked(themeStyles.input)
+                  )} 
+                />
                 {checked && (
                   <div 
-                    className={cn("absolute w-2 h-2 rounded-full", styles.indicator)}
+                    className={cn(
+                      "absolute w-2 h-2 rounded-full",
+                      getRadioIndicatorColor(themeStyles.input)
+                    )}
                     style={{ 
                       top: '50%', 
                       left: '50%', 
@@ -326,14 +404,16 @@ export function HeadlessUIRadioGroup({
                   />
                 )}
               </div>
-              <span className={styles.label}>
+              <span className={cn(getRadioLabelStyle(themeStyles.input))}>
                 {option}
               </span>
-              <input
-                type="hidden"
-                name={name}
-                value={checked ? option : ''}
-              />
+              {checked && (
+                <input
+                  type="hidden"
+                  name={name}
+                  value={option}
+                />
+              )}
             </>
           )}
         </RadioGroup.Option>
@@ -367,69 +447,6 @@ export function HeadlessUICheckbox({
     onChange?.(newChecked, value);
   };
 
-  // Get theme-specific checkbox styling
-  const getCheckboxStyles = () => {
-    const baseInput = themeStyles.input;
-    
-    if (baseInput.includes('bg-gray-900') || baseInput.includes('bg-gray-800')) {
-      // Elegant/Dark themes
-      return {
-        checkbox: 'w-5 h-5 border-2 border-gray-600 rounded ui-checked:border-yellow-400 ui-checked:bg-yellow-400',
-        label: 'text-gray-300 font-medium tracking-widest uppercase cursor-pointer select-none'
-      };
-    } else if (baseInput.includes('border-3') || baseInput.includes('font-mono')) {
-      // Retro theme
-      return {
-        checkbox: 'w-5 h-5 border-3 border-orange-400 rounded-none ui-checked:border-orange-500 ui-checked:bg-orange-500',
-        label: 'text-pink-600 font-black tracking-wider uppercase cursor-pointer select-none transform skew-x-6'
-      };
-    } else if (baseInput.includes('rounded-3xl') || baseInput.includes('border-4')) {
-      // Playful theme
-      return {
-        checkbox: 'w-5 h-5 border-3 border-pink-300 rounded-xl ui-checked:border-purple-500 ui-checked:bg-purple-500',
-        label: 'text-purple-700 font-bold cursor-pointer select-none'
-      };
-    } else if (baseInput.includes('rounded-2xl') && baseInput.includes('green')) {
-      // Nature theme
-      return {
-        checkbox: 'w-5 h-5 border-2 border-green-300 rounded-lg ui-checked:border-emerald-600 ui-checked:bg-emerald-600',
-        label: 'text-emerald-700 font-semibold tracking-wide cursor-pointer select-none'
-      };
-    } else if (baseInput.includes('bg-black') || baseInput.includes('border-cyan')) {
-      // Neon theme
-      return {
-        checkbox: 'w-5 h-5 border-2 border-cyan-400 rounded ui-checked:border-cyan-400 ui-checked:bg-cyan-400',
-        label: 'text-green-400 font-bold tracking-wider uppercase cursor-pointer select-none'
-      };
-    } else if (baseInput.includes('bg-purple-800') || baseInput.includes('font-serif')) {
-      // Luxury theme
-      return {
-        checkbox: 'w-5 h-5 border border-purple-600 rounded ui-checked:border-yellow-400 ui-checked:bg-yellow-400',
-        label: 'text-yellow-300 font-medium tracking-widest uppercase font-serif cursor-pointer select-none'
-      };
-    } else if (baseInput.includes('rounded-xl') && baseInput.includes('backdrop-blur')) {
-      // Modern theme
-      return {
-        checkbox: 'w-5 h-5 border-2 border-gray-200 rounded-md ui-checked:border-purple-500 ui-checked:bg-purple-500',
-        label: 'text-gray-800 font-semibold cursor-pointer select-none'
-      };
-    } else if (baseInput.includes('uppercase') && baseInput.includes('tracking-wider')) {
-      // Professional theme
-      return {
-        checkbox: 'w-5 h-5 border-2 border-slate-300 rounded ui-checked:border-blue-600 ui-checked:bg-blue-600',
-        label: 'text-slate-700 font-bold uppercase tracking-wider cursor-pointer select-none'
-      };
-    } else {
-      // Minimal theme (default)
-      return {
-        checkbox: 'w-5 h-5 border border-gray-300 rounded ui-checked:border-blue-500 ui-checked:bg-blue-500',
-        label: 'text-gray-700 font-medium tracking-wide cursor-pointer select-none'
-      };
-    }
-  };
-
-  const styles = getCheckboxStyles();
-
   return (
     <Checkbox
       checked={checked}
@@ -439,7 +456,14 @@ export function HeadlessUICheckbox({
       {({ checked }) => (
         <>
           <div className="relative">
-            <div className={cn("transition-all duration-200", styles.checkbox)} />
+            <div 
+              className={cn(
+                "w-5 h-5 border-2 transition-all duration-200",
+                checked 
+                  ? getCheckboxThemeChecked(themeStyles.input)
+                  : getCheckboxThemeUnchecked(themeStyles.input)
+              )} 
+            />
             {checked && (
               <svg 
                 className="absolute inset-0 w-full h-full text-white" 
@@ -454,14 +478,16 @@ export function HeadlessUICheckbox({
               </svg>
             )}
           </div>
-          <span className={styles.label}>
+          <span className={cn(getCheckboxLabelStyle(themeStyles.input))}>
             {label}
           </span>
-          <input
-            type="hidden"
-            name={name}
-            value={checked ? value : ''}
-          />
+          {checked && (
+            <input
+              type="hidden"
+              name={name}
+              value={value}
+            />
+          )}
         </>
       )}
     </Checkbox>
