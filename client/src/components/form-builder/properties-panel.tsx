@@ -511,45 +511,7 @@ export function PropertiesPanel({
             </div>
         </div>
 
-        {/* Styling Options */}
-        <div className="mb-8">
-          <h3 className="text-sm font-medium text-neutral-700 mb-4">Styling</h3>
-          <div className="space-y-3">
-            <div>
-              <Label className="text-xs font-medium text-neutral-600 mb-1">Width</Label>
-              <Select 
-                value={selectedElement.styling?.width || 'full'}
-                onValueChange={(value) => handleStylingUpdate('width', value)}
-              >
-                <SelectTrigger className="text-sm">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="full">Full Width</SelectItem>
-                  <SelectItem value="half">Half Width</SelectItem>
-                  <SelectItem value="third">One Third</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            
-            <div>
-              <Label className="text-xs font-medium text-neutral-600 mb-1">Size</Label>
-              <Select 
-                value={selectedElement.styling?.size || 'medium'}
-                onValueChange={(value) => handleStylingUpdate('size', value)}
-              >
-                <SelectTrigger className="text-sm">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="small">Small</SelectItem>
-                  <SelectItem value="medium">Medium</SelectItem>
-                  <SelectItem value="large">Large</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-        </div>
+        
 
         {/* Advanced Settings */}
         <div className="mb-8">
