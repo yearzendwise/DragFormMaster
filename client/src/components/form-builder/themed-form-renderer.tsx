@@ -253,7 +253,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
   }
 
   return (
-    <div className={themeStyles.field}>
+    <>
       {element.type !== 'image' && (
         <label className={themeStyles.label}>
           {element.label}
@@ -266,6 +266,6 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
       {(element as FormElement).helpText && (
         <p className="text-sm text-gray-500 mt-1">{(element as FormElement).helpText}</p>
       )}
-    </div>
+    </>
   );
 }
