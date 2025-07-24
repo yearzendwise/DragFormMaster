@@ -255,6 +255,7 @@ export function useFormWizard() {
         title: 'Untitled Form',
         elements: [],
         settings: {
+          description: '',
           submitButtonText: 'Submit',
           resetButtonText: 'Reset',
           showProgressBar: false,
@@ -339,6 +340,7 @@ export function useFormWizard() {
         title: 'Untitled Form',
         elements: [],
         settings: {
+          description: '',
           submitButtonText: 'Submit',
           resetButtonText: 'Reset',
           showProgressBar: false,

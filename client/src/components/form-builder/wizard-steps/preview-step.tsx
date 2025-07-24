@@ -23,6 +23,7 @@ interface PreviewStepProps {
   elements: FormElement[];
   selectedTheme: FormTheme | null;
   formSettings?: {
+    description?: string;
     submitButtonText?: string;
     resetButtonText?: string;
     showProgressBar?: boolean;
@@ -260,6 +261,10 @@ export function PreviewStep({
         <div className={`${themeStyles.container} ${selectedTheme.id === 'glassmorphism' ? 'glassmorphism-override' : ''}`}>
           {formSettings.showFormTitle !== false && (
             <h1 className={themeStyles.header}>{formTitle}</h1>
+          )}
+          
+          {formSettings.description && (
+            <p className="text-neutral-600 mb-6 leading-relaxed">{formSettings.description}</p>
           )}
           
           <form className="space-y-4" onSubmit={handleFormSubmit}>

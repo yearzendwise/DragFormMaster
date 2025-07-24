@@ -105,6 +105,7 @@ export interface WizardState {
     title: string;
     elements: FormElement[];
     settings?: {
+      description?: string;
       submitButtonText?: string;
       resetButtonText?: string;
       showProgressBar?: boolean;

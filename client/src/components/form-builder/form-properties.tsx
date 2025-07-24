@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -10,6 +11,7 @@ interface FormPropertiesProps {
   onUpdateFormTitle: (title: string) => void;
   onUpdateSettings?: (settings: any) => void;
   settings?: {
+    description?: string;
     submitButtonText?: string;
     resetButtonText?: string;
     showProgressBar?: boolean;
@@ -29,6 +31,7 @@ export function FormProperties({
   const [isOpen, setIsOpen] = useState(true);
   
   const {
+    description = '',
     submitButtonText = 'Submit',
     resetButtonText = 'Reset',
     showProgressBar = false,
@@ -77,6 +80,21 @@ export function FormProperties({
                 onChange={(e) => onUpdateFormTitle(e.target.value)}
                 placeholder="Enter form title..."
                 className="focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            {/* Form Description */}
+            <div>
+              <Label htmlFor="form-description" className="text-sm font-medium text-neutral-700 mb-2">
+                Form Description
+              </Label>
+              <Textarea
+                id="form-description"
+                value={description}
+                onChange={(e) => handleSettingChange('description', e.target.value)}
+                placeholder="Add a description to help users understand the form..."
+                className="focus:ring-2 focus:ring-blue-500 min-h-[60px]"
+                rows={3}
               />
             </div>
 

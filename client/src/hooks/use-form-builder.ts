@@ -17,6 +17,7 @@ export function useFormBuilder(initialTitle?: string, initialElements?: FormElem
   });
 
   const [formSettings, setFormSettings] = useState({
+    description: '',
     submitButtonText: 'Submit',
     resetButtonText: 'Reset',
     showProgressBar: false,
