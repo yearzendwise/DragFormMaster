@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,7 +10,6 @@ interface FormPropertiesProps {
   onUpdateFormTitle: (title: string) => void;
   onUpdateSettings?: (settings: any) => void;
   settings?: {
-    description?: string;
     submitButtonText?: string;
     resetButtonText?: string;
     showProgressBar?: boolean;
@@ -31,7 +29,6 @@ export function FormProperties({
   const [isOpen, setIsOpen] = useState(true);
   
   const {
-    description = '',
     submitButtonText = 'Submit',
     resetButtonText = 'Reset',
     showProgressBar = false,
@@ -81,24 +78,6 @@ export function FormProperties({
                 placeholder="Enter form title..."
                 className="focus:ring-2 focus:ring-blue-500"
               />
-            </div>
-
-            {/* Form Description */}
-            <div>
-              <Label htmlFor="form-description" className="text-sm font-medium text-neutral-700 mb-2">
-                Description
-              </Label>
-              <Textarea
-                id="form-description"
-                value={description}
-                onChange={(e) => handleSettingChange('description', e.target.value)}
-                placeholder="Optional form description..."
-                className="focus:ring-2 focus:ring-blue-500"
-                rows={3}
-              />
-              <p className="text-xs text-neutral-500 mt-1">
-                Brief description shown at the top of your form
-              </p>
             </div>
 
             {/* Button Text Customization */}

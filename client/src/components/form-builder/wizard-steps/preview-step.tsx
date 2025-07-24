@@ -23,7 +23,6 @@ interface PreviewStepProps {
   elements: FormElement[];
   selectedTheme: FormTheme | null;
   formSettings?: {
-    description?: string;
     submitButtonText?: string;
     resetButtonText?: string;
     showProgressBar?: boolean;
