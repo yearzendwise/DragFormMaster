@@ -191,112 +191,52 @@ export function HeadlessUIBooleanSwitch({
 
   const labels = getLabels();
 
-  // Get theme-specific switch styling
-  const getSwitchStyles = () => {
-    const baseInput = themeStyles?.input || '';
-    
-    if (baseInput.includes('bg-gray-900') || baseInput.includes('bg-gray-800')) {
-      // Elegant/Dark themes
-      return {
-        track: enabled 
-          ? 'bg-yellow-400 border-yellow-400' 
-          : 'bg-gray-700 border-gray-600',
-        thumb: 'bg-white',
-        activeLabel: 'text-yellow-400 font-medium tracking-widest uppercase',
-        inactiveLabel: 'text-gray-400 font-medium tracking-widest uppercase'
-      };
-    } else if (baseInput.includes('border-3') || baseInput.includes('font-mono')) {
-      // Retro theme
-      return {
-        track: enabled 
-          ? 'bg-gradient-to-r from-orange-500 to-pink-500 border-orange-400' 
-          : 'bg-yellow-100 border-orange-400',
-        thumb: 'bg-white',
-        activeLabel: 'text-orange-600 font-black tracking-wider uppercase transform skew-x-6',
-        inactiveLabel: 'text-pink-400 font-black tracking-wider uppercase transform skew-x-6'
-      };
-    } else if (baseInput.includes('rounded-3xl') || baseInput.includes('border-4')) {
-      // Playful theme
-      return {
-        track: enabled 
-          ? 'bg-purple-500 border-purple-400' 
-          : 'bg-pink-100 border-pink-300',
-        thumb: 'bg-white',
-        activeLabel: 'text-purple-700 font-bold',
-        inactiveLabel: 'text-pink-400 font-bold'
-      };
-    } else if (baseInput.includes('rounded-2xl') && baseInput.includes('green')) {
-      // Nature theme
-      return {
-        track: enabled 
-          ? 'bg-emerald-500 border-emerald-400' 
-          : 'bg-green-100 border-green-300',
-        thumb: 'bg-white',
-        activeLabel: 'text-emerald-700 font-semibold tracking-wide',
-        inactiveLabel: 'text-green-400 font-semibold tracking-wide'
-      };
-    } else if (baseInput.includes('bg-black') || baseInput.includes('border-cyan')) {
-      // Neon theme
-      return {
-        track: enabled 
-          ? 'bg-cyan-400 border-cyan-400' 
-          : 'bg-gray-800 border-cyan-400',
-        thumb: 'bg-white',
-        activeLabel: 'text-cyan-400 font-bold tracking-wider uppercase',
-        inactiveLabel: 'text-green-400 font-bold tracking-wider uppercase'
-      };
-    } else if (baseInput.includes('bg-purple-800') || baseInput.includes('font-serif')) {
-      // Luxury theme
-      return {
-        track: enabled 
-          ? 'bg-yellow-400 border-yellow-400' 
-          : 'bg-purple-800 border-purple-600',
-        thumb: 'bg-white',
-        activeLabel: 'text-yellow-300 font-medium tracking-widest uppercase font-serif',
-        inactiveLabel: 'text-purple-300 font-medium tracking-widest uppercase font-serif'
-      };
-    } else if (baseInput.includes('rounded-xl') && baseInput.includes('backdrop-blur')) {
-      // Modern theme
-      return {
-        track: enabled 
-          ? 'bg-purple-500 border-purple-500' 
-          : 'bg-gray-200 border-gray-200',
-        thumb: 'bg-white',
-        activeLabel: 'text-purple-700 font-semibold',
-        inactiveLabel: 'text-gray-500 font-semibold'
-      };
-    } else if (baseInput.includes('uppercase') && baseInput.includes('tracking-wider')) {
-      // Professional theme
-      return {
-        track: enabled 
-          ? 'bg-blue-600 border-blue-600' 
-          : 'bg-slate-200 border-slate-300',
-        thumb: 'bg-white',
-        activeLabel: 'text-blue-700 font-bold uppercase tracking-wider',
-        inactiveLabel: 'text-slate-500 font-bold uppercase tracking-wider'
-      };
-    } else {
-      // Minimal theme (default)
-      return {
-        track: enabled 
-          ? 'bg-blue-500 border-blue-500' 
-          : 'bg-gray-200 border-gray-300',
-        thumb: 'bg-white',
-        activeLabel: 'text-blue-700 font-medium tracking-wide',
-        inactiveLabel: 'text-gray-500 font-medium tracking-wide'
-      };
-    }
+  // Use the actual theme's booleanSwitch styles
+  const booleanSwitchStyles = themeStyles?.booleanSwitch || {
+    track: 'bg-gray-200',
+    thumb: 'bg-white',
+    activeLabel: 'text-gray-700 font-medium',
+    inactiveLabel: 'text-gray-400 font-medium'
   };
 
-  const styles = getSwitchStyles();
+  // Clean track style for proper state management
+  const getTrackStyle = () => {
+    let trackClass = booleanSwitchStyles.track;
+    
+    // Remove conflicting data attributes and states
+    trackClass = trackClass.replace(/data-\[state=[^\]]+\]:[^\s]+/g, '');
+    
+    // Apply enabled/disabled styling based on state
+    if (enabled) {
+      // Extract checked styles from the track class
+      const checkedMatch = trackClass.match(/data-\[state=checked\]:([^\s]+)/);
+      if (checkedMatch) {
+        trackClass = checkedMatch[1];
+      } else {
+        // Fallback to the base track style for enabled state
+        trackClass = trackClass.replace(/data-\[state=unchecked\]:[^\s]+/g, '').trim();
+      }
+    } else {
+      // Extract unchecked styles from the track class
+      const uncheckedMatch = trackClass.match(/data-\[state=unchecked\]:([^\s]+)/);
+      if (uncheckedMatch) {
+        trackClass = uncheckedMatch[1];
+      } else {
+        // Fallback to the base track style for disabled state
+        trackClass = trackClass.replace(/data-\[state=checked\]:[^\s]+/g, '').trim();
+      }
+    }
+    
+    return trackClass;
+  };
 
   return (
-    <div className={cn("inline-flex items-center gap-2 sm:gap-3", className)}>
+    <div className={cn("inline-flex items-center justify-center gap-3", className)}>
       {showLabels && (
         <span 
           className={cn(
-            "text-xs sm:text-sm transition-colors cursor-pointer select-none whitespace-nowrap",
-            enabled ? styles.inactiveLabel : styles.activeLabel
+            "text-sm transition-colors cursor-pointer select-none whitespace-nowrap",
+            !enabled ? booleanSwitchStyles.activeLabel : booleanSwitchStyles.inactiveLabel
           )}
           onClick={() => handleChange(false)}
         >
@@ -309,15 +249,15 @@ export function HeadlessUIBooleanSwitch({
         onChange={handleChange}
         disabled={disabled}
         className={cn(
-          "relative inline-flex h-5 w-9 sm:h-6 sm:w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
-          styles.track
+          "relative inline-flex h-6 w-11 items-center rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
+          getTrackStyle()
         )}
       >
         <span
           className={cn(
-            "inline-block h-4 w-4 sm:h-5 sm:w-5 transform rounded-full transition-transform",
-            styles.thumb,
-            enabled ? "translate-x-4 sm:translate-x-5" : "translate-x-0.5"
+            "inline-block h-4 w-4 transform rounded-full transition-transform duration-200 shadow-sm",
+            booleanSwitchStyles.thumb,
+            enabled ? "translate-x-5" : "translate-x-0.5"
           )}
         />
       </Switch>
@@ -325,8 +265,8 @@ export function HeadlessUIBooleanSwitch({
       {showLabels && (
         <span 
           className={cn(
-            "text-xs sm:text-sm transition-colors cursor-pointer select-none whitespace-nowrap",
-            enabled ? styles.activeLabel : styles.inactiveLabel
+            "text-sm transition-colors cursor-pointer select-none whitespace-nowrap",
+            enabled ? booleanSwitchStyles.activeLabel : booleanSwitchStyles.inactiveLabel
           )}
           onClick={() => handleChange(true)}
         >
