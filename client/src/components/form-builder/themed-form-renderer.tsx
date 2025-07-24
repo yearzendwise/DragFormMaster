@@ -123,7 +123,7 @@ function ThemedCheckbox({
         />
         {isChecked && (
           <svg
-            className="absolute inset-0 w-full h-full text-white pointer-events-none"
+            className="absolute inset-0.5 w-4 h-4 text-white pointer-events-none"
             fill="currentColor"
             viewBox="0 0 20 20"
           >
