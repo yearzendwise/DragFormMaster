@@ -10,6 +10,7 @@ interface ThemedFullNameProps {
     input: string;
     label: string;
   };
+  onChange?: (firstName: string, lastName: string) => void;
 }
 
 export function ThemedFullName({
@@ -20,7 +21,8 @@ export function ThemedFullName({
   firstNamePlaceholder = "First Name",
   lastNamePlaceholder = "Last Name",
   className = "",
-  themeStyles
+  themeStyles,
+  onChange
 }: ThemedFullNameProps) {
   return (
     <div className="grid grid-cols-2 gap-3">
@@ -34,6 +36,7 @@ export function ThemedFullName({
           disabled={disabled}
           readOnly={readonly}
           className={`${themeStyles.input} ${className}`}
+          onChange={(e) => onChange?.(e.target.value, (document.getElementById(`${name}-last`) as HTMLInputElement)?.value || '')}
         />
       </div>
       <div>
@@ -46,6 +49,7 @@ export function ThemedFullName({
           disabled={disabled}
           readOnly={readonly}
           className={`${themeStyles.input} ${className}`}
+          onChange={(e) => onChange?.((document.getElementById(`${name}-first`) as HTMLInputElement)?.value || '', e.target.value)}
         />
       </div>
     </div>
