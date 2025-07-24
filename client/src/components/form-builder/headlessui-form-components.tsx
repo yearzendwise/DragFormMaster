@@ -235,6 +235,32 @@ export function HeadlessUIBooleanSwitch({
     return resultClasses.join(' ');
   };
 
+  // Extract and apply proper theme-specific thumb styling
+  const getThumbStyle = () => {
+    const thumbClass = booleanSwitchStyles.thumb;
+    let resultClasses = [];
+    
+    // Extract base classes (shadow, etc.) that should always apply
+    const baseClasses = thumbClass.match(/shadow-[^\s]+|rounded-[^\s]+/g) || [];
+    resultClasses.push(...baseClasses);
+    
+    if (enabled) {
+      // Extract checked state thumb styling
+      const checkedThumbMatch = thumbClass.match(/data-\[state=checked\]:(bg-[^\s]+)/);
+      if (checkedThumbMatch) {
+        resultClasses.push(checkedThumbMatch[1]);
+      }
+    } else {
+      // Extract unchecked state thumb styling
+      const uncheckedThumbMatch = thumbClass.match(/data-\[state=unchecked\]:(bg-[^\s]+)/);
+      if (uncheckedThumbMatch) {
+        resultClasses.push(uncheckedThumbMatch[1]);
+      }
+    }
+    
+    return resultClasses.join(' ');
+  };
+
   return (
     <div className={cn("inline-flex items-center justify-center gap-3", className)}>
       {showLabels && (
@@ -270,7 +296,7 @@ export function HeadlessUIBooleanSwitch({
         <span
           className={cn(
             "pointer-events-none inline-block transform transition-transform duration-200",
-            booleanSwitchStyles.thumb,
+            getThumbStyle(),
             // Always make thumb circular unless theme specifically overrides
             booleanSwitchStyles.thumb.includes('rounded-none') ? "" : "rounded-full",
             enabled ? "translate-x-5" : "translate-x-0.5"
