@@ -70,9 +70,11 @@ export function BuildStep({ onDataChange, initialTitle, initialElements, initial
     }
     
     // Initialize form settings from props
-    if (initialSettings && !hasInitialized.current) {
+    if (initialSettings) {
       Object.keys(initialSettings).forEach(key => {
-        updateFormSettings(key, initialSettings[key]);
+        if ((formSettings as any)[key] !== initialSettings[key]) {
+          updateFormSettings(key, initialSettings[key]);
+        }
       });
     }
   }, [initialTitle, initialElements, initialSettings, formTitle, elements.length, resetFormData, updateFormSettings]);
