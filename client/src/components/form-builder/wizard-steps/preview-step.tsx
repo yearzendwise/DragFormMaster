@@ -289,7 +289,7 @@ export function PreviewStep({
             <>
               <h1 className={themeStyles.header}>{formTitle}</h1>
               {formSettings.description && (
-                <p className={`mb-6 mt-2 leading-relaxed ${getDescriptionStyles(selectedTheme.id)}`}>
+                <p className={`mb-6 -mt-4 leading-relaxed ${getDescriptionStyles(selectedTheme.id)}`}>
                   {formSettings.description}
                 </p>
               )}
