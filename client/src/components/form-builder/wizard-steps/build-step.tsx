@@ -249,9 +249,38 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
         
       </div>
       
-      {/* Disabled Drag Overlay to fix shadow animation issues */}
-      <DragOverlay>
-        {null}
+      {/* Drag Overlay - Must be outside main container for proper z-index */}
+      <DragOverlay 
+        dropAnimation={null}
+        style={{ 
+          zIndex: 10000,
+          position: 'fixed',
+          pointerEvents: 'none',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%'
+        }}
+      >
+        {draggedType && (
+          <div className="p-4 bg-white border-2 border-blue-400 rounded-xl shadow-2xl opacity-95 cursor-grabbing">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl flex items-center justify-center">
+                <span className="text-blue-700 text-sm font-semibold">
+                  {draggedType.split('-')[0].charAt(0).toUpperCase()}
+                </span>
+              </div>
+              <div>
+                <div className="text-sm font-semibold text-neutral-800">
+                  {draggedType.split('-').map(word => 
+                    word.charAt(0).toUpperCase() + word.slice(1)
+                  ).join(' ')}
+                </div>
+                <div className="text-xs text-neutral-500">Drop to add</div>
+              </div>
+            </div>
+          </div>
+        )}
       </DragOverlay>
     </DndContext>
   );
