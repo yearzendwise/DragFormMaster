@@ -202,24 +202,37 @@ export function HeadlessUIBooleanSwitch({
   // Extract and apply proper theme-specific track styling
   const getTrackStyle = () => {
     const trackClass = booleanSwitchStyles.track;
+    let resultClasses = [];
+    
+    // Extract base border classes that should always apply
+    const borderClasses = trackClass.match(/border-\d+|border-2|border-3|border-4/g) || [];
+    resultClasses.push(...borderClasses);
     
     if (enabled) {
-      // Extract checked state styling
-      const checkedMatch = trackClass.match(/data-\[state=checked\]:([^\s]+(?:\s+[^\s]*)*)/);
-      if (checkedMatch) {
-        return checkedMatch[1];
+      // Extract checked state styling (background and border)
+      const checkedBgMatch = trackClass.match(/data-\[state=checked\]:(bg-[^\s]+(?:\s+[^\s]*)*)/);
+      if (checkedBgMatch) {
+        resultClasses.push(checkedBgMatch[1]);
       }
-      // Fallback for enabled state
-      return trackClass.replace(/data-\[state=unchecked\]:[^\s]+/g, '').trim();
+      
+      const checkedBorderMatch = trackClass.match(/data-\[state=checked\]:(border-[^\s]+)/);
+      if (checkedBorderMatch) {
+        resultClasses.push(checkedBorderMatch[1]);
+      }
     } else {
-      // Extract unchecked state styling
-      const uncheckedMatch = trackClass.match(/data-\[state=unchecked\]:([^\s]+)/);
-      if (uncheckedMatch) {
-        return uncheckedMatch[1];
+      // Extract unchecked state styling (background and border)
+      const uncheckedBgMatch = trackClass.match(/data-\[state=unchecked\]:(bg-[^\s]+)/);
+      if (uncheckedBgMatch) {
+        resultClasses.push(uncheckedBgMatch[1]);
       }
-      // Fallback for disabled state
-      return trackClass.replace(/data-\[state=checked\]:[^\s]+/g, '').trim();
+      
+      const uncheckedBorderMatch = trackClass.match(/data-\[state=unchecked\]:(border-[^\s]+)/);
+      if (uncheckedBorderMatch) {
+        resultClasses.push(uncheckedBorderMatch[1]);
+      }
     }
+    
+    return resultClasses.join(' ');
   };
 
   return (
@@ -242,6 +255,8 @@ export function HeadlessUIBooleanSwitch({
         disabled={disabled}
         className={cn(
           "relative inline-flex shrink-0 cursor-pointer items-center transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
+          // Ensure there's always a border for visibility
+          getTrackStyle() || "border-2 border-gray-300",
           getTrackStyle(),
           // Handle special shape cases per theme
           booleanSwitchStyles.track.includes('rounded-none') ? "rounded-none" : "rounded-full"
