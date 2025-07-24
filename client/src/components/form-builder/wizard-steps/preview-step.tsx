@@ -3,7 +3,7 @@ import { ThemedFormRenderer } from '@/components/form-builder/themed-form-render
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Save, Download, Code, Mail, Clock, User } from 'lucide-react';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 
 // Extended type for preview elements that includes buttons and spacer
 type PreviewFormElement = FormElement | {
@@ -69,6 +69,7 @@ export function PreviewStep({
   const [showJsonPreview, setShowJsonPreview] = useState(false);
   const [showEmailPreview, setShowEmailPreview] = useState(false);
   const [actualFormData, setActualFormData] = useState<Record<string, any>>({});
+  const [liveFormData, setLiveFormData] = useState<Record<string, any>>({});
 
   // Generate sample form data based on form elements
   const generateSampleFormData = () => {
@@ -258,18 +259,26 @@ export function PreviewStep({
 
   const themeStyles = selectedTheme.styles;
 
+  // Track form changes in real-time
+  const handleFormChange = useCallback((fieldName: string, value: any) => {
+    setLiveFormData(prev => ({
+      ...prev,
+      [fieldName]: value
+    }));
+  }, []);
+
   // Calculate progress percentage based on filled fields
   const progressPercentage = useMemo(() => {
     const totalFields = elements.length;
     if (totalFields === 0) return 0;
     
-    const filledFields = Object.keys(actualFormData).filter(key => {
-      const value = actualFormData[key];
-      return value !== null && value !== undefined && value !== '';
+    const filledFields = Object.keys(liveFormData).filter(key => {
+      const value = liveFormData[key];
+      return value !== null && value !== undefined && value !== '' && value !== false;
     }).length;
     
     return Math.round((filledFields / totalFields) * 100);
-  }, [elements.length, actualFormData]);
+  }, [elements.length, liveFormData]);
 
   // Progress bar component
   const ThemedProgressBar = () => {
@@ -339,6 +348,7 @@ export function PreviewStep({
                 key={element.id}
                 element={element as FormElement}
                 themeStyles={themeStyles}
+                onChange={handleFormChange}
               />
             ))}
             

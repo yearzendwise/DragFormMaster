@@ -24,9 +24,10 @@ type PreviewFormElement = FormElement | {
 interface ThemedFormRendererProps {
   element: PreviewFormElement;
   themeStyles: FormTheme['styles'];
+  onChange?: (fieldName: string, value: any) => void;
 }
 
-export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererProps) {
+export function ThemedFormRenderer({ element, themeStyles, onChange }: ThemedFormRendererProps) {
   const renderFormControl = () => {
     const baseInputClasses = themeStyles.input;
     
@@ -57,6 +58,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
             maxLength={element.validation?.maxLength}
             className={baseInputClasses}
             style={forceTransparentStyle}
+            onChange={(e) => onChange?.(element.name, e.target.value)}
           />
         );
 
@@ -71,6 +73,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
             name={element.name}
             className={baseInputClasses}
             style={forceTransparentStyle}
+            onChange={(e) => onChange?.(element.name, e.target.value)}
           />
         );
 
@@ -86,6 +89,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
             min={element.validation?.min}
             max={element.validation?.max}
             className={baseInputClasses}
+            onChange={(value) => onChange?.(element.name, value)}
           />
         );
 
@@ -102,6 +106,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
             maxLength={element.validation?.maxLength}
             className={baseInputClasses}
             style={forceTransparentStyle}
+            onChange={(e) => onChange?.(element.name, e.target.value)}
           />
         );
 
@@ -112,6 +117,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
             required={element.required}
             disabled={element.disabled}
             className={baseInputClasses}
+            onChange={(e) => onChange?.(element.name, e.target.value)}
           >
             <option value="">{element.placeholder || 'Select an option'}</option>
             {element.options?.map((option, index) => (
@@ -132,6 +138,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
                 value={option}
                 label={option}
                 themeStyles={themeStyles}
+                onChange={(checked) => onChange?.(element.name + '_' + option, checked)}
               />
             ))}
           </div>
@@ -143,6 +150,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
             name={element.name}
             options={element.options || []}
             themeStyles={themeStyles}
+            onChange={(value) => onChange?.(element.name, value)}
           />
         );
 
@@ -214,6 +222,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
             variant={(element as FormElement).rateVariant || "numbers"}
             showNumbers={(element as FormElement).rateVariant === "numbers" || !(element as FormElement).rateVariant}
             className="justify-center"
+            onChange={(value) => onChange?.(element.name, value)}
           />
         );
 
@@ -227,6 +236,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
             showLabels={true}
             className="justify-center"
             themeStyles={themeStyles}
+            onChange={(value) => onChange?.(element.name, value)}
           />
         );
 
@@ -240,6 +250,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
             variant={(element as FormElement).dateTimeVariant || "date-only"}
             themeStyles={themeStyles}
             placeholder={element.placeholder}
+            onChange={(value) => onChange?.(element.name, value)}
           />
         );
 
@@ -253,6 +264,10 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
             firstNamePlaceholder="First Name"
             lastNamePlaceholder="Last Name"
             themeStyles={themeStyles}
+            onChange={(firstName, lastName) => {
+              onChange?.(element.name + '_first', firstName);
+              onChange?.(element.name + '_last', lastName);
+            }}
           />
         );
 
