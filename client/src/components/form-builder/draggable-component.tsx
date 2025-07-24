@@ -39,7 +39,7 @@ export function DraggableComponent({ item, onAddElement, isMobile = false }: Dra
 
   const style = transform ? {
     transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-    opacity: isDragging ? 0.5 : 1,
+    opacity: isDragging ? 0 : 1,
   } : undefined;
 
   const IconComponent = iconMap[item.type] || Type;
@@ -86,9 +86,7 @@ export function DraggableComponent({ item, onAddElement, isMobile = false }: Dra
           </div>
         </div>
         
-        {isDragging && (
-          <div className="absolute inset-0 rounded-xl border-2 border-blue-400 bg-blue-50/20 animate-pulse"></div>
-        )}
+
       </div>
     </div>
   );
