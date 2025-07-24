@@ -365,22 +365,18 @@ export function PropertiesPanel({
               {selectedElement.type === 'datetime-picker' && (
                 <div>
                   <Label className="text-xs font-medium text-neutral-600 mb-1">Input Type</Label>
-                  <Select 
+                  <select 
                     value={selectedElement.dateTimeVariant || 'date-only'}
-                    onValueChange={(value) => {
-                      console.log('DateTime variant changing to:', value);
-                      handleUpdate('dateTimeVariant', value);
+                    onChange={(e) => {
+                      console.log('DateTime variant changing to:', e.target.value);
+                      handleUpdate('dateTimeVariant', e.target.value);
                     }}
+                    className="w-full text-sm border border-gray-300 rounded-md px-3 py-2 bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
-                    <SelectTrigger className="text-sm">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent className="z-50">
-                      <SelectItem value="date-only">📅 Date Only</SelectItem>
-                      <SelectItem value="time-only">🕐 Time Only</SelectItem>
-                      <SelectItem value="datetime">📅🕐 Date & Time</SelectItem>
-                    </SelectContent>
-                  </Select>
+                    <option value="date-only">📅 Date Only</option>
+                    <option value="time-only">🕐 Time Only</option>
+                    <option value="datetime">📅🕐 Date & Time</option>
+                  </select>
                   <div className="text-xs text-neutral-500 mt-1">
                     Current: {selectedElement.dateTimeVariant || 'date-only'}
                   </div>
