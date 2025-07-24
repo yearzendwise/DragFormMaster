@@ -12,8 +12,6 @@ interface FormPropertiesProps {
   onUpdateSettings?: (settings: any) => void;
   settings?: {
     description?: string;
-    submitButtonText?: string;
-    resetButtonText?: string;
     showProgressBar?: boolean;
     allowSaveProgress?: boolean;
     showFormTitle?: boolean;
@@ -32,8 +30,6 @@ export function FormProperties({
   
   const {
     description = '',
-    submitButtonText = 'Submit',
-    resetButtonText = 'Reset',
     showProgressBar = false,
     allowSaveProgress = false,
     showFormTitle = true,
@@ -98,36 +94,7 @@ export function FormProperties({
               />
             </div>
 
-            {/* Button Text Customization */}
-            <div className="space-y-3">
-              <h4 className="text-sm font-medium text-neutral-700">Button Labels</h4>
-              
-              <div>
-                <Label htmlFor="submit-text" className="text-xs font-medium text-neutral-600 mb-1">
-                  Submit Button
-                </Label>
-                <Input
-                  id="submit-text"
-                  value={submitButtonText}
-                  onChange={(e) => handleSettingChange('submitButtonText', e.target.value)}
-                  placeholder="Submit"
-                  className="focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
 
-              <div>
-                <Label htmlFor="reset-text" className="text-xs font-medium text-neutral-600 mb-1">
-                  Reset Button
-                </Label>
-                <Input
-                  id="reset-text"
-                  value={resetButtonText}
-                  onChange={(e) => handleSettingChange('resetButtonText', e.target.value)}
-                  placeholder="Reset"
-                  className="focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-            </div>
 
             {/* Form Options */}
             <div className="space-y-3">

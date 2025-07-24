@@ -256,8 +256,6 @@ export function useFormWizard() {
         elements: [],
         settings: {
           description: '',
-          submitButtonText: 'Submit',
-          resetButtonText: 'Reset',
           showProgressBar: false,
           allowSaveProgress: false,
           showFormTitle: true,
@@ -341,8 +339,6 @@ export function useFormWizard() {
         elements: [],
         settings: {
           description: '',
-          submitButtonText: 'Submit',
-          resetButtonText: 'Reset',
           showProgressBar: false,
           allowSaveProgress: false,
           showFormTitle: true,
