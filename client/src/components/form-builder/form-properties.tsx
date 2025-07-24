@@ -159,18 +159,7 @@ export function FormProperties({
                 </Label>
               </div>
 
-              <div className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  id="save-progress"
-                  checked={allowSaveProgress}
-                  onChange={(e) => handleSettingChange('allowSaveProgress', e.target.checked)}
-                  className="rounded border-neutral-300 text-blue-600 focus:ring-blue-500"
-                />
-                <Label htmlFor="save-progress" className="text-xs text-neutral-600">
-                  Allow save progress
-                </Label>
-              </div>
+              
             </div>
 
             {/* Form Info */}
