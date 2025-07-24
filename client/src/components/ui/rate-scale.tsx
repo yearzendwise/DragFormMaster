@@ -55,26 +55,57 @@ const RateScale = React.forwardRef<HTMLDivElement, RateScaleProps>(
 
     // Face emoji mapping for different rating values
     const getFaceEmoji = (rating: number, isActive: boolean, isHovered: boolean) => {
-      const totalRange = max - min + 1
-      const position = (rating - min) / (totalRange - 1)
-      
-      let baseEmoji = "😐"
-      if (position <= 0.2) baseEmoji = "😢"
-      else if (position <= 0.4) baseEmoji = "😕"
-      else if (position <= 0.6) baseEmoji = "😐"
-      else if (position <= 0.8) baseEmoji = "🙂"
-      else baseEmoji = "😊"
-      
-      // Show excited face on hover or active
-      if (isActive || isHovered) {
-        if (position <= 0.2) return "😭"
-        else if (position <= 0.4) return "☹️"
-        else if (position <= 0.6) return "😐"
-        else if (position <= 0.8) return "😃"
-        else return "🤩"
+      // Comprehensive 1-10 emoji mapping for more accurate representation
+      const emojiMap: { [key: number]: { base: string; active: string } } = {
+        1: { base: "😭", active: "💔" },
+        2: { base: "😢", active: "😰" },
+        3: { base: "😟", active: "😔" },
+        4: { base: "😕", active: "😒" },
+        5: { base: "😐", active: "😑" },
+        6: { base: "🙂", active: "😊" },
+        7: { base: "😊", active: "😄" },
+        8: { base: "😃", active: "🤗" },
+        9: { base: "😍", active: "🤩" },
+        10: { base: "🤩", active: "🎉" }
       }
       
-      return baseEmoji
+      // For ratings outside 1-10, calculate position-based emoji
+      if (rating < 1 || rating > 10 || !emojiMap[rating]) {
+        const totalRange = max - min + 1
+        const position = (rating - min) / (totalRange - 1)
+        
+        let baseEmoji = "😐"
+        if (position <= 0.1) baseEmoji = "😭"
+        else if (position <= 0.2) baseEmoji = "😢"
+        else if (position <= 0.3) baseEmoji = "😟"
+        else if (position <= 0.4) baseEmoji = "😕"
+        else if (position <= 0.5) baseEmoji = "😐"
+        else if (position <= 0.6) baseEmoji = "🙂"
+        else if (position <= 0.7) baseEmoji = "😊"
+        else if (position <= 0.8) baseEmoji = "😃"
+        else if (position <= 0.9) baseEmoji = "😍"
+        else baseEmoji = "🤩"
+        
+        // Show alternate emoji on hover or active
+        if (isActive || isHovered) {
+          if (position <= 0.1) return "💔"
+          else if (position <= 0.2) return "😰"
+          else if (position <= 0.3) return "😔"
+          else if (position <= 0.4) return "😒"
+          else if (position <= 0.5) return "😑"
+          else if (position <= 0.6) return "😊"
+          else if (position <= 0.7) return "😄"
+          else if (position <= 0.8) return "🤗"
+          else if (position <= 0.9) return "🤩"
+          else return "🎉"
+        }
+        
+        return baseEmoji
+      }
+      
+      // Use specific emoji for 1-10 ratings
+      const emoji = emojiMap[rating]
+      return (isActive || isHovered) ? emoji.active : emoji.base
     }
 
     if (variant === "stars") {
