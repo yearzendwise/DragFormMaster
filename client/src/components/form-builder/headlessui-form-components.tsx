@@ -249,16 +249,27 @@ export function HeadlessUIBooleanSwitch({
         onChange={handleChange}
         disabled={disabled}
         className={cn(
-          "relative inline-flex h-6 w-11 items-center rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
+          "relative inline-flex shrink-0 cursor-pointer items-center transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
           getTrackStyle()
         )}
+        style={{
+          width: '44px',
+          height: '24px',
+          borderRadius: '9999px',
+          minWidth: '44px'
+        }}
       >
         <span
           className={cn(
-            "inline-block h-4 w-4 transform rounded-full transition-transform duration-200 shadow-sm",
+            "pointer-events-none inline-block transform transition-transform duration-200 shadow-sm",
             booleanSwitchStyles.thumb,
             enabled ? "translate-x-5" : "translate-x-0.5"
           )}
+          style={{
+            width: '16px',
+            height: '16px',
+            borderRadius: '50%'
+          }}
         />
       </Switch>
       
