@@ -261,6 +261,7 @@ export function PreviewStep({
 
   // Track form changes in real-time
   const handleFormChange = useCallback((fieldName: string, value: any) => {
+    console.log('Form change detected:', fieldName, value);
     setLiveFormData(prev => ({
       ...prev,
       [fieldName]: value

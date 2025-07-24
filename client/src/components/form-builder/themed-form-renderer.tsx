@@ -138,7 +138,7 @@ export function ThemedFormRenderer({ element, themeStyles, onChange }: ThemedFor
                 value={option}
                 label={option}
                 themeStyles={themeStyles}
-                onChange={(checked) => onChange?.(element.name + '_' + option, checked)}
+                onChange={(checked, value) => onChange?.(element.name + '_' + value, checked)}
               />
             ))}
           </div>
@@ -222,7 +222,7 @@ export function ThemedFormRenderer({ element, themeStyles, onChange }: ThemedFor
             variant={(element as FormElement).rateVariant || "numbers"}
             showNumbers={(element as FormElement).rateVariant === "numbers" || !(element as FormElement).rateVariant}
             className="justify-center"
-            onChange={(value) => onChange?.(element.name, value)}
+            onValueChange={(value) => onChange?.(element.name, value)}
           />
         );
 
@@ -236,7 +236,7 @@ export function ThemedFormRenderer({ element, themeStyles, onChange }: ThemedFor
             showLabels={true}
             className="justify-center"
             themeStyles={themeStyles}
-            onChange={(value) => onChange?.(element.name, value)}
+            onValueChange={(value) => onChange?.(element.name, value)}
           />
         );
 
