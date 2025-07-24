@@ -81,18 +81,6 @@ export function FormWizard() {
       {/* Header with Progress */}
       <header className="bg-white/95 backdrop-blur-lg border-b border-slate-200/60 h-16 flex items-center justify-between px-6 shadow-sm">
         <div className="flex items-center space-x-6">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center shadow-lg">
-              <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-slate-800">FormCraft</h1>
-              <p className="text-xs text-slate-500 -mt-0.5">Wizard Mode</p>
-            </div>
-          </div>
-          
           {/* Progress Steps */}
           <div className="hidden lg:flex items-center space-x-4">
             {[
