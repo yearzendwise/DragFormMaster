@@ -66,16 +66,10 @@ export function useFormBuilder(initialTitle?: string, initialElements?: FormElem
   }, []);
 
   const updateElement = useCallback((id: string, updates: Partial<FormElement>) => {
-    // Normalize field name if it's being updated
-    const normalizedUpdates = { ...updates };
-    if (updates.name) {
-      normalizedUpdates.name = normalizeFieldName(updates.name);
-    }
-    
     setState(prev => ({
       ...prev,
       elements: prev.elements.map(el => 
-        el.id === id ? { ...el, ...normalizedUpdates } : el
+        el.id === id ? { ...el, ...updates } : el
       ),
     }));
   }, []);
@@ -257,14 +251,16 @@ function validateFieldName(name: string): boolean {
 }
 
 function normalizeFieldName(input: string): string {
+  if (!input || input.trim() === '') return 'field-name';
+  
   return input
     .toLowerCase() // Convert to lowercase
     .replace(/[^a-z0-9\-\s]/g, '') // Remove special chars except hyphens and spaces
     .replace(/\s+/g, '-') // Replace spaces with hyphens
     .replace(/--+/g, '-') // Replace multiple hyphens with single hyphen
     .replace(/^-+|-+$/g, '') // Remove leading/trailing hyphens
-    .replace(/^[0-9]/, 'field-$&') // Ensure it starts with a letter
-    || 'field-name'; // Fallback if empty
+    .replace(/^[0-9]+/, 'field-$&') // Ensure it starts with a letter if it starts with numbers
+    || 'field-name'; // Fallback if empty after normalization
 }
 
 function ensureUniqueFieldNames(elements: FormElement[]): FormElement[] {
