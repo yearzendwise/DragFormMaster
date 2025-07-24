@@ -66,10 +66,16 @@ export function useFormBuilder(initialTitle?: string, initialElements?: FormElem
   }, []);
 
   const updateElement = useCallback((id: string, updates: Partial<FormElement>) => {
+    // Normalize field name if it's being updated
+    const normalizedUpdates = { ...updates };
+    if (updates.name) {
+      normalizedUpdates.name = normalizeFieldName(updates.name);
+    }
+    
     setState(prev => ({
       ...prev,
       elements: prev.elements.map(el => 
-        el.id === id ? { ...el, ...updates } : el
+        el.id === id ? { ...el, ...normalizedUpdates } : el
       ),
     }));
   }, []);
@@ -117,18 +123,24 @@ export function useFormBuilder(initialTitle?: string, initialElements?: FormElem
   }, []);
 
   const resetFormData = useCallback((title: string, elements: FormElement[]) => {
+    // Ensure all field names follow the formatting rules
+    const normalizedElements = ensureUniqueFieldNames(elements);
+    
     setState(prev => ({
       ...prev,
       formTitle: title,
-      elements: elements,
+      elements: normalizedElements,
       selectedElementId: null
     }));
   }, []);
 
   const exportForm = useCallback(() => {
+    // Ensure all field names are properly formatted before export
+    const normalizedElements = ensureUniqueFieldNames(state.elements);
+    
     const formConfig = {
       title: state.formTitle,
-      elements: state.elements,
+      elements: normalizedElements,
       settings: state.settings,
     };
     
@@ -154,7 +166,7 @@ export function useFormBuilder(initialTitle?: string, initialElements?: FormElem
       required: false,
       disabled: false,
       readonly: false,
-      name: `field-${state.elements.length + 1}`,
+      name: generateFieldName(type),
       ...(type === 'select' && { options: [] }),
       ...(type === 'radio' && { options: [] }),
       ...(type === 'checkbox' && { checked: false }),
@@ -233,5 +245,46 @@ function getDefaultPlaceholder(type: FormElementType): string {
 
 function generateFieldName(type: FormElementType): string {
   const timestamp = Date.now().toString(36);
-  return `${type.replace('-', '_')}_${timestamp}`;
+  // Convert type to valid field name format (a-z and hyphens only)
+  const normalizedType = type.replace(/[^a-z\-]/g, '');
+  return `${normalizedType}-${timestamp}`;
 }
+
+function validateFieldName(name: string): boolean {
+  // Only allow lowercase letters (a-z) and hyphens (-), must start with letter
+  const validPattern = /^[a-z][a-z\-]*$/;
+  return validPattern.test(name) && name.length > 0;
+}
+
+function normalizeFieldName(input: string): string {
+  return input
+    .toLowerCase() // Convert to lowercase
+    .replace(/[^a-z0-9\-\s]/g, '') // Remove special chars except hyphens and spaces
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/--+/g, '-') // Replace multiple hyphens with single hyphen
+    .replace(/^-+|-+$/g, '') // Remove leading/trailing hyphens
+    .replace(/^[0-9]/, 'field-$&') // Ensure it starts with a letter
+    || 'field-name'; // Fallback if empty
+}
+
+function ensureUniqueFieldNames(elements: FormElement[]): FormElement[] {
+  const usedNames = new Set<string>();
+  
+  return elements.map((element) => {
+    let normalizedName = normalizeFieldName(element.name);
+    
+    // Ensure uniqueness by adding suffix if needed
+    let counter = 1;
+    let finalName = normalizedName;
+    while (usedNames.has(finalName)) {
+      finalName = `${normalizedName}-${counter}`;
+      counter++;
+    }
+    
+    usedNames.add(finalName);
+    return { ...element, name: finalName };
+  });
+}
+
+// Export utility functions for field name validation
+export { validateFieldName, normalizeFieldName, ensureUniqueFieldNames };

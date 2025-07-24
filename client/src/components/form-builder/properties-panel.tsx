@@ -6,9 +6,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { LanguageSelector } from '@/components/ui/language-selector';
-import { Fragment } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { ChevronUpDownIcon, CheckIcon } from '@heroicons/react/24/solid';
+import { validateFieldName, normalizeFieldName } from '@/hooks/use-form-builder';
 
 interface PropertiesPanelProps {
   selectedElement: FormElement | null;
@@ -158,8 +159,26 @@ export function PropertiesPanel({
               id="name"
               value={selectedElement.name}
               onChange={(e) => handleUpdate('name', e.target.value)}
-              className="focus:ring-2 focus:ring-blue-500"
+              className={`focus:ring-2 ${
+                validateFieldName(selectedElement.name) 
+                  ? 'focus:ring-blue-500 border-gray-300' 
+                  : 'focus:ring-red-500 border-red-300'
+              }`}
+              placeholder="field-name"
             />
+            <div className="mt-1 space-y-1">
+              {!validateFieldName(selectedElement.name) && (
+                <p className="text-xs text-red-600 flex items-center gap-1">
+                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                  </svg>
+                  Must start with a letter and contain only a-z and hyphens (-)
+                </p>
+              )}
+              <p className="text-xs text-neutral-500">
+                Auto-formatted: Only lowercase letters and hyphens allowed
+              </p>
+            </div>
           </div>
 
           {/* Image-specific properties */}
