@@ -108,7 +108,7 @@ export function ComponentPalette({ onAddElement }: ComponentPaletteProps) {
   const isMobile = window.innerWidth < 1024; // lg breakpoint
 
   return (
-    <aside className="w-80 lg:w-80 bg-gradient-to-b from-slate-50 to-white border-r border-slate-200/60 shadow-sm relative h-full flex flex-col">
+    <aside className="w-80 lg:w-80 bg-gradient-to-b from-slate-50 to-white border-r border-slate-200/60 shadow-sm relative z-10 h-full flex flex-col">
       <div className="p-4 lg:p-6 flex-1 overflow-y-auto">
         <div className="mb-6">
           <h2 className="text-lg font-bold text-slate-800 mb-1">Form Components</h2>

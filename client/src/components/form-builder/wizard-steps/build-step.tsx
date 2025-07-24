@@ -139,12 +139,12 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
     >
       <div className="flex-1 flex relative h-full">
         {/* Left Sidebar - Component Palette */}
-        <div className="hidden lg:block flex-none relative">
+        <div className="hidden lg:block flex-none relative z-20">
           <ComponentPalette onAddElement={handleAddElement} />
         </div>
         
         {/* Main Content Area */}
-        <div className="flex-1 flex flex-col min-w-0 relative">
+        <div className="flex-1 flex flex-col min-w-0 relative z-10">
           <FormCanvas
             formTitle={formTitle}
             elements={elements}
@@ -163,7 +163,7 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
         </div>
         
         {/* Right Sidebar - Properties Panel */}
-        <div className="hidden lg:block flex-none relative">
+        <div className="hidden lg:block flex-none relative z-20">
           <PropertiesPanel
             selectedElement={selectedElement}
             onUpdateElement={updateElement}
@@ -247,41 +247,26 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
           </div>
         )}
         
-      </div>
-      
-      {/* Drag Overlay - Must be outside main container for proper z-index */}
-      <DragOverlay 
-        dropAnimation={null}
-        style={{ 
-          zIndex: 10000,
-          position: 'fixed',
-          pointerEvents: 'none',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%'
-        }}
-      >
-        {draggedType && (
-          <div className="p-4 bg-white border-2 border-blue-400 rounded-xl shadow-2xl opacity-95 cursor-grabbing">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl flex items-center justify-center">
-                <span className="text-blue-700 text-sm font-semibold">
-                  {draggedType.split('-')[0].charAt(0).toUpperCase()}
-                </span>
-              </div>
-              <div>
-                <div className="text-sm font-semibold text-neutral-800">
-                  {draggedType.split('-').map(word => 
-                    word.charAt(0).toUpperCase() + word.slice(1)
-                  ).join(' ')}
+        {/* Drag Overlay */}
+        <DragOverlay dropAnimation={null}>
+          {draggedType && (
+            <div className="p-4 bg-white border-2 border-blue-400 rounded-xl shadow-xl opacity-95 pointer-events-none">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <svg className="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+                  </svg>
                 </div>
-                <div className="text-xs text-neutral-500">Drop to add</div>
+                <div className="text-sm font-medium text-blue-700">
+                  {draggedType.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                </div>
               </div>
             </div>
-          </div>
-        )}
-      </DragOverlay>
+          )}
+        </DragOverlay>
+
+
+      </div>
     </DndContext>
   );
 }
