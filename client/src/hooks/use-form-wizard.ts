@@ -228,6 +228,82 @@ const defaultThemes: FormTheme[] = [
         fill: 'bg-gradient-to-r from-orange-500 to-pink-500 h-4 rounded-none transition-all duration-400 ease-out shadow-lg transform -skew-x-6'
       }
     }
+  },
+  // New themes added
+  {
+    id: 'cosmic',
+    name: 'Cosmic',
+    description: 'Space-themed design with cosmic gradients and starry effects',
+    preview: 'bg-gradient-to-br from-purple-900 via-indigo-900 to-black',
+    styles: {
+      container: 'max-w-2xl mx-auto p-8 bg-gradient-to-br from-slate-900/95 via-purple-900/95 to-black/95 backdrop-blur-xl border border-purple-500/30 rounded-2xl shadow-2xl relative overflow-hidden before:content-[""] before:absolute before:inset-0 before:bg-[url("data:image/svg+xml,%3Csvg width="40" height="40" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="white" fill-opacity="0.05"%3E%3Ccircle cx="3" cy="3" r="1"/%3E%3Ccircle cx="13" cy="13" r="1"/%3E%3Ccircle cx="23" cy="5" r="1"/%3E%3Ccircle cx="33" cy="15" r="1"/%3E%3C/g%3E%3C/svg%3E")]',
+      header: 'text-4xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent mb-8 tracking-wide',
+      field: 'mb-6',
+      label: 'block text-sm font-medium text-purple-200 mb-3 tracking-wide',
+      input: 'w-full px-4 py-3 h-12 border border-purple-500/40 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 bg-black/40 backdrop-blur-sm text-white placeholder-purple-300/60',
+      button: 'w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 px-6 rounded-lg hover:from-purple-500 hover:to-pink-500 transition-all duration-300 font-semibold shadow-lg hover:shadow-purple-500/50 transform hover:scale-105',
+      background: 'bg-gradient-to-br from-black via-purple-950 to-indigo-950',
+      booleanSwitch: {
+        track: 'border-2 data-[state=unchecked]:bg-purple-900/40 data-[state=unchecked]:border-purple-500/40 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-purple-500 data-[state=checked]:to-pink-500 data-[state=checked]:border-purple-400',
+        thumb: 'data-[state=unchecked]:bg-purple-300 data-[state=checked]:bg-cyan-300 shadow-lg shadow-purple-500/20',
+        activeLabel: 'text-purple-200 font-medium',
+        inactiveLabel: 'text-purple-400/60'
+      },
+      progressBar: {
+        container: 'w-full bg-purple-900/40 rounded-full h-3 mb-6 border border-purple-500/30',
+        fill: 'bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 h-3 rounded-full transition-all duration-700 ease-out shadow-lg shadow-purple-500/30'
+      }
+    }
+  },
+  {
+    id: 'brutalist',
+    name: 'Brutalist',
+    description: 'Raw, industrial design with bold typography and concrete textures',
+    preview: 'bg-gray-800 border-4 border-black',
+    styles: {
+      container: 'max-w-2xl mx-auto p-8 bg-gray-100 border-8 border-black shadow-[8px_8px_0_0_#000000]',
+      header: 'text-5xl font-black text-black mb-8 uppercase tracking-tight',
+      field: 'mb-6',
+      label: 'block text-sm font-black text-black mb-2 uppercase tracking-wider',
+      input: 'w-full px-4 py-3 h-12 border-4 border-black bg-white focus:outline-none focus:bg-yellow-100 transition-all duration-100 text-black font-bold',
+      button: 'w-full bg-black text-white py-4 px-6 hover:bg-gray-800 transition-all duration-100 font-black uppercase tracking-wider shadow-[4px_4px_0_0_#000000] hover:shadow-[2px_2px_0_0_#000000] hover:translate-x-[2px] hover:translate-y-[2px]',
+      background: 'bg-gray-300',
+      booleanSwitch: {
+        track: 'border-4 data-[state=unchecked]:bg-gray-400 data-[state=unchecked]:border-black data-[state=checked]:bg-black data-[state=checked]:border-black',
+        thumb: 'data-[state=unchecked]:bg-black data-[state=checked]:bg-white shadow-[2px_2px_0_0_#000000]',
+        activeLabel: 'text-black font-black uppercase',
+        inactiveLabel: 'text-gray-600 font-black uppercase'
+      },
+      progressBar: {
+        container: 'w-full bg-white border-4 border-black h-6 mb-6',
+        fill: 'bg-black h-6 transition-all duration-200 ease-linear'
+      }
+    }
+  },
+  {
+    id: 'pastel-dream',
+    name: 'Pastel Dream',
+    description: 'Soft, dreamy design with gentle pastels and cloud-like elements',
+    preview: 'bg-gradient-to-br from-pink-200 via-purple-200 to-indigo-200',
+    styles: {
+      container: 'max-w-2xl mx-auto p-8 bg-white/80 backdrop-blur-lg border border-purple-200/50 rounded-3xl shadow-xl relative overflow-hidden before:content-[""] before:absolute before:inset-0 before:bg-gradient-to-br before:from-pink-100/30 before:via-purple-100/30 before:to-blue-100/30 before:rounded-3xl',
+      header: 'text-4xl font-light text-purple-800 mb-8 tracking-wide relative z-10',
+      field: 'mb-6 relative z-10',
+      label: 'block text-sm font-medium text-purple-700 mb-3 tracking-wide',
+      input: 'w-full px-4 py-3 h-12 border-2 border-purple-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-purple-300 focus:border-transparent transition-all duration-300 bg-white/70 backdrop-blur-sm placeholder-purple-300',
+      button: 'w-full bg-gradient-to-r from-purple-400 to-pink-400 text-white py-4 px-6 rounded-2xl hover:from-purple-500 hover:to-pink-500 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105',
+      background: 'bg-gradient-to-br from-purple-100 via-pink-100 to-blue-100',
+      booleanSwitch: {
+        track: 'border-2 data-[state=unchecked]:bg-purple-100 data-[state=unchecked]:border-purple-300 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-purple-400 data-[state=checked]:to-pink-400 data-[state=checked]:border-purple-400',
+        thumb: 'data-[state=unchecked]:bg-purple-400 data-[state=checked]:bg-white shadow-md',
+        activeLabel: 'text-purple-700 font-medium',
+        inactiveLabel: 'text-purple-400'
+      },
+      progressBar: {
+        container: 'w-full bg-purple-100 rounded-full h-3 mb-6 border border-purple-200',
+        fill: 'bg-gradient-to-r from-purple-400 to-pink-400 h-3 rounded-full transition-all duration-700 ease-out shadow-sm'
+      }
+    }
   }
 ];
 

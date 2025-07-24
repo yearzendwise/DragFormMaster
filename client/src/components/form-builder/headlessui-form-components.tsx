@@ -22,6 +22,15 @@ const getRadioThemeChecked = (baseInput: string) => {
     return 'border-purple-500 bg-purple-500';
   } else if (baseInput.includes('uppercase') && baseInput.includes('tracking-wider')) {
     return 'border-blue-600 bg-blue-600';
+  } else if (baseInput.includes('border-purple-500/40')) {
+    // Cosmic theme
+    return 'border-purple-400 bg-gradient-to-r from-purple-500 to-pink-500';
+  } else if (baseInput.includes('border-4') && baseInput.includes('border-black')) {
+    // Brutalist theme
+    return 'border-black bg-black';
+  } else if (baseInput.includes('border-purple-200') && baseInput.includes('rounded-2xl')) {
+    // Pastel Dream theme
+    return 'border-purple-400 bg-gradient-to-r from-purple-400 to-pink-400';
   } else {
     return 'border-blue-500 bg-blue-500';
   }
@@ -44,6 +53,15 @@ const getRadioThemeUnchecked = (baseInput: string) => {
     return 'border-gray-200 bg-white';
   } else if (baseInput.includes('uppercase') && baseInput.includes('tracking-wider')) {
     return 'border-slate-300 bg-slate-50';
+  } else if (baseInput.includes('border-purple-500/40')) {
+    // Cosmic theme
+    return 'border-purple-500/40 bg-black/40';
+  } else if (baseInput.includes('border-4') && baseInput.includes('border-black')) {
+    // Brutalist theme
+    return 'border-black bg-white';
+  } else if (baseInput.includes('border-purple-200') && baseInput.includes('rounded-2xl')) {
+    // Pastel Dream theme
+    return 'border-purple-200 bg-white/70';
   } else {
     return 'border-gray-300 bg-gray-50';
   }
@@ -66,6 +84,15 @@ const getRadioIndicatorColor = (baseInput: string) => {
     return 'bg-white';
   } else if (baseInput.includes('uppercase') && baseInput.includes('tracking-wider')) {
     return 'bg-slate-50';
+  } else if (baseInput.includes('border-purple-500/40')) {
+    // Cosmic theme
+    return 'bg-cyan-300';
+  } else if (baseInput.includes('border-4') && baseInput.includes('border-black')) {
+    // Brutalist theme
+    return 'bg-white';
+  } else if (baseInput.includes('border-purple-200') && baseInput.includes('rounded-2xl')) {
+    // Pastel Dream theme
+    return 'bg-white';
   } else {
     return 'bg-gray-50';
   }
@@ -88,6 +115,15 @@ const getRadioLabelStyle = (baseInput: string) => {
     return 'text-gray-800 font-semibold cursor-pointer select-none';
   } else if (baseInput.includes('uppercase') && baseInput.includes('tracking-wider')) {
     return 'text-slate-700 font-bold uppercase tracking-wider cursor-pointer select-none';
+  } else if (baseInput.includes('border-purple-500/40')) {
+    // Cosmic theme
+    return 'text-purple-200 font-medium tracking-wide cursor-pointer select-none';
+  } else if (baseInput.includes('border-4') && baseInput.includes('border-black')) {
+    // Brutalist theme
+    return 'text-black font-black uppercase tracking-wider cursor-pointer select-none';
+  } else if (baseInput.includes('border-purple-200') && baseInput.includes('rounded-2xl')) {
+    // Pastel Dream theme
+    return 'text-purple-700 font-medium cursor-pointer select-none';
   } else {
     return 'text-gray-700 font-medium tracking-wide cursor-pointer select-none';
   }
@@ -111,6 +147,15 @@ const getCheckboxThemeChecked = (baseInput: string) => {
     return 'border-purple-500 bg-purple-500 rounded-md';
   } else if (baseInput.includes('uppercase') && baseInput.includes('tracking-wider')) {
     return 'border-blue-600 bg-blue-600';
+  } else if (baseInput.includes('border-purple-500/40')) {
+    // Cosmic theme
+    return 'border-purple-400 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg';
+  } else if (baseInput.includes('border-4') && baseInput.includes('border-black')) {
+    // Brutalist theme
+    return 'border-black bg-black';
+  } else if (baseInput.includes('border-purple-200') && baseInput.includes('rounded-2xl')) {
+    // Pastel Dream theme
+    return 'border-purple-400 bg-gradient-to-r from-purple-400 to-pink-400 rounded-xl';
   } else {
     return 'border-blue-500 bg-blue-500';
   }
@@ -133,6 +178,15 @@ const getCheckboxThemeUnchecked = (baseInput: string) => {
     return 'border-gray-200 bg-white rounded-md';
   } else if (baseInput.includes('uppercase') && baseInput.includes('tracking-wider')) {
     return 'border-slate-300 bg-slate-50';
+  } else if (baseInput.includes('border-purple-500/40')) {
+    // Cosmic theme
+    return 'border-purple-500/40 bg-black/40 rounded-lg';
+  } else if (baseInput.includes('border-4') && baseInput.includes('border-black')) {
+    // Brutalist theme
+    return 'border-black bg-white';
+  } else if (baseInput.includes('border-purple-200') && baseInput.includes('rounded-2xl')) {
+    // Pastel Dream theme
+    return 'border-purple-200 bg-white/70 rounded-xl';
   } else {
     return 'border-gray-300 bg-gray-50';
   }
@@ -668,6 +722,33 @@ export function HeadlessUISelect({
         option: 'text-slate-700 hover:bg-slate-50 focus:bg-slate-50 font-bold uppercase tracking-wider text-xs',
         activeOption: 'bg-blue-600 text-white',
         text: 'text-slate-700 font-bold uppercase tracking-wider'
+      };
+    } else if (baseInput.includes('border-purple-500/40')) {
+      // Cosmic theme
+      return {
+        button: `${baseInput} justify-between text-left`,
+        dropdown: 'bg-black/90 backdrop-blur-xl border border-purple-500/40 rounded-lg shadow-2xl shadow-purple-500/20',
+        option: 'text-purple-200 hover:bg-purple-900/40 focus:bg-purple-900/40',
+        activeOption: 'bg-gradient-to-r from-purple-500 to-pink-500 text-white',
+        text: 'text-purple-200'
+      };
+    } else if (baseInput.includes('border-4') && baseInput.includes('border-black')) {
+      // Brutalist theme
+      return {
+        button: `${baseInput} justify-between text-left`,
+        dropdown: 'bg-white border-4 border-black shadow-[4px_4px_0_0_#000000]',
+        option: 'text-black hover:bg-gray-100 focus:bg-gray-100 font-black uppercase',
+        activeOption: 'bg-black text-white',
+        text: 'text-black font-black'
+      };
+    } else if (baseInput.includes('border-purple-200') && baseInput.includes('rounded-2xl')) {
+      // Pastel Dream theme
+      return {
+        button: `${baseInput} justify-between text-left`,
+        dropdown: 'bg-white/90 backdrop-blur-lg border-2 border-purple-200 rounded-2xl shadow-xl',
+        option: 'text-purple-700 hover:bg-purple-50 focus:bg-purple-50',
+        activeOption: 'bg-gradient-to-r from-purple-400 to-pink-400 text-white',
+        text: 'text-purple-700'
       };
     } else {
       // Minimal theme (default)
