@@ -249,22 +249,9 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
         
       </div>
       
-      {/* Drag Overlay */}
-      <DragOverlay dropAnimation={null}>
-        {draggedType && (
-          <div className="p-4 bg-white border-2 border-blue-400 rounded-xl shadow-xl opacity-95 pointer-events-none cursor-grabbing" style={{ zIndex: 9999 }}>
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                <svg className="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <div className="text-sm font-medium text-blue-700">
-                {draggedType.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
-              </div>
-            </div>
-          </div>
-        )}
+      {/* Disabled Drag Overlay to fix shadow animation issues */}
+      <DragOverlay>
+        {null}
       </DragOverlay>
     </DndContext>
   );
