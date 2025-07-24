@@ -370,18 +370,18 @@ export function PropertiesPanel({
                     onValueChange={(value) => handleUpdate('dateTimeVariant', value)}
                   >
                     <SelectTrigger className="text-sm">
-                      <SelectValue />
+                      <SelectValue placeholder="Select input type" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="date-only">📅 Date Only (MM/DD/YYYY)</SelectItem>
-                      <SelectItem value="time-only">🕐 Time Only (HH:MM)</SelectItem>
-                      <SelectItem value="datetime">📅🕐 Date & Time</SelectItem>
+                      <SelectItem value="date-only">Date Only</SelectItem>
+                      <SelectItem value="time-only">Time Only</SelectItem>
+                      <SelectItem value="datetime">Date & Time</SelectItem>
                     </SelectContent>
                   </Select>
                   <p className="text-xs text-neutral-500 mt-1">
-                    {selectedElement.dateTimeVariant === 'date-only' && 'Users will select a date only'}
+                    {(selectedElement.dateTimeVariant === 'date-only' || !selectedElement.dateTimeVariant) && 'Users will select a date only'}
                     {selectedElement.dateTimeVariant === 'time-only' && 'Users will select a time only'}
-                    {(selectedElement.dateTimeVariant === 'datetime' || !selectedElement.dateTimeVariant) && 'Users will select both date and time'}
+                    {selectedElement.dateTimeVariant === 'datetime' && 'Users will select both date and time'}
                   </p>
                 </div>
               )}
