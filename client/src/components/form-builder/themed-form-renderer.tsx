@@ -161,7 +161,9 @@ function ThemedRadio({
   onChange 
 }: ThemedRadioProps) {
   const handleChange = () => {
-    onChange?.(value);
+    if (onChange) {
+      onChange(value);
+    }
   };
 
   // Extract theme-specific styles for radio buttons (similar to checkbox but circular)
@@ -247,6 +249,46 @@ function ThemedRadio({
         {label}
       </span>
     </label>
+  );
+}
+
+// Themed Radio Group Component
+interface ThemedRadioGroupProps {
+  name: string;
+  options: string[];
+  themeStyles: FormTheme['styles'];
+  defaultValue?: string;
+  onChange?: (value: string) => void;
+}
+
+function ThemedRadioGroup({ 
+  name, 
+  options, 
+  themeStyles, 
+  defaultValue, 
+  onChange 
+}: ThemedRadioGroupProps) {
+  const [selectedValue, setSelectedValue] = React.useState<string>(defaultValue || '');
+
+  const handleRadioChange = (value: string) => {
+    setSelectedValue(value);
+    onChange?.(value);
+  };
+
+  return (
+    <div className="space-y-3">
+      {options.map((option, index) => (
+        <ThemedRadio
+          key={index}
+          name={name}
+          value={option}
+          label={option}
+          checked={selectedValue === option}
+          onChange={handleRadioChange}
+          themeStyles={themeStyles}
+        />
+      ))}
+    </div>
   );
 }
 
@@ -473,17 +515,11 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
 
       case 'radio':
         return (
-          <div className="space-y-3">
-            {element.options?.map((option, index) => (
-              <ThemedRadio
-                key={index}
-                name={element.name}
-                value={option}
-                label={option}
-                themeStyles={themeStyles}
-              />
-            ))}
-          </div>
+          <ThemedRadioGroup
+            name={element.name}
+            options={element.options || []}
+            themeStyles={themeStyles}
+          />
         );
 
       case 'image':
