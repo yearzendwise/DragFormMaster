@@ -159,13 +159,6 @@ export function PropertiesPanel({
               id="name"
               value={selectedElement.name}
               onChange={(e) => handleUpdate('name', e.target.value)}
-              onBlur={(e) => {
-                // Normalize the field name when user finishes editing
-                const normalizedName = normalizeFieldName(e.target.value);
-                if (normalizedName !== e.target.value) {
-                  handleUpdate('name', normalizedName);
-                }
-              }}
               className={`focus:ring-2 ${
                 validateFieldName(selectedElement.name) 
                   ? 'focus:ring-blue-500 border-gray-300' 
@@ -183,7 +176,7 @@ export function PropertiesPanel({
                 </p>
               )}
               <p className="text-xs text-neutral-500">
-                Auto-formatted on blur: Only lowercase letters and hyphens allowed
+                Auto-formatted: Only lowercase letters and hyphens allowed
               </p>
             </div>
           </div>
