@@ -37,6 +37,7 @@ export interface FormSettings {
   actionUrl: string;
   method: 'GET' | 'POST';
   enctype?: string;
+  compactMode?: boolean;
 }
 
 export type FormElementType = 
