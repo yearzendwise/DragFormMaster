@@ -15,6 +15,7 @@ import { Label } from "@/components/ui/label";
 import { RateScale } from "@/components/ui/rate-scale";
 import { BooleanSwitch } from "@/components/ui/boolean-switch";
 import { NumberInput } from "@/components/ui/number-input";
+import { FullName } from "@/components/ui/full-name";
 import { DropInsertionIndicator } from './drop-insertion-indicator';
 
 interface FormElementRendererProps {
@@ -260,6 +261,19 @@ export function FormElementRenderer({
             name={element.name}
             className="focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             tabIndex={isDragging ? -1 : undefined}
+          />
+        );
+
+      case "full-name":
+        return (
+          <FullName
+            name={element.name}
+            required={element.required}
+            disabled={element.disabled || isDragging}
+            readonly={element.readonly}
+            firstNamePlaceholder="First Name"
+            lastNamePlaceholder="Last Name"
+            size={element.styling?.size || 'medium'}
           />
         );
 

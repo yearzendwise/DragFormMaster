@@ -6,6 +6,7 @@ import { NumberInput } from '@/components/ui/number-input';
 import { cn } from '@/lib/utils';
 import * as React from 'react';
 import { HeadlessUIBooleanSwitch, HeadlessUIRadioGroup, HeadlessUICheckbox, HeadlessUIDateTimePicker } from './headlessui-form-components';
+import { ThemedFullName } from '@/components/ui/themed-full-name';
 
 // Extended type for preview elements that includes buttons and spacer
 type PreviewFormElement = FormElement | {
@@ -239,6 +240,19 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
             variant={(element as FormElement).dateTimeVariant || "date-only"}
             themeStyles={themeStyles}
             placeholder={element.placeholder}
+          />
+        );
+
+      case 'full-name':
+        return (
+          <ThemedFullName
+            name={element.name}
+            required={element.required}
+            disabled={(element as FormElement).disabled}
+            readonly={(element as FormElement).readonly}
+            firstNamePlaceholder="First Name"
+            lastNamePlaceholder="Last Name"
+            themeStyles={themeStyles}
           />
         );
 

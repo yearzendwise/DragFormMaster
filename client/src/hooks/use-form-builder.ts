@@ -235,6 +235,7 @@ function getDefaultLabel(type: FormElementType): string {
     'rate-scale': 'How did we do?',
     'boolean-switch': 'Yes or No?',
     'datetime-picker': 'Select Date',
+    'full-name': 'Full Name',
   } as const;
   return labels[type];
 }
@@ -252,6 +253,7 @@ function getDefaultPlaceholder(type: FormElementType): string {
     'rate-scale': '',
     'boolean-switch': '',
     'datetime-picker': 'Select date...',
+    'full-name': 'Enter your full name',
   } as const;
   return placeholders[type];
 }

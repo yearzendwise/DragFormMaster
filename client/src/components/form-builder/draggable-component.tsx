@@ -1,6 +1,6 @@
 import { useDraggable } from '@dnd-kit/core';
 import { ComponentPaletteItem, FormElementType } from '@/types/form-builder';
-import { Type, Mail, FileText, Hash, ChevronDown, CheckSquare, Circle, Send, RotateCcw, Image, Star } from 'lucide-react';
+import { Type, Mail, FileText, Hash, ChevronDown, CheckSquare, Circle, Send, RotateCcw, Image, Star, User, ToggleLeft, Calendar } from 'lucide-react';
 
 interface DraggableComponentProps {
   item: ComponentPaletteItem;
@@ -20,6 +20,9 @@ const iconMap = {
   'reset-button': RotateCcw,
   'image': Image,
   'rate-scale': Star,
+  'full-name': User,
+  'boolean-switch': ToggleLeft,
+  'datetime-picker': Calendar,
 };
 
 export function DraggableComponent({ item, onAddElement, isMobile = false }: DraggableComponentProps) {

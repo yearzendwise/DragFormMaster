@@ -50,7 +50,8 @@ export type FormElementType =
   | 'image'
   | 'rate-scale'
   | 'boolean-switch'
-  | 'datetime-picker';
+  | 'datetime-picker'
+  | 'full-name';
 
 export interface ComponentPaletteItem {
   type: FormElementType;

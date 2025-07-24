@@ -36,6 +36,14 @@ const paletteItems: ComponentPaletteItem[] = [
     category: 'basic',
   },
   {
+    type: 'full-name',
+    label: 'Full Name',
+    description: 'First and last name fields',
+    icon: 'fas fa-user',
+    color: 'bg-gradient-to-br from-teal-100 to-cyan-200 text-teal-700',
+    category: 'basic',
+  },
+  {
     type: 'image',
     label: 'Image',
     description: 'Square image display',
