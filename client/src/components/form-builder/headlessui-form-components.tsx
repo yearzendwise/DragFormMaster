@@ -256,6 +256,8 @@ export function HeadlessUIBooleanSwitch({
           className={cn(
             "pointer-events-none inline-block transform transition-transform duration-200",
             booleanSwitchStyles.thumb,
+            // Always make thumb circular unless theme specifically overrides
+            booleanSwitchStyles.thumb.includes('rounded-none') ? "" : "rounded-full",
             enabled ? "translate-x-5" : "translate-x-0.5"
           )}
           style={{
