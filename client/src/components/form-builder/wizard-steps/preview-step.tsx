@@ -263,12 +263,6 @@ export function PreviewStep({
             <h1 className={themeStyles.header}>{formTitle}</h1>
           )}
           
-          {formSettings.description && (
-            <div className={`${themeStyles.text} mb-6 text-center`}>
-              {formSettings.description}
-            </div>
-          )}
-          
           <form className="space-y-4" onSubmit={handleFormSubmit}>
             {elementsWithButtons.map((element) => (
               <ThemedFormRenderer
