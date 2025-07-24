@@ -158,7 +158,11 @@ export function PropertiesPanel({
             <Input
               id="name"
               value={selectedElement.name}
-              onChange={(e) => handleUpdate('name', e.target.value)}
+              onChange={(e) => {
+                // Only allow lowercase letters and hyphens
+                const filteredValue = e.target.value.replace(/[^a-z\-]/g, '');
+                handleUpdate('name', filteredValue);
+              }}
               className={`focus:ring-2 ${
                 validateFieldName(selectedElement.name) 
                   ? 'focus:ring-blue-500 border-gray-300' 
@@ -176,7 +180,7 @@ export function PropertiesPanel({
                 </p>
               )}
               <p className="text-xs text-neutral-500">
-                Auto-formatted: Only lowercase letters and hyphens allowed
+                Only lowercase letters (a-z) and hyphens (-) can be typed
               </p>
             </div>
           </div>

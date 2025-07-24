@@ -259,13 +259,16 @@ function validateFieldName(name: string): boolean {
 function normalizeFieldName(input: string): string {
   if (!input || input.trim() === '') return 'field-name';
   
+  // Since we're already filtering at input level, just ensure proper format
   let normalized = input
-    .toLowerCase() // Convert to lowercase
-    .replace(/[^a-z0-9\-\s]/g, '') // Remove special chars except hyphens and spaces
-    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/[^a-z\-]/g, '') // Only allow lowercase letters and hyphens
     .replace(/--+/g, '-') // Replace multiple hyphens with single hyphen
-    .replace(/^-+|-+$/g, '') // Remove leading/trailing hyphens
-    .replace(/^[0-9]+/, 'field-$&'); // Ensure it starts with a letter if it starts with numbers
+    .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
+  
+  // Ensure it starts with a letter
+  if (normalized && /^[^a-z]/.test(normalized)) {
+    normalized = 'field-' + normalized;
+  }
   
   // Return normalized result or fallback
   return normalized || 'field-name';
