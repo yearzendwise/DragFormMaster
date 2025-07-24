@@ -186,8 +186,8 @@ const defaultThemes: FormTheme[] = [
       button: 'w-full bg-gradient-to-r from-orange-500 to-pink-500 text-white py-4 px-6 rounded-none hover:from-orange-600 hover:to-pink-600 transition-all duration-200 font-black uppercase tracking-wider shadow-lg hover:shadow-xl transform hover:scale-105',
       background: 'bg-gradient-to-br from-yellow-200 to-orange-200',
       booleanSwitch: {
-        track: 'data-[state=unchecked]:bg-yellow-300 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-orange-500 data-[state=checked]:to-pink-500 border-orange-400 border-4',
-        thumb: 'bg-white shadow-lg',
+        track: 'data-[state=unchecked]:bg-yellow-300 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-orange-500 data-[state=checked]:to-pink-500 border-orange-400 border-4 rounded-none',
+        thumb: 'bg-white shadow-lg rounded-none',
         activeLabel: 'text-orange-600 font-black tracking-wider uppercase transform skew-x-6',
         inactiveLabel: 'text-pink-400 font-black tracking-wider uppercase transform skew-x-6'
       }

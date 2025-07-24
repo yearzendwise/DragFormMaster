@@ -199,35 +199,27 @@ export function HeadlessUIBooleanSwitch({
     inactiveLabel: 'text-gray-400 font-medium'
   };
 
-  // Clean track style for proper state management
+  // Extract and apply proper theme-specific track styling
   const getTrackStyle = () => {
-    let trackClass = booleanSwitchStyles.track;
+    const trackClass = booleanSwitchStyles.track;
     
-    // Remove conflicting data attributes and states
-    trackClass = trackClass.replace(/data-\[state=[^\]]+\]:[^\s]+/g, '');
-    
-    // Apply enabled/disabled styling based on state
     if (enabled) {
-      // Extract checked styles from the track class
-      const checkedMatch = trackClass.match(/data-\[state=checked\]:([^\s]+)/);
+      // Extract checked state styling
+      const checkedMatch = trackClass.match(/data-\[state=checked\]:([^\s]+(?:\s+[^\s]*)*)/);
       if (checkedMatch) {
-        trackClass = checkedMatch[1];
-      } else {
-        // Fallback to the base track style for enabled state
-        trackClass = trackClass.replace(/data-\[state=unchecked\]:[^\s]+/g, '').trim();
+        return checkedMatch[1];
       }
+      // Fallback for enabled state
+      return trackClass.replace(/data-\[state=unchecked\]:[^\s]+/g, '').trim();
     } else {
-      // Extract unchecked styles from the track class
+      // Extract unchecked state styling
       const uncheckedMatch = trackClass.match(/data-\[state=unchecked\]:([^\s]+)/);
       if (uncheckedMatch) {
-        trackClass = uncheckedMatch[1];
-      } else {
-        // Fallback to the base track style for disabled state
-        trackClass = trackClass.replace(/data-\[state=checked\]:[^\s]+/g, '').trim();
+        return uncheckedMatch[1];
       }
+      // Fallback for disabled state
+      return trackClass.replace(/data-\[state=checked\]:[^\s]+/g, '').trim();
     }
-    
-    return trackClass;
   };
 
   return (
@@ -250,25 +242,25 @@ export function HeadlessUIBooleanSwitch({
         disabled={disabled}
         className={cn(
           "relative inline-flex shrink-0 cursor-pointer items-center transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
-          getTrackStyle()
+          getTrackStyle(),
+          // Handle special shape cases per theme
+          booleanSwitchStyles.track.includes('rounded-none') ? "rounded-none" : "rounded-full"
         )}
         style={{
           width: '44px',
           height: '24px',
-          borderRadius: '9999px',
           minWidth: '44px'
         }}
       >
         <span
           className={cn(
-            "pointer-events-none inline-block transform transition-transform duration-200 shadow-sm",
+            "pointer-events-none inline-block transform transition-transform duration-200",
             booleanSwitchStyles.thumb,
             enabled ? "translate-x-5" : "translate-x-0.5"
           )}
           style={{
             width: '16px',
-            height: '16px',
-            borderRadius: '50%'
+            height: '16px'
           }}
         />
       </Switch>
