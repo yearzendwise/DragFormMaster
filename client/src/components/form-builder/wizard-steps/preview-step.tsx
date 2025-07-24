@@ -386,7 +386,7 @@ export function PreviewStep({
                 }
 
                 return rows.map((row, rowIndex) => (
-                  <div key={`row-${rowIndex}`} className={row.length > 1 ? "grid grid-cols-2 gap-4" : ""}>
+                  <div key={`row-${rowIndex}`} className={row.length > 1 ? "grid grid-cols-1 md:grid-cols-2 gap-4 items-start" : ""}>
                     {row.map((element) => (
                       <ThemedFormRenderer
                         key={element.id}
