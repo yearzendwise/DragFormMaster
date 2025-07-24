@@ -13,7 +13,7 @@ const defaultThemes: FormTheme[] = [
       header: 'text-3xl font-light text-gray-900 mb-8 tracking-wide',
       field: 'mb-6',
       label: 'block text-sm font-medium text-gray-700 mb-2 tracking-wide',
-      input: 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white',
+      input: 'w-full px-4 py-3 h-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white',
       button: 'w-full bg-gray-900 text-white py-3 px-6 rounded-lg hover:bg-gray-800 transition-all duration-200 font-medium tracking-wide shadow-md hover:shadow-lg',
       background: 'bg-gray-50',
       booleanSwitch: {
@@ -38,7 +38,7 @@ const defaultThemes: FormTheme[] = [
       header: 'text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-8 tracking-tight',
       field: 'mb-6',
       label: 'block text-sm font-semibold text-gray-800 mb-3 tracking-wide',
-      input: 'w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 bg-white/80 backdrop-blur-sm',
+      input: 'w-full px-4 py-3 h-12 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 bg-white/80 backdrop-blur-sm',
       button: 'w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-4 px-6 rounded-xl hover:scale-105 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl',
       background: 'bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50',
       booleanSwitch: {
@@ -63,7 +63,7 @@ const defaultThemes: FormTheme[] = [
       header: 'text-3xl font-bold text-slate-800 mb-8 border-b-2 border-slate-200 pb-6 tracking-tight',
       field: 'mb-8',
       label: 'block text-sm font-bold text-slate-700 mb-3 uppercase tracking-wider',
-      input: 'w-full px-4 py-3 border-2 border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all duration-200 bg-slate-50 focus:bg-white',
+      input: 'w-full px-4 py-3 h-12 border-2 border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all duration-200 bg-slate-50 focus:bg-white',
       button: 'w-full bg-slate-900 text-white py-4 px-8 rounded-md hover:bg-slate-800 transition-all duration-200 font-bold uppercase tracking-wider shadow-lg hover:shadow-xl',
       background: 'bg-slate-50',
       booleanSwitch: {
@@ -88,7 +88,7 @@ const defaultThemes: FormTheme[] = [
       header: 'text-4xl font-black text-transparent bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text mb-8 text-center animate-pulse',
       field: 'mb-6',
       label: 'block text-sm font-bold text-purple-700 mb-3 tracking-wide',
-      input: 'w-full px-4 py-3 border-3 border-pink-300 rounded-2xl focus:outline-none focus:ring-4 focus:ring-purple-400 focus:border-purple-400 transition-all duration-300 bg-pink-50 focus:bg-white hover:border-purple-300',
+      input: 'w-full px-4 py-3 h-12 border-3 border-pink-300 rounded-2xl focus:outline-none focus:ring-4 focus:ring-purple-400 focus:border-purple-400 transition-all duration-300 bg-pink-50 focus:bg-white hover:border-purple-300',
       button: 'w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white py-4 px-6 rounded-2xl hover:from-pink-600 hover:to-purple-700 transition-all duration-300 font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-105',
       background: 'bg-gradient-to-br from-pink-100 via-purple-50 to-indigo-100',
       booleanSwitch: {
@@ -113,7 +113,7 @@ const defaultThemes: FormTheme[] = [
       header: 'text-3xl font-light text-yellow-400 mb-10 text-center border-b border-gray-700 pb-6 tracking-widest',
       field: 'mb-8',
       label: 'block text-sm font-medium text-gray-300 mb-4 tracking-widest uppercase',
-      input: 'w-full px-4 py-4 bg-gray-800 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-all duration-300 placeholder-gray-400',
+      input: 'w-full px-4 py-3 h-12 bg-gray-800 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-all duration-300 placeholder-gray-400',
       button: 'w-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 py-4 px-6 rounded-lg hover:from-yellow-500 hover:to-yellow-600 transition-all duration-300 font-bold tracking-widest uppercase shadow-lg hover:shadow-xl',
       background: 'bg-gray-900',
       booleanSwitch: {
@@ -139,7 +139,7 @@ const defaultThemes: FormTheme[] = [
       header: 'text-4xl font-bold text-cyan-400 mb-8 text-center tracking-wider drop-shadow-lg shadow-cyan-400/50',
       field: 'mb-6',
       label: 'block text-sm font-bold text-green-400 mb-3 tracking-wider uppercase',
-      input: 'w-full px-4 py-3 bg-gray-900 border-2 border-cyan-400 rounded-lg text-cyan-100 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all duration-300 placeholder-gray-500 shadow-inner',
+      input: 'w-full px-4 py-3 h-12 bg-gray-900 border-2 border-cyan-400 rounded-lg text-cyan-100 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all duration-300 placeholder-gray-500 shadow-inner',
       button: 'w-full bg-gradient-to-r from-cyan-400 to-green-400 text-black py-4 px-6 rounded-lg hover:from-cyan-500 hover:to-green-500 transition-all duration-300 font-bold uppercase tracking-wider shadow-lg shadow-cyan-400/30 hover:shadow-xl',
       background: 'bg-gray-900',
       booleanSwitch: {
@@ -164,7 +164,7 @@ const defaultThemes: FormTheme[] = [
       header: 'text-3xl font-bold text-green-800 mb-8 text-center tracking-wide',
       field: 'mb-7',
       label: 'block text-sm font-semibold text-emerald-700 mb-3 tracking-wide',
-      input: 'w-full px-4 py-3 border-2 border-green-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-300 bg-white/80 backdrop-blur-sm',
+      input: 'w-full px-4 py-3 h-12 border-2 border-green-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-300 bg-white/80 backdrop-blur-sm',
       button: 'w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white py-4 px-6 rounded-2xl hover:from-green-700 hover:to-emerald-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl',
       background: 'bg-gradient-to-br from-green-100 to-emerald-100',
       booleanSwitch: {
@@ -189,7 +189,7 @@ const defaultThemes: FormTheme[] = [
       header: 'text-4xl font-light text-yellow-400 mb-10 text-center tracking-widest font-serif',
       field: 'mb-8',
       label: 'block text-sm font-medium text-yellow-300 mb-4 tracking-widest uppercase font-serif',
-      input: 'w-full px-5 py-4 bg-purple-800/50 border border-purple-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-all duration-300 placeholder-purple-300 backdrop-blur-sm',
+      input: 'w-full px-5 py-3 h-12 bg-purple-800/50 border border-purple-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-all duration-300 placeholder-purple-300 backdrop-blur-sm',
       button: 'w-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-purple-900 py-4 px-6 rounded-lg hover:from-yellow-500 hover:to-yellow-600 transition-all duration-300 font-bold tracking-widest uppercase shadow-lg hover:shadow-xl font-serif',
       background: 'bg-gradient-to-br from-purple-100 to-indigo-100',
       booleanSwitch: {
@@ -214,7 +214,7 @@ const defaultThemes: FormTheme[] = [
       header: 'text-4xl font-black text-orange-600 mb-8 text-center tracking-wider uppercase transform -skew-x-12',
       field: 'mb-6',
       label: 'block text-sm font-black text-pink-600 mb-3 tracking-wider uppercase transform skew-x-6',
-      input: 'w-full px-4 py-3 border-3 border-orange-400 rounded-none focus:outline-none focus:ring-4 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200 bg-yellow-50 font-mono',
+      input: 'w-full px-4 py-3 h-12 border-3 border-orange-400 rounded-none focus:outline-none focus:ring-4 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200 bg-yellow-50 font-mono',
       button: 'w-full bg-gradient-to-r from-orange-500 to-pink-500 text-white py-4 px-6 rounded-none hover:from-orange-600 hover:to-pink-600 transition-all duration-200 font-black uppercase tracking-wider shadow-lg hover:shadow-xl transform hover:scale-105',
       background: 'bg-gradient-to-br from-yellow-200 to-orange-200',
       booleanSwitch: {

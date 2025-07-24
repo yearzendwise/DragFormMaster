@@ -28,7 +28,6 @@ interface ThemedFormRendererProps {
 }
 
 export function ThemedFormRenderer({ element, themeStyles, onChange }: ThemedFormRendererProps) {
-  console.log('ThemedFormRenderer - element type:', element.type, 'onChange defined:', !!onChange);
   const renderFormControl = () => {
     const baseInputClasses = themeStyles.input;
     
@@ -59,10 +58,7 @@ export function ThemedFormRenderer({ element, themeStyles, onChange }: ThemedFor
             maxLength={element.validation?.maxLength}
             className={baseInputClasses}
             style={forceTransparentStyle}
-            onChange={(e) => {
-              console.log('Text input onChange triggered:', element.name, e.target.value);
-              onChange?.(element.name, e.target.value);
-            }}
+            onChange={(e) => onChange?.(element.name, e.target.value)}
           />
         );
 
@@ -269,7 +265,6 @@ export function ThemedFormRenderer({ element, themeStyles, onChange }: ThemedFor
             lastNamePlaceholder="Last Name"
             themeStyles={themeStyles}
             onChange={(firstName, lastName) => {
-              console.log('Full name onChange triggered:', firstName, lastName);
               onChange?.(element.name + '_first', firstName);
               onChange?.(element.name + '_last', lastName);
             }}
