@@ -1,5 +1,6 @@
 import React from 'react';
-import { Switch, RadioGroup, Checkbox } from '@headlessui/react';
+import { Switch, RadioGroup, Checkbox, Listbox, Transition } from '@headlessui/react';
+import { ChevronUpDownIcon, CheckIcon } from '@heroicons/react/24/solid';
 import { cn } from '@/lib/utils';
 import { FormTheme } from '@/types/form-builder';
 
@@ -558,6 +559,192 @@ export function HeadlessUIDateTimePicker({
           disabled && "opacity-50 cursor-not-allowed"
         )}
       />
+    </div>
+  );
+}
+
+// HeadlessUI Select Component with theme-aware styling
+interface HeadlessUISelectProps {
+  name: string;
+  options: string[];
+  placeholder?: string;
+  required?: boolean;
+  disabled?: boolean;
+  themeStyles: FormTheme['styles'];
+  onChange?: (value: string) => void;
+  className?: string;
+}
+
+export function HeadlessUISelect({
+  name,
+  options,
+  placeholder = 'Select an option...',
+  required = false,
+  disabled = false,
+  themeStyles,
+  onChange,
+  className
+}: HeadlessUISelectProps) {
+  const [selected, setSelected] = React.useState('');
+
+  const handleChange = (value: string) => {
+    setSelected(value);
+    onChange?.(value);
+  };
+
+  // Get theme-specific select styling
+  const getSelectThemeStyles = () => {
+    const baseInput = themeStyles.input;
+    
+    // Theme-specific customizations for select
+    if (baseInput.includes('bg-gray-900') || baseInput.includes('bg-gray-800')) {
+      // Elegant theme
+      return {
+        button: `${baseInput} justify-between text-left`,
+        dropdown: 'bg-gray-800 border border-gray-600 rounded-lg shadow-2xl',
+        option: 'text-white hover:bg-gray-700 focus:bg-gray-700',
+        activeOption: 'bg-yellow-400 text-gray-900',
+        text: 'text-white'
+      };
+    } else if (baseInput.includes('border-3') || baseInput.includes('font-mono')) {
+      // Retro theme
+      return {
+        button: `${baseInput} justify-between text-left`,
+        dropdown: 'bg-yellow-50 border-3 border-orange-400 rounded-none shadow-2xl',
+        option: 'text-black hover:bg-orange-100 focus:bg-orange-100 font-mono',
+        activeOption: 'bg-orange-500 text-white',
+        text: 'text-black font-mono'
+      };
+    } else if (baseInput.includes('rounded-3xl') || baseInput.includes('border-4')) {
+      // Playful theme
+      return {
+        button: `${baseInput} justify-between text-left`,
+        dropdown: 'bg-white border-3 border-pink-300 rounded-2xl shadow-2xl',
+        option: 'text-purple-700 hover:bg-pink-50 focus:bg-pink-50',
+        activeOption: 'bg-purple-600 text-white',
+        text: 'text-purple-700'
+      };
+    } else if (baseInput.includes('rounded-2xl') && baseInput.includes('green')) {
+      // Nature theme
+      return {
+        button: `${baseInput} justify-between text-left`,
+        dropdown: 'bg-white/90 backdrop-blur-sm border-2 border-green-300 rounded-2xl shadow-2xl',
+        option: 'text-emerald-700 hover:bg-green-50 focus:bg-green-50',
+        activeOption: 'bg-emerald-600 text-white',
+        text: 'text-emerald-700'
+      };
+    } else if (baseInput.includes('bg-black') || baseInput.includes('border-cyan')) {
+      // Neon theme
+      return {
+        button: `${baseInput} justify-between text-left`,
+        dropdown: 'bg-gray-900 border-2 border-cyan-400 rounded-lg shadow-2xl shadow-cyan-400/30',
+        option: 'text-cyan-100 hover:bg-gray-800 focus:bg-gray-800',
+        activeOption: 'bg-cyan-400 text-black',
+        text: 'text-cyan-100'
+      };
+    } else if (baseInput.includes('bg-purple-800') || baseInput.includes('font-serif')) {
+      // Luxury theme
+      return {
+        button: `${baseInput} justify-between text-left`,
+        dropdown: 'bg-purple-800/90 backdrop-blur-sm border border-purple-600 rounded-lg shadow-2xl',
+        option: 'text-white hover:bg-purple-700 focus:bg-purple-700 font-serif',
+        activeOption: 'bg-yellow-400 text-purple-900',
+        text: 'text-white font-serif'
+      };
+    } else if (baseInput.includes('rounded-xl') && baseInput.includes('backdrop-blur')) {
+      // Modern theme
+      return {
+        button: `${baseInput} justify-between text-left`,
+        dropdown: 'bg-white/90 backdrop-blur-xl border border-gray-200 rounded-xl shadow-2xl',
+        option: 'text-gray-800 hover:bg-gray-50 focus:bg-gray-50',
+        activeOption: 'bg-purple-500 text-white',
+        text: 'text-gray-800'
+      };
+    } else if (baseInput.includes('uppercase') && baseInput.includes('tracking-wider')) {
+      // Professional theme
+      return {
+        button: `${baseInput} justify-between text-left`,
+        dropdown: 'bg-white border-2 border-slate-300 rounded-md shadow-xl',
+        option: 'text-slate-700 hover:bg-slate-50 focus:bg-slate-50 font-bold uppercase tracking-wider text-xs',
+        activeOption: 'bg-blue-600 text-white',
+        text: 'text-slate-700 font-bold uppercase tracking-wider'
+      };
+    } else {
+      // Minimal theme (default)
+      return {
+        button: `${baseInput} justify-between text-left`,
+        dropdown: 'bg-white border border-gray-300 rounded-lg shadow-lg',
+        option: 'text-gray-700 hover:bg-gray-50 focus:bg-gray-50',
+        activeOption: 'bg-blue-500 text-white',
+        text: 'text-gray-700'
+      };
+    }
+  };
+
+  const styles = getSelectThemeStyles();
+
+  return (
+    <div className={cn("relative", className)}>
+      <Listbox value={selected} onChange={handleChange} disabled={disabled}>
+        <div className="relative">
+          <Listbox.Button
+            className={cn(
+              styles.button,
+              "relative w-full cursor-default py-3 pl-4 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300",
+              disabled && "opacity-50 cursor-not-allowed"
+            )}
+          >
+            <span className={cn("block truncate", styles.text)}>
+              {selected || placeholder}
+            </span>
+            <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+              <ChevronUpDownIcon
+                className="h-5 w-5 text-gray-400"
+                aria-hidden="true"
+              />
+            </span>
+          </Listbox.Button>
+          <Transition
+            as={React.Fragment}
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <Listbox.Options className={cn(
+              "absolute mt-1 max-h-60 w-full overflow-auto py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10",
+              styles.dropdown
+            )}>
+              {options.map((option, optionIdx) => (
+                <Listbox.Option
+                  key={optionIdx}
+                  className={({ active, selected: isSelected }) =>
+                    cn(
+                      "relative cursor-default select-none py-2 pl-10 pr-4",
+                      active || isSelected ? styles.activeOption : styles.option
+                    )
+                  }
+                  value={option}
+                >
+                  {({ selected: isSelected }) => (
+                    <>
+                      <span className={cn("block truncate", isSelected ? "font-medium" : "font-normal")}>
+                        {option}
+                      </span>
+                      {isSelected ? (
+                        <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                          <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                        </span>
+                      ) : null}
+                    </>
+                  )}
+                </Listbox.Option>
+              ))}
+            </Listbox.Options>
+          </Transition>
+        </div>
+      </Listbox>
+      {/* Hidden input for form submission */}
+      <input type="hidden" name={name} value={selected} />
     </div>
   );
 }

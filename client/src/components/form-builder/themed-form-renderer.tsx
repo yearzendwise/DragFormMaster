@@ -5,7 +5,7 @@ import { RateScale } from '@/components/ui/rate-scale';
 import { NumberInput } from '@/components/ui/number-input';
 import { cn } from '@/lib/utils';
 import * as React from 'react';
-import { HeadlessUIBooleanSwitch, HeadlessUIRadioGroup, HeadlessUICheckbox, HeadlessUIDateTimePicker } from './headlessui-form-components';
+import { HeadlessUIBooleanSwitch, HeadlessUIRadioGroup, HeadlessUICheckbox, HeadlessUIDateTimePicker, HeadlessUISelect } from './headlessui-form-components';
 import { ThemedFullName } from '@/components/ui/themed-full-name';
 
 // Extended type for preview elements that includes buttons and spacer
@@ -112,20 +112,15 @@ export function ThemedFormRenderer({ element, themeStyles, onChange }: ThemedFor
 
       case 'select':
         return (
-          <select
+          <HeadlessUISelect
             name={element.name}
+            options={element.options || []}
+            placeholder={element.placeholder || 'Select an option...'}
             required={element.required}
             disabled={element.disabled}
-            className={baseInputClasses}
-            onChange={(e) => onChange?.(element.name, e.target.value)}
-          >
-            <option value="">{element.placeholder || 'Select an option'}</option>
-            {element.options?.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
+            themeStyles={themeStyles}
+            onChange={(value) => onChange?.(element.name, value)}
+          />
         );
 
       case 'checkbox':
