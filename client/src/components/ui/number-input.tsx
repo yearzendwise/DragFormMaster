@@ -39,31 +39,23 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       setDisplayValue(value?.toString() || "")
     }, [value])
 
-    const formatValue = (inputValue: string, inputVariant: string) => {
-      const numericValue = inputValue.replace(/[^0-9.]/g, '')
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+      // Allow backspace, delete, tab, escape, enter
+      if ([8, 9, 27, 13, 46].indexOf(e.keyCode) !== -1 ||
+          // Allow Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
+          (e.keyCode === 65 && e.ctrlKey === true) ||
+          (e.keyCode === 67 && e.ctrlKey === true) ||
+          (e.keyCode === 86 && e.ctrlKey === true) ||
+          (e.keyCode === 88 && e.ctrlKey === true)) {
+        return
+      }
       
-      switch (inputVariant) {
-        case 'phone':
-          // Format as (XXX) XXX-XXXX for US phone numbers
-          const phoneDigits = numericValue.replace(/\D/g, '')
-          if (phoneDigits.length <= 3) {
-            return phoneDigits
-          } else if (phoneDigits.length <= 6) {
-            return `(${phoneDigits.slice(0, 3)}) ${phoneDigits.slice(3)}`
-          } else {
-            return `(${phoneDigits.slice(0, 3)}) ${phoneDigits.slice(3, 6)}-${phoneDigits.slice(6, 10)}`
-          }
-        
-        case 'currency':
-          // Format as currency with $ prefix
-          if (!numericValue) return ""
-          const currencyValue = parseFloat(numericValue)
-          if (isNaN(currencyValue)) return ""
-          return `$${currencyValue.toFixed(2)}`
-          
-        case 'number':
-        default:
-          return numericValue
+      // For phone numbers, limit to 10 digits
+      if (variant === 'phone') {
+        const currentDigits = displayValue.replace(/\D/g, '')
+        if (currentDigits.length >= 10 && e.key.match(/[0-9]/)) {
+          e.preventDefault()
+        }
       }
     }
 
@@ -72,13 +64,15 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       let processedValue = inputValue
 
       if (variant === 'phone') {
-        // Allow digits, parentheses, spaces, and dashes for phone
-        processedValue = inputValue.replace(/[^0-9\s\(\)\-]/g, '')
+        // Extract only digits for phone
+        const digitsOnly = inputValue.replace(/\D/g, '')
+        processedValue = formatPhoneNumber(digitsOnly)
       } else if (variant === 'currency') {
-        // Allow digits, decimal point, and dollar sign for currency
-        processedValue = inputValue.replace(/[^0-9\.\$]/g, '')
+        // Extract digits and decimal for currency
+        const numericOnly = inputValue.replace(/[^0-9\.]/g, '')
+        processedValue = formatCurrency(numericOnly)
       } else {
-        // Default number input - allow digits and decimal point
+        // Default number input - allow digits, decimal point, and negative sign
         processedValue = inputValue.replace(/[^0-9\.\-]/g, '')
       }
 
@@ -86,9 +80,38 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       onChange?.(processedValue)
     }
 
+    const formatPhoneNumber = (digits: string) => {
+      if (digits.length === 0) return ''
+      if (digits.length <= 3) return digits
+      if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`
+      return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6, 10)}`
+    }
+
+    const formatCurrency = (value: string) => {
+      if (!value) return ''
+      // Remove existing $ and format
+      const numValue = value.replace(/\$/g, '')
+      if (numValue === '') return '$'
+      
+      // Handle decimal places
+      const parts = numValue.split('.')
+      if (parts.length > 2) {
+        // More than one decimal point, keep only first
+        return `$${parts[0]}.${parts[1]}`
+      }
+      
+      if (parts.length === 2 && parts[1].length > 2) {
+        // Limit to 2 decimal places
+        return `$${parts[0]}.${parts[1].slice(0, 2)}`
+      }
+      
+      return `$${numValue}`
+    }
+
     const handleBlur = () => {
-      if (variant === 'phone' || variant === 'currency') {
-        const formatted = formatValue(displayValue, variant)
+      if (variant === 'currency' && displayValue && !displayValue.includes('.')) {
+        // Add .00 to currency if no decimal
+        const formatted = displayValue + '.00'
         setDisplayValue(formatted)
         onChange?.(formatted)
       }
@@ -110,7 +133,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       
       switch (variant) {
         case 'phone':
-          return '(555) 123-4567'
+          return '(123) 456-7890'
         case 'currency':
           return '$0.00'
         case 'number':
@@ -125,6 +148,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         type={getInputType()}
         value={displayValue}
         onChange={handleInputChange}
+        onKeyDown={handleKeyDown}
         onBlur={handleBlur}
         placeholder={getPlaceholder()}
         disabled={disabled}
