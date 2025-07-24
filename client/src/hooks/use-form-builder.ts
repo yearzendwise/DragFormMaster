@@ -261,7 +261,7 @@ function normalizeFieldName(input: string): string {
   
   // Since we're already filtering at input level, just ensure proper format
   let normalized = input
-    .replace(/[^a-z\-]/g, '') // Only allow lowercase letters and hyphens
+    .replace(/[^a-z-]/g, '') // Only allow lowercase letters and hyphens
     .replace(/--+/g, '-') // Replace multiple hyphens with single hyphen
     .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
   

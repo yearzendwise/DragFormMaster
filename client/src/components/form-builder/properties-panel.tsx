@@ -160,7 +160,7 @@ export function PropertiesPanel({
               value={selectedElement.name}
               onChange={(e) => {
                 // Only allow lowercase letters and hyphens
-                const filteredValue = e.target.value.replace(/[^a-z\-]/g, '');
+                const filteredValue = e.target.value.replace(/[^a-z-]/g, '');
                 handleUpdate('name', filteredValue);
               }}
               className={`focus:ring-2 ${
