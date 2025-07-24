@@ -85,7 +85,21 @@ export function PropertiesPanel({
           </Button>
         </div>
 
-        
+        {/* Element Type Badge */}
+        <div className="mb-6 lg:mb-8">
+          <div className="bg-gradient-to-r from-blue-100 to-indigo-100 border border-blue-200/50 rounded-lg lg:rounded-xl p-3 lg:p-4">
+            <div className="flex items-center space-x-2 lg:space-x-3">
+              <div>
+                <div className="text-sm font-bold text-slate-800 capitalize">
+                  {selectedElement.type.replace('-', ' ')}
+                </div>
+                <div className="text-xs text-blue-600 font-medium">
+                  Form Element
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Basic Properties */}
         <div className="space-y-4 mb-8">
