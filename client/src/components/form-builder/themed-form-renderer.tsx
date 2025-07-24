@@ -236,7 +236,7 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
             name={element.name}
             required={element.required}
             disabled={(element as FormElement).disabled}
-            variant={(element as FormElement).dateTimeVariant || "datetime"}
+            variant={(element as FormElement).dateTimeVariant || "date-only"}
             themeStyles={themeStyles}
             placeholder={element.placeholder}
           />

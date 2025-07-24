@@ -252,7 +252,7 @@ export function FormElementRenderer({
       case "datetime-picker":
         return (
           <Input
-            type={element.dateTimeVariant === 'date-only' ? 'date' : element.dateTimeVariant === 'time-only' ? 'time' : 'datetime-local'}
+            type={(!element.dateTimeVariant || element.dateTimeVariant === 'date-only') ? 'date' : element.dateTimeVariant === 'time-only' ? 'time' : 'datetime-local'}
             placeholder={element.placeholder}
             required={element.required}
             disabled={element.disabled || isDragging}

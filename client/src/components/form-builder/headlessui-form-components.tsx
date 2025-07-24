@@ -498,7 +498,7 @@ export function HeadlessUIDateTimePicker({
   name,
   required = false,
   disabled = false,
-  variant = 'datetime',
+  variant = 'date-only',
   themeStyles,
   onChange,
   placeholder,

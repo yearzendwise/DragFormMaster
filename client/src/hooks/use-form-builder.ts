@@ -34,7 +34,7 @@ export function useFormBuilder(initialTitle?: string, initialElements?: FormElem
       options: type === 'select' || type === 'radio' || type === 'checkbox' ? ['Option 1', 'Option 2'] : undefined,
       rateVariant: type === 'rate-scale' ? 'numbers' : undefined,
       booleanVariant: type === 'boolean-switch' ? 'yes-no' : undefined,
-      dateTimeVariant: type === 'datetime-picker' ? 'datetime' : undefined,
+      dateTimeVariant: type === 'datetime-picker' ? 'date-only' : undefined,
     };
 
     setState(prev => {
@@ -160,7 +160,7 @@ export function useFormBuilder(initialTitle?: string, initialElements?: FormElem
       ...(type === 'image' && { src: '', alt: '' }),
       ...(type === 'rate-scale' && { rateVariant: 'numbers' }),
       ...(type === 'boolean-switch' && { booleanVariant: 'yes-no' }),
-      ...(type === 'datetime-picker' && { dateTimeVariant: 'datetime' }),
+      ...(type === 'datetime-picker' && { dateTimeVariant: 'date-only' }),
     };
 
     if (index !== undefined && index >= 0 && index <= state.elements.length) {
@@ -208,7 +208,7 @@ function getDefaultLabel(type: FormElementType): string {
     'image': 'Image',
     'rate-scale': 'How did we do?',
     'boolean-switch': 'Yes or No?',
-    'datetime-picker': 'Select Date & Time',
+    'datetime-picker': 'Select Date',
   } as const;
   return labels[type];
 }
@@ -225,7 +225,7 @@ function getDefaultPlaceholder(type: FormElementType): string {
     'image': '',
     'rate-scale': '',
     'boolean-switch': '',
-    'datetime-picker': 'Select date and time...',
+    'datetime-picker': 'Select date...',
   } as const;
   return placeholders[type];
 }
