@@ -18,6 +18,32 @@ type PreviewFormElement = FormElement | {
   };
 };
 
+// Function to get theme-specific description styles
+const getDescriptionStyles = (themeId: string): string => {
+  switch (themeId) {
+    case 'minimal':
+      return 'text-gray-600 tracking-wide'; // left-aligned like header
+    case 'modern':
+      return 'text-gray-700 font-medium'; // matches header style  
+    case 'professional':
+      return 'text-slate-600 tracking-wide'; // left-aligned like header
+    case 'playful':
+      return 'text-purple-600 text-center font-medium'; // centered like header
+    case 'elegant':
+      return 'text-gray-700 tracking-wide'; // matches elegant style
+    case 'neon':
+      return 'text-green-300 text-center tracking-wider font-medium drop-shadow-lg'; // centered like header
+    case 'nature':
+      return 'text-emerald-700 text-center tracking-wide'; // centered like header
+    case 'luxury':
+      return 'text-yellow-300 text-center tracking-widest font-serif font-light'; // centered like header
+    case 'retro':
+      return 'text-orange-700 text-center tracking-wider font-bold transform skew-x-3'; // centered like header
+    default:
+      return 'text-gray-600';
+  }
+};
+
 interface PreviewStepProps {
   formTitle: string;
   elements: FormElement[];
@@ -263,7 +289,9 @@ export function PreviewStep({
             <>
               <h1 className={themeStyles.header}>{formTitle}</h1>
               {formSettings.description && (
-                <p className="text-neutral-600 mb-6 mt-2 leading-relaxed">{formSettings.description}</p>
+                <p className={`mb-6 mt-2 leading-relaxed ${getDescriptionStyles(selectedTheme.id)}`}>
+                  {formSettings.description}
+                </p>
               )}
             </>
           )}
