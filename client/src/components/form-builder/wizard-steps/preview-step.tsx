@@ -3,7 +3,7 @@ import { ThemedFormRenderer } from '@/components/form-builder/themed-form-render
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Save, Download, Code, Mail, Clock, User } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 // Extended type for preview elements that includes buttons and spacer
 type PreviewFormElement = FormElement | {
@@ -258,6 +258,43 @@ export function PreviewStep({
 
   const themeStyles = selectedTheme.styles;
 
+  // Calculate progress percentage based on filled fields
+  const progressPercentage = useMemo(() => {
+    const totalFields = elements.length;
+    if (totalFields === 0) return 0;
+    
+    const filledFields = Object.keys(actualFormData).filter(key => {
+      const value = actualFormData[key];
+      return value !== null && value !== undefined && value !== '';
+    }).length;
+    
+    return Math.round((filledFields / totalFields) * 100);
+  }, [elements.length, actualFormData]);
+
+  // Progress bar component
+  const ThemedProgressBar = () => {
+    if (!formSettings.showProgressBar || !themeStyles.progressBar) return null;
+    
+    return (
+      <div className="mb-6">
+        <div className="flex justify-between items-center mb-2">
+          <span className={`text-sm font-medium ${selectedTheme.id === 'elegant' || selectedTheme.id === 'neon' || selectedTheme.id === 'luxury' ? 'text-gray-300' : 'text-gray-700'}`}>
+            Form Progress
+          </span>
+          <span className={`text-sm font-medium ${selectedTheme.id === 'elegant' || selectedTheme.id === 'neon' || selectedTheme.id === 'luxury' ? 'text-gray-300' : 'text-gray-700'}`}>
+            {progressPercentage}%
+          </span>
+        </div>
+        <div className={themeStyles.progressBar.container}>
+          <div 
+            className={themeStyles.progressBar.fill}
+            style={{ width: `${progressPercentage}%` }}
+          />
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="flex-1 flex flex-col">
       {/* Header */}
@@ -293,6 +330,8 @@ export function PreviewStep({
               )}
             </>
           )}
+          
+          <ThemedProgressBar />
           
           <form className="space-y-4" onSubmit={handleFormSubmit}>
             {elementsWithButtons.map((element) => (

@@ -21,6 +21,10 @@ const defaultThemes: FormTheme[] = [
         thumb: 'data-[state=unchecked]:bg-gray-500 data-[state=checked]:bg-green-500 shadow-md',
         activeLabel: 'text-gray-900 font-medium',
         inactiveLabel: 'text-gray-500'
+      },
+      progressBar: {
+        container: 'w-full bg-gray-200 rounded-lg h-2 mb-6',
+        fill: 'bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-lg transition-all duration-500 ease-out'
       }
     }
   },
@@ -42,6 +46,10 @@ const defaultThemes: FormTheme[] = [
         thumb: 'data-[state=unchecked]:bg-gray-500 data-[state=checked]:bg-green-500 shadow-lg',
         activeLabel: 'text-gray-800 font-semibold',
         inactiveLabel: 'text-gray-500'
+      },
+      progressBar: {
+        container: 'w-full bg-gray-200/60 rounded-xl h-3 mb-8 backdrop-blur-sm',
+        fill: 'bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 h-3 rounded-xl transition-all duration-700 ease-out shadow-lg'
       }
     }
   },
@@ -63,6 +71,10 @@ const defaultThemes: FormTheme[] = [
         thumb: 'data-[state=unchecked]:bg-gray-500 data-[state=checked]:bg-green-500 shadow-lg',
         activeLabel: 'text-slate-800 font-bold uppercase tracking-wider',
         inactiveLabel: 'text-slate-500 font-bold uppercase tracking-wider'
+      },
+      progressBar: {
+        container: 'w-full bg-slate-200 rounded-md h-2 mb-8 border border-slate-300',
+        fill: 'bg-gradient-to-r from-blue-600 to-blue-700 h-2 rounded-md transition-all duration-500 ease-in-out'
       }
     }
   },
@@ -84,6 +96,10 @@ const defaultThemes: FormTheme[] = [
         thumb: 'data-[state=unchecked]:bg-gray-500 data-[state=checked]:bg-green-500 shadow-lg',
         activeLabel: 'text-purple-700 font-bold',
         inactiveLabel: 'text-pink-400 font-bold'
+      },
+      progressBar: {
+        container: 'w-full bg-pink-200 rounded-2xl h-4 mb-6 border-2 border-pink-300',
+        fill: 'bg-gradient-to-r from-pink-500 to-purple-600 h-4 rounded-2xl transition-all duration-500 ease-bounce shadow-lg'
       }
     }
   },
@@ -105,6 +121,10 @@ const defaultThemes: FormTheme[] = [
         thumb: 'data-[state=unchecked]:bg-gray-500 data-[state=checked]:bg-green-500 shadow-xl',
         activeLabel: 'text-yellow-400 font-medium tracking-widest uppercase',
         inactiveLabel: 'text-gray-400 font-medium tracking-widest uppercase'
+      },
+      progressBar: {
+        container: 'w-full bg-gray-700 rounded-lg h-3 mb-10 border border-gray-600',
+        fill: 'bg-gradient-to-r from-yellow-400 to-yellow-500 h-3 rounded-lg transition-all duration-700 ease-out shadow-lg shadow-yellow-400/30'
       }
     }
   },
@@ -127,6 +147,10 @@ const defaultThemes: FormTheme[] = [
         thumb: 'data-[state=unchecked]:bg-gray-500 data-[state=checked]:bg-green-500 shadow-lg shadow-cyan-400/50',
         activeLabel: 'text-cyan-400 font-bold tracking-wider uppercase',
         inactiveLabel: 'text-gray-500 font-bold tracking-wider uppercase'
+      },
+      progressBar: {
+        container: 'w-full bg-gray-800 rounded-lg h-3 mb-8 border-2 border-cyan-400 shadow-inner',
+        fill: 'bg-gradient-to-r from-cyan-400 to-green-400 h-3 rounded-lg transition-all duration-600 ease-out shadow-lg shadow-cyan-400/50'
       }
     }
   },
@@ -148,6 +172,10 @@ const defaultThemes: FormTheme[] = [
         thumb: 'data-[state=unchecked]:bg-gray-500 data-[state=checked]:bg-green-500 shadow-lg',
         activeLabel: 'text-green-800 font-semibold tracking-wide',
         inactiveLabel: 'text-emerald-400 font-semibold tracking-wide'
+      },
+      progressBar: {
+        container: 'w-full bg-green-200 rounded-3xl h-3 mb-8 border-2 border-green-300',
+        fill: 'bg-gradient-to-r from-green-600 to-emerald-600 h-3 rounded-3xl transition-all duration-500 ease-out shadow-lg'
       }
     }
   },
@@ -169,6 +197,10 @@ const defaultThemes: FormTheme[] = [
         thumb: 'data-[state=unchecked]:bg-gray-500 data-[state=checked]:bg-green-500 shadow-xl',
         activeLabel: 'text-yellow-400 font-medium tracking-widest uppercase font-serif',
         inactiveLabel: 'text-purple-300 font-medium tracking-widest uppercase font-serif'
+      },
+      progressBar: {
+        container: 'w-full bg-purple-800/50 rounded-lg h-4 mb-10 border border-purple-600 backdrop-blur-sm',
+        fill: 'bg-gradient-to-r from-yellow-400 to-yellow-500 h-4 rounded-lg transition-all duration-800 ease-out shadow-lg shadow-yellow-400/30'
       }
     }
   },
@@ -190,6 +222,10 @@ const defaultThemes: FormTheme[] = [
         thumb: 'data-[state=unchecked]:bg-gray-500 data-[state=checked]:bg-green-500 shadow-lg rounded-none',
         activeLabel: 'text-orange-600 font-black tracking-wider uppercase transform skew-x-6',
         inactiveLabel: 'text-pink-400 font-black tracking-wider uppercase transform skew-x-6'
+      },
+      progressBar: {
+        container: 'w-full bg-yellow-300 rounded-none h-4 mb-6 border-4 border-orange-400 transform skew-x-6',
+        fill: 'bg-gradient-to-r from-orange-500 to-pink-500 h-4 rounded-none transition-all duration-400 ease-out shadow-lg transform -skew-x-6'
       }
     }
   }

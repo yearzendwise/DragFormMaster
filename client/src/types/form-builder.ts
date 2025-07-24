@@ -97,6 +97,10 @@ export interface FormTheme {
       activeLabel: string;
       inactiveLabel: string;
     };
+    progressBar?: {
+      container: string;
+      fill: string;
+    };
   };
 }
 
