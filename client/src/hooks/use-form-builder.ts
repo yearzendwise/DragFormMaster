@@ -35,6 +35,7 @@ export function useFormBuilder(initialTitle?: string, initialElements?: FormElem
       rateVariant: type === 'rate-scale' ? 'numbers' : undefined,
       booleanVariant: type === 'boolean-switch' ? 'yes-no' : undefined,
       dateTimeVariant: type === 'datetime-picker' ? 'date-only' : undefined,
+      numberVariant: type === 'number-input' ? 'number' : undefined,
     };
 
     setState(prev => {

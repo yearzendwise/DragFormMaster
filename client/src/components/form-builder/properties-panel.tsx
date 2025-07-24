@@ -279,26 +279,46 @@ export function PropertiesPanel({
               )}
 
               {selectedElement.type === 'number-input' && (
-                <div className="grid grid-cols-2 gap-3">
+                <>
                   <div>
-                    <Label className="text-xs font-medium text-neutral-600 mb-1">Min Value</Label>
-                    <Input
-                      type="number"
-                      value={selectedElement.validation?.min || ''}
-                      onChange={(e) => handleValidationUpdate('min', parseInt(e.target.value) || undefined)}
-                      className="text-sm"
-                    />
+                    <Label className="text-xs font-medium text-neutral-600 mb-1">Input Type</Label>
+                    <Select 
+                      value={selectedElement.numberVariant || 'number'}
+                      onValueChange={(value) => handleUpdate('numberVariant', value)}
+                    >
+                      <SelectTrigger className="text-sm">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="number">Number (Default)</SelectItem>
+                        <SelectItem value="phone">Phone Number</SelectItem>
+                        <SelectItem value="currency">Currency ($)</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
-                  <div>
-                    <Label className="text-xs font-medium text-neutral-600 mb-1">Max Value</Label>
-                    <Input
-                      type="number"
-                      value={selectedElement.validation?.max || ''}
-                      onChange={(e) => handleValidationUpdate('max', parseInt(e.target.value) || undefined)}
-                      className="text-sm"
-                    />
-                  </div>
-                </div>
+                  {selectedElement.numberVariant === 'number' && (
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <Label className="text-xs font-medium text-neutral-600 mb-1">Min Value</Label>
+                        <Input
+                          type="number"
+                          value={selectedElement.validation?.min || ''}
+                          onChange={(e) => handleValidationUpdate('min', parseInt(e.target.value) || undefined)}
+                          className="text-sm"
+                        />
+                      </div>
+                      <div>
+                        <Label className="text-xs font-medium text-neutral-600 mb-1">Max Value</Label>
+                        <Input
+                          type="number"
+                          value={selectedElement.validation?.max || ''}
+                          onChange={(e) => handleValidationUpdate('max', parseInt(e.target.value) || undefined)}
+                          className="text-sm"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </>
               )}
 
               {selectedElement.type === 'rate-scale' && (

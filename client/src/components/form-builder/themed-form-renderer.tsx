@@ -2,6 +2,7 @@ import { FormElement, FormTheme } from '@/types/form-builder';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { RateScale } from '@/components/ui/rate-scale';
+import { NumberInput } from '@/components/ui/number-input';
 import { cn } from '@/lib/utils';
 import * as React from 'react';
 import { HeadlessUIBooleanSwitch, HeadlessUIRadioGroup, HeadlessUICheckbox, HeadlessUIDateTimePicker } from './headlessui-form-components';
@@ -74,8 +75,8 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
 
       case 'number-input':
         return (
-          <Input
-            type="number"
+          <NumberInput
+            variant={element.numberVariant || "number"}
             placeholder={element.placeholder}
             required={element.required}
             disabled={element.disabled}
@@ -84,7 +85,6 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
             min={element.validation?.min}
             max={element.validation?.max}
             className={baseInputClasses}
-            style={forceTransparentStyle}
           />
         );
 

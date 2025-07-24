@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RateScale } from "@/components/ui/rate-scale";
 import { BooleanSwitch } from "@/components/ui/boolean-switch";
+import { NumberInput } from "@/components/ui/number-input";
 import { DropInsertionIndicator } from './drop-insertion-indicator';
 
 interface FormElementRendererProps {
@@ -86,8 +87,8 @@ export function FormElementRenderer({
 
       case "number-input":
         return (
-          <Input
-            type="number"
+          <NumberInput
+            variant={element.numberVariant || "number"}
             placeholder={element.placeholder}
             required={element.required}
             disabled={element.disabled || isDragging}
