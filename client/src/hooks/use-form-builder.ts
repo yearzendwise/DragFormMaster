@@ -66,18 +66,11 @@ export function useFormBuilder(initialTitle?: string, initialElements?: FormElem
   }, []);
 
   const updateElement = useCallback((id: string, updates: Partial<FormElement>) => {
-    // Normalize field name if it's being updated
-    const normalizedUpdates = { ...updates };
-    if (updates.name !== undefined) {
-      console.log('Before normalize:', updates.name);
-      normalizedUpdates.name = normalizeFieldName(updates.name);
-      console.log('After normalize:', normalizedUpdates.name);
-    }
-    
+    // For field names, don't normalize during typing - let users type freely
     setState(prev => ({
       ...prev,
       elements: prev.elements.map(el => 
-        el.id === id ? { ...el, ...normalizedUpdates } : el
+        el.id === id ? { ...el, ...updates } : el
       ),
     }));
   }, []);
