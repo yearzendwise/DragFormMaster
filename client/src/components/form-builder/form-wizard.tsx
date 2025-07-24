@@ -79,7 +79,7 @@ export function FormWizard() {
   return (
     <div className="h-screen flex flex-col bg-neutral-50">
       {/* Header with Progress */}
-      <header className="bg-white/95 backdrop-blur-lg border-b border-slate-200/60 h-16 flex items-center justify-between px-6 shadow-sm">
+      <header className="bg-white/95 backdrop-blur-lg border-b border-slate-200/60 h-16 flex items-center justify-between px-6 shadow-sm pt-[40px] pb-[40px]">
         <div className="flex items-center space-x-6">
           {/* Progress Steps */}
           <div className="hidden lg:flex items-center space-x-4">
@@ -129,7 +129,6 @@ export function FormWizard() {
           Step {getStepNumber()} of 3
         </div>
       </header>
-
       {/* Step Content */}
       <div className="flex-1 flex flex-col">
         {wizardState.currentStep === 'build' && (
@@ -160,7 +159,6 @@ export function FormWizard() {
           />
         )}
       </div>
-
       {/* Navigation Footer */}
       <footer className="bg-white border-t border-slate-200 px-6 py-4">
         <div className="flex items-center justify-between">
