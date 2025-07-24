@@ -249,8 +249,8 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
         
       </div>
       
-      {/* Drag Overlay - Disabled to remove animation */}
-      <DragOverlay dropAnimation={null}>
+      {/* Disabled Drag Overlay to fix shadow animation issues */}
+      <DragOverlay>
         {null}
       </DragOverlay>
     </DndContext>
