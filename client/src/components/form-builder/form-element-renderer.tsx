@@ -383,17 +383,17 @@ export function FormElementRenderer({
                 </button>
               )}
 
-              {/* Settings Button */}
+              {/* Settings Button - Mobile only */}
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   onMobileEdit?.(element.id);
                 }}
-                className="w-8 h-8 lg:w-9 lg:h-9 rounded-full shadow-lg flex items-center justify-center transition-all bg-slate-500 hover:bg-slate-600 text-white shadow-slate-200"
+                className="lg:hidden w-8 h-8 rounded-full shadow-lg flex items-center justify-center transition-all bg-slate-500 hover:bg-slate-600 text-white shadow-slate-200"
                 title="Edit properties"
               >
                 <svg
-                  className="w-3 h-3 lg:w-4 lg:h-4"
+                  className="w-3 h-3"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
