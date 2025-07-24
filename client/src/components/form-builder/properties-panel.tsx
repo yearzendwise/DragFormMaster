@@ -159,8 +159,8 @@ export function PropertiesPanel({
               id="name"
               value={selectedElement.name}
               onChange={(e) => {
-                // Only allow lowercase letters and hyphens
-                const filteredValue = e.target.value.replace(/[^a-z-]/g, '');
+                // Only allow lowercase letters, numbers, and hyphens
+                const filteredValue = e.target.value.replace(/[^a-z0-9-]/g, '');
                 handleUpdate('name', filteredValue);
               }}
               className={`focus:ring-2 ${
@@ -176,11 +176,11 @@ export function PropertiesPanel({
                   <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                   </svg>
-                  Must start with a letter and contain only a-z and hyphens (-)
+                  Must start with a letter and contain only a-z, 0-9, and hyphens (-)
                 </p>
               )}
               <p className="text-xs text-neutral-500">
-                Only lowercase letters (a-z) and hyphens (-) can be typed
+                Only lowercase letters (a-z), numbers (0-9), and hyphens (-) can be typed
               </p>
             </div>
           </div>

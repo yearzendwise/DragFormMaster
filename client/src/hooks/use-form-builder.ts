@@ -240,14 +240,14 @@ function getDefaultPlaceholder(type: FormElementType): string {
 
 function generateFieldName(type: FormElementType): string {
   const timestamp = Date.now().toString(36);
-  // Convert type to valid field name format (a-z and hyphens only)
-  const normalizedType = type.replace(/[^a-z-]/g, '');
+  // Convert type to valid field name format (a-z, 0-9, and hyphens only)
+  const normalizedType = type.replace(/[^a-z0-9-]/g, '');
   return `${normalizedType}-${timestamp}`;
 }
 
 function validateFieldName(name: string): boolean {
-  // Only allow lowercase letters (a-z) and hyphens (-), must start with letter
-  const validPattern = /^[a-z][a-z-]*$/;
+  // Must start with a letter, then allow letters, numbers, and hyphens
+  const validPattern = /^[a-z][a-z0-9-]*$/;
   return validPattern.test(name) && name.length > 0;
 }
 
@@ -256,7 +256,7 @@ function normalizeFieldName(input: string): string {
   
   // Since we're already filtering at input level, just ensure proper format
   let normalized = input
-    .replace(/[^a-z-]/g, '') // Only allow lowercase letters and hyphens
+    .replace(/[^a-z0-9-]/g, '') // Only allow lowercase letters, numbers, and hyphens
     .replace(/--+/g, '-') // Replace multiple hyphens with single hyphen
     .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
   
