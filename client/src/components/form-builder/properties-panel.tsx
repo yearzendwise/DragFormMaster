@@ -6,6 +6,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { LanguageSelector } from '@/components/ui/language-selector';
+import { Fragment } from 'react';
+import { Listbox, Transition } from '@headlessui/react';
+import { ChevronUpDownIcon, CheckIcon } from '@heroicons/react/24/solid';
 
 interface PropertiesPanelProps {
   selectedElement: FormElement | null;
@@ -365,21 +368,101 @@ export function PropertiesPanel({
               {selectedElement.type === 'datetime-picker' && (
                 <div>
                   <Label className="text-xs font-medium text-neutral-600 mb-1">Input Type</Label>
-                  <select 
+                  <Listbox 
                     value={selectedElement.dateTimeVariant || 'date-only'}
-                    onChange={(e) => {
-                      console.log('DateTime variant changing to:', e.target.value);
-                      handleUpdate('dateTimeVariant', e.target.value);
+                    onChange={(value) => {
+                      console.log('DateTime variant changing to:', value);
+                      handleUpdate('dateTimeVariant', value);
                     }}
-                    className="w-full text-sm border border-gray-300 rounded-md px-3 py-2 bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
-                    <option value="date-only">📅 Date Only</option>
-                    <option value="time-only">🕐 Time Only</option>
-                    <option value="datetime">📅🕐 Date & Time</option>
-                  </select>
-                  <div className="text-xs text-neutral-500 mt-1">
-                    Current: {selectedElement.dateTimeVariant || 'date-only'}
-                  </div>
+                    <div className="relative">
+                      <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm">
+                        <span className="block truncate">
+                          {selectedElement.dateTimeVariant === 'date-only' || !selectedElement.dateTimeVariant ? '📅 Date Only' :
+                           selectedElement.dateTimeVariant === 'time-only' ? '🕐 Time Only' :
+                           '📅🕐 Date & Time'}
+                        </span>
+                        <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                          <ChevronUpDownIcon
+                            className="h-4 w-4 text-gray-400"
+                            aria-hidden="true"
+                          />
+                        </span>
+                      </Listbox.Button>
+                      <Transition
+                        as={Fragment}
+                        leave="transition ease-in duration-100"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                      >
+                        <Listbox.Options className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                          <Listbox.Option
+                            value="date-only"
+                            className={({ active }) =>
+                              `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                                active ? 'bg-blue-100 text-blue-900' : 'text-gray-900'
+                              }`
+                            }
+                          >
+                            {({ selected }) => (
+                              <>
+                                <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
+                                  📅 Date Only
+                                </span>
+                                {selected ? (
+                                  <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-blue-600">
+                                    <CheckIcon className="h-4 w-4" aria-hidden="true" />
+                                  </span>
+                                ) : null}
+                              </>
+                            )}
+                          </Listbox.Option>
+                          <Listbox.Option
+                            value="time-only"
+                            className={({ active }) =>
+                              `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                                active ? 'bg-blue-100 text-blue-900' : 'text-gray-900'
+                              }`
+                            }
+                          >
+                            {({ selected }) => (
+                              <>
+                                <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
+                                  🕐 Time Only
+                                </span>
+                                {selected ? (
+                                  <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-blue-600">
+                                    <CheckIcon className="h-4 w-4" aria-hidden="true" />
+                                  </span>
+                                ) : null}
+                              </>
+                            )}
+                          </Listbox.Option>
+                          <Listbox.Option
+                            value="datetime"
+                            className={({ active }) =>
+                              `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                                active ? 'bg-blue-100 text-blue-900' : 'text-gray-900'
+                              }`
+                            }
+                          >
+                            {({ selected }) => (
+                              <>
+                                <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
+                                  📅🕐 Date & Time
+                                </span>
+                                {selected ? (
+                                  <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-blue-600">
+                                    <CheckIcon className="h-4 w-4" aria-hidden="true" />
+                                  </span>
+                                ) : null}
+                              </>
+                            )}
+                          </Listbox.Option>
+                        </Listbox.Options>
+                      </Transition>
+                    </div>
+                  </Listbox>
                   <p className="text-xs text-neutral-500 mt-1">
                     {(selectedElement.dateTimeVariant === 'date-only' || !selectedElement.dateTimeVariant) && 'Users will select a date only'}
                     {selectedElement.dateTimeVariant === 'time-only' && 'Users will select a time only'}
