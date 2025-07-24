@@ -370,11 +370,11 @@ function ThemedBooleanSwitch({
   const labels = getLabels();
 
   return (
-    <div className={cn("inline-flex items-center gap-3", className)} {...props}>
+    <div className={cn("inline-flex items-center gap-2 sm:gap-3", className)} {...props}>
       {showLabels && (
         <Label 
           className={cn(
-            "text-sm font-medium transition-colors cursor-pointer select-none",
+            "text-xs sm:text-sm font-medium transition-colors cursor-pointer select-none whitespace-nowrap",
             checked 
               ? themeStyles?.inactiveLabel || "text-muted-foreground"
               : themeStyles?.activeLabel || "text-foreground font-semibold"
@@ -389,14 +389,14 @@ function ThemedBooleanSwitch({
         checked={checked}
         onCheckedChange={handleChange}
         disabled={disabled}
-        className={cn(themeStyles?.track || '')}
+        className={cn("flex-shrink-0", themeStyles?.track || '')}
         aria-label={`Toggle between ${labels.negative} and ${labels.positive}`}
       />
       
       {showLabels && (
         <Label 
           className={cn(
-            "text-sm font-medium transition-colors cursor-pointer select-none",
+            "text-xs sm:text-sm font-medium transition-colors cursor-pointer select-none whitespace-nowrap",
             checked 
               ? themeStyles?.activeLabel || "text-foreground font-semibold"
               : themeStyles?.inactiveLabel || "text-muted-foreground"
