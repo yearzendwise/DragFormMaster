@@ -218,6 +218,29 @@ export function BuildStep({ onDataChange, initialTitle, initialElements }: Build
           </div>
         )}
 
+        {/* Drag Overlay - Renders dragged items at highest z-index */}
+        <DragOverlay>
+          {draggedType && (
+            <div className="bg-white rounded-xl shadow-2xl border-2 border-blue-400 p-4 opacity-90 cursor-grabbing">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl flex items-center justify-center">
+                  <span className="text-blue-700 text-sm font-semibold">
+                    {draggedType.split('-')[0].charAt(0).toUpperCase()}
+                  </span>
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-neutral-800">
+                    {draggedType.split('-').map(word => 
+                      word.charAt(0).toUpperCase() + word.slice(1)
+                    ).join(' ')}
+                  </div>
+                  <div className="text-xs text-neutral-500">Drop to add</div>
+                </div>
+              </div>
+            </div>
+          )}
+        </DragOverlay>
+
         {/* Mobile Properties Modal */}
         {showMobileProperties && selectedElement && (
           <div className="lg:hidden fixed inset-0 bg-black/50 z-[300] flex items-end">
