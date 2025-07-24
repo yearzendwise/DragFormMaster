@@ -246,13 +246,13 @@ function getDefaultPlaceholder(type: FormElementType): string {
 function generateFieldName(type: FormElementType): string {
   const timestamp = Date.now().toString(36);
   // Convert type to valid field name format (a-z and hyphens only)
-  const normalizedType = type.replace(/[^a-z\-]/g, '');
+  const normalizedType = type.replace(/[^a-z-]/g, '');
   return `${normalizedType}-${timestamp}`;
 }
 
 function validateFieldName(name: string): boolean {
   // Only allow lowercase letters (a-z) and hyphens (-), must start with letter
-  const validPattern = /^[a-z][a-z\-]*$/;
+  const validPattern = /^[a-z][a-z-]*$/;
   return validPattern.test(name) && name.length > 0;
 }
 
