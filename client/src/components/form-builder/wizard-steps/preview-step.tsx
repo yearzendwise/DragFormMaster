@@ -260,11 +260,12 @@ export function PreviewStep({
       <div className={`flex-1 overflow-y-auto p-6 ${themeStyles.background}`}>
         <div className={`${themeStyles.container} ${selectedTheme.id === 'glassmorphism' ? 'glassmorphism-override' : ''}`}>
           {formSettings.showFormTitle !== false && (
-            <h1 className={themeStyles.header}>{formTitle}</h1>
-          )}
-          
-          {formSettings.description && (
-            <p className="text-neutral-600 mb-6 leading-relaxed">{formSettings.description}</p>
+            <>
+              <h1 className={themeStyles.header}>{formTitle}</h1>
+              {formSettings.description && (
+                <p className="text-neutral-600 mb-6 mt-2 leading-relaxed">{formSettings.description}</p>
+              )}
+            </>
           )}
           
           <form className="space-y-4" onSubmit={handleFormSubmit}>
