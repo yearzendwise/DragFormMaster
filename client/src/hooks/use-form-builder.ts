@@ -69,7 +69,9 @@ export function useFormBuilder(initialTitle?: string, initialElements?: FormElem
     // Normalize field name if it's being updated
     const normalizedUpdates = { ...updates };
     if (updates.name !== undefined) {
+      console.log('Before normalize:', updates.name);
       normalizedUpdates.name = normalizeFieldName(updates.name);
+      console.log('After normalize:', normalizedUpdates.name);
     }
     
     setState(prev => ({
