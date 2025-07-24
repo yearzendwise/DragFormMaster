@@ -258,7 +258,9 @@ function ThemedRadio({
           }}
         />
         {checked && (
-          <div className={cn("absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full", styles.indicator)}></div>
+          <div className={cn("absolute inset-0 flex items-center justify-center", "")}>
+            <div className={cn("w-2 h-2 rounded-full", styles.indicator)}></div>
+          </div>
         )}
       </div>
       <span className={styles.label}>
