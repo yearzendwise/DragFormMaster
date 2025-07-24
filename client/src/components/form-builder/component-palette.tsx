@@ -84,6 +84,14 @@ const paletteItems: ComponentPaletteItem[] = [
     color: 'bg-gradient-to-br from-cyan-100 to-blue-200 text-cyan-700',
     category: 'selection',
   },
+  {
+    type: 'datetime-picker',
+    label: 'Date & Time',
+    description: 'Date, time, or datetime input',
+    icon: 'fas fa-calendar-alt',
+    color: 'bg-gradient-to-br from-blue-100 to-sky-200 text-blue-700',
+    category: 'basic',
+  },
 ];
 
 const categoryLabels = {

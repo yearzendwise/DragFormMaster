@@ -49,6 +49,7 @@ export interface FormElement {
   readonly?: boolean;
   rateVariant?: 'numbers' | 'faces' | 'stars'; // for rate-scale components
   booleanVariant?: 'yes-no' | 'true-false' | 'on-off'; // for boolean-switch components
+  dateTimeVariant?: 'date-only' | 'time-only' | 'datetime'; // for datetime-picker components
 }
 
 export interface ValidationRules {
@@ -80,4 +81,5 @@ export type FormElementType =
   | 'radio' 
   | 'image'
   | 'rate-scale'
-  | 'boolean-switch';
+  | 'boolean-switch'
+  | 'datetime-picker';

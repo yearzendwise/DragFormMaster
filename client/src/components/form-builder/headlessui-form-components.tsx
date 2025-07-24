@@ -479,3 +479,85 @@ export function HeadlessUICheckbox({
     </Checkbox>
   );
 }
+
+// DateTime Picker Component
+interface HeadlessUIDateTimePickerProps {
+  label: string;
+  name: string;
+  required?: boolean;
+  disabled?: boolean;
+  variant?: 'date-only' | 'time-only' | 'datetime';
+  themeStyles: FormTheme['styles'];
+  onChange?: (value: string) => void;
+  placeholder?: string;
+  className?: string;
+}
+
+export function HeadlessUIDateTimePicker({
+  label,
+  name,
+  required = false,
+  disabled = false,
+  variant = 'datetime',
+  themeStyles,
+  onChange,
+  placeholder,
+  className
+}: HeadlessUIDateTimePickerProps) {
+  const [value, setValue] = React.useState('');
+
+  const handleChange = (newValue: string) => {
+    setValue(newValue);
+    onChange?.(newValue);
+  };
+
+  const getInputType = () => {
+    switch (variant) {
+      case 'date-only':
+        return 'date';
+      case 'time-only':
+        return 'time';
+      case 'datetime':
+        return 'datetime-local';
+      default:
+        return 'datetime-local';
+    }
+  };
+
+  const getPlaceholder = () => {
+    if (placeholder) return placeholder;
+    switch (variant) {
+      case 'date-only':
+        return 'Select date...';
+      case 'time-only':
+        return 'Select time...';
+      case 'datetime':
+        return 'Select date and time...';
+      default:
+        return 'Select date and time...';
+    }
+  };
+
+  return (
+    <div className={cn("space-y-2", className)}>
+      <label className={cn(themeStyles.label)}>
+        {label}
+        {required && <span className="text-red-500 ml-1">*</span>}
+      </label>
+      <input
+        type={getInputType()}
+        name={name}
+        value={value}
+        onChange={(e) => handleChange(e.target.value)}
+        required={required}
+        disabled={disabled}
+        placeholder={getPlaceholder()}
+        className={cn(
+          themeStyles.input,
+          "w-full",
+          disabled && "opacity-50 cursor-not-allowed"
+        )}
+      />
+    </div>
+  );
+}

@@ -361,6 +361,25 @@ export function PropertiesPanel({
                   </Select>
                 </div>
               )}
+
+              {selectedElement.type === 'datetime-picker' && (
+                <div>
+                  <Label className="text-xs font-medium text-neutral-600 mb-1">Input Type</Label>
+                  <Select 
+                    value={selectedElement.dateTimeVariant || 'datetime'}
+                    onValueChange={(value) => handleUpdate('dateTimeVariant', value)}
+                  >
+                    <SelectTrigger className="text-sm">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="date-only">Date Only</SelectItem>
+                      <SelectItem value="time-only">Time Only</SelectItem>
+                      <SelectItem value="datetime">Date & Time</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
             </div>
         </div>
 

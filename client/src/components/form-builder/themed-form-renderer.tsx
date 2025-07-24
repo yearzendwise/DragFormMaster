@@ -4,7 +4,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { RateScale } from '@/components/ui/rate-scale';
 import { cn } from '@/lib/utils';
 import * as React from 'react';
-import { HeadlessUIBooleanSwitch, HeadlessUIRadioGroup, HeadlessUICheckbox } from './headlessui-form-components';
+import { HeadlessUIBooleanSwitch, HeadlessUIRadioGroup, HeadlessUICheckbox, HeadlessUIDateTimePicker } from './headlessui-form-components';
 
 // Extended type for preview elements that includes buttons and spacer
 type PreviewFormElement = FormElement | {
@@ -226,6 +226,19 @@ export function ThemedFormRenderer({ element, themeStyles }: ThemedFormRendererP
             showLabels={true}
             className="justify-center"
             themeStyles={themeStyles}
+          />
+        );
+
+      case 'datetime-picker':
+        return (
+          <HeadlessUIDateTimePicker
+            label=""
+            name={element.name}
+            required={element.required}
+            disabled={(element as FormElement).disabled}
+            variant={(element as FormElement).dateTimeVariant || "datetime"}
+            themeStyles={themeStyles}
+            placeholder={element.placeholder}
           />
         );
 

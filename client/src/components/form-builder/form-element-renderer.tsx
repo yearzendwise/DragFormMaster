@@ -249,6 +249,19 @@ export function FormElementRenderer({
           />
         );
 
+      case "datetime-picker":
+        return (
+          <Input
+            type={element.dateTimeVariant === 'date-only' ? 'date' : element.dateTimeVariant === 'time-only' ? 'time' : 'datetime-local'}
+            placeholder={element.placeholder}
+            required={element.required}
+            disabled={element.disabled || isDragging}
+            name={element.name}
+            className="focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            tabIndex={isDragging ? -1 : undefined}
+          />
+        );
+
       default:
         return <div>Unknown element type</div>;
     }
