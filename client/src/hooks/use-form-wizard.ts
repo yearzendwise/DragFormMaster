@@ -356,6 +356,3 @@ export function useFormWizard() {
     resetWizard
   };
 }
-
-// Export themes for testing purposes
-export const formThemes = defaultThemes;

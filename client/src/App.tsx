@@ -4,14 +4,12 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import FormBuilder from "@/pages/form-builder";
-import TestSwitch from "@/pages/test-switch";
 import NotFound from "@/pages/not-found";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={FormBuilder} />
-      <Route path="/test-switch" component={TestSwitch} />
       <Route component={NotFound} />
     </Switch>
   );
