@@ -199,36 +199,71 @@ export function HeadlessUIBooleanSwitch({
     inactiveLabel: 'text-gray-400 font-medium'
   };
 
-  // Clean track style for proper state management
-  const getTrackStyle = () => {
-    let trackClass = booleanSwitchStyles.track;
+  // Extract background and border styles from track
+  const getTrackStyles = () => {
+    const trackClass = booleanSwitchStyles.track;
+    const baseInput = themeStyles?.input || '';
     
-    // Remove conflicting data attributes and states
-    trackClass = trackClass.replace(/data-\[state=[^\]]+\]:[^\s]+/g, '');
-    
-    // Apply enabled/disabled styling based on state
-    if (enabled) {
-      // Extract checked styles from the track class
-      const checkedMatch = trackClass.match(/data-\[state=checked\]:([^\s]+)/);
-      if (checkedMatch) {
-        trackClass = checkedMatch[1];
-      } else {
-        // Fallback to the base track style for enabled state
-        trackClass = trackClass.replace(/data-\[state=unchecked\]:[^\s]+/g, '').trim();
-      }
+    // Define theme-specific colors based on input styles
+    if (baseInput.includes('bg-gray-900') || baseInput.includes('bg-gray-800')) {
+      // Elegant theme
+      return {
+        background: enabled ? 'linear-gradient(to right, #FBBF24, #FDE047)' : '#374151',
+        borderColor: enabled ? '#FBBF24' : '#4B5563'
+      };
+    } else if (baseInput.includes('border-3') || baseInput.includes('font-mono')) {
+      // Retro theme
+      return {
+        background: enabled ? 'linear-gradient(to right, #F97316, #EC4899)' : '#FEF3C7',
+        borderColor: '#FB923C',
+        borderWidth: '4px'
+      };
+    } else if (baseInput.includes('rounded-3xl') || baseInput.includes('border-4')) {
+      // Playful theme
+      return {
+        background: enabled ? 'linear-gradient(to right, #EC4899, #9333EA)' : '#FCE7F3',
+        borderColor: '#F9A8D4'
+      };
+    } else if (baseInput.includes('rounded-2xl') && baseInput.includes('green')) {
+      // Nature theme
+      return {
+        background: enabled ? 'linear-gradient(to right, #16A34A, #059669)' : '#BBF7D0',
+        borderColor: '#86EFAC'
+      };
+    } else if (baseInput.includes('bg-black') || baseInput.includes('border-cyan')) {
+      // Neon theme
+      return {
+        background: enabled ? 'linear-gradient(to right, #06B6D4, #22D3EE)' : '#1F2937',
+        borderColor: '#06B6D4'
+      };
+    } else if (baseInput.includes('bg-purple-800') || baseInput.includes('font-serif')) {
+      // Luxury theme
+      return {
+        background: enabled ? 'linear-gradient(to right, #FBBF24, #FDE047)' : '#581C87',
+        borderColor: enabled ? '#FBBF24' : '#7C3AED'
+      };
+    } else if (baseInput.includes('rounded-xl') && baseInput.includes('backdrop-blur')) {
+      // Modern theme
+      return {
+        background: enabled ? '#A855F7' : '#E5E7EB',
+        borderColor: enabled ? '#A855F7' : '#E5E7EB'
+      };
+    } else if (baseInput.includes('uppercase') && baseInput.includes('tracking-wider')) {
+      // Professional theme
+      return {
+        background: enabled ? '#2563EB' : '#CBD5E1',
+        borderColor: enabled ? '#2563EB' : '#CBD5E1'
+      };
     } else {
-      // Extract unchecked styles from the track class
-      const uncheckedMatch = trackClass.match(/data-\[state=unchecked\]:([^\s]+)/);
-      if (uncheckedMatch) {
-        trackClass = uncheckedMatch[1];
-      } else {
-        // Fallback to the base track style for disabled state
-        trackClass = trackClass.replace(/data-\[state=checked\]:[^\s]+/g, '').trim();
-      }
+      // Minimal theme
+      return {
+        background: enabled ? '#3B82F6' : '#E5E7EB',
+        borderColor: enabled ? '#3B82F6' : '#D1D5DB'
+      };
     }
-    
-    return trackClass;
   };
+
+  const trackStyles = getTrackStyles();
 
   return (
     <div className={cn("inline-flex items-center justify-center gap-3", className)}>
@@ -248,27 +283,27 @@ export function HeadlessUIBooleanSwitch({
         checked={enabled}
         onChange={handleChange}
         disabled={disabled}
-        className={cn(
-          "relative inline-flex shrink-0 cursor-pointer items-center transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
-          getTrackStyle()
-        )}
+        className="relative inline-flex shrink-0 cursor-pointer items-center transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
         style={{
           width: '44px',
           height: '24px',
+          minWidth: '44px',
           borderRadius: '9999px',
-          minWidth: '44px'
+          background: trackStyles.background,
+          border: `${trackStyles.borderWidth || '2px'} solid ${trackStyles.borderColor}`,
+          padding: '2px'
         }}
       >
         <span
           className={cn(
             "pointer-events-none inline-block transform transition-transform duration-200 shadow-sm",
-            booleanSwitchStyles.thumb,
-            enabled ? "translate-x-5" : "translate-x-0.5"
+            booleanSwitchStyles.thumb
           )}
           style={{
-            width: '16px',
-            height: '16px',
-            borderRadius: '50%'
+            width: '18px',
+            height: '18px',
+            borderRadius: '50%',
+            transform: enabled ? 'translateX(20px)' : 'translateX(0)'
           }}
         />
       </Switch>
