@@ -367,17 +367,23 @@ export function PropertiesPanel({
                   <Label className="text-xs font-medium text-neutral-600 mb-1">Input Type</Label>
                   <Select 
                     value={selectedElement.dateTimeVariant || 'date-only'}
-                    onValueChange={(value) => handleUpdate('dateTimeVariant', value)}
+                    onValueChange={(value) => {
+                      console.log('DateTime variant changing to:', value);
+                      handleUpdate('dateTimeVariant', value);
+                    }}
                   >
                     <SelectTrigger className="text-sm">
-                      <SelectValue placeholder="Select input type" />
+                      <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="date-only">Date Only</SelectItem>
-                      <SelectItem value="time-only">Time Only</SelectItem>
-                      <SelectItem value="datetime">Date & Time</SelectItem>
+                    <SelectContent className="z-50">
+                      <SelectItem value="date-only">📅 Date Only</SelectItem>
+                      <SelectItem value="time-only">🕐 Time Only</SelectItem>
+                      <SelectItem value="datetime">📅🕐 Date & Time</SelectItem>
                     </SelectContent>
                   </Select>
+                  <div className="text-xs text-neutral-500 mt-1">
+                    Current: {selectedElement.dateTimeVariant || 'date-only'}
+                  </div>
                   <p className="text-xs text-neutral-500 mt-1">
                     {(selectedElement.dateTimeVariant === 'date-only' || !selectedElement.dateTimeVariant) && 'Users will select a date only'}
                     {selectedElement.dateTimeVariant === 'time-only' && 'Users will select a time only'}
