@@ -1,7 +1,7 @@
 import { FormElement, FormTheme } from '@/types/form-builder';
 import { ThemedFormRenderer } from '@/components/form-builder/themed-form-renderer';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Save, Download, Code, Mail, Clock, User } from 'lucide-react';
 import { useState } from 'react';
 
@@ -295,6 +295,9 @@ export function PreviewStep({
               <Mail className="w-5 h-5" />
               <span>Form Submission Email Preview</span>
             </DialogTitle>
+            <DialogDescription>
+              Preview how form submissions will appear in email notifications sent to administrators
+            </DialogDescription>
           </DialogHeader>
           <div className="mt-4">
             {/* Email Header */}
@@ -443,6 +446,9 @@ export function PreviewStep({
               <Code className="w-5 h-5" />
               <span>Technical JSON Preview</span>
             </DialogTitle>
+            <DialogDescription>
+              View the raw JSON data structure that will be sent to your backend for processing
+            </DialogDescription>
           </DialogHeader>
           <div className="mt-4">
             <p className="text-sm text-slate-600 mb-4">
