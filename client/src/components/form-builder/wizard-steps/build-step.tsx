@@ -56,28 +56,45 @@ export function BuildStep({ onDataChange, initialTitle, initialElements, initial
   const lastSentData = useRef<{title: string, elements: any[], settings: any}>({ title: '', elements: [], settings: {} });
   const hasInitialized = useRef(false);
   
-  // Initialize form data from props on first mount or when props change significantly
+  // Initialize form data from props on first mount only
   useEffect(() => {
-    if (initialTitle && initialElements && initialElements.length > 0) {
-      // Only reset if we haven't initialized yet, or if the data is very different
-      const shouldReset = !hasInitialized.current || 
-                         (initialTitle !== formTitle && elements.length === 0);
-      
-      if (shouldReset) {
+    if (!hasInitialized.current) {
+      if (initialTitle && initialElements && initialElements.length > 0) {
         resetFormData(initialTitle, initialElements);
-        hasInitialized.current = true;
       }
+      
+      // Initialize form settings from props
+      if (initialSettings) {
+        Object.keys(initialSettings).forEach(key => {
+          updateFormSettings(key, initialSettings[key]);
+        });
+      }
+      
+      hasInitialized.current = true;
     }
-    
-    // Initialize form settings from props
-    if (initialSettings) {
+  }, []);
+
+  // Separate effect to sync settings when they change from outside (but not on every formSettings change)
+  useEffect(() => {
+    if (hasInitialized.current && initialSettings) {
+      // Only update if there's an actual difference and it's not just the form settings changing
+      let hasChanges = false;
+      const updates: Record<string, any> = {};
+      
       Object.keys(initialSettings).forEach(key => {
         if ((formSettings as any)[key] !== initialSettings[key]) {
-          updateFormSettings(key, initialSettings[key]);
+          updates[key] = initialSettings[key];
+          hasChanges = true;
         }
       });
+      
+      if (hasChanges) {
+        Object.keys(updates).forEach(key => {
+          updateFormSettings(key, updates[key]);
+        });
+      }
     }
-  }, [initialTitle, initialElements, initialSettings, formTitle, elements.length, resetFormData, updateFormSettings]);
+  }, [JSON.stringify(initialSettings)]);
   
   // Update parent component when data changes (with comparison to prevent loops)
   useEffect(() => {
