@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { WizardStep, WizardState, FormTheme, FormElement } from '@/types/form-builder';
+import { WizardStep, WizardState, FormTheme, FormElement, CustomColors } from '@/types/form-builder';
+import { applyCustomColors, extractThemeColors } from '@/utils/theme-color-utils';
 
 const defaultThemes: FormTheme[] = [
   // Enhanced existing themes
@@ -487,6 +488,37 @@ export function useFormWizard() {
     });
   };
 
+  const customizeThemeColors = (colors: CustomColors) => {
+    setWizardState(prev => {
+      if (!prev.selectedTheme) return prev;
+      
+      const customizedTheme = applyCustomColors(prev.selectedTheme, colors);
+      const newState = {
+        ...prev,
+        selectedTheme: customizedTheme
+      };
+      saveToStorage(newState);
+      return newState;
+    });
+  };
+
+  const resetThemeColors = () => {
+    setWizardState(prev => {
+      if (!prev.selectedTheme) return prev;
+      
+      // Find the original theme from defaultThemes
+      const originalTheme = defaultThemes.find(t => t.id === prev.selectedTheme!.id);
+      if (!originalTheme) return prev;
+      
+      const newState = {
+        ...prev,
+        selectedTheme: { ...originalTheme, customColors: undefined }
+      };
+      saveToStorage(newState);
+      return newState;
+    });
+  };
+
   const completeWizard = () => {
     setWizardState(prev => ({
       ...prev,
@@ -532,6 +564,8 @@ export function useFormWizard() {
     previousStep,
     updateFormData,
     selectTheme,
+    customizeThemeColors,
+    resetThemeColors,
     completeWizard,
     resetWizard
   };

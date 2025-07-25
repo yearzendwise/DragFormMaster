@@ -1,5 +1,7 @@
-import { FormElement, FormTheme } from '@/types/form-builder';
+import { FormElement, FormTheme, CustomColors } from '@/types/form-builder';
 import { ThemedFormRenderer } from '@/components/form-builder/themed-form-renderer';
+import { CustomThemedForm } from '@/components/form-builder/custom-themed-form';
+import { ColorCustomizer } from '@/components/form-builder/color-customizer';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Save, Download, Code, Mail, Clock, User } from 'lucide-react';
@@ -57,6 +59,8 @@ interface PreviewStepProps {
   };
   onSave: () => void;
   onExport: () => void;
+  onCustomizeColors: (colors: CustomColors) => void;
+  onResetColors: () => void;
 }
 
 export function PreviewStep({ 
@@ -65,7 +69,9 @@ export function PreviewStep({
   selectedTheme, 
   formSettings = {},
   onSave, 
-  onExport 
+  onExport,
+  onCustomizeColors,
+  onResetColors
 }: PreviewStepProps) {
   const [showJsonPreview, setShowJsonPreview] = useState(false);
   const [showEmailPreview, setShowEmailPreview] = useState(false);
@@ -329,7 +335,14 @@ export function PreviewStep({
             <h2 className="text-2xl font-bold text-slate-800 mb-2">Preview & Save</h2>
             <p className="text-slate-600">Review your form and save it when ready</p>
           </div>
-          <div className="flex space-x-3">
+          <div className="flex items-center space-x-3">
+            {selectedTheme && (
+              <ColorCustomizer
+                theme={selectedTheme}
+                onColorsChange={onCustomizeColors}
+                onResetColors={onResetColors}
+              />
+            )}
             <Button variant="outline" onClick={onExport} className="flex items-center space-x-2">
               <Download className="w-4 h-4" />
               <span>Export</span>
@@ -343,8 +356,14 @@ export function PreviewStep({
       </div>
 
       {/* Preview */}
-      <div className={`flex-1 overflow-y-auto p-6 ${themeStyles.background}`}>
-        <div className={`${themeStyles.container} ${selectedTheme.id === 'glassmorphism' ? 'glassmorphism-override' : ''}`}>
+      <div 
+        className={`flex-1 overflow-y-auto p-6 ${themeStyles.background} ${selectedTheme.customColors ? 'custom-background' : ''}`}
+        style={selectedTheme.customColors ? { backgroundColor: selectedTheme.customColors.background } : {}}
+      >
+        <div 
+          className={`${themeStyles.container} ${selectedTheme.id === 'glassmorphism' ? 'glassmorphism-override' : ''} ${selectedTheme.customColors ? 'custom-background' : ''}`}
+          style={selectedTheme.customColors ? { backgroundColor: selectedTheme.customColors.background } : {}}
+        >
           {formSettings.showFormTitle !== false && (
             <>
               <h1 className={themeStyles.header}>{formTitle}</h1>
@@ -401,10 +420,10 @@ export function PreviewStep({
                 return rows.map((row, rowIndex) => (
                   <div key={`row-${rowIndex}`} className={row.length > 1 ? "grid grid-cols-1 md:grid-cols-2 gap-4 items-start" : ""}>
                     {row.map((element) => (
-                      <ThemedFormRenderer
+                      <CustomThemedForm
                         key={element.id}
+                        theme={selectedTheme}
                         element={element as FormElement}
-                        themeStyles={themeStyles}
                         onChange={handleFormChange}
                         onReset={handleFormReset}
                       />
@@ -415,10 +434,10 @@ export function PreviewStep({
             ) : (
               // Normal mode: Single column layout
               elementsWithButtons.map((element) => (
-                <ThemedFormRenderer
+                <CustomThemedForm
                   key={element.id}
+                  theme={selectedTheme}
                   element={element as FormElement}
-                  themeStyles={themeStyles}
                   onChange={handleFormChange}
                   onReset={handleFormReset}
                 />

@@ -79,11 +79,18 @@ export interface FormBuilderState {
 
 export type WizardStep = 'build' | 'style' | 'preview';
 
+export interface CustomColors {
+  primary: string;
+  secondary: string;
+  background: string;
+}
+
 export interface FormTheme {
   id: string;
   name: string;
   description: string;
   preview: string;
+  customColors?: CustomColors;
   styles: {
     container: string;
     header: string;

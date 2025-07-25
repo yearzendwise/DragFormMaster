@@ -13,6 +13,8 @@ export function FormWizard() {
     previousStep,
     updateFormData,
     selectTheme,
+    customizeThemeColors,
+    resetThemeColors,
     completeWizard,
     resetWizard
   } = useFormWizard();
@@ -156,6 +158,8 @@ export function FormWizard() {
             formSettings={wizardState.formData.settings}
             onSave={handleSave}
             onExport={handleExport}
+            onCustomizeColors={customizeThemeColors}
+            onResetColors={resetThemeColors}
           />
         )}
       </div>
