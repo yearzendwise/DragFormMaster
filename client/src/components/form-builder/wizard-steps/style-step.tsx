@@ -87,12 +87,17 @@ export function StyleStep({ themes, selectedTheme, onSelectTheme }: StyleStepPro
                           &gt; NEO_MODERN.exe
                         </div>
                       )}
+                      {theme.id === 'modern-bold' && (
+                        <div className="text-white font-black text-xl tracking-wider drop-shadow-lg">
+                          MODERN BOLD
+                        </div>
+                      )}
                       {theme.id === 'minimal' && (
                         <div className="text-gray-800 font-light text-lg tracking-wide">
                           MINIMAL
                         </div>
                       )}
-                      {!['neon', 'nature', 'luxury', 'retro', 'cosmic', 'brutalist', 'pastel-dream', 'professional', 'neo-modern', 'minimal'].includes(theme.id) && (
+                      {!['neon', 'nature', 'luxury', 'retro', 'cosmic', 'brutalist', 'pastel-dream', 'professional', 'neo-modern', 'minimal', 'modern-bold'].includes(theme.id) && (
                         <>
                           <div className="text-white font-semibold opacity-90 text-lg">{theme.name}</div>
                           <div className="text-white text-sm opacity-60 mt-1">Theme Preview</div>
@@ -124,9 +129,10 @@ export function StyleStep({ themes, selectedTheme, onSelectTheme }: StyleStepPro
                           theme.id === 'brutalist' ? 'bg-white border-4 border-black' :
                           theme.id === 'pastel-dream' ? 'bg-white/70 border-2 border-purple-200 rounded-2xl' :
                           theme.id === 'neo-modern' ? 'bg-black/50 border border-green-400/30 text-green-100 font-mono' :
+                          theme.id === 'modern-bold' ? 'bg-gradient-to-r from-white to-gray-50 border-3 border-orange-500/30 text-gray-900 font-semibold rounded-2xl shadow-lg' :
                           'bg-white border border-gray-300 rounded-lg'
                         }`}>
-                          <div className={theme.id === 'neon' || theme.id === 'luxury' || theme.id === 'elegant' || theme.id === 'glassmorphism' || theme.id === 'cosmic' || theme.id === 'neo-modern' ? 'text-gray-300' : theme.id === 'brutalist' ? 'text-black' : 'text-slate-400'}>
+                          <div className={theme.id === 'neon' || theme.id === 'luxury' || theme.id === 'elegant' || theme.id === 'glassmorphism' || theme.id === 'cosmic' || theme.id === 'neo-modern' ? 'text-gray-300' : theme.id === 'brutalist' || theme.id === 'modern-bold' ? 'text-black' : 'text-slate-400'}>
                             Enter your name
                           </div>
                         </div>
@@ -147,9 +153,10 @@ export function StyleStep({ themes, selectedTheme, onSelectTheme }: StyleStepPro
                           theme.id === 'brutalist' ? 'bg-white border-4 border-black' :
                           theme.id === 'pastel-dream' ? 'bg-white/70 border-2 border-purple-200 rounded-2xl' :
                           theme.id === 'neo-modern' ? 'bg-black/50 border border-green-400/30 text-green-100 font-mono' :
+                          theme.id === 'modern-bold' ? 'bg-gradient-to-r from-white to-gray-50 border-3 border-orange-500/30 text-gray-900 font-semibold rounded-2xl shadow-lg' :
                           'bg-white border border-gray-300 rounded-lg'
                         }`}>
-                          <div className={theme.id === 'neon' || theme.id === 'luxury' || theme.id === 'elegant' || theme.id === 'glassmorphism' || theme.id === 'cosmic' || theme.id === 'neo-modern' ? 'text-gray-300' : theme.id === 'brutalist' ? 'text-black' : 'text-slate-400'}>
+                          <div className={theme.id === 'neon' || theme.id === 'luxury' || theme.id === 'elegant' || theme.id === 'glassmorphism' || theme.id === 'cosmic' || theme.id === 'neo-modern' ? 'text-gray-300' : theme.id === 'brutalist' || theme.id === 'modern-bold' ? 'text-black' : 'text-slate-400'}>
                             Enter your email
                           </div>
                         </div>
@@ -168,6 +175,7 @@ export function StyleStep({ themes, selectedTheme, onSelectTheme }: StyleStepPro
                         theme.id === 'brutalist' ? 'bg-black text-white border-4 border-black' :
                         theme.id === 'pastel-dream' ? 'bg-gradient-to-r from-purple-400 to-pink-400 text-white rounded-2xl' :
                         theme.id === 'neo-modern' ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-black font-mono border border-green-400/50' :
+                        theme.id === 'modern-bold' ? 'bg-gradient-to-r from-orange-500 via-red-500 to-purple-600 text-white font-black text-xs uppercase tracking-widest rounded-2xl shadow-2xl border-2 border-white/20' :
                         'bg-gray-900 text-white rounded-lg'
                       }`}>
                         Submit

@@ -128,6 +128,31 @@ const defaultThemes: FormTheme[] = [
       }
     }
   },
+  {
+    id: 'modern-bold',
+    name: 'Modern Bold',
+    description: 'Ultra-bold gradients with striking typography and dynamic effects',
+    preview: 'bg-gradient-to-br from-orange-500 via-red-500 to-purple-600',
+    styles: {
+      container: 'max-w-2xl mx-auto p-8 bg-gradient-to-br from-slate-50 to-white border-4 border-transparent bg-clip-padding rounded-3xl shadow-2xl relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-br before:from-orange-500 before:via-red-500 before:to-purple-600 before:rounded-3xl before:-z-10 before:blur-xl before:opacity-20',
+      header: 'text-5xl font-black bg-gradient-to-r from-orange-600 via-red-600 to-purple-700 bg-clip-text text-transparent mb-10 tracking-tighter drop-shadow-lg',
+      field: 'mb-8',
+      label: 'block text-base font-black text-gray-900 mb-4 tracking-wide uppercase drop-shadow-sm',
+      input: 'w-full px-6 py-4 h-14 border-3 border-transparent rounded-2xl focus:outline-none focus:ring-4 focus:ring-orange-500/30 focus:border-orange-500 transition-all duration-300 bg-gradient-to-r from-white to-gray-50 shadow-lg hover:shadow-xl font-semibold text-gray-900 placeholder-gray-500',
+      button: 'w-full bg-gradient-to-r from-orange-500 via-red-500 to-purple-600 text-white py-5 px-8 rounded-2xl hover:scale-110 hover:rotate-1 transition-all duration-400 font-black text-lg uppercase tracking-widest shadow-2xl hover:shadow-orange-500/40 border-2 border-white/20',
+      background: 'bg-gradient-to-br from-orange-50 via-red-50 to-purple-50',
+      booleanSwitch: {
+        track: 'border-3 data-[state=unchecked]:bg-gray-200 data-[state=unchecked]:border-gray-400 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-orange-500 data-[state=checked]:to-purple-600 data-[state=checked]:border-orange-500',
+        thumb: 'data-[state=unchecked]:bg-gray-600 data-[state=checked]:bg-white shadow-2xl',
+        activeLabel: 'text-gray-900 font-black uppercase tracking-wide',
+        inactiveLabel: 'text-gray-500 font-semibold'
+      },
+      progressBar: {
+        container: 'w-full bg-gray-200 rounded-2xl h-4 mb-8 border-2 border-gray-300 shadow-inner',
+        fill: 'bg-gradient-to-r from-orange-500 via-red-500 to-purple-600 h-4 rounded-2xl transition-all duration-800 ease-out shadow-lg shadow-orange-500/50'
+      }
+    }
+  },
   // New themes
   {
     id: 'neon',
