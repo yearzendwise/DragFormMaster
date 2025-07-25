@@ -353,7 +353,6 @@ export function PreviewStep({
                          element.type === 'submit-button' || 
                          element.type === 'reset-button' || 
                          element.type === 'spacer' ||
-                         element.type === 'textarea' ||
                          element.type === 'rate-scale' ||
                          element.type === 'image';
                 };
