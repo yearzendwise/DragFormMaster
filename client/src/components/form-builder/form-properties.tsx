@@ -110,7 +110,7 @@ export function FormProperties({
                   onChange={(e) => handleSettingChange('compactMode', e.target.checked)}
                   className="rounded border-neutral-300 text-blue-600 focus:ring-blue-500"
                 />
-                <Label htmlFor="compact-mode" className="text-sm text-neutral-700">
+                <Label htmlFor="compact-mode" className="text-xs text-neutral-600">
                   Compact Mode (2 fields per row)
                 </Label>
               </div>
