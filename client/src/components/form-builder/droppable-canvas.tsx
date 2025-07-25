@@ -202,8 +202,6 @@ export function DroppableCanvas({
                 </svg>
                 {elements.length} field{elements.length !== 1 ? 's' : ''} added
               </span>
-              <span className="mx-2">•</span>
-              <span>Drag to reorder</span>
             </p>
           </div>
         )}
