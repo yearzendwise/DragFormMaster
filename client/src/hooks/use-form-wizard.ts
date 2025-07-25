@@ -229,6 +229,31 @@ const defaultThemes: FormTheme[] = [
       }
     }
   },
+  {
+    id: 'neo-modern',
+    name: 'Neo Modern',
+    description: 'Ultra-contemporary design with sharp edges, monospace fonts, and tech-inspired aesthetics',
+    preview: 'bg-gradient-to-br from-slate-800 via-gray-800 to-black border border-green-400/30',
+    styles: {
+      container: 'max-w-2xl mx-auto p-8 bg-gradient-to-br from-slate-900/95 to-gray-900/95 backdrop-blur-xl border border-green-400/20 rounded-none shadow-2xl relative overflow-hidden',
+      header: 'text-3xl font-mono font-bold text-green-400 mb-8 tracking-wider border-l-4 border-green-400 pl-4 relative before:content-[">"] before:text-green-400 before:mr-2',
+      field: 'mb-6',
+      label: 'block text-xs font-mono font-bold text-gray-300 mb-3 tracking-widest uppercase relative before:content-["//"] before:text-green-400/60 before:mr-2',
+      input: 'w-full px-4 py-3 h-12 bg-black/50 border border-green-400/30 rounded-none focus:outline-none focus:border-green-400 focus:shadow-[0_0_10px_rgba(34,197,94,0.3)] transition-all duration-300 text-green-100 font-mono placeholder-gray-500 backdrop-blur-sm',
+      button: 'w-full bg-gradient-to-r from-green-600 to-emerald-600 text-black py-4 px-6 rounded-none hover:from-green-500 hover:to-emerald-500 transition-all duration-300 font-mono font-bold uppercase tracking-widest shadow-lg hover:shadow-[0_0_20px_rgba(34,197,94,0.4)] border border-green-400/50',
+      background: 'bg-gradient-to-br from-slate-900 to-black',
+      booleanSwitch: {
+        track: 'border-2 rounded-none data-[state=unchecked]:bg-gray-800 data-[state=unchecked]:border-green-400/30 data-[state=checked]:bg-green-600 data-[state=checked]:border-green-400',
+        thumb: 'data-[state=unchecked]:bg-gray-600 data-[state=checked]:bg-black shadow-lg rounded-none',
+        activeLabel: 'text-green-400 font-mono font-bold uppercase tracking-wider',
+        inactiveLabel: 'text-gray-500 font-mono uppercase tracking-wider'
+      },
+      progressBar: {
+        container: 'w-full bg-gray-800 rounded-none h-2 mb-6 border border-green-400/30',
+        fill: 'bg-gradient-to-r from-green-400 to-emerald-400 h-2 rounded-none transition-all duration-500 ease-out shadow-[0_0_10px_rgba(34,197,94,0.3)]'
+      }
+    }
+  },
   // New themes added
   {
     id: 'cosmic',
