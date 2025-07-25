@@ -269,6 +269,20 @@ export function PreviewStep({
     }));
   }, []);
 
+  // Handle form reset
+  const handleFormReset = useCallback(() => {
+    console.log('Form reset triggered');
+    setLiveFormData({});
+    setActualFormData({});
+    setJsonViewActive(false);
+    
+    // Also reset all form inputs by clearing their values
+    const form = document.querySelector('form');
+    if (form) {
+      form.reset();
+    }
+  }, []);
+
   // Calculate progress percentage based on filled fields
   const progressPercentage = useMemo(() => {
     const totalFields = elements.length;
@@ -392,6 +406,7 @@ export function PreviewStep({
                         element={element as FormElement}
                         themeStyles={themeStyles}
                         onChange={handleFormChange}
+                        onReset={handleFormReset}
                       />
                     ))}
                   </div>
@@ -405,6 +420,7 @@ export function PreviewStep({
                   element={element as FormElement}
                   themeStyles={themeStyles}
                   onChange={handleFormChange}
+                  onReset={handleFormReset}
                 />
               ))
             )}

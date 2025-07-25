@@ -25,9 +25,10 @@ interface ThemedFormRendererProps {
   element: PreviewFormElement;
   themeStyles: FormTheme['styles'];
   onChange?: (fieldName: string, value: any) => void;
+  onReset?: () => void;
 }
 
-export function ThemedFormRenderer({ element, themeStyles, onChange }: ThemedFormRendererProps) {
+export function ThemedFormRenderer({ element, themeStyles, onChange, onReset }: ThemedFormRendererProps) {
   const renderFormControl = () => {
     const baseInputClasses = themeStyles.input;
     
@@ -200,6 +201,10 @@ export function ThemedFormRenderer({ element, themeStyles, onChange }: ThemedFor
         return (
           <button
             type="reset"
+            onClick={(e) => {
+              e.preventDefault();
+              onReset?.();
+            }}
             className={`${themeStyles.button.replace('bg-blue-600', 'bg-gray-600').replace('hover:bg-blue-700', 'hover:bg-gray-700')}`}
           >
             {element.label}
