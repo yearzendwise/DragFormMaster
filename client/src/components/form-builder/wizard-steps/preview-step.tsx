@@ -358,11 +358,21 @@ export function PreviewStep({
       {/* Preview */}
       <div 
         className={`flex-1 overflow-y-auto p-6 ${themeStyles.background} ${selectedTheme.customColors ? 'custom-background' : ''}`}
-        style={selectedTheme.customColors ? { backgroundColor: selectedTheme.customColors.background } : {}}
+        style={selectedTheme.customColors ? 
+          (selectedTheme.customColors.backgroundGradient 
+            ? { background: selectedTheme.customColors.backgroundGradient }
+            : { backgroundColor: selectedTheme.customColors.background }) 
+          : {}
+        }
       >
         <div 
           className={`${themeStyles.container} ${selectedTheme.id === 'glassmorphism' ? 'glassmorphism-override' : ''} ${selectedTheme.customColors ? 'custom-background' : ''}`}
-          style={selectedTheme.customColors ? { backgroundColor: selectedTheme.customColors.background } : {}}
+          style={selectedTheme.customColors ? 
+            (selectedTheme.customColors.backgroundGradient 
+              ? { background: selectedTheme.customColors.backgroundGradient }
+              : { backgroundColor: selectedTheme.customColors.background }) 
+            : {}
+          }
         >
           {formSettings.showFormTitle !== false && (
             <>

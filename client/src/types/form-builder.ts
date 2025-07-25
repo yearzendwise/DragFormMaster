@@ -81,8 +81,11 @@ export type WizardStep = 'build' | 'style' | 'preview';
 
 export interface CustomColors {
   primary: string;
+  primaryGradient?: string;
   secondary: string;
+  secondaryGradient?: string;
   background: string;
+  backgroundGradient?: string;
 }
 
 export interface FormTheme {
