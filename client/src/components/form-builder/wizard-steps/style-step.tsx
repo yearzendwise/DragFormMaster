@@ -156,17 +156,7 @@ export function StyleStep({ themes, selectedTheme, onSelectTheme }: StyleStepPro
                       </div>
                     </div>
 
-                    <Button
-                      variant={selectedTheme?.id === theme.id ? "default" : "outline"}
-                      size="sm"
-                      className="w-full mt-4"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onSelectTheme(theme);
-                      }}
-                    >
-                      {selectedTheme?.id === theme.id ? "Selected" : "Select Theme"}
-                    </Button>
+
                   </div>
                 </div>
               </div>
