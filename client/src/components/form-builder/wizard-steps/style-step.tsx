@@ -62,12 +62,22 @@ export function StyleStep({ themes, selectedTheme, onSelectTheme }: StyleStepPro
                           80S STYLE
                         </div>
                       )}
-                      {theme.id === 'glassmorphism' && (
-                        <div className="text-white font-bold text-lg backdrop-blur-xl bg-white/10 px-6 py-3 rounded-2xl border border-white/30 shadow-2xl drop-shadow-lg">
-                          ✨ True Glass ✨
+                      {theme.id === 'cosmic' && (
+                        <div className="text-purple-300 font-bold text-lg tracking-wider drop-shadow-lg">
+                          <span className="text-cyan-400">✦</span> COSMIC <span className="text-pink-400">✦</span>
                         </div>
                       )}
-                      {!['neon', 'nature', 'luxury', 'retro', 'glassmorphism'].includes(theme.id) && (
+                      {theme.id === 'brutalist' && (
+                        <div className="text-white font-black text-lg tracking-wider uppercase border-4 border-white px-4 py-2">
+                          BRUTALIST
+                        </div>
+                      )}
+                      {theme.id === 'pastel-dream' && (
+                        <div className="text-purple-600 font-medium text-lg tracking-wide">
+                          ✨ Pastel Dreams ✨
+                        </div>
+                      )}
+                      {!['neon', 'nature', 'luxury', 'retro', 'cosmic', 'brutalist', 'pastel-dream'].includes(theme.id) && (
                         <>
                           <div className="text-white font-semibold opacity-90 text-lg">{theme.name}</div>
                           <div className="text-white text-sm opacity-60 mt-1">Theme Preview</div>
@@ -94,10 +104,13 @@ export function StyleStep({ themes, selectedTheme, onSelectTheme }: StyleStepPro
                           theme.id === 'elegant' ? 'bg-gray-800 border border-gray-600 text-white rounded-lg' :
                           theme.id === 'playful' ? 'bg-pink-50 border-3 border-pink-300 rounded-2xl' :
                           theme.id === 'modern' ? 'bg-white/80 border-2 border-gray-200 rounded-xl backdrop-blur-sm' :
-                          theme.id === 'professional' ? 'bg-slate-50 border-2 border-slate-300' :
+                          theme.id === 'professional' ? 'bg-white border border-gray-300 rounded-md' :
+                          theme.id === 'cosmic' ? 'bg-black/40 border border-purple-500/40 text-purple-200 rounded-lg' :
+                          theme.id === 'brutalist' ? 'bg-white border-4 border-black' :
+                          theme.id === 'pastel-dream' ? 'bg-white/70 border-2 border-purple-200 rounded-2xl' :
                           'bg-white border border-gray-300 rounded-lg'
                         }`}>
-                          <div className={theme.id === 'neon' || theme.id === 'luxury' || theme.id === 'elegant' || theme.id === 'glassmorphism' ? 'text-gray-300' : 'text-slate-400'}>
+                          <div className={theme.id === 'neon' || theme.id === 'luxury' || theme.id === 'elegant' || theme.id === 'glassmorphism' || theme.id === 'cosmic' ? 'text-gray-300' : theme.id === 'brutalist' ? 'text-black' : 'text-slate-400'}>
                             Enter your name
                           </div>
                         </div>
@@ -113,10 +126,13 @@ export function StyleStep({ themes, selectedTheme, onSelectTheme }: StyleStepPro
                           theme.id === 'elegant' ? 'bg-gray-800 border border-gray-600 text-white rounded-lg' :
                           theme.id === 'playful' ? 'bg-pink-50 border-3 border-purple-300 rounded-2xl' :
                           theme.id === 'modern' ? 'bg-white/80 border-2 border-gray-200 rounded-xl backdrop-blur-sm' :
-                          theme.id === 'professional' ? 'bg-slate-50 border-2 border-slate-300' :
+                          theme.id === 'professional' ? 'bg-white border border-gray-300 rounded-md' :
+                          theme.id === 'cosmic' ? 'bg-black/40 border border-purple-500/40 text-purple-200 rounded-lg' :
+                          theme.id === 'brutalist' ? 'bg-white border-4 border-black' :
+                          theme.id === 'pastel-dream' ? 'bg-white/70 border-2 border-purple-200 rounded-2xl' :
                           'bg-white border border-gray-300 rounded-lg'
                         }`}>
-                          <div className={theme.id === 'neon' || theme.id === 'luxury' || theme.id === 'elegant' || theme.id === 'glassmorphism' ? 'text-gray-300' : 'text-slate-400'}>
+                          <div className={theme.id === 'neon' || theme.id === 'luxury' || theme.id === 'elegant' || theme.id === 'glassmorphism' || theme.id === 'cosmic' ? 'text-gray-300' : theme.id === 'brutalist' ? 'text-black' : 'text-slate-400'}>
                             Enter your email
                           </div>
                         </div>
@@ -130,7 +146,10 @@ export function StyleStep({ themes, selectedTheme, onSelectTheme }: StyleStepPro
                         theme.id === 'elegant' ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 rounded-lg' :
                         theme.id === 'playful' ? 'bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-2xl' :
                         theme.id === 'modern' ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl' :
-                        theme.id === 'professional' ? 'bg-slate-900 text-white' :
+                        theme.id === 'professional' ? 'bg-blue-600 text-white rounded-md' :
+                        theme.id === 'cosmic' ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg' :
+                        theme.id === 'brutalist' ? 'bg-black text-white border-4 border-black' :
+                        theme.id === 'pastel-dream' ? 'bg-gradient-to-r from-purple-400 to-pink-400 text-white rounded-2xl' :
                         'bg-gray-900 text-white rounded-lg'
                       }`}>
                         Submit
