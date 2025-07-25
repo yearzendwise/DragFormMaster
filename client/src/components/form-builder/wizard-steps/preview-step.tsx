@@ -337,11 +337,13 @@ export function PreviewStep({
           </div>
           <div className="flex items-center space-x-3">
             {selectedTheme && (
-              <ColorCustomizer
-                theme={selectedTheme}
-                onColorsChange={onCustomizeColors}
-                onResetColors={onResetColors}
-              />
+              <div className="mr-2">
+                <ColorCustomizer
+                  theme={selectedTheme}
+                  onColorsChange={onCustomizeColors}
+                  onResetColors={onResetColors}
+                />
+              </div>
             )}
             <Button variant="outline" onClick={onExport} className="flex items-center space-x-2">
               <Download className="w-4 h-4" />
