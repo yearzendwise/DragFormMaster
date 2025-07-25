@@ -274,7 +274,7 @@ export function PreviewStep({
     console.log('Form reset triggered');
     setLiveFormData({});
     setActualFormData({});
-    setJsonViewActive(false);
+    setShowEmailPreview(false);
     
     // Also reset all form inputs by clearing their values
     const form = document.querySelector('form');
