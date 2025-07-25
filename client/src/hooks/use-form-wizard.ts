@@ -57,24 +57,24 @@ const defaultThemes: FormTheme[] = [
     id: 'professional',
     name: 'Professional',
     description: 'Corporate design with precise spacing and structured layout',
-    preview: 'bg-slate-200 border-l-4 border-blue-600 shadow-md',
+    preview: 'bg-gray-50 border-l-4 border-blue-600 shadow-sm',
     styles: {
-      container: 'max-w-3xl mx-auto p-12 bg-white border border-slate-200 shadow-xl rounded-lg',
-      header: 'text-3xl font-bold text-slate-800 mb-8 border-b-2 border-slate-200 pb-6 tracking-tight',
-      field: 'mb-8',
-      label: 'block text-sm font-bold text-slate-700 mb-3 uppercase tracking-wider',
-      input: 'w-full px-4 py-3 h-12 border-2 border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all duration-200 bg-slate-50 focus:bg-white',
-      button: 'w-full bg-slate-900 text-white py-4 px-8 rounded-md hover:bg-slate-800 transition-all duration-200 font-bold uppercase tracking-wider shadow-lg hover:shadow-xl',
-      background: 'bg-slate-50',
+      container: 'max-w-3xl mx-auto p-10 bg-white border border-gray-200 shadow-sm rounded-lg',
+      header: 'text-2xl font-semibold text-gray-900 mb-6 pb-4 border-b border-gray-200',
+      field: 'mb-6',
+      label: 'block text-sm font-medium text-gray-700 mb-2',
+      input: 'w-full px-4 py-3 h-12 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-white',
+      button: 'w-full bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 transition-colors duration-200 font-medium shadow-sm hover:shadow-md',
+      background: 'bg-gray-50',
       booleanSwitch: {
-        track: 'border-2 data-[state=unchecked]:bg-slate-300 data-[state=unchecked]:border-blue-400 data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600',
-        thumb: 'data-[state=unchecked]:bg-gray-500 data-[state=checked]:bg-green-500 shadow-lg',
-        activeLabel: 'text-slate-800 font-bold uppercase tracking-wider',
-        inactiveLabel: 'text-slate-500 font-bold uppercase tracking-wider'
+        track: 'border data-[state=unchecked]:bg-gray-200 data-[state=unchecked]:border-gray-300 data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600',
+        thumb: 'data-[state=unchecked]:bg-white data-[state=checked]:bg-white shadow-sm',
+        activeLabel: 'text-gray-900 font-medium',
+        inactiveLabel: 'text-gray-600 font-normal'
       },
       progressBar: {
-        container: 'w-full bg-slate-200 rounded-md h-2 mb-8 border border-slate-300',
-        fill: 'bg-gradient-to-r from-blue-600 to-blue-700 h-2 rounded-md transition-all duration-500 ease-in-out'
+        container: 'w-full bg-gray-200 rounded-full h-1.5 mb-6',
+        fill: 'bg-blue-600 h-1.5 rounded-full transition-all duration-500 ease-out'
       }
     }
   },

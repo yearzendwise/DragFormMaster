@@ -26,7 +26,7 @@ const getDescriptionStyles = (themeId: string): string => {
     case 'modern':
       return 'text-gray-700 font-medium'; // matches header style  
     case 'professional':
-      return 'text-slate-600 tracking-wide'; // left-aligned like header
+      return 'text-gray-600'; // left-aligned like header
     case 'playful':
       return 'text-purple-600 text-center font-medium'; // centered like header
     case 'elegant':

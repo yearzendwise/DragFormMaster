@@ -51,8 +51,8 @@ const getRadioThemeUnchecked = (baseInput: string) => {
     return 'border-purple-600 bg-purple-800';
   } else if (baseInput.includes('rounded-xl') && baseInput.includes('backdrop-blur')) {
     return 'border-gray-200 bg-white';
-  } else if (baseInput.includes('uppercase') && baseInput.includes('tracking-wider')) {
-    return 'border-slate-300 bg-slate-50';
+  } else if (baseInput.includes('focus:ring-1') && baseInput.includes('focus:ring-blue-500')) {
+    return 'border-gray-300 bg-white';
   } else if (baseInput.includes('border-purple-500/40')) {
     // Cosmic theme
     return 'border-purple-500/40 bg-black/40';
@@ -82,8 +82,8 @@ const getRadioIndicatorColor = (baseInput: string) => {
     return 'bg-purple-800';
   } else if (baseInput.includes('rounded-xl') && baseInput.includes('backdrop-blur')) {
     return 'bg-white';
-  } else if (baseInput.includes('uppercase') && baseInput.includes('tracking-wider')) {
-    return 'bg-slate-50';
+  } else if (baseInput.includes('focus:ring-1') && baseInput.includes('focus:ring-blue-500')) {
+    return 'bg-white';
   } else if (baseInput.includes('border-purple-500/40')) {
     // Cosmic theme
     return 'bg-cyan-300';
@@ -113,8 +113,8 @@ const getRadioLabelStyle = (baseInput: string) => {
     return 'text-yellow-300 font-medium tracking-widest uppercase font-serif cursor-pointer select-none';
   } else if (baseInput.includes('rounded-xl') && baseInput.includes('backdrop-blur')) {
     return 'text-gray-800 font-semibold cursor-pointer select-none';
-  } else if (baseInput.includes('uppercase') && baseInput.includes('tracking-wider')) {
-    return 'text-slate-700 font-bold uppercase tracking-wider cursor-pointer select-none';
+  } else if (baseInput.includes('focus:ring-1') && baseInput.includes('focus:ring-blue-500')) {
+    return 'text-gray-700 font-medium cursor-pointer select-none';
   } else if (baseInput.includes('border-purple-500/40')) {
     // Cosmic theme
     return 'text-purple-200 font-medium tracking-wide cursor-pointer select-none';
@@ -145,7 +145,7 @@ const getCheckboxThemeChecked = (baseInput: string) => {
     return 'border-yellow-400 bg-yellow-400';
   } else if (baseInput.includes('rounded-xl') && baseInput.includes('backdrop-blur')) {
     return 'border-purple-500 bg-purple-500 rounded-md';
-  } else if (baseInput.includes('uppercase') && baseInput.includes('tracking-wider')) {
+  } else if (baseInput.includes('focus:ring-1') && baseInput.includes('focus:ring-blue-500')) {
     return 'border-blue-600 bg-blue-600';
   } else if (baseInput.includes('border-purple-500/40')) {
     // Cosmic theme
@@ -176,8 +176,8 @@ const getCheckboxThemeUnchecked = (baseInput: string) => {
     return 'border-purple-600 bg-purple-800';
   } else if (baseInput.includes('rounded-xl') && baseInput.includes('backdrop-blur')) {
     return 'border-gray-200 bg-white rounded-md';
-  } else if (baseInput.includes('uppercase') && baseInput.includes('tracking-wider')) {
-    return 'border-slate-300 bg-slate-50';
+  } else if (baseInput.includes('focus:ring-1') && baseInput.includes('focus:ring-blue-500')) {
+    return 'border-gray-300 bg-white';
   } else if (baseInput.includes('border-purple-500/40')) {
     // Cosmic theme
     return 'border-purple-500/40 bg-black/40 rounded-lg';
@@ -714,14 +714,14 @@ export function HeadlessUISelect({
         activeOption: 'bg-purple-500 text-white',
         text: 'text-gray-800'
       };
-    } else if (baseInput.includes('uppercase') && baseInput.includes('tracking-wider')) {
+    } else if (baseInput.includes('focus:ring-1') && baseInput.includes('focus:ring-blue-500')) {
       // Professional theme
       return {
         button: `${baseInput} justify-between text-left`,
-        dropdown: 'bg-white border-2 border-slate-300 rounded-md shadow-xl',
-        option: 'text-slate-700 hover:bg-slate-50 focus:bg-slate-50 font-bold uppercase tracking-wider text-xs',
+        dropdown: 'bg-white border border-gray-200 rounded-md shadow-sm',
+        option: 'text-gray-700 hover:bg-gray-50 focus:bg-gray-50 font-medium',
         activeOption: 'bg-blue-600 text-white',
-        text: 'text-slate-700 font-bold uppercase tracking-wider'
+        text: 'text-gray-700 font-medium'
       };
     } else if (baseInput.includes('border-purple-500/40')) {
       // Cosmic theme
