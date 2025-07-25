@@ -77,7 +77,12 @@ export function StyleStep({ themes, selectedTheme, onSelectTheme }: StyleStepPro
                           ✨ Pastel Dreams ✨
                         </div>
                       )}
-                      {!['neon', 'nature', 'luxury', 'retro', 'cosmic', 'brutalist', 'pastel-dream'].includes(theme.id) && (
+                      {theme.id === 'professional' && (
+                        <div className="text-blue-600 font-semibold text-lg">
+                          PROFESSIONAL
+                        </div>
+                      )}
+                      {!['neon', 'nature', 'luxury', 'retro', 'cosmic', 'brutalist', 'pastel-dream', 'professional'].includes(theme.id) && (
                         <>
                           <div className="text-white font-semibold opacity-90 text-lg">{theme.name}</div>
                           <div className="text-white text-sm opacity-60 mt-1">Theme Preview</div>
