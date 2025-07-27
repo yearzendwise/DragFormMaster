@@ -1,5 +1,5 @@
 {
-  "name": "rest-express",
+  "name": "drag-form-master",
   "version": "1.0.0",
   "type": "module",
   "license": "MIT",
@@ -113,5 +113,19 @@
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.8"
-  }
+  },
+  "description": "A modern, wizard-style form builder application that allows users to create, customize, and preview forms with comprehensive theming options and an intuitive drag-and-drop interface.",
+  "main": "lib/index.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yearzendwise/DragFormMaster.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/yearzendwise/DragFormMaster/issues"
+  },
+  "homepage": "https://github.com/yearzendwise/DragFormMaster#readme"
 }
