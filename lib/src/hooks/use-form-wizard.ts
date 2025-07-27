@@ -359,25 +359,25 @@ const defaultThemes: FormTheme[] = [
   {
     id: 'promotional',
     name: 'Promotional',
-    description: 'High-impact design for marketing campaigns with attention-grabbing CTAs',
-    preview: 'bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600',
+    description: 'Marketing-focused design with hero sections, badges, and conversion elements',
+    preview: 'bg-gradient-to-br from-red-500 to-orange-500',
     styles: {
-      container: 'max-w-2xl mx-auto p-10 bg-white rounded-3xl shadow-2xl relative overflow-hidden before:content-[""] before:absolute before:inset-0 before:bg-gradient-to-br before:from-blue-600/10 before:via-purple-600/10 before:to-pink-600/10 before:-z-10',
-      header: 'text-5xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-10 text-center animate-pulse',
-      field: 'mb-6',
-      label: 'block text-sm font-bold text-gray-800 mb-3 tracking-wide uppercase',
-      input: 'w-full px-5 py-4 h-12 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:border-purple-500 transition-all duration-300 bg-gray-50 hover:bg-white text-lg',
-      button: 'w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-5 px-8 rounded-xl hover:shadow-2xl transition-all duration-300 font-bold text-lg tracking-wide transform hover:scale-105 animate-pulse hover:animate-none',
-      background: 'bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50',
+      container: 'max-w-2xl mx-auto bg-white rounded-none shadow-2xl relative overflow-visible',
+      header: 'relative text-5xl font-black text-center mb-12 px-8 py-6 bg-gradient-to-r from-red-500 to-orange-500 text-white -mx-8 -mt-8 shadow-lg before:content-["🔥_LIMITED_OFFER_🔥"] before:absolute before:-top-4 before:left-1/2 before:-translate-x-1/2 before:bg-yellow-400 before:text-black before:px-6 before:py-2 before:rounded-full before:text-sm before:font-bold before:animate-bounce',
+      field: 'mb-8 relative before:content-[""] before:absolute before:-left-4 before:top-0 before:w-1 before:h-full before:bg-gradient-to-b before:from-red-500 before:to-orange-500',
+      label: 'inline-block text-sm font-black text-gray-900 mb-3 uppercase tracking-wider bg-yellow-100 px-3 py-1 rounded-md relative after:content-["*"] after:text-red-500 after:ml-1 after:text-lg',
+      input: 'w-full px-6 py-4 h-12 border-3 border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-red-500/30 focus:border-red-500 transition-all duration-300 bg-gray-50 text-lg font-medium shadow-inner hover:shadow-md',
+      button: 'relative w-full bg-gradient-to-r from-red-600 to-orange-600 text-white py-6 px-8 rounded-lg font-black text-xl uppercase tracking-wider shadow-2xl transform hover:scale-105 transition-all duration-300 before:content-["➜"] before:absolute before:right-8 before:top-1/2 before:-translate-y-1/2 before:text-2xl before:animate-pulse after:content-["CLAIM_NOW!"] after:absolute after:-top-3 after:right-4 after:bg-yellow-400 after:text-black after:px-3 after:py-1 after:rounded after:text-xs after:font-bold after:rotate-12',
+      background: 'bg-gradient-to-br from-gray-50 to-orange-50',
       booleanSwitch: {
-        track: 'border-3 data-[state=unchecked]:bg-gray-200 data-[state=unchecked]:border-gray-300 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-blue-600 data-[state=checked]:via-purple-600 data-[state=checked]:to-pink-600 data-[state=checked]:border-purple-600',
-        thumb: 'data-[state=unchecked]:bg-gray-500 data-[state=checked]:bg-white shadow-2xl',
-        activeLabel: 'text-purple-700 font-bold text-lg',
-        inactiveLabel: 'text-gray-400 font-semibold'
+        track: 'border-3 rounded-full data-[state=unchecked]:bg-gray-300 data-[state=unchecked]:border-gray-400 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-red-500 data-[state=checked]:to-orange-500 data-[state=checked]:border-red-600 data-[state=checked]:shadow-lg data-[state=checked]:shadow-red-500/30',
+        thumb: 'data-[state=unchecked]:bg-white data-[state=checked]:bg-white shadow-xl data-[state=checked]:shadow-2xl data-[state=checked]:scale-110',
+        activeLabel: 'text-red-600 font-black text-lg relative after:content-["✓"] after:ml-2 after:text-green-500',
+        inactiveLabel: 'text-gray-500 font-bold line-through'
       },
       progressBar: {
-        container: 'w-full bg-gray-200 rounded-full h-4 mb-8 shadow-inner',
-        fill: 'bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 h-4 rounded-full transition-all duration-500 ease-out shadow-lg animate-pulse'
+        container: 'w-full bg-gray-200 rounded-lg h-6 mb-10 relative overflow-hidden shadow-inner before:content-["ALMOST_THERE!"] before:absolute before:top-1/2 before:-translate-y-1/2 before:left-1/2 before:-translate-x-1/2 before:text-xs before:font-bold before:text-gray-500 before:tracking-wider',
+        fill: 'bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 h-6 rounded-lg transition-all duration-700 ease-out relative overflow-hidden before:content-[""] before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent before:animate-shimmer'
       }
     }
   }

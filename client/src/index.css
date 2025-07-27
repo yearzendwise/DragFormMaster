@@ -70,6 +70,20 @@
   }
 }
 
+/* Promotional theme animations */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
 /* Form Builder specific styles */
 .drop-zone {
   transition: all 0.15s ease;
