@@ -10,9 +10,11 @@
     "README.md"
   ],
   "scripts": {
-    "build": "node build.js",
+    "build": "rollup -c",
+    "build:full": "node build-npm-package.js",
     "dev": "rollup -c -w",
-    "prepare": "npm run build"
+    "prepare": "npm run build:full",
+    "test": "node test-package.js"
   },
   "keywords": [
     "react",
