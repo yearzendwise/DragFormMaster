@@ -170,7 +170,8 @@ Mobile-first design: Ensure all interfaces work seamlessly on mobile devices.
 - **Importable Package Structure**: Created comprehensive package structure in `./lib/` directory to make the form builder importable into other React Vite projects. Features include:
   - Complete build system with Node.js build script copying all necessary components, hooks, types, and utilities
   - Package exports for FormBuilder, FormWizard, ThemedFormRenderer, and all specialized components
-  - All 14 themes packaged with complete styling systems
+  - All 15 themes packaged with complete styling systems
+  - Complete UI component library exports including LanguageSelector (translation button/modal), Dialog components, Toast system, and all form controls
   - TypeScript definitions and proper module exports
   - Comprehensive integration guide with step-by-step setup instructions for Tailwind CSS configuration and CSS variables
   - Peer dependency management for @dnd-kit, @radix-ui, @headlessui, react-hook-form, zod, and other required packages
