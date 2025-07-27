@@ -355,6 +355,31 @@ const defaultThemes: FormTheme[] = [
         fill: 'bg-gradient-to-r from-purple-400 to-pink-400 h-3 rounded-full transition-all duration-700 ease-out shadow-sm'
       }
     }
+  },
+  {
+    id: 'promotional',
+    name: 'Promotional',
+    description: 'High-impact design for marketing campaigns with attention-grabbing CTAs',
+    preview: 'bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600',
+    styles: {
+      container: 'max-w-2xl mx-auto p-10 bg-white rounded-3xl shadow-2xl relative overflow-hidden before:content-[""] before:absolute before:inset-0 before:bg-gradient-to-br before:from-blue-600/10 before:via-purple-600/10 before:to-pink-600/10 before:-z-10',
+      header: 'text-5xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-10 text-center animate-pulse',
+      field: 'mb-6',
+      label: 'block text-sm font-bold text-gray-800 mb-3 tracking-wide uppercase',
+      input: 'w-full px-5 py-4 h-12 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:border-purple-500 transition-all duration-300 bg-gray-50 hover:bg-white text-lg',
+      button: 'w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-5 px-8 rounded-xl hover:shadow-2xl transition-all duration-300 font-bold text-lg tracking-wide transform hover:scale-105 animate-pulse hover:animate-none',
+      background: 'bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50',
+      booleanSwitch: {
+        track: 'border-3 data-[state=unchecked]:bg-gray-200 data-[state=unchecked]:border-gray-300 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-blue-600 data-[state=checked]:via-purple-600 data-[state=checked]:to-pink-600 data-[state=checked]:border-purple-600',
+        thumb: 'data-[state=unchecked]:bg-gray-500 data-[state=checked]:bg-white shadow-2xl',
+        activeLabel: 'text-purple-700 font-bold text-lg',
+        inactiveLabel: 'text-gray-400 font-semibold'
+      },
+      progressBar: {
+        container: 'w-full bg-gray-200 rounded-full h-4 mb-8 shadow-inner',
+        fill: 'bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 h-4 rounded-full transition-all duration-500 ease-out shadow-lg animate-pulse'
+      }
+    }
   }
 ];
 

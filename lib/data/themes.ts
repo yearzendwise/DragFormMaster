@@ -83,5 +83,11 @@ export const themes = [
     name: 'Modern Bold',
     description: 'Ultra-bold gradients with striking typography and dynamic effects',
     preview: 'bg-gradient-to-br from-orange-500 via-red-500 to-purple-600',
+  },
+  {
+    id: 'promotional',
+    name: 'Promotional',
+    description: 'High-impact design for marketing campaigns with attention-grabbing CTAs',
+    preview: 'bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600',
   }
 ];

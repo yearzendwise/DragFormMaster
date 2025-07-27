@@ -48,7 +48,7 @@ Mobile-first design: Ensure all interfaces work seamlessly on mobile devices.
 - **Component Palette**: Draggable form elements (text, email, textarea, select, image, etc.)
 - **Form Canvas**: Drop zone with sortable elements and live preview
 - **Properties Panel**: Element configuration and styling options
-- **Theme Selector**: 12 robust visual themes including Minimal, Modern, Professional, Playful, Elegant, Neon, Nature, Luxury, Retro, Cosmic, Brutalist, and Pastel Dream
+- **Theme Selector**: 15 robust visual themes including Minimal, Modern, Professional, Playful, Elegant, Neon, Nature, Luxury, Retro, Cosmic, Brutalist, Pastel Dream, Neo Modern, Modern Bold, and Promotional
 - **Final Preview**: Complete form preview with save functionality
 
 ### Database Schema
@@ -107,11 +107,17 @@ Mobile-first design: Ensure all interfaces work seamlessly on mobile devices.
 
 ### Enhanced Themes System
 - **Enhanced 5 Existing Themes**: Updated Minimal, Modern, Professional, Playful, and Elegant themes with more robust styling, better typography, improved color schemes, and modern design patterns
-- **Added 4 New Themes**: 
+- **Added 10 New Themes**: 
   - **Neon**: Cyberpunk-inspired with glowing effects and dark backgrounds
   - **Nature**: Earth tones with organic shapes and natural textures
   - **Luxury**: Premium design with rich colors and serif typography
   - **Retro**: Vintage 80s style with bold colors and geometric patterns
+  - **Cosmic**: Space-themed design with cosmic gradients and starry effects
+  - **Brutalist**: Raw, industrial design with bold black borders and stark contrasts
+  - **Pastel Dream**: Soft, dreamy design with gentle pastels and cloud-like elements
+  - **Neo Modern**: Tech-inspired design with dark gradients and terminal aesthetics
+  - **Modern Bold**: Ultra-bold gradients with striking typography and dynamic effects
+  - **Promotional**: High-impact design for marketing campaigns with attention-grabbing CTAs and animated elements
 - **Improved Theme Previews**: Enhanced preview cards with theme-specific styling demonstrations and better visual representation
 - **Fixed Form Preview**: Created dedicated ThemedFormRenderer for accurate preview rendering with proper theme application
 
@@ -147,11 +153,7 @@ Mobile-first design: Ensure all interfaces work seamlessly on mobile devices.
 - **HeadlessUI Select Component Implementation**: Replaced basic HTML select dropdowns with comprehensive HeadlessUI Listbox component featuring theme-specific styling for all 9 themes. Each theme has custom dropdown appearance, option styling, and hover states that match the theme's design language. Includes proper accessibility features, keyboard navigation, smooth transitions, and visual feedback. Maintains shadcn Select component for form building (Step 1) while using HeadlessUI for themed previews (Step 3) (July 2025)
 - **Comprehensive README Documentation**: Created detailed README.md file covering all project features, setup instructions, API reference, theme system documentation, security considerations, mobile support details, and contribution guidelines. Includes complete technology stack overview, project structure explanation, and deployment instructions for both development and production environments (July 2025)
 - **Compact Mode Layout Feature**: Added compact mode option in form properties that creates a 2-column grid layout for form elements, automatically grouping compatible elements into rows of 2. Excludes components that already have multi-column layouts (Full Name, rate scales, images, buttons) from compact grouping. Now includes textarea and email input fields in compact mode. Maintains single-column layout for excluded elements while optimizing space usage for standard input fields (July 2025)
-- **Expanded Theme Collection**: Added 3 new stunning themes bringing the total to 12 themes:
-  - **Cosmic**: Space-themed design with dark backgrounds, cosmic gradients, starry effects, and glowing purple/pink accents
-  - **Brutalist**: Raw, industrial design with bold black borders, harsh shadows, stark contrasts, and uppercase typography
-  - **Pastel Dream**: Soft, dreamy design with gentle pastels, cloud-like elements, gradient overlays, and rounded edges
-  All new themes include comprehensive styling for checkboxes, radio buttons, boolean switches, select dropdowns, and all form elements (July 2025)
+- **Expanded Theme Collection**: Added multiple new stunning themes bringing the total to 15 themes, including the latest **Promotional** theme designed specifically for marketing campaigns with high-impact visuals, attention-grabbing CTAs, animated elements, and professional marketing aesthetics (July 2025)
 - **Neo Modern Theme**: Added new tech-inspired theme with dark gradient backgrounds, monospace fonts, terminal-style elements, green accent colors, and Matrix-style aesthetics. Features sharp edges and cyberpunk design elements. Fixed theme preview visibility issues for Professional and Minimal themes (July 2025)
 - **Modern Bold Theme**: Created new ultra-modern theme with bold gradients (orange-red-purple), striking typography, dynamic hover effects (scale, rotate), and enhanced visual impact. Features larger text sizes, thick borders, dramatic shadows, and uppercase tracking for maximum visual presence (July 2025)
 - **Enhanced Compact Mode**: Updated compact form functionality to include textarea and email address field types in 2-column layout, providing better space utilization for all compatible form elements (July 2025)
@@ -174,4 +176,4 @@ Mobile-first design: Ensure all interfaces work seamlessly on mobile devices.
   - Peer dependency management for @dnd-kit, @radix-ui, @headlessui, react-hook-form, zod, and other required packages
   - Built package in `./lib/dist/` ready to copy into other projects with simple import syntax (July 2025)
 
-The application now provides 14 comprehensive themes, fully functional drag and drop with compatibility testing, ranging from minimal to cosmic, brutalist, neo-modern, and modern bold designs, offering users extensive customization options while maintaining modern full-stack development practices with type safety throughout, efficient development workflows, and scalable deployment architecture. The form builder provides an intuitive interface for creating complex forms without requiring technical knowledge from end users.
+The application now provides 15 comprehensive themes, fully functional drag and drop with compatibility testing, ranging from minimal to cosmic, brutalist, neo-modern, modern bold, and promotional designs, offering users extensive customization options while maintaining modern full-stack development practices with type safety throughout, efficient development workflows, and scalable deployment architecture. The form builder provides an intuitive interface for creating complex forms without requiring technical knowledge from end users.
