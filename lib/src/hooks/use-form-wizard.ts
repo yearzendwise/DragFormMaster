@@ -362,8 +362,8 @@ const defaultThemes: FormTheme[] = [
     description: 'Marketing-focused design with hero sections, badges, and conversion elements',
     preview: 'bg-gradient-to-br from-red-500 to-orange-500',
     styles: {
-      container: 'max-w-2xl mx-auto bg-white rounded-none shadow-2xl relative overflow-visible',
-      header: 'relative text-5xl font-black text-center mb-12 px-8 py-6 bg-gradient-to-r from-red-500 to-orange-500 text-white -mx-8 -mt-8 shadow-lg before:content-["🔥_LIMITED_OFFER_🔥"] before:absolute before:-top-4 before:left-1/2 before:-translate-x-1/2 before:bg-yellow-400 before:text-black before:px-6 before:py-2 before:rounded-full before:text-sm before:font-bold before:animate-bounce',
+      container: 'max-w-2xl mx-auto bg-white rounded-none shadow-2xl relative overflow-visible pt-16 pb-8 px-8',
+      header: 'relative text-5xl font-black text-center mb-12 px-8 py-6 bg-gradient-to-r from-red-500 to-orange-500 text-white -mx-8 mt-0 shadow-lg before:content-["🔥_LIMITED_OFFER_🔥"] before:absolute before:-top-12 before:left-1/2 before:-translate-x-1/2 before:bg-yellow-400 before:text-black before:px-6 before:py-2 before:rounded-full before:text-sm before:font-bold before:animate-bounce',
       field: 'mb-8 relative before:content-[""] before:absolute before:-left-4 before:top-0 before:w-1 before:h-full before:bg-gradient-to-b before:from-red-500 before:to-orange-500',
       label: 'inline-block text-sm font-black text-gray-900 mb-3 uppercase tracking-wider bg-yellow-100 px-3 py-1 rounded-md relative after:content-["*"] after:text-red-500 after:ml-1 after:text-lg',
       input: 'w-full px-6 py-4 h-12 border-3 border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-red-500/30 focus:border-red-500 transition-all duration-300 bg-gray-50 text-lg font-medium shadow-inner hover:shadow-md',
