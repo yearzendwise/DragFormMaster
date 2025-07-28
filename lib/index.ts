@@ -1,19 +1,19 @@
 // Main form builder components
 export { default as FormBuilder } from './components/FormBuilder';
-export { default as FormWizard } from '../client/src/components/form-builder/form-wizard';
+export { FormWizard } from './components/form-builder/form-wizard';
 
 // Individual wizard steps
-export { default as BuildStep } from '../client/src/components/form-builder/wizard-steps/build-step';
-export { default as StyleStep } from '../client/src/components/form-builder/wizard-steps/style-step';
-export { default as PreviewStep } from '../client/src/components/form-builder/wizard-steps/preview-step';
+export { BuildStep } from './components/form-builder/wizard-steps/build-step';
+export { StyleStep } from './components/form-builder/wizard-steps/style-step';
+export { PreviewStep } from './components/form-builder/wizard-steps/preview-step';
 
 // Form renderers
-export { default as ThemedFormRenderer } from '../client/src/components/form-builder/themed-form-renderer';
-export { default as CustomThemedForm } from '../client/src/components/form-builder/custom-themed-form';
+export { ThemedFormRenderer } from './components/form-builder/themed-form-renderer';
+export { CustomThemedForm } from './components/form-builder/custom-themed-form';
 
 // Hooks
-export { default as useFormWizard } from '../client/src/hooks/use-form-wizard';
-export { default as useFormBuilder } from '../client/src/hooks/use-form-builder';
+export { useFormWizard } from './hooks/use-form-wizard';
+export { useFormBuilder } from './hooks/use-form-builder';
 
 // Types
 export type {
@@ -28,16 +28,16 @@ export type {
   FormBuilderState,
   ValidationRules,
   ElementStyling
-} from '../client/src/types/form-builder';
+} from './types/form-builder';
 
 // Utilities
 export { getThemeStyles } from './utils/theme-styles';
-export { getThemeGradientPresets } from '../client/src/utils/theme-gradient-presets';
-export { extractThemeColors } from '../client/src/utils/theme-color-utils';
+export { getThemeGradientPresets } from './utils/theme-gradient-presets';
+export { extractThemeColors, applyCustomColors, lightenColor } from './utils/theme-color-utils';
 
 // Theme definitions
 export { themes } from './data/themes';
 
 // Component palette
-export { default as ComponentPalette } from '../client/src/components/form-builder/component-palette';
-export { default as PropertiesPanel } from '../client/src/components/form-builder/properties-panel';
+export { ComponentPalette } from './components/form-builder/component-palette';
+export { PropertiesPanel } from './components/form-builder/properties-panel';
