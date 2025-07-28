@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "prebuild": "rm -rf dist",
-    "build": "rollup -c rollup.config.mjs",
+    "build": "rollup -c",
     "postbuild": "node fix-compiled-imports.js",
     "build:full": "node build-npm-package.js",
     "dev": "rollup -c -w",
