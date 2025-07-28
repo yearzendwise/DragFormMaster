@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, RadioGroup, Checkbox, Listbox, Transition } from '@headlessui/react';
-import { ChevronUpDownIcon, CheckIcon } from '@heroicons/react/24/solid';
+import { ChevronUpDownIcon, CheckIcon } from '@heroicons/react/24/outline';
 import { cn } from '@/lib/utils';
 import { FormTheme } from '@/types/form-builder';
 
