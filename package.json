@@ -115,7 +115,21 @@
     "bufferutil": "^4.0.8"
   },
   "description": "A modern, wizard-style form builder application that allows users to create, customize, and preview forms with comprehensive theming options and an intuitive drag-and-drop interface.",
-  "main": "lib/index.ts",
+  "main": "lib/dist/index.js",
+  "module": "lib/dist/index.esm.js",
+  "types": "lib/dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/dist/index.esm.js",
+      "require": "./lib/dist/index.js",
+      "types": "./lib/dist/index.d.ts"
+    }
+  },
+  "files": [
+    "lib/dist/**/*",
+    "lib/README.md",
+    "lib/LICENSE"
+  ],
   "directories": {
     "lib": "lib"
   },
