@@ -120,9 +120,9 @@
   "types": "lib/dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./lib/dist/index.d.ts",
       "import": "./lib/index.js",
-      "require": "./lib/index.js",
-      "types": "./lib/dist/index.d.ts"
+      "require": "./lib/index.js"
     }
   },
   "files": [
