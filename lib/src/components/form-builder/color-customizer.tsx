@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { CustomColors, FormTheme } from '@/types/form-builder';
+import { Button } from '../../components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../../components/ui/dialog';
+import { Label } from '../../components/ui/label';
+import { Input } from '../../components/ui/input';
+import { CustomColors, FormTheme } from '../../types/form-builder';
 import { Palette, RotateCcw, Pipette, Type, Paintbrush, Square, FileText } from 'lucide-react';
-import { getThemeGradientPresets } from '@/utils/theme-gradient-presets';
-import { extractThemeColors } from '@/utils/theme-color-utils';
-import { cn } from '@/lib/utils';
+import { getThemeGradientPresets } from '../../utils/theme-gradient-presets';
+import { extractThemeColors } from '../../utils/theme-color-utils';
+import { cn } from '../../lib/utils';
 
 interface ColorCustomizerProps {
   theme: FormTheme;

@@ -1,5 +1,5 @@
-import { FormTheme } from '@/types/form-builder';
-import { Button } from '@/components/ui/button';
+import { FormTheme } from '../../types/form-builder';
+import { Button } from '../../components/ui/button';
 import { Check } from 'lucide-react';
 
 interface StyleStepProps {

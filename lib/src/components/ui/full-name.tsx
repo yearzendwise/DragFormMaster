@@ -1,5 +1,5 @@
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Input } from "./input";
+import { Label } from "./label";
 
 interface FullNameProps {
   name: string;

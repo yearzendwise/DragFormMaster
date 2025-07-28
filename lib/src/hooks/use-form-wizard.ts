@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { WizardStep, WizardState, FormTheme, FormElement, CustomColors } from '@/types/form-builder';
-import { applyCustomColors, extractThemeColors } from '@/utils/theme-color-utils';
+import { WizardStep, WizardState, FormTheme, FormElement, CustomColors } from '../types/form-builder';
+import { applyCustomColors, extractThemeColors } from '../utils/theme-color-utils';
 
 const defaultThemes: FormTheme[] = [
   // Enhanced existing themes

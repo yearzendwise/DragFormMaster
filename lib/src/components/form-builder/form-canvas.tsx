@@ -1,4 +1,4 @@
-import { FormElement, FormElementType } from '@/types/form-builder';
+import { FormElement, FormElementType } from '../../types/form-builder';
 import { DroppableCanvas } from './droppable-canvas';
 
 interface FormCanvasProps {

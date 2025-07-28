@@ -1,5 +1,5 @@
-import { FormTheme, FormElement } from '@/types/form-builder';
-import { ThemedFormRenderer } from '@/components/form-builder/themed-form-renderer';
+import { FormTheme, FormElement } from '../../types/form-builder';
+import { ThemedFormRenderer } from '../../components/form-builder/themed-form-renderer';
 import { CSSProperties, useEffect } from 'react';
 
 interface CustomThemedFormProps {

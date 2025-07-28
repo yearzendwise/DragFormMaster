@@ -1,5 +1,5 @@
 import { useDroppable } from '@dnd-kit/core';
-import { FormElement, FormElementType } from '@/types/form-builder';
+import { FormElement, FormElementType } from '../../types/form-builder';
 import { FormElementRenderer } from './form-element-renderer';
 import { SortableFormElement } from './sortable-form-element';
 import { DropInsertionIndicator } from './drop-insertion-indicator';

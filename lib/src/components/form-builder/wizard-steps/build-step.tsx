@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { DndContext, DragEndEvent, MouseSensor, TouchSensor, useSensor, useSensors, DragOverlay, DragStartEvent } from '@dnd-kit/core';
-import { useFormBuilder } from '@/hooks/use-form-builder';
-import { ComponentPalette } from '@/components/form-builder/component-palette';
-import { FormCanvas } from '@/components/form-builder/form-canvas';
-import { PropertiesPanel } from '@/components/form-builder/properties-panel';
-import { FormProperties } from '@/components/form-builder/form-properties';
+import { useFormBuilder } from '../../hooks/use-form-builder';
+import { ComponentPalette } from '../../components/form-builder/component-palette';
+import { FormCanvas } from '../../components/form-builder/form-canvas';
+import { PropertiesPanel } from '../../components/form-builder/properties-panel';
+import { FormProperties } from '../../components/form-builder/form-properties';
 
-import { FormElementType, DragItem } from '@/types/form-builder';
-import { Button } from '@/components/ui/button';
+import { FormElementType, DragItem } from '../../types/form-builder';
+import { Button } from '../../components/ui/button';
 
 
 interface BuildStepProps {

@@ -1,12 +1,12 @@
-import { FormElement, FormTheme, CustomColors } from '@/types/form-builder';
-import { ThemedFormRenderer } from '@/components/form-builder/themed-form-renderer';
-import { CustomThemedForm } from '@/components/form-builder/custom-themed-form';
-import { ColorCustomizer } from '@/components/form-builder/color-customizer';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { FormElement, FormTheme, CustomColors } from '../../types/form-builder';
+import { ThemedFormRenderer } from '../../components/form-builder/themed-form-renderer';
+import { CustomThemedForm } from '../../components/form-builder/custom-themed-form';
+import { ColorCustomizer } from '../../components/form-builder/color-customizer';
+import { Button } from '../../components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '../../components/ui/dialog';
 import { Save, Download, Code, Mail, Clock, User } from 'lucide-react';
 import { useState, useMemo, useCallback, useEffect } from 'react';
-import { lightenColor } from '@/utils/theme-color-utils';
+import { lightenColor } from '../../utils/theme-color-utils';
 
 // Extended type for preview elements that includes buttons and spacer
 type PreviewFormElement = FormElement | {

@@ -10,7 +10,9 @@
     "README.md"
   ],
   "scripts": {
-    "build": "rollup -c",
+    "prebuild": "rm -rf dist",
+    "build": "rollup -c rollup.config.mjs",
+    "postbuild": "node fix-compiled-imports.js",
     "build:full": "node build-npm-package.js",
     "dev": "rollup -c -w",
     "test": "node test-package.js"
@@ -87,6 +89,7 @@
     "@rollup/plugin-typescript": "^12.1.1",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
+    "glob": "^11.0.3",
     "rollup": "^4.24.0",
     "rollup-plugin-dts": "^6.1.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",

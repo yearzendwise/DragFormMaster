@@ -1,8 +1,8 @@
-import { useFormWizard } from '@/hooks/use-form-wizard';
+import { useFormWizard } from '../../hooks/use-form-wizard';
 import { BuildStep } from './wizard-steps/build-step';
 import { StyleStep } from './wizard-steps/style-step';
 import { PreviewStep } from './wizard-steps/preview-step';
-import { Button } from '@/components/ui/button';
+import { Button } from '../../components/ui/button';
 import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
 
 export function FormWizard() {
