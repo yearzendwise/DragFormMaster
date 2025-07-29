@@ -97,7 +97,37 @@ export function StyleStep({ themes, selectedTheme, onSelectTheme }: StyleStepPro
                           MINIMAL
                         </div>
                       )}
-                      {!['neon', 'nature', 'luxury', 'retro', 'cosmic', 'brutalist', 'pastel-dream', 'professional', 'neo-modern', 'minimal', 'modern-bold'].includes(theme.id) && (
+                      {theme.id === 'aurora' && (
+                        <div className="text-teal-300 font-light text-lg tracking-widest drop-shadow-lg">
+                          <span className="text-emerald-300">✦</span> AURORA <span className="text-cyan-300">✦</span>
+                        </div>
+                      )}
+                      {theme.id === 'sunset' && (
+                        <div className="text-white font-bold text-lg tracking-wide drop-shadow-lg">
+                          <span className="text-yellow-300">☀</span> SUNSET <span className="text-rose-300">☀</span>
+                        </div>
+                      )}
+                      {theme.id === 'ocean-depth' && (
+                        <div className="text-blue-300 font-bold text-lg tracking-wide drop-shadow-[0_0_10px_rgba(147,197,253,0.8)]">
+                          <span className="text-cyan-300">🌊</span> OCEAN DEPTH <span className="text-blue-400">🌊</span>
+                        </div>
+                      )}
+                      {theme.id === 'matrix' && (
+                        <div className="text-green-400 font-mono font-bold text-lg tracking-wider drop-shadow-[0_0_10px_rgba(34,197,94,0.8)]">
+                          [MATRIX_THEME]
+                        </div>
+                      )}
+                      {theme.id === 'royal-quantum' && (
+                        <div className="text-yellow-300 font-serif text-lg tracking-widest drop-shadow-[0_0_20px_rgba(251,191,36,0.8)]">
+                          ♛ ROYAL QUANTUM ♛
+                        </div>
+                      )}
+                      {theme.id === 'executive-neon' && (
+                        <div className="text-cyan-400 font-sans font-light text-lg tracking-[0.3em] uppercase drop-shadow-[0_0_15px_rgba(6,182,212,0.8)]">
+                          EXECUTIVE
+                        </div>
+                      )}
+                      {!['neon', 'nature', 'luxury', 'retro', 'cosmic', 'brutalist', 'pastel-dream', 'professional', 'neo-modern', 'minimal', 'modern-bold', 'aurora', 'sunset', 'ocean-depth', 'matrix', 'royal-quantum', 'executive-neon'].includes(theme.id) && (
                         <>
                           <div className="text-white font-semibold opacity-90 text-lg">{theme.name}</div>
                           <div className="text-white text-sm opacity-60 mt-1">Theme Preview</div>
@@ -130,9 +160,15 @@ export function StyleStep({ themes, selectedTheme, onSelectTheme }: StyleStepPro
                           theme.id === 'pastel-dream' ? 'bg-white/70 border-2 border-purple-200 rounded-2xl' :
                           theme.id === 'neo-modern' ? 'bg-black/50 border border-green-400/30 text-green-100 font-mono' :
                           theme.id === 'modern-bold' ? 'bg-gradient-to-r from-white to-gray-50 border-3 border-orange-500/30 text-gray-900 font-semibold rounded-2xl shadow-lg' :
+                          theme.id === 'aurora' ? 'bg-slate-800/50 border border-teal-400/30 text-teal-100' :
+                          theme.id === 'sunset' ? 'bg-white/70 border-2 border-orange-200 rounded-2xl' :
+                          theme.id === 'ocean-depth' ? 'bg-blue-950/50 border border-blue-400/30 rounded-2xl text-blue-100' :
+                          theme.id === 'matrix' ? 'bg-black border border-green-500/50 text-green-100 font-mono' :
+                          theme.id === 'royal-quantum' ? 'bg-purple-950/50 border border-yellow-400/30 rounded-xl text-white font-serif' :
+                          theme.id === 'executive-neon' ? 'bg-gray-800/50 border border-gray-700 text-white' :
                           'bg-white border border-gray-300 rounded-lg'
                         }`}>
-                          <div className={theme.id === 'neon' || theme.id === 'luxury' || theme.id === 'elegant' || theme.id === 'glassmorphism' || theme.id === 'cosmic' || theme.id === 'neo-modern' ? 'text-gray-300' : theme.id === 'brutalist' || theme.id === 'modern-bold' ? 'text-black' : 'text-slate-400'}>
+                          <div className={theme.id === 'neon' || theme.id === 'luxury' || theme.id === 'elegant' || theme.id === 'glassmorphism' || theme.id === 'cosmic' || theme.id === 'neo-modern' || theme.id === 'aurora' || theme.id === 'ocean-depth' || theme.id === 'matrix' || theme.id === 'royal-quantum' || theme.id === 'executive-neon' ? 'text-gray-300' : theme.id === 'brutalist' || theme.id === 'modern-bold' ? 'text-black' : 'text-slate-400'}>
                             Enter your name
                           </div>
                         </div>
@@ -154,9 +190,15 @@ export function StyleStep({ themes, selectedTheme, onSelectTheme }: StyleStepPro
                           theme.id === 'pastel-dream' ? 'bg-white/70 border-2 border-purple-200 rounded-2xl' :
                           theme.id === 'neo-modern' ? 'bg-black/50 border border-green-400/30 text-green-100 font-mono' :
                           theme.id === 'modern-bold' ? 'bg-gradient-to-r from-white to-gray-50 border-3 border-orange-500/30 text-gray-900 font-semibold rounded-2xl shadow-lg' :
+                          theme.id === 'aurora' ? 'bg-slate-800/50 border border-teal-400/30 text-teal-100' :
+                          theme.id === 'sunset' ? 'bg-white/70 border-2 border-orange-200 rounded-2xl' :
+                          theme.id === 'ocean-depth' ? 'bg-blue-950/50 border border-blue-400/30 rounded-2xl text-blue-100' :
+                          theme.id === 'matrix' ? 'bg-black border border-green-500/50 text-green-100 font-mono' :
+                          theme.id === 'royal-quantum' ? 'bg-purple-950/50 border border-yellow-400/30 rounded-xl text-white font-serif' :
+                          theme.id === 'executive-neon' ? 'bg-gray-800/50 border border-gray-700 text-white' :
                           'bg-white border border-gray-300 rounded-lg'
                         }`}>
-                          <div className={theme.id === 'neon' || theme.id === 'luxury' || theme.id === 'elegant' || theme.id === 'glassmorphism' || theme.id === 'cosmic' || theme.id === 'neo-modern' ? 'text-gray-300' : theme.id === 'brutalist' || theme.id === 'modern-bold' ? 'text-black' : 'text-slate-400'}>
+                          <div className={theme.id === 'neon' || theme.id === 'luxury' || theme.id === 'elegant' || theme.id === 'glassmorphism' || theme.id === 'cosmic' || theme.id === 'neo-modern' || theme.id === 'aurora' || theme.id === 'ocean-depth' || theme.id === 'matrix' || theme.id === 'royal-quantum' || theme.id === 'executive-neon' ? 'text-gray-300' : theme.id === 'brutalist' || theme.id === 'modern-bold' ? 'text-black' : 'text-slate-400'}>
                             Enter your email
                           </div>
                         </div>
@@ -176,6 +218,12 @@ export function StyleStep({ themes, selectedTheme, onSelectTheme }: StyleStepPro
                         theme.id === 'pastel-dream' ? 'bg-gradient-to-r from-purple-400 to-pink-400 text-white rounded-2xl' :
                         theme.id === 'neo-modern' ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-black font-mono border border-green-400/50' :
                         theme.id === 'modern-bold' ? 'bg-gradient-to-r from-orange-500 via-red-500 to-purple-600 text-white font-black text-xs uppercase tracking-widest rounded-2xl shadow-2xl border-2 border-white/20' :
+                        theme.id === 'aurora' ? 'bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-600 text-white rounded-xl' :
+                        theme.id === 'sunset' ? 'bg-gradient-to-r from-rose-500 via-orange-500 to-amber-500 text-white rounded-2xl' :
+                        theme.id === 'ocean-depth' ? 'bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-600 text-white rounded-2xl' :
+                        theme.id === 'matrix' ? 'bg-black border-2 border-green-400 text-green-400 font-mono uppercase tracking-widest' :
+                        theme.id === 'royal-quantum' ? 'bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 text-purple-900 rounded-xl font-serif font-bold uppercase' :
+                        theme.id === 'executive-neon' ? 'bg-gray-900 border border-gray-700 text-cyan-400 font-light uppercase tracking-widest' :
                         'bg-gray-900 text-white rounded-lg'
                       }`}>
                         Submit

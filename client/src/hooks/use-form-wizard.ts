@@ -380,6 +380,156 @@ const defaultThemes: FormTheme[] = [
         fill: 'bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 h-6 rounded-lg transition-all duration-700 ease-out relative overflow-hidden before:content-[""] before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent before:animate-shimmer'
       }
     }
+  },
+  {
+    id: 'aurora',
+    name: 'Aurora',
+    description: 'Northern lights inspired with ethereal gradients and glowing effects',
+    preview: 'bg-gradient-to-br from-teal-500 via-emerald-500 to-cyan-600',
+    styles: {
+      container: 'max-w-2xl mx-auto p-8 bg-gradient-to-br from-slate-900/95 to-slate-800/95 backdrop-blur-xl border border-teal-400/20 rounded-3xl shadow-2xl relative overflow-hidden before:content-[""] before:absolute before:inset-0 before:bg-gradient-to-r before:from-teal-500/10 before:via-emerald-500/10 before:to-cyan-600/10 before:animate-pulse',
+      header: 'text-4xl font-light bg-gradient-to-r from-teal-300 via-emerald-300 to-cyan-300 bg-clip-text text-transparent mb-8 tracking-wide text-center relative after:content-[""] after:absolute after:inset-x-0 after:-bottom-2 after:h-px after:bg-gradient-to-r after:from-transparent after:via-teal-400/50 after:to-transparent',
+      field: 'mb-6 relative',
+      label: 'block text-sm font-medium text-teal-200 mb-3 tracking-wide opacity-90',
+      input: 'w-full px-4 py-3 h-12 border border-teal-400/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400/50 focus:border-transparent transition-all duration-300 bg-slate-800/50 backdrop-blur-sm text-white placeholder-teal-300/40 shadow-[0_0_15px_rgba(20,184,166,0.1)]',
+      button: 'w-full bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-600 text-white py-4 px-6 rounded-xl hover:shadow-[0_0_30px_rgba(20,184,166,0.4)] transition-all duration-300 font-medium transform hover:scale-105 relative overflow-hidden before:content-[""] before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700',
+      background: 'bg-gradient-to-br from-slate-900 via-teal-950 to-slate-900',
+      booleanSwitch: {
+        track: 'border-2 data-[state=unchecked]:bg-slate-700/50 data-[state=unchecked]:border-teal-400/30 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-teal-500 data-[state=checked]:to-cyan-500 data-[state=checked]:border-teal-400 data-[state=checked]:shadow-[0_0_15px_rgba(20,184,166,0.4)]',
+        thumb: 'data-[state=unchecked]:bg-slate-400 data-[state=checked]:bg-white shadow-lg data-[state=checked]:shadow-[0_0_10px_rgba(255,255,255,0.5)]',
+        activeLabel: 'text-teal-300 font-medium tracking-wide',
+        inactiveLabel: 'text-slate-400/70'
+      },
+      progressBar: {
+        container: 'w-full bg-slate-800/50 rounded-full h-3 mb-6 border border-teal-400/20 backdrop-blur-sm',
+        fill: 'bg-gradient-to-r from-teal-400 via-emerald-400 to-cyan-400 h-3 rounded-full transition-all duration-700 ease-out shadow-[0_0_20px_rgba(20,184,166,0.5)] relative overflow-hidden before:content-[""] before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent before:animate-shimmer'
+      }
+    }
+  },
+  {
+    id: 'sunset',
+    name: 'Sunset',
+    description: 'Warm sunset hues with soft transitions and dreamy atmosphere',
+    preview: 'bg-gradient-to-br from-rose-400 via-orange-400 to-amber-500',
+    styles: {
+      container: 'max-w-2xl mx-auto p-8 bg-gradient-to-br from-white/90 to-orange-50/90 backdrop-blur-lg border border-orange-200/50 rounded-3xl shadow-2xl relative overflow-hidden before:content-[""] before:absolute before:top-0 before:right-0 before:w-96 before:h-96 before:bg-gradient-radial before:from-rose-300/20 before:to-transparent before:blur-3xl',
+      header: 'text-4xl font-bold bg-gradient-to-r from-rose-600 via-orange-600 to-amber-600 bg-clip-text text-transparent mb-8 tracking-tight drop-shadow-sm',
+      field: 'mb-6',
+      label: 'block text-sm font-semibold text-orange-800 mb-3 tracking-wide',
+      input: 'w-full px-4 py-3 h-12 border-2 border-orange-200 rounded-2xl focus:outline-none focus:ring-3 focus:ring-rose-300 focus:border-transparent transition-all duration-300 bg-white/70 backdrop-blur-sm placeholder-orange-300 shadow-sm hover:shadow-md',
+      button: 'w-full bg-gradient-to-r from-rose-500 via-orange-500 to-amber-500 text-white py-4 px-6 rounded-2xl hover:shadow-xl transition-all duration-300 font-semibold transform hover:scale-105 relative overflow-hidden before:content-[""] before:absolute before:inset-0 before:bg-gradient-to-t before:from-black/10 before:to-transparent hover:before:from-black/20',
+      background: 'bg-gradient-to-br from-rose-100 via-orange-100 to-amber-100',
+      booleanSwitch: {
+        track: 'border-2 data-[state=unchecked]:bg-orange-100 data-[state=unchecked]:border-orange-300 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-rose-500 data-[state=checked]:to-amber-500 data-[state=checked]:border-rose-400 data-[state=checked]:shadow-md',
+        thumb: 'data-[state=unchecked]:bg-orange-400 data-[state=checked]:bg-white shadow-lg',
+        activeLabel: 'text-orange-800 font-semibold',
+        inactiveLabel: 'text-orange-400'
+      },
+      progressBar: {
+        container: 'w-full bg-orange-100 rounded-full h-3 mb-6 border border-orange-200 shadow-inner',
+        fill: 'bg-gradient-to-r from-rose-500 via-orange-500 to-amber-500 h-3 rounded-full transition-all duration-700 ease-out shadow-md relative overflow-hidden before:content-[""] before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent'
+      }
+    }
+  },
+  {
+    id: 'ocean-depth',
+    name: 'Ocean Depth',
+    description: 'Deep sea inspired with aquatic gradients and fluid animations',
+    preview: 'bg-gradient-to-b from-blue-600 via-blue-800 to-indigo-950',
+    styles: {
+      container: 'max-w-2xl mx-auto p-8 bg-gradient-to-b from-blue-900/95 via-blue-950/95 to-indigo-950/95 backdrop-blur-xl border border-blue-400/20 rounded-3xl shadow-2xl relative overflow-hidden before:content-[""] before:absolute before:inset-0 before:bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] before:from-blue-500/10 before:to-transparent before:animate-pulse',
+      header: 'text-4xl font-bold bg-gradient-to-r from-blue-300 via-cyan-300 to-blue-300 bg-clip-text text-transparent mb-8 tracking-wide text-center drop-shadow-[0_0_20px_rgba(59,130,246,0.5)]',
+      field: 'mb-6 relative',
+      label: 'block text-sm font-medium text-blue-200 mb-3 tracking-wide drop-shadow-sm',
+      input: 'w-full px-4 py-3 h-12 border border-blue-400/30 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-transparent transition-all duration-300 bg-blue-950/50 backdrop-blur-sm text-white placeholder-blue-300/40 shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)]',
+      button: 'w-full bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-600 text-white py-4 px-6 rounded-2xl hover:shadow-[0_0_40px_rgba(59,130,246,0.6)] transition-all duration-300 font-semibold transform hover:scale-105 relative overflow-hidden before:content-[""] before:absolute before:inset-0 before:bg-[linear-gradient(45deg,transparent_30%,rgba(255,255,255,0.5)_50%,transparent_70%)] before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-1000',
+      background: 'bg-gradient-to-b from-blue-950 via-indigo-950 to-slate-950',
+      booleanSwitch: {
+        track: 'border-2 data-[state=unchecked]:bg-blue-900/50 data-[state=unchecked]:border-blue-400/30 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-blue-500 data-[state=checked]:to-cyan-500 data-[state=checked]:border-blue-400 data-[state=checked]:shadow-[0_0_20px_rgba(59,130,246,0.4)]',
+        thumb: 'data-[state=unchecked]:bg-blue-400 data-[state=checked]:bg-white shadow-lg data-[state=checked]:shadow-[0_0_15px_rgba(255,255,255,0.6)]',
+        activeLabel: 'text-blue-200 font-medium tracking-wide drop-shadow-sm',
+        inactiveLabel: 'text-blue-400/60'
+      },
+      progressBar: {
+        container: 'w-full bg-blue-950/50 rounded-full h-3 mb-6 border border-blue-400/20 backdrop-blur-sm shadow-inner',
+        fill: 'bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 h-3 rounded-full transition-all duration-700 ease-out shadow-[0_0_25px_rgba(59,130,246,0.6)] relative overflow-hidden before:content-[""] before:absolute before:inset-0 before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent)] before:animate-shimmer'
+      }
+    }
+  },
+  {
+    id: 'matrix',
+    name: 'Matrix',
+    description: 'Cyberpunk matrix style with digital rain effects and terminal aesthetics',
+    preview: 'bg-black border border-green-500/50',
+    styles: {
+      container: 'max-w-2xl mx-auto p-8 bg-black border border-green-500/30 rounded-none shadow-2xl relative overflow-hidden before:content-[""] before:absolute before:inset-0 before:bg-[linear-gradient(0deg,transparent_0%,rgba(0,255,0,0.03)_50%,transparent_100%)] before:bg-[length:2px_20px] before:animate-matrix-rain',
+      header: 'text-3xl font-mono font-bold text-green-400 mb-8 tracking-wider text-center relative before:content-["["] before:text-green-600 before:mr-2 after:content-["]"] after:text-green-600 after:ml-2 drop-shadow-[0_0_10px_rgba(34,197,94,0.8)]',
+      field: 'mb-6 relative pl-4 before:content-[">"] before:absolute before:left-0 before:top-8 before:text-green-500 before:font-mono',
+      label: 'block text-xs font-mono font-bold text-green-300 mb-3 tracking-widest uppercase opacity-80',
+      input: 'w-full px-4 py-3 h-12 bg-black border border-green-500/50 rounded-none focus:outline-none focus:border-green-400 focus:shadow-[0_0_15px_rgba(34,197,94,0.5)] transition-all duration-200 text-green-100 font-mono placeholder-green-600/50 caret-green-400',
+      button: 'w-full bg-black border-2 border-green-400 text-green-400 py-4 px-6 rounded-none hover:bg-green-400 hover:text-black transition-all duration-200 font-mono font-bold uppercase tracking-widest shadow-[0_0_20px_rgba(34,197,94,0.3)] hover:shadow-[0_0_30px_rgba(34,197,94,0.6)] relative overflow-hidden before:content-["EXECUTE_"] before:mr-1',
+      background: 'bg-black',
+      booleanSwitch: {
+        track: 'border-2 rounded-none data-[state=unchecked]:bg-black data-[state=unchecked]:border-green-600/50 data-[state=checked]:bg-green-500 data-[state=checked]:border-green-400 data-[state=checked]:shadow-[0_0_10px_rgba(34,197,94,0.6)]',
+        thumb: 'data-[state=unchecked]:bg-green-600 data-[state=checked]:bg-black shadow-lg rounded-none',
+        activeLabel: 'text-green-400 font-mono font-bold uppercase tracking-wider before:content-["[ON]"] before:mr-2',
+        inactiveLabel: 'text-green-600/50 font-mono uppercase tracking-wider before:content-["[OFF]"] before:mr-2'
+      },
+      progressBar: {
+        container: 'w-full bg-black border border-green-600/30 rounded-none h-4 mb-6 relative overflow-hidden before:content-["LOADING..."] before:absolute before:left-2 before:top-0 before:text-[10px] before:text-green-600/50 before:font-mono before:leading-4',
+        fill: 'bg-green-500 h-4 rounded-none transition-all duration-300 ease-linear relative before:content-[""] before:absolute before:inset-0 before:bg-[repeating-linear-gradient(90deg,transparent,transparent_10px,rgba(0,0,0,0.3)_10px,rgba(0,0,0,0.3)_20px)] before:animate-scan'
+      }
+    }
+  },
+  {
+    id: 'royal-quantum',
+    name: 'Royal Quantum',
+    description: 'Regal purple meets quantum physics with particle effects and royal grandeur',
+    preview: 'bg-gradient-to-br from-purple-800 via-violet-900 to-indigo-950 border-2 border-gold-400',
+    styles: {
+      container: 'max-w-2xl mx-auto p-10 bg-gradient-to-br from-purple-900/95 via-violet-950/95 to-indigo-950/95 backdrop-blur-xl border-2 border-yellow-400/40 rounded-3xl shadow-2xl relative overflow-hidden before:content-[""] before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_20%_80%,rgba(251,191,36,0.1)_0%,transparent_50%)] after:content-[""] after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_80%_20%,rgba(167,139,250,0.1)_0%,transparent_50%)]',
+      header: 'text-5xl font-serif font-bold bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-300 bg-clip-text text-transparent mb-10 tracking-wide text-center relative before:content-["♛"] before:absolute before:-left-16 before:text-yellow-400/40 before:text-6xl after:content-["♛"] after:absolute after:-right-16 after:text-yellow-400/40 after:text-6xl drop-shadow-[0_0_30px_rgba(251,191,36,0.5)]',
+      field: 'mb-8 relative before:content-[""] before:absolute before:-left-2 before:top-0 before:bottom-0 before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-yellow-400/50 before:to-transparent',
+      label: 'inline-block text-sm font-serif font-semibold text-yellow-300 mb-4 tracking-widest uppercase relative after:content-[""] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-yellow-400/30 after:to-transparent',
+      input: 'w-full px-5 py-3 h-12 border border-yellow-400/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400/50 focus:border-transparent transition-all duration-300 bg-purple-950/50 backdrop-blur-sm text-white placeholder-violet-300/40 shadow-[inset_0_2px_8px_rgba(0,0,0,0.3)] font-serif',
+      button: 'w-full bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 text-purple-900 py-4 px-8 rounded-xl hover:shadow-[0_0_40px_rgba(251,191,36,0.6)] transition-all duration-300 font-serif font-bold uppercase tracking-widest transform hover:scale-105 relative overflow-hidden before:content-[""] before:absolute before:inset-0 before:bg-[linear-gradient(105deg,transparent_40%,rgba(255,255,255,0.7)_50%,transparent_60%)] before:translate-x-[-150%] hover:before:translate-x-[150%] before:transition-transform before:duration-700',
+      background: 'bg-gradient-to-br from-purple-950 via-violet-950 to-indigo-950',
+      booleanSwitch: {
+        track: 'border-2 data-[state=unchecked]:bg-purple-900/50 data-[state=unchecked]:border-violet-400/30 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-yellow-400 data-[state=checked]:to-yellow-300 data-[state=checked]:border-yellow-400 data-[state=checked]:shadow-[0_0_20px_rgba(251,191,36,0.5)]',
+        thumb: 'data-[state=unchecked]:bg-violet-400 data-[state=checked]:bg-purple-900 shadow-xl',
+        activeLabel: 'text-yellow-300 font-serif font-semibold tracking-widest uppercase',
+        inactiveLabel: 'text-violet-400/60 font-serif'
+      },
+      progressBar: {
+        container: 'w-full bg-purple-950/50 rounded-full h-4 mb-8 border border-yellow-400/20 backdrop-blur-sm shadow-inner relative overflow-hidden',
+        fill: 'bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 h-4 rounded-full transition-all duration-700 ease-out shadow-[0_0_30px_rgba(251,191,36,0.6)] relative before:content-[""] before:absolute before:inset-0 before:bg-[repeating-linear-gradient(90deg,transparent,transparent_20px,rgba(255,255,255,0.3)_20px,rgba(255,255,255,0.3)_40px)] before:animate-slide'
+      }
+    }
+  },
+  {
+    id: 'executive-neon',
+    name: 'Executive Neon',
+    description: 'Corporate elegance meets electric neon accents for modern executives',
+    preview: 'bg-gradient-to-r from-slate-900 to-gray-900 border-t-4 border-electric-blue-500',
+    styles: {
+      container: 'max-w-2xl mx-auto p-10 bg-gradient-to-b from-slate-900 to-gray-900 border border-gray-700 rounded-none shadow-2xl relative overflow-hidden before:content-[""] before:absolute before:top-0 before:left-0 before:right-0 before:h-1 before:bg-gradient-to-r before:from-blue-500 before:via-cyan-400 before:to-blue-500 before:animate-slide after:content-[""] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-cyan-400/50 after:to-transparent',
+      header: 'text-4xl font-sans font-light text-white mb-10 tracking-[0.2em] text-center uppercase relative after:content-[""] after:absolute after:bottom-[-8px] after:left-1/2 after:-translate-x-1/2 after:w-32 after:h-1 after:bg-gradient-to-r after:from-transparent after:via-cyan-400 after:to-transparent',
+      field: 'mb-8 relative group',
+      label: 'block text-xs font-sans font-medium text-gray-400 mb-3 tracking-[0.15em] uppercase transition-colors duration-300 group-hover:text-cyan-400',
+      input: 'w-full px-4 py-3 h-12 border border-gray-700 bg-gray-800/50 rounded-none focus:outline-none focus:border-cyan-400 focus:shadow-[0_0_0_1px_rgba(6,182,212,0.5)] transition-all duration-300 text-white placeholder-gray-500 font-light tracking-wide hover:border-gray-600',
+      button: 'relative w-full bg-gray-900 border border-gray-700 text-white py-4 px-8 rounded-none transition-all duration-300 font-light uppercase tracking-[0.2em] hover:border-cyan-400 hover:text-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] group overflow-hidden before:content-[""] before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-cyan-400/10 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-700',
+      background: 'bg-gradient-to-b from-gray-900 to-slate-900',
+      booleanSwitch: {
+        track: 'border data-[state=unchecked]:bg-gray-800 data-[state=unchecked]:border-gray-700 data-[state=checked]:bg-gray-800 data-[state=checked]:border-cyan-400 data-[state=checked]:shadow-[inset_0_0_10px_rgba(6,182,212,0.3)] transition-all duration-300',
+        thumb: 'data-[state=unchecked]:bg-gray-600 data-[state=checked]:bg-cyan-400 shadow-lg data-[state=checked]:shadow-[0_0_10px_rgba(6,182,212,0.6)] transition-all duration-300',
+        activeLabel: 'text-cyan-400 font-light tracking-[0.15em] uppercase',
+        inactiveLabel: 'text-gray-500 font-light tracking-[0.15em] uppercase'
+      },
+      progressBar: {
+        container: 'w-full bg-gray-800 h-1 mb-8 relative overflow-hidden',
+        fill: 'bg-cyan-400 h-1 transition-all duration-500 ease-out relative shadow-[0_0_10px_rgba(6,182,212,0.6)] before:content-[""] before:absolute before:top-0 before:right-0 before:bottom-0 before:w-2 before:bg-white before:blur-sm before:animate-pulse'
+      }
+    }
   }
 ];
 
